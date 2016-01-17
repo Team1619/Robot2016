@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.usfirst.frc.team1619.robot2016.Properties;
+
 /**
  * Created by DanielHathcock on 10/23/15. Project: Logger Package:
  * org.usfirst.frc.team1619.logger
