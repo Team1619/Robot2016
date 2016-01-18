@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1619.robot2016.util.logger;
+package org.usfirst.frc.team1619.robot2016;
+
+import org.usfirst.frc.team1619.robot2016.util.logger.LoggingLevels;
 
 /**
  * Created by DanielHathcock on 10/20/15. Project: Logger Package:

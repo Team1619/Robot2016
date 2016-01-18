@@ -17,7 +17,7 @@ public class GenericPID {
     this.kP = pValue;
     this.kI = iValue;
     this.kD = dValue;
-    
+
     setPoint = 0;
     prevError = 0;
     integral = 0;
