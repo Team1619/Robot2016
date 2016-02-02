@@ -5,12 +5,13 @@ import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Joysticks and JoystickButtons from the driver station
+ * 
  * @author Tim
  */
 public class DriverInput {
 
   private static DriverInput instance;
-  
+
   private Joystick rightStick;
   private Joystick leftStick;
 
@@ -20,17 +21,17 @@ public class DriverInput {
   }
 
   public static DriverInput getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new DriverInput();
     }
     return instance;
   }
 
-  //Driver
+  // Driver
   public GenericHID getDriverStick() {
     return this.rightStick;
   }
-  
+
   public double getDriverX() {
     return this.rightStick.getX();
   }
@@ -47,7 +48,7 @@ public class DriverInput {
     return this.rightStick.getThrottle();
   }
 
-  //Operator
+  // Operator
   public GenericHID getOperatorStick() {
     return this.leftStick;
   }

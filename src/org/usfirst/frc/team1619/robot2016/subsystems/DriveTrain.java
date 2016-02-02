@@ -8,17 +8,17 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class DriveTrain implements Subsystem {
 
   private static DriveTrain instance;
-  
+
   private RobotOutput robotOutput;
   private DriverInput driverInput;
-  
+
   private DriveTrain() {
     robotOutput = RobotOutput.getInstance();
     driverInput = DriverInput.getInstance();
   }
-  
+
   public static DriveTrain getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new DriveTrain();
     }
     return instance;
