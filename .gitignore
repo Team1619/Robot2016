@@ -50,6 +50,6 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.project
+# .project ##needed to be able to import project from git to eclipse
 *.launch
 .classpath
