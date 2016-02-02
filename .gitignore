@@ -38,5 +38,18 @@
 ehthumbs.db
 Thumbs.db
 
-# Eclipse classpath file. Doesn't need to be shared #
+# Eclipse #
+##########
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.project
+*.launch
 .classpath
