@@ -1,13 +1,13 @@
 package org.usfirst.frc.team1619.robot2016;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Joysticks and JoystickButtons from the driver station
  * @author Tim
- *
  */
-class DriverInput {
+public class DriverInput {
 
   private static DriverInput instance;
   
@@ -27,6 +27,10 @@ class DriverInput {
   }
 
   //Driver
+  public GenericHID getDriverStick() {
+    return this.rightStick;
+  }
+  
   public double getDriverX() {
     return this.rightStick.getX();
   }
@@ -44,6 +48,10 @@ class DriverInput {
   }
 
   //Operator
+  public GenericHID getOperatorStick() {
+    return this.leftStick;
+  }
+
   public double getOperatorX() {
     return this.leftStick.getX();
   }
