@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.util.logger;
 
-import org.usfirst.frc.team1619.robot2016.Properties;
+import org.usfirst.frc.team1619.robot2016.Constants;
 
 /**
  * Created by DanielHathcock on 10/6/15. Project: Logger Package:
@@ -15,9 +15,22 @@ import org.usfirst.frc.team1619.robot2016.Properties;
  */
 public class Logger extends GenericLogger {
 
+  private static Logger instance;
+  static {
+    instance = new Logger();
+  }
+  
+  public static Logger getInstance() {
+    return instance;
+  }
+  
   /**
-   * Created by DanielHathcock on 10/20/15. Project: Logger Package:
-   * org.usfirst.frc.team1619.logger
+   * Enum which describes the logging levels:
+   * 
+   * Error: only log errors (calls to error())
+   * Warning: log errors and any warnings (calls to error() or warning())
+   * Info: log information about errors and warnings as well (error(), warning(), and info())
+   * Debug: log everything (all calls to logger functions) 
    */
   public enum LoggingLevel {
     ERROR, WARNING, INFO, DEBUG;
@@ -30,11 +43,15 @@ public class Logger extends GenericLogger {
   
   private LoggingLevel loggingLevel; 
   
-  public Logger() {
-    super("UACRRobot" + Properties.getLoggingLevel() + "Log", ".txt");
+  private Logger() {
+    super("UACRRobot" + Constants.LOGGING_LEVEL + "Log", ".txt");
     nextLog();
   }
 
+  public void setLoggingLevel(LoggingLevel newLevel) {
+    loggingLevel = newLevel;
+  }
+  
   /**
    * Logs an error message to the log file.
    *
@@ -53,7 +70,7 @@ public class Logger extends GenericLogger {
    *          The warning message. All arguments separated by a space.
    */
   public void warning(String... message) {
-    if (Properties.getLoggingLevel().compareTo(LoggingLevels.WARNING) >= 0) {
+    if (loggingLevel.compareTo(LoggingLevel.WARNING) >= 0) {
       log("WARNING", message);
     }
   }
@@ -66,7 +83,7 @@ public class Logger extends GenericLogger {
    *          The info message. All arguments separated by a space.
    */
   public void info(String... message) {
-    if (Properties.getLoggingLevel().compareTo(LoggingLevels.INFO) >= 0) {
+    if (loggingLevel.compareTo(LoggingLevel.INFO) >= 0) {
       log("INFO", message);
     }
   }
@@ -79,7 +96,7 @@ public class Logger extends GenericLogger {
    *          The debug message. All arguments separated by a space.
    */
   public void debug(String... message) {
-    if (Properties.getLoggingLevel().compareTo(LoggingLevels.DEBUG) >= 0) {
+    if (loggingLevel.compareTo(LoggingLevel.DEBUG) >= 0) {
       log("DEBUG", message);
     }
   }
