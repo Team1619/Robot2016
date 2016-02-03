@@ -9,21 +9,20 @@ import edu.wpi.first.wpilibj.Joystick;
  * @author Tim
  */
 public class DriverInput {
-
   private static DriverInput instance;
+  static {
+    instance = new DriverInput();
+  }
 
   private Joystick rightStick;
   private Joystick leftStick;
 
   private DriverInput() {
-    rightStick = new Joystick(0);
-    leftStick = new Joystick(1);
+    rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
+    leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
   }
 
   public static DriverInput getInstance() {
-    if (instance == null) {
-      instance = new DriverInput();
-    }
     return instance;
   }
 

@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 public class RobotOutput {
   private static RobotOutput instance;
+  static {
+    instance = new RobotOutput();
+  }
 
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
@@ -28,9 +31,6 @@ public class RobotOutput {
   }
 
   public static RobotOutput getInstance() {
-    if (instance == null) {
-      instance = new RobotOutput();
-    }
     return instance;
   }
 
