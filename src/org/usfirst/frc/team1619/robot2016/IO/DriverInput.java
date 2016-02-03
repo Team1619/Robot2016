@@ -1,29 +1,33 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.IO;
+
+import org.usfirst.frc.team1619.robot2016.Constants;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Joysticks and JoystickButtons from the driver station
- * 
  * @author Tim
  */
 public class DriverInput {
+  //Singleton stuff
   private static DriverInput instance;
   static {
     instance = new DriverInput();
   }
 
+  public static DriverInput getInstance() {
+    return instance;
+  }
+
+  //Declare
   private Joystick rightStick;
   private Joystick leftStick;
 
   private DriverInput() {
+    //Init
     rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
-  }
-
-  public static DriverInput getInstance() {
-    return instance;
   }
 
   // Driver

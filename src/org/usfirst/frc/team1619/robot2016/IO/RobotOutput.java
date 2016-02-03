@@ -1,22 +1,31 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.IO;
+
+import org.usfirst.frc.team1619.robot2016.Constants;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class RobotOutput {
+  //Singleton
   private static RobotOutput instance;
   static {
     instance = new RobotOutput();
   }
 
+  public static RobotOutput getInstance() {
+    return instance;
+  }
+
+  //Declare
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
   private CANTalon driveRight2;
-
+  
   private RobotDrive drive;
 
   private RobotOutput() {
+    //Init
     driveRight1 = new CANTalon(Constants.DRIVE_RIGHT_1_ID);
     driveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_ID);
     driveLeft1 = new CANTalon(Constants.DRIVE_LEFT_1_ID);
@@ -30,13 +39,8 @@ public class RobotOutput {
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
 
-  public static RobotOutput getInstance() {
-    return instance;
-  }
-
   /**
    * Don't use this method. Use SensorInput instead.
-   * 
    * @return Left drive encoder position
    */
   public int getDriveLeftEncPos() {
@@ -45,7 +49,6 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
-   * 
    * @return Right drive encoder position
    */
   public int getDriveRightEncPos() {
@@ -54,7 +57,6 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
-   * 
    * @return Left drive encoder velocity
    */
   public int getDriveLeftEncVel() {
@@ -63,7 +65,6 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
-   * 
    * @return Right drive encoder velocity
    */
   public int getDriveRightEncVel() {
@@ -72,7 +73,6 @@ public class RobotOutput {
 
   /**
    * Drive the robot using arcadeDrive
-   * 
    * @param translation
    *          Forward/back values
    * @param rotation
