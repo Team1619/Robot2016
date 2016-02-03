@@ -6,21 +6,26 @@ import org.usfirst.frc.team1619.robot2016.RobotOutput;
 import edu.wpi.first.wpilibj.GenericHID;
 
 public class DriveTrain implements Subsystem {
-
+  //Singleton stuff
+  //static is called when the class is loaded
   private static DriveTrain instance;
+  static {
+    instance = new DriveTrain();
+  }
 
+  
+
+  //Declare stuff
   private RobotOutput robotOutput;
   private DriverInput driverInput;
 
   private DriveTrain() {
+    //Init stuff
     robotOutput = RobotOutput.getInstance();
     driverInput = DriverInput.getInstance();
   }
 
   public static DriveTrain getInstance() {
-    if (instance == null) {
-      instance = new DriveTrain();
-    }
     return instance;
   }
 
@@ -45,4 +50,5 @@ public class DriveTrain implements Subsystem {
     robotOutput.drive(translation, rotation);
   }
 
+  
 }
