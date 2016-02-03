@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.subsystems;
 
-import org.usfirst.frc.team1619.robot2016.DriverInput;
-import org.usfirst.frc.team1619.robot2016.RobotOutput;
+import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
+import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -12,21 +12,32 @@ public class DriveTrain implements Subsystem {
   static {
     instance = new DriveTrain();
   }
-
   
+  public static DriveTrain getInstance() {
+    return instance;
+  }
+
+  //Enum for current state
+  private enum Modes {
+    MANUAL, PID;
+  }
 
   //Declare stuff
+  Modes mode;
+
   private RobotOutput robotOutput;
   private DriverInput driverInput;
+  
+  private double targetRotation;
 
   private DriveTrain() {
     //Init stuff
+    mode = Modes.MANUAL;
+    
     robotOutput = RobotOutput.getInstance();
     driverInput = DriverInput.getInstance();
-  }
-
-  public static DriveTrain getInstance() {
-    return instance;
+    
+    targetRotation = 0;
   }
 
   @Override
@@ -35,7 +46,12 @@ public class DriveTrain implements Subsystem {
 
   @Override
   public void update() {
-    this.drive(driverInput.getDriverStick());
+    if (mode.equals(Modes.MANUAL)) {
+      drive(driverInput.getDriverStick());
+    }
+    else if(mode.equals(Modes.PID)) {
+      
+    }
   }
 
   @Override
@@ -50,5 +66,15 @@ public class DriveTrain implements Subsystem {
     robotOutput.drive(translation, rotation);
   }
 
+  public void setModeManual() {
+    mode = Modes.MANUAL;
+  }
+
+  public void setModePID() {
+    mode = Modes.PID;
+  }
   
+  public void setSetpoint(double translation, double rotation) {
+    
+  }
 }

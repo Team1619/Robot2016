@@ -6,7 +6,7 @@ package org.usfirst.frc.team1619.robot2016.subsystems;
  * @author Tim
  *
  */
-interface Subsystem {
+public interface Subsystem {
   public void initialize();
 
   public void update();

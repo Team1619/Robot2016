@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.IO;
+
+import org.usfirst.frc.team1619.robot2016.Constants;
 
 import com.kauailabs.navx.frc.AHRS;
 
