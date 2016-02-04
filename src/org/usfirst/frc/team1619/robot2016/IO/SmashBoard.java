@@ -6,6 +6,7 @@ import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 
@@ -23,11 +24,15 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 public class SmashBoard {
   
   private static SmashBoard instance;
-  static {
-    instance = new SmashBoard();
-  }
+//  static {
+//    instance = new SmashBoard();
+//  }
   
   public static SmashBoard getInstance() {
+    if (instance == null) {
+      instance = new SmashBoard();
+    }
+    
     return instance;
   }
   
@@ -70,7 +75,7 @@ public class SmashBoard {
     
     sensorInput = SensorInput.getInstance();
     driverInput = DriverInput.getInstance();
-    logger = Logger.getInstance();
+    // logger = Logger.getInstance();
     
     loggingLevelChooser = new SendableChooser();
     autoModeChooser = new SendableChooser();
@@ -89,10 +94,12 @@ public class SmashBoard {
     loggingLevelChooser.addObject("Info", LoggingLevel.INFO);
     loggingLevelChooser.addObject("Debug", LoggingLevel.DEBUG);
     loggingLevelChooser.addDefault(Constants.LOGGING_LEVEL.toString(), Constants.LOGGING_LEVEL);
+    loggingLevelChooser.initTable(smashBoard);
+    
+    // Place choosers
+    SmartDashboard.putData("Logging Level", loggingLevelChooser);
     
     // Values
-    smashBoard.putValue("Logging Level", loggingLevelChooser);
-    
   }
   
   /**
