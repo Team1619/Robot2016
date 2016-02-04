@@ -29,10 +29,12 @@ public abstract class GenericLogger {
   private static final String LOG_FOLDER_PATH = Constants.LOG_FOLDER_PATH;
   private static final String STOP = "STOP";
   private static final SimpleDateFormat sDateFormat =
-    new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss.SSSZ");
+    new SimpleDateFormat("yyyy-MM-dd_HH:mm:ssZ");
+  
   private static String sLogFolder = getDateString() + "/";
   private static ArrayList<GenericLogger> sLoggers =
     new ArrayList<GenericLogger>();
+  protected static boolean sSafeToLog = false;
 
   static {
     sDateFormat.setTimeZone(TimeZone.getTimeZone("America/Denver"));
@@ -40,7 +42,7 @@ public abstract class GenericLogger {
 
   protected ArrayBlockingQueue<String[]> fLoggingQueue;
   private FileWriter fOutput;
-  private String fLogName;
+  protected String fLogName;
   private String fFileExtension;
   private Thread fLogThread;
 
@@ -163,7 +165,7 @@ public abstract class GenericLogger {
   public static void changeLogs() {
     stopLogs();
     sLogFolder = getDateString() + "/";
-
+    
     if (makeLogFolder()) {
       cleanUp();
       startLogs();
@@ -219,6 +221,7 @@ public abstract class GenericLogger {
   private static boolean makeLogFolder() {
     File logDir = new File(LOG_FOLDER_PATH + sLogFolder);
     if (logDir.mkdir() || logDir.exists()) {
+      sSafeToLog = true;
       return true;
     }
     // If folder not successfully created:
@@ -227,6 +230,7 @@ public abstract class GenericLogger {
       .println("Cannot create log folder " + LOG_FOLDER_PATH + sLogFolder);
 
     stopLogs();
+    sSafeToLog = false;
     return false;
   }
 
@@ -287,16 +291,18 @@ public abstract class GenericLogger {
   }
 
   /**
-   * Make sure the logger is not running, then send the initial log (if any) to
-   * the loggingQueue and start the thread (which should define a new
-   * fileWriter).
+   * Make sure the logger is not running, then, if logging is safe, send 
+   * the initial log (if any) to the loggingQueue and start the thread 
+   * (which should define a new fileWriter).
    */
   protected void nextLog() {
     stopThread();
 
-    initLog();
+    if (sSafeToLog) {
+      initLog();
 
-    startThread();
+      startThread();
+    }
   }
 
   /**

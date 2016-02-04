@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
-import org.usfirst.frc.team1619.robot2016.subsystems.DriveTrain;
 import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
@@ -26,15 +25,11 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 public class SmashBoard {
   
   private static SmashBoard instance;
-//  static {
-//    instance = new SmashBoard();
-//  }
+  static {
+    instance = new SmashBoard();
+  }
   
-  public static SmashBoard getInstance() {
-    if (instance == null) {
-      instance = new SmashBoard();
-    }
-    
+  public static SmashBoard getInstance() {    
     return instance;
   }
   
@@ -48,6 +43,8 @@ public class SmashBoard {
      * Used to update values or preferences in real time from the 
      * SmartDashboard on the driverstation. Called automatically on value change.
      * 
+     * Double click on value in smashBoard (while not in editable mode) to 
+     * change a value.
      */
     @Override
     public void valueChanged(ITable source, String key, Object value,
@@ -64,13 +61,11 @@ public class SmashBoard {
   
   // References for getting and putting data
   private SensorInput sensorInput;
-  private DriverInput driverInput;
   private Logger logger;
   private UtilityArm utilityArm;
   
   // Choosers
   private SendableChooser loggingLevelChooser;
-  private SendableChooser autoModeChooser;
   
   
   private SmashBoard() {
@@ -78,12 +73,10 @@ public class SmashBoard {
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();
-    driverInput = DriverInput.getInstance();
-    // logger = Logger.getInstance();
     utilityArm = UtilityArm.getInstance();
+    logger = Logger.getInstance();
     
     loggingLevelChooser = new SendableChooser();
-    autoModeChooser = new SendableChooser();
     
     addDefaults();
   }
@@ -93,7 +86,7 @@ public class SmashBoard {
    * smashBoard which will be listened for.
    */
   private void addDefaults() {
-    // Choosers
+    // Initialize choosers
     loggingLevelChooser.addObject("Error", LoggingLevel.ERROR);
     loggingLevelChooser.addObject("Warning", LoggingLevel.WARNING);
     loggingLevelChooser.addObject("Info", LoggingLevel.INFO);
@@ -101,10 +94,10 @@ public class SmashBoard {
     loggingLevelChooser.addDefault(Constants.LOGGING_LEVEL.toString(), Constants.LOGGING_LEVEL);
     loggingLevelChooser.initTable(smashBoard);
     
-    // Place choosers
-    SmartDashboard.putData("Logging Level", loggingLevelChooser);
+    // Place choosers (directly into SmartDashboard wpilib class)
+    SmartDashboard.putData("Logging level", loggingLevelChooser);
     
-    // Values
+    // Value defaults
   }
   
   /**

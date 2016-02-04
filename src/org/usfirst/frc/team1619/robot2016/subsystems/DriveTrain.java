@@ -4,7 +4,6 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
 import edu.wpi.first.wpilibj.GenericHID;
