@@ -69,7 +69,7 @@ public class SmashBoard {
   
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmartDashboard");
+    smashBoard = NetworkTable.getTable("SmashBoard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();

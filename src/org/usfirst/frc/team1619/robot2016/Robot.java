@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 
   public void teleopInit() {
     driveTrain.initialize();
-  }
+}
   
   public void teleopPeriodic() {
     driveTrain.update();
@@ -44,5 +44,4 @@ public class Robot extends IterativeRobot {
 
   public void testPeriodic() {
   }
-
 }
