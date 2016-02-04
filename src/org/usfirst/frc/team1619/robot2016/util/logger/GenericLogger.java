@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.usfirst.frc.team1619.robot2016.Properties;
+import org.usfirst.frc.team1619.robot2016.Constants;
 
 /**
  * Created by DanielHathcock on 10/23/15. Project: Logger Package:
@@ -26,8 +26,7 @@ public abstract class GenericLogger {
 
   private static final int MAX_LOGS = 50;
   private static final int QUEUE_SIZE = 32;
-  private static final String LOG_FOLDER_PATH =
-    Properties.getProperty("LOG_FOLDER_PATH", String.class);
+  private static final String LOG_FOLDER_PATH = Constants.LOG_FOLDER_PATH;
   private static final String STOP = "STOP";
   private static final SimpleDateFormat sDateFormat =
     new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss.SSSZ");

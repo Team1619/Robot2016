@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016;
 
+import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
+
 public class Constants {
 
   // Motor IDs
@@ -14,4 +16,10 @@ public class Constants {
 
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
+  
+  // Properties/configurations
+  public static final boolean TEST_MODE = false;
+  public static final boolean COMPETITION_MODE = false;
+  public static final LoggingLevel LOGGING_LEVEL = LoggingLevel.WARNING;
+  public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
 }
