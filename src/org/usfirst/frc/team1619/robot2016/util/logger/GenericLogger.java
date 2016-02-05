@@ -24,8 +24,8 @@ import org.usfirst.frc.team1619.robot2016.Constants;
  */
 public abstract class GenericLogger {
 
-  private static final int MAX_LOGS = 50;
-  private static final int QUEUE_SIZE = 32;
+  private static final int MAX_LOGS = Constants.MAX_LOGS;
+  private static final int QUEUE_SIZE = Constants.QUEUE_SIZE;
   private static final String LOG_FOLDER_PATH = Constants.LOG_FOLDER_PATH;
   private static final String STOP = "STOP";
   private static final SimpleDateFormat sDateFormat =

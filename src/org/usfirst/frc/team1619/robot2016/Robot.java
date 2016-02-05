@@ -34,7 +34,6 @@ public class Robot extends IterativeRobot {
 
   public void teleopInit() {
     driveTrain.initialize();
-    smashBoard.updateChoosers();
   }
   
   public void teleopPeriodic() {
