@@ -86,6 +86,12 @@ public class RobotOutput {
     drive.arcadeDrive(translation, rotation);
   }
   
+  /**
+   * Sets the speed of the test motor.
+   * @param speed
+   *          Speed of test motor.
+   */
+  
   public void setTestMotor(double speed) {
 	  testMotor.set(speed);
   }
