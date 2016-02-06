@@ -4,6 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Joysticks and JoystickButtons from the driver station
@@ -23,14 +24,28 @@ public class DriverInput {
   //Declare
   private Joystick rightStick;
   private Joystick leftStick;
+  
+  private JoystickButton testForwardButton;
+  private JoystickButton testBackwardButton;
 
   private DriverInput() {
     //Init
     rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
+    
+    testForwardButton = new JoystickButton(rightStick, Constants.TEST_FORWARD_BUTTON );
+    testBackwardButton = new JoystickButton(rightStick, Constants.TEST_BACKWARD_BUTTON);
   }
 
   // Driver
+  public boolean getTestForwardButton() {
+	  return this.testForwardButton.get();
+  }
+  
+  public boolean getTestBackwardButton() {
+	  return this.testBackwardButton.get();
+  }
+  
   public GenericHID getDriverStick() {
     return this.rightStick;
   }
