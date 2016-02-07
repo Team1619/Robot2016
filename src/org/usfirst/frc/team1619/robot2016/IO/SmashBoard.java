@@ -70,7 +70,7 @@ public class SmashBoard {
   private SendableChooser autoModeChooser;
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmartDashboard");
+    smashBoard = NetworkTable.getTable("SmashBoard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();
@@ -126,7 +126,7 @@ public class SmashBoard {
     smashBoard.putNumber("Left Drive Encoder Velocity", sensorInput.getDriveLeftEncoderVelocity());
     
     // NavX
-    smashBoard.putNumber("Heading", sensorInput.getNavXHeading());
+    smashBoard.putNumber("angle", sensorInput.getNavXHeading());
   }
   
 }
