@@ -16,7 +16,7 @@ public class RobotOutput {
     return instance;
   }
 
-  //Declare
+  //Declare16e54
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
@@ -35,6 +35,11 @@ public class RobotOutput {
     driveRight2.setInverted(true);
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
+    
+    driveRight1.enableBrakeMode(true);
+    driveRight2.enableBrakeMode(true);
+    driveLeft1.enableBrakeMode(true);
+    driveLeft2.enableBrakeMode(true);
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
@@ -44,7 +49,15 @@ public class RobotOutput {
    * @return Left drive encoder position
    */
   public int getDriveLeftEncPos() {
-    return driveLeft1.getEncPosition();
+    return -driveLeft1.getEncPosition();
+  }
+
+  /**
+   * Don't use this method. Use SensorInput instead.
+   * @param Left drive encoder new position
+   */
+  public void setDriveLeftPos(int position) {
+    driveLeft1.setEncPosition(position);
   }
 
   /**
@@ -52,7 +65,15 @@ public class RobotOutput {
    * @return Right drive encoder position
    */
   public int getDriveRightEncPos() {
-    return driveRight1.getEncPosition();
+    return -driveRight1.getEncPosition();
+  }
+
+  /**
+   * Don't use this method. Use SensorInput instead.
+   * @param Right drive encoder new position
+   */
+  public void setDriveRightPos(int position) {
+    driveRight1.setEncPosition(position);
   }
 
   /**
@@ -60,7 +81,7 @@ public class RobotOutput {
    * @return Left drive encoder velocity
    */
   public int getDriveLeftEncVel() {
-    return driveLeft1.getEncVelocity();
+    return -driveLeft1.getEncVelocity();
   }
 
   /**
@@ -68,7 +89,7 @@ public class RobotOutput {
    * @return Right drive encoder velocity
    */
   public int getDriveRightEncVel() {
-    return driveRight1.getEncVelocity();
+    return -driveRight1.getEncVelocity();
   }
 
   /**
@@ -78,7 +99,18 @@ public class RobotOutput {
    * @param rotation
    *          Rotation values
    */
-  public void drive(double translation, double rotation) {
-    drive.arcadeDrive(translation, rotation);
+  public void arcadeDrive(double translation, double rotation) {
+    drive.arcadeDrive(-translation, rotation);
+  }
+
+  /**
+   * Drive the robot using tankDrive
+   * @param leftValue
+   *          Left motor values
+   * @param rightValue
+   *          Right motor values
+   */
+  public void tankDrive(double leftValue, double rightValue) {
+    drive.tankDrive(-leftValue, -rightValue);
   }
 }
