@@ -5,6 +5,7 @@ public class GenericPID {
   private double kI;
   private double kD;
 
+  private double outputValue;
   private double setPoint;
   private double prevError;
   private double integral;
@@ -18,6 +19,7 @@ public class GenericPID {
     this.kI = iValue;
     this.kD = dValue;
 
+    outputValue = 0;
     setPoint = 0;
     prevError = 0;
     integral = 0;
@@ -33,8 +35,12 @@ public class GenericPID {
     this.setPoint = target;
   }
 
-  public double get(double currentValue) {
-    return calcPID(setPoint - currentValue);
+  public void calculate(double currentValue) {
+    outputValue = calcPID(setPoint - currentValue);
+  }
+
+  public double get() {
+    return outputValue;
   }
 
   public void resetError() {
