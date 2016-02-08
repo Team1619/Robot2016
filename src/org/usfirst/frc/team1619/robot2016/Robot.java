@@ -28,7 +28,10 @@ public class Robot extends IterativeRobot {
     
   }
 
-  
+  public void teleopInit() {
+    DriveTrain.getInstance().initialize();
+  }
+
   public void teleopPeriodic() {
     DriveTrain.getInstance().update();
     SmashBoard.getInstance().update();

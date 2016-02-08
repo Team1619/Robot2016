@@ -51,7 +51,7 @@ public class SensorInput {
    * @return Right drive encoder position
    */
   public int getDriveRightEncoderPosition() {
-    return robotOut.getDriveRightEncPos();
+    return robotOut.getDriveRightEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**

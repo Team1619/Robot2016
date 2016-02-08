@@ -18,7 +18,6 @@ public class Constants {
   public static final int DRIVE_RIGHT_1_ID = 3;
   public static final int DRIVE_RIGHT_2_ID = 4;
 
-
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
   
@@ -29,8 +28,8 @@ public class Constants {
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
 
   //Drive Train
-  public static final double DRIVE_PID_ROTATION_P = 0;
-  public static final double DRIVE_PID_ROTATION_I = 0;
+  public static final double DRIVE_PID_ROTATION_P = 0.025;
+  public static final double DRIVE_PID_ROTATION_I = 0.0;
   public static final double DRIVE_PID_ROTATION_D = 0;
 
   public static final double DRIVE_PID_TRANSLATION_P = 0;
