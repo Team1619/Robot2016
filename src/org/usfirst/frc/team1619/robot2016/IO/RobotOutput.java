@@ -16,7 +16,7 @@ public class RobotOutput {
     return instance;
   }
 
-  //Declare16e54
+  //Declare
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
@@ -57,7 +57,7 @@ public class RobotOutput {
    * @param Left drive encoder new position
    */
   public void setDriveLeftPos(int position) {
-    driveLeft1.setEncPosition(position);
+    driveLeft1.setEncPosition(-position);
   }
 
   /**
@@ -65,7 +65,7 @@ public class RobotOutput {
    * @return Right drive encoder position
    */
   public int getDriveRightEncPos() {
-    return -driveRight1.getEncPosition();
+    return driveRight1.getEncPosition();
   }
 
   /**
@@ -73,7 +73,7 @@ public class RobotOutput {
    * @param Right drive encoder new position
    */
   public void setDriveRightPos(int position) {
-    driveRight1.setEncPosition(position);
+    driveRight1.setEncPosition(-position);
   }
 
   /**

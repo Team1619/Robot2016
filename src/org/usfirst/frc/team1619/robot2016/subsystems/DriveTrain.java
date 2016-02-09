@@ -4,6 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -33,7 +34,7 @@ public class DriveTrain implements Subsystem {
   private RobotOutput robotOutput;
 
   private GenericPID translationPID;
-  private GenericPID rotationPID;
+  public GenericPID rotationPID;
 
   private DriveTrain() {
     //Init stuff
@@ -43,8 +44,8 @@ public class DriveTrain implements Subsystem {
     sensorInput = SensorInput.getInstance();
     robotOutput = RobotOutput.getInstance();
 
-    translationPID.setTarget(0);
-    rotationPID.setTarget(0);
+    translationPID = new GenericPID();
+    rotationPID = new GenericPID();
   }
 
   @Override
@@ -65,9 +66,13 @@ public class DriveTrain implements Subsystem {
     if(driverInput.getTurnPID()) {
       mode = Modes.PIDROTATE;
     }
+    else {
+      mode = Modes.MANUAL;
+    }
     if(driverInput.getResetPID()) {
       reset();
       setRotationTarget(0);
+//      rotationPID.setValues(SmashBoard.getInstance().getP(), SmashBoard.getInstance().getI(), 0);
     }
     
     switch(mode) {
@@ -75,14 +80,13 @@ public class DriveTrain implements Subsystem {
         drive(driverInput.getDriverStick());
         break;
       case PIDROTATE:
-        rotationPID.calculate(sensorInput.getDriveLeftEncoderPosition()
-          - sensorInput.getDriveRightEncoderPosition());
-        this.arcadeDrive(0, rotationPID.get());
+        rotationPID.calculate(((sensorInput.getNavXHeading() + 180) % 360) - 180);
+          arcadeDrive(driverInput.getDriverY(), rotationPID.get());
         break;
       case PIDTRANSLATE:
         translationPID.calculate((sensorInput.getDriveLeftEncoderPosition()
           + sensorInput.getDriveRightEncoderPosition()) / 2);
-        this.arcadeDrive(translationPID.get(), rotationPID.get());
+        arcadeDrive(translationPID.get(), rotationPID.get());
         break;
       case PIDFULL:
         break;
@@ -136,5 +140,6 @@ public class DriveTrain implements Subsystem {
   public void reset() {
     sensorInput.setDriveLeftPos(0);
     sensorInput.setDriveRightPos(0);
+    sensorInput.resetNavXHeading();
   }
 }
