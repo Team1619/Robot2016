@@ -137,4 +137,8 @@ public class SmashBoard {
   public double getI() {
     return smashBoard.getNumber("i", Constants.DRIVE_PID_ROTATION_I);
   }
+
+  public double getD() {
+    return smashBoard.getNumber("d", Constants.DRIVE_PID_ROTATION_D);
+  }
 }

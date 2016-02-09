@@ -82,10 +82,10 @@ public class SensorInput {
   //NavX
   /**
    * NavX fused heading
-   * @return Current NavX heading
+   * @return Current NavX heading between -180 and 180
    */
   public double getNavXHeading() {
-    return navX.getFusedHeading();
+    return ((navX.getFusedHeading() + 180) % 360) - 180;
   }
 
   /**

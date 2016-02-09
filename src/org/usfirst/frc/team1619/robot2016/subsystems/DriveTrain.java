@@ -32,6 +32,7 @@ public class DriveTrain implements Subsystem {
   private DriverInput driverInput;
   private SensorInput sensorInput;
   private RobotOutput robotOutput;
+  private SmashBoard smashBoard;
 
   private GenericPID translationPID;
   public GenericPID rotationPID;
@@ -43,6 +44,7 @@ public class DriveTrain implements Subsystem {
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();
     robotOutput = RobotOutput.getInstance();
+    smashBoard = SmashBoard.getInstance();
 
     translationPID = new GenericPID();
     rotationPID = new GenericPID();
@@ -72,7 +74,9 @@ public class DriveTrain implements Subsystem {
     if(driverInput.getResetPID()) {
       reset();
       setRotationTarget(0);
-//      rotationPID.setValues(SmashBoard.getInstance().getP(), SmashBoard.getInstance().getI(), 0);
+      rotationPID.setValues(smashBoard.getP(), 
+        smashBoard.getI(), 
+        smashBoard.getD());
     }
     
     switch(mode) {
@@ -80,8 +84,8 @@ public class DriveTrain implements Subsystem {
         drive(driverInput.getDriverStick());
         break;
       case PIDROTATE:
-        rotationPID.calculate(((sensorInput.getNavXHeading() + 180) % 360) - 180);
-          arcadeDrive(driverInput.getDriverY(), rotationPID.get());
+        rotationPID.calculate(sensorInput.getNavXHeading());
+        arcadeDrive(driverInput.getDriverY(), rotationPID.get());
         break;
       case PIDTRANSLATE:
         translationPID.calculate((sensorInput.getDriveLeftEncoderPosition()
@@ -99,15 +103,15 @@ public class DriveTrain implements Subsystem {
   public void disable() {
   }
 
-  public void drive(GenericHID input) {
+  private void drive(GenericHID input) {
     robotOutput.arcadeDrive(input.getY(), input.getTwist());
   }
 
-  public void arcadeDrive(double translation, double rotation) {
+  private void arcadeDrive(double translation, double rotation) {
     robotOutput.arcadeDrive(translation, rotation);
   }
 
-  public void tankDrive(double leftValue, double rightValue) {
+  private void tankDrive(double leftValue, double rightValue) {
     robotOutput.tankDrive(leftValue, rightValue);
   }
 
@@ -138,8 +142,6 @@ public class DriveTrain implements Subsystem {
   }
 
   public void reset() {
-    sensorInput.setDriveLeftPos(0);
-    sensorInput.setDriveRightPos(0);
     sensorInput.resetNavXHeading();
   }
 }
