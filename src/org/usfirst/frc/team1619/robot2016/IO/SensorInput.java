@@ -19,9 +19,15 @@ public class SensorInput {
   private RobotOutput robotOut;
   private AHRS navX;
 
+  private int driveLeftEncPos;
+  private int driveRightEncPos;
+
   private SensorInput() {
     robotOut = RobotOutput.getInstance();
     navX = new AHRS(SPI.Port.kMXP);
+
+    driveLeftEncPos = 0;
+    driveRightEncPos = 0;
   }
 
   public static SensorInput getInstance() {
@@ -34,16 +40,15 @@ public class SensorInput {
    * @return Left drive encoder position
    */
   public int getDriveLeftEncoderPosition() {
-    return robotOut.getDriveLeftEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
+    return (robotOut.getDriveRightEncPos() - driveRightEncPos) / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**
-   * Set the current encoder position.
-   * This is usually used for zeroing the encoder.
+   * Reset the current encoder position to zero.
    * @param position Left encoder new position
    */
-  public void setDriveLeftPos(int position) {
-    robotOut.setDriveLeftPos(position);
+  public void resetDriveLeftPos() {
+    driveLeftEncPos = robotOut.getDriveLeftEncPos();
   }
 
   /**
@@ -51,16 +56,15 @@ public class SensorInput {
    * @return Right drive encoder position
    */
   public int getDriveRightEncoderPosition() {
-    return robotOut.getDriveRightEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
+    return (robotOut.getDriveRightEncPos() - driveRightEncPos) / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**
-   * Set the current encoder position.
-   * This is usually used for zeroing the encoder.
+   * Reset the current encoder position to zero.
    * @param position Right encoder new position
    */
-  public void setDriveRightPos(int position) {
-    robotOut.setDriveRightPos(position);
+  public void resetDriveRightPos() {
+    driveRightEncPos = robotOut.getDriveRightEncPos();
   }
 
   /**

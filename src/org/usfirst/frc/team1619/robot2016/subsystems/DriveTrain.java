@@ -53,10 +53,11 @@ public class DriveTrain implements Subsystem {
   @Override
   public void initialize() {
     mode = Modes.MANUAL;
-    
+
     rotationPID.setValues(Constants.DRIVE_PID_ROTATION_P, 
       Constants.DRIVE_PID_ROTATION_I, 
       Constants.DRIVE_PID_ROTATION_D);
+    rotationPID.setIRange(25);
 
     translationPID.setValues(Constants.DRIVE_PID_TRANSLATION_P, 
       Constants.DRIVE_PID_TRANSLATION_I, 
@@ -66,17 +67,20 @@ public class DriveTrain implements Subsystem {
   @Override
   public void update() {
     if(driverInput.getTurnPID()) {
-      mode = Modes.PIDROTATE;
+      mode = Modes.PIDTRANSLATE;
     }
     else {
       mode = Modes.MANUAL;
     }
     if(driverInput.getResetPID()) {
       reset();
-      setRotationTarget(0);
       rotationPID.setValues(smashBoard.getP(), 
         smashBoard.getI(), 
         smashBoard.getD());
+      setRotationTarget(0);
+      sensorInput.resetDriveLeftPos();
+      sensorInput.resetDriveRightPos();
+      setTranslationTarget(2000);
     }
     
     switch(mode) {
@@ -90,7 +94,8 @@ public class DriveTrain implements Subsystem {
       case PIDTRANSLATE:
         translationPID.calculate((sensorInput.getDriveLeftEncoderPosition()
           + sensorInput.getDriveRightEncoderPosition()) / 2);
-        arcadeDrive(translationPID.get(), rotationPID.get());
+        rotationPID.calculate(sensorInput.getNavXHeading());
+        arcadeDrive(-translationPID.get(), rotationPID.get());
         break;
       case PIDFULL:
         break;

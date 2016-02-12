@@ -73,7 +73,7 @@ public class RobotOutput {
    * @param Right drive encoder new position
    */
   public void setDriveRightPos(int position) {
-    driveRight1.setEncPosition(-position);
+    driveRight1.setEncPosition(position);
   }
 
   /**
