@@ -54,6 +54,14 @@ public class GenericPID {
   }
 
   /**
+   * Reset the PID loop to initial conditions
+   */
+  public void reset() {
+    integral = 0;
+    prevError = 0;
+  }
+
+  /**
    * Integral term will only be calculated when -range < error < range
    * @param range Range that the I term is calculated within
    */

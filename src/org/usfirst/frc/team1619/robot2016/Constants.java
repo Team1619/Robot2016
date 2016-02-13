@@ -27,12 +27,14 @@ public class Constants {
   public static final LoggingLevel LOGGING_LEVEL = LoggingLevel.WARNING;
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
 
-  //Drive Train
-  public static final double DRIVE_PID_ROTATION_P = 0.08;
-  public static final double DRIVE_PID_ROTATION_I = 0.004;
-  public static final double DRIVE_PID_ROTATION_D = 0.35;
+  //DriveTrain
+  public static final double DRIVE_PID_ROTATION_P = 0.04;
+  public static final double DRIVE_PID_ROTATION_I = 0.001;
+  public static final double DRIVE_PID_ROTATION_D = 0.15;
 
   public static final double DRIVE_PID_TRANSLATION_P = 0.001;
   public static final double DRIVE_PID_TRANSLATION_I = 0;
   public static final double DRIVE_PID_TRANSLATION_D = 0;
+
+  public static final double DRIVER_ROTATION_DEADZONE = 0.05;
 }

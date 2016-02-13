@@ -23,11 +23,12 @@ public class DriveTrain implements Subsystem {
 
   //Enum for current state
   private enum Modes {
-    MANUAL, PIDROTATE, PIDTRANSLATE, PIDFULL;
+    MANUAL, PIDROTATE, PIDHOLDHEADING, PIDFULL;
   }
 
   //Declare stuff
-  Modes mode;
+  private Modes mode;
+  private Modes prevMode;
 
   private DriverInput driverInput;
   private SensorInput sensorInput;
@@ -40,6 +41,7 @@ public class DriveTrain implements Subsystem {
   private DriveTrain() {
     //Init stuff
     mode = Modes.MANUAL;
+    prevMode = null;
 
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();
@@ -53,6 +55,7 @@ public class DriveTrain implements Subsystem {
   @Override
   public void initialize() {
     mode = Modes.MANUAL;
+    prevMode = null;
 
     rotationPID.setValues(Constants.DRIVE_PID_ROTATION_P, 
       Constants.DRIVE_PID_ROTATION_I, 
@@ -66,46 +69,82 @@ public class DriveTrain implements Subsystem {
 
   @Override
   public void update() {
-    if(driverInput.getTurnPID()) {
-      mode = Modes.PIDTRANSLATE;
-    }
-    else {
+//    if(driverInput.getTurnPID()
+//      && driverInput.getDriverRotate() < Constants.DRIVER_ROTATION_DEADZONE 
+//      && driverInput.getDriverRotate() > -Constants.DRIVER_ROTATION_DEADZONE) {
+//      if(mode != Modes.PIDHOLDHEADING
+//        && sensorInput.getNavXRotationSpeed() < 1 
+//        && sensorInput.getNavXRotationSpeed() > -1) {
+//        mode = Modes.PIDHOLDHEADING;
+//      }
+//    }
+//    else {
       mode = Modes.MANUAL;
-    }
+//    }
+
     if(driverInput.getResetPID()) {
       reset();
       rotationPID.setValues(smashBoard.getP(), 
         smashBoard.getI(), 
         smashBoard.getD());
-      setRotationTarget(0);
-      sensorInput.resetDriveLeftPos();
-      sensorInput.resetDriveRightPos();
-      setTranslationTarget(2000);
     }
-    
+
+    if(prevMode != mode) {
+      initState();
+    }
+    updateState();
+    prevMode = mode;
+  }
+
+  @Override
+  public void disable() {
+  }
+
+  private void initState() {
     switch(mode) {
       case MANUAL:
-        drive(driverInput.getDriverStick());
         break;
+
       case PIDROTATE:
-        rotationPID.calculate(sensorInput.getNavXHeading());
-        arcadeDrive(driverInput.getDriverY(), rotationPID.get());
+        setRotationTarget(0);
         break;
-      case PIDTRANSLATE:
-        translationPID.calculate((sensorInput.getDriveLeftEncoderPosition()
-          + sensorInput.getDriveRightEncoderPosition()) / 2);
-        rotationPID.calculate(sensorInput.getNavXHeading());
-        arcadeDrive(-translationPID.get(), rotationPID.get());
+
+      case PIDHOLDHEADING:
+        reset();
+        rotationPID.reset();
+        setRotationTarget(0);
         break;
+
       case PIDFULL:
         break;
+
       default:
         break;
     }
   }
 
-  @Override
-  public void disable() {
+  private void updateState() {
+    switch(mode) {
+      case MANUAL:
+        drive(driverInput.getDriverStick());
+        break;
+
+      case PIDROTATE:
+      case PIDHOLDHEADING:
+        rotationPID.calculate(sensorInput.getNavXHeading());
+        arcadeDrive(driverInput.getDriverTranslate(), rotationPID.get());
+        break;
+
+      case PIDFULL:
+        translationPID.calculate((sensorInput.getDriveLeftEncoderPosition()
+          + sensorInput.getDriveRightEncoderPosition()) / 2);
+        rotationPID.calculate(sensorInput.getNavXHeading());
+        arcadeDrive(-translationPID.get(), rotationPID.get());
+        break;
+
+      default:
+        break;
+    }
   }
 
   private void drive(GenericHID input) {
@@ -114,28 +153,6 @@ public class DriveTrain implements Subsystem {
 
   private void arcadeDrive(double translation, double rotation) {
     robotOutput.arcadeDrive(translation, rotation);
-  }
-
-  private void tankDrive(double leftValue, double rightValue) {
-    robotOutput.tankDrive(leftValue, rightValue);
-  }
-
-  public void setModeManual() {
-    mode = Modes.MANUAL;
-  }
-
-  public void setModePIDTranslate() {
-    mode = Modes.PIDTRANSLATE;
-    rotationPID.setTarget(sensorInput.getDriveLeftEncoderPosition()
-      - sensorInput.getDriveRightEncoderPosition());
-  }
-
-  public void setModePIDRotate() {
-    mode = Modes.PIDROTATE;
-  }
-
-  public void setModePIDFull() {
-    mode = Modes.PIDFULL;
   }
 
   public void setTranslationTarget(double target) {

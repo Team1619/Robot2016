@@ -53,6 +53,14 @@ public class DriverInput {
     return rightStick;
   }
 
+  public double getDriverTranslate() {
+    return getDriverY();
+  }
+
+  public double getDriverRotate() {
+    return getDriverTwist();
+  }
+
   public double getDriverX() {
     return rightStick.getX();
   }

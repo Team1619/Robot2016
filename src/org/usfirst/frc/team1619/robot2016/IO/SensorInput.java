@@ -92,10 +92,14 @@ public class SensorInput {
     return ((navX.getFusedHeading() + 180) % 360) - 180;
   }
 
+  public double getNavXRotationSpeed() {
+    return navX.getRate();
+  }
+
   /**
    * Set the current NavX heading to 0
    */
   public void resetNavXHeading() {
-    navX.reset();
+    navX.zeroYaw();
   }
 }
