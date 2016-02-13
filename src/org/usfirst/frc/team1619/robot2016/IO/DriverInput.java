@@ -21,20 +21,37 @@ public class DriverInput {
     return instance;
   }
 
-  //Declare
+  //Declare joysticks
   private Joystick rightStick;
   private Joystick leftStick;
   
   private JoystickButton testForwardButton;
   private JoystickButton testBackwardButton;
 
+  //Declare buttons
+  private JoystickButton turnPID;
+  private JoystickButton resetPID;
+
   private DriverInput() {
-    //Init
+    //Init joysticks
     rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
     
     testForwardButton = new JoystickButton(rightStick, Constants.TEST_FORWARD_BUTTON );
     testBackwardButton = new JoystickButton(rightStick, Constants.TEST_BACKWARD_BUTTON);
+
+    //Init buttons
+    turnPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_TURN);
+    resetPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_RESET);
+  }
+
+  //Buttons
+  public boolean getTurnPID() {
+    return turnPID.get();
+  }
+
+  public boolean getResetPID() {
+    return resetPID.get();
   }
 
   // Driver
@@ -47,43 +64,43 @@ public class DriverInput {
   }
   
   public GenericHID getDriverStick() {
-    return this.rightStick;
+    return rightStick;
   }
 
   public double getDriverX() {
-    return this.rightStick.getX();
+    return rightStick.getX();
   }
 
   public double getDriverY() {
-    return this.rightStick.getY();
+    return rightStick.getY();
   }
 
   public double getDriverTwist() {
-    return this.rightStick.getTwist();
+    return rightStick.getTwist();
   }
 
   public double getDriverThrottle() {
-    return this.rightStick.getThrottle();
+    return rightStick.getThrottle();
   }
 
   // Operator
   public GenericHID getOperatorStick() {
-    return this.leftStick;
+    return leftStick;
   }
 
   public double getOperatorX() {
-    return this.leftStick.getX();
+    return leftStick.getX();
   }
 
   public double getOperatorY() {
-    return this.leftStick.getY();
+    return leftStick.getY();
   }
 
   public double getOperatorTwist() {
-    return this.leftStick.getTwist();
+    return leftStick.getTwist();
   }
 
   public double getOperatorThrottle() {
-    return this.leftStick.getThrottle();
+    return leftStick.getThrottle();
   }
 }

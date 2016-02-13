@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.subsystems.DriveTrain;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
 
@@ -70,7 +71,7 @@ public class SmashBoard {
   private SendableChooser autoModeChooser;
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmartDashboard");
+    smashBoard = NetworkTable.getTable("SmashBoard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();
@@ -120,8 +121,8 @@ public class SmashBoard {
    */
   public void update() {
     // Encoders
-    smashBoard.putNumber("Right Drive Encoder Position", sensorInput.getDriveRightEncoderPosition());
-    smashBoard.putNumber("Left Drive Encoder Position", sensorInput.getDriveLeftEncoderPosition());
+    smashBoard.putNumber("rightDriveEncoderPosition", sensorInput.getDriveRightEncoderPosition());
+    smashBoard.putNumber("leftDriveEncoderPosition", sensorInput.getDriveLeftEncoderPosition());
     smashBoard.putNumber("Right Drive Encoder Velocity", sensorInput.getDriveRightEncoderVelocity());
     smashBoard.putNumber("Left Drive Encoder Velocity", sensorInput.getDriveLeftEncoderVelocity());
     
@@ -131,5 +132,15 @@ public class SmashBoard {
     //Dart
     smashBoard.putNumber("Upper Hall Effect", sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
     smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
+    
+    smashBoard.putNumber("angle", sensorInput.getNavXHeading());
+  }
+
+  public double getP() {
+    return smashBoard.getNumber("p", Constants.DRIVE_PID_ROTATION_P);
+  }
+
+  public double getI() {
+    return smashBoard.getNumber("i", Constants.DRIVE_PID_ROTATION_I);
   }
 }

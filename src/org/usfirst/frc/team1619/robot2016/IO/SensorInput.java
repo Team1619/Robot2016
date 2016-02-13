@@ -44,11 +44,29 @@ public class SensorInput {
   }
 
   /**
+   * Set the current encoder position.
+   * This is usually used for zeroing the encoder.
+   * @param position Left encoder new position
+   */
+  public void setDriveLeftPos(int position) {
+    robotOut.setDriveLeftPos(position);
+  }
+
+  /**
    * Right drive motor position in inches
    * @return Right drive encoder position
    */
   public int getDriveRightEncoderPosition() {
-    return robotOut.getDriveRightEncPos();
+    return robotOut.getDriveRightEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
+  }
+
+  /**
+   * Set the current encoder position.
+   * This is usually used for zeroing the encoder.
+   * @param position Right encoder new position
+   */
+  public void setDriveRightPos(int position) {
+    robotOut.setDriveRightPos(position);
   }
 
   /**

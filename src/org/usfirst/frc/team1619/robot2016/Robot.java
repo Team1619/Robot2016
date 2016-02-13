@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
@@ -11,24 +10,23 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 public class Robot extends IterativeRobot {
   
   public void robotInit() {
-    
   }
 
   public void disabledInit() {
-    
   }
   
   public void disabledPeriodic() {
     SmashBoard.getInstance().update();
   }
   public void autonomousInit() {
-
   }
 
   public void autonomousPeriodic() {
-    
   }
-
+  
+  public void teleopInit() {
+    DriveTrain.getInstance().initialize();
+  }
   
   public void teleopPeriodic() {
     DriveTrain.getInstance().update();
@@ -38,7 +36,7 @@ public class Robot extends IterativeRobot {
   }
 
   public void testPeriodic() {
-
   }
 
 }
+

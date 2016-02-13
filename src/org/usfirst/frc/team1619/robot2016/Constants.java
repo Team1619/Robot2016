@@ -16,6 +16,10 @@ public class Constants {
   public static final int JOYSTICK_RIGHT_ID = 0;
   public static final int JOYSTICK_LEFT_ID = 1;
   
+  //Joystick Buttons
+  public static final int BUTTON_DRIVE_PID_TURN = 1;
+  public static final int BUTTON_DRIVE_PID_RESET = 2;
+  
   //Buttons
   public static final int TEST_FORWARD_BUTTON = 1;
   public static final int TEST_BACKWARD_BUTTON = 2;
@@ -30,4 +34,13 @@ public class Constants {
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
   public static final int UPPER_HALLEFFECT_ID = 1;
   public static final int LOWER_HALLEFFECT_ID = 0;
+  
+//Drive Train
+  public static final double DRIVE_PID_ROTATION_P = 0.025;
+  public static final double DRIVE_PID_ROTATION_I = 0.0;
+  public static final double DRIVE_PID_ROTATION_D = 0;
+
+  public static final double DRIVE_PID_TRANSLATION_P = 0;
+  public static final double DRIVE_PID_TRANSLATION_I = 0;
+  public static final double DRIVE_PID_TRANSLATION_D = 0;
 }
