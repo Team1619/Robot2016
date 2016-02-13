@@ -102,10 +102,12 @@ public class SensorInput {
   }
   
   public boolean getUpperHallEffect() {
-    return upperHallEffect.get();
+    //Sensor is low true
+    return !upperHallEffect.get();
   }
   
   public boolean getLowerHallEffect() {
-    return lowerHallEffect.get();
+    //Sensor is low true
+    return !lowerHallEffect.get();
   }
 }

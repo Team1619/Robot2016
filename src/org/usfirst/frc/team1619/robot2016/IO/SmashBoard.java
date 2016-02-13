@@ -71,7 +71,7 @@ public class SmashBoard {
   private SendableChooser autoModeChooser;
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmashBoard");
+    smashBoard = NetworkTable.getTable("SmartDashboard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();

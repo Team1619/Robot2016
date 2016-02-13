@@ -93,7 +93,7 @@ public class DriverInput {
   }
 
   public double getOperatorY() {
-    return leftStick.getY();
+    return leftStick.getY() * -1.0;
   }
 
   public double getOperatorTwist() {

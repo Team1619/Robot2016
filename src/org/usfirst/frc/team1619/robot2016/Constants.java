@@ -32,8 +32,9 @@ public class Constants {
   public static final boolean COMPETITION_MODE = false;
   public static final LoggingLevel LOGGING_LEVEL = LoggingLevel.WARNING;
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
-  public static final int UPPER_HALLEFFECT_ID = 1;
-  public static final int LOWER_HALLEFFECT_ID = 0;
+  public static final int UPPER_HALLEFFECT_ID = 0;
+  public static final int LOWER_HALLEFFECT_ID = 1;
+  public static final double DART_SPEED_FACTOR = 1.0;
   
 //Drive Train
   public static final double DRIVE_PID_ROTATION_P = 0.025;

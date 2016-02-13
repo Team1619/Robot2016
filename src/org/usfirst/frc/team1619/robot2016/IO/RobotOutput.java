@@ -41,6 +41,8 @@ public class RobotOutput {
     driveRight2.setInverted(true);
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
+
+    dartMotor.setInverted(true);
     
     driveRight1.enableBrakeMode(true);
     driveRight2.enableBrakeMode(true);
