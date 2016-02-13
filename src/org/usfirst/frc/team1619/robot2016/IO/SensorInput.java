@@ -68,6 +68,10 @@ public class SensorInput {
   public void setDriveRightPos(int position) {
     robotOut.setDriveRightPos(position);
   }
+  
+  public int getDartPosition() {
+    return robotOut.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
+  }
 
   /**
    * Left drive motor velocity

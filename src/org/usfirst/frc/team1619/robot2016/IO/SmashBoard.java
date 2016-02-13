@@ -125,6 +125,7 @@ public class SmashBoard {
     smashBoard.putNumber("leftDriveEncoderPosition", sensorInput.getDriveLeftEncoderPosition());
     smashBoard.putNumber("Right Drive Encoder Velocity", sensorInput.getDriveRightEncoderVelocity());
     smashBoard.putNumber("Left Drive Encoder Velocity", sensorInput.getDriveLeftEncoderVelocity());
+    smashBoard.putNumber("dartEncoderPosition", sensorInput.getDartPosition());
     
     // NavX
     smashBoard.putNumber("Heading", sensorInput.getNavXHeading());
