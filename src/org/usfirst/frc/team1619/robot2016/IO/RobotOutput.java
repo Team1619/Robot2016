@@ -23,6 +23,7 @@ public class RobotOutput {
   private CANTalon driveRight2;
   
   private CANTalon testMotor;
+  private CANTalon dartMotor;
   
   private RobotDrive drive;
 
@@ -34,6 +35,7 @@ public class RobotOutput {
     driveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_ID);
     
     testMotor = new CANTalon(Constants.TEST_MOTOR_ID);
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID);
 
     driveRight1.setInverted(true);
     driveRight2.setInverted(true);
@@ -94,5 +96,9 @@ public class RobotOutput {
   
   public void setTestMotor(double speed) {
 	  testMotor.set(speed);
+  }
+  
+  public void setDartMotor(double speed) {
+    dartMotor.set(speed);
   }
 }

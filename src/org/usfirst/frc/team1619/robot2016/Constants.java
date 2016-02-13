@@ -10,6 +10,7 @@ public class Constants {
   public static final int DRIVE_RIGHT_1_ID = 3;
   public static final int DRIVE_RIGHT_2_ID = 4;
   public static final int TEST_MOTOR_ID = 10;
+  public static final int DART_MOTOR_ID = 5;
 
   //Joysticks
   public static final int JOYSTICK_RIGHT_ID = 0;
