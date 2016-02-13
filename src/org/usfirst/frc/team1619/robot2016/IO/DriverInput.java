@@ -24,6 +24,9 @@ public class DriverInput {
   //Declare joysticks
   private Joystick rightStick;
   private Joystick leftStick;
+  
+  private JoystickButton testForwardButton;
+  private JoystickButton testBackwardButton;
 
   //Declare buttons
   private JoystickButton turnPID;
@@ -33,6 +36,9 @@ public class DriverInput {
     //Init joysticks
     rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
+    
+    testForwardButton = new JoystickButton(rightStick, Constants.TEST_FORWARD_BUTTON );
+    testBackwardButton = new JoystickButton(rightStick, Constants.TEST_BACKWARD_BUTTON);
 
     //Init buttons
     turnPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_TURN);
@@ -49,6 +55,14 @@ public class DriverInput {
   }
 
   // Driver
+  public boolean getTestForwardButton() {
+	  return this.testForwardButton.get();
+  }
+  
+  public boolean getTestBackwardButton() {
+	  return this.testBackwardButton.get();
+  }
+  
   public GenericHID getDriverStick() {
     return rightStick;
   }
@@ -79,7 +93,7 @@ public class DriverInput {
   }
 
   public double getOperatorY() {
-    return leftStick.getY();
+    return leftStick.getY() * -1.0;
   }
 
   public double getOperatorTwist() {

@@ -6,6 +6,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 /**
  * Sensor inputs from the robot
  * @author Tim
@@ -18,10 +20,14 @@ public class SensorInput {
 
   private RobotOutput robotOut;
   private AHRS navX;
+  private DigitalInput upperHallEffect;
+  private DigitalInput lowerHallEffect;
 
   private SensorInput() {
     robotOut = RobotOutput.getInstance();
     navX = new AHRS(SPI.Port.kMXP);
+    upperHallEffect = new DigitalInput(Constants.UPPER_HALLEFFECT_ID);
+    lowerHallEffect = new DigitalInput(Constants.LOWER_HALLEFFECT_ID);
   }
 
   public static SensorInput getInstance() {
@@ -93,5 +99,15 @@ public class SensorInput {
    */
   public void resetNavXHeading() {
     navX.reset();
+  }
+  
+  public boolean getUpperHallEffect() {
+    //Sensor is low true
+    return !upperHallEffect.get();
+  }
+  
+  public boolean getLowerHallEffect() {
+    //Sensor is low true
+    return !lowerHallEffect.get();
   }
 }

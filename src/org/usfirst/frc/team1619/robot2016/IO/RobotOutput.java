@@ -22,6 +22,9 @@ public class RobotOutput {
   private CANTalon driveRight1;
   private CANTalon driveRight2;
   
+  private CANTalon testMotor;
+  private CANTalon dartMotor;
+  
   private RobotDrive drive;
 
   private RobotOutput() {
@@ -30,11 +33,16 @@ public class RobotOutput {
     driveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_ID);
     driveLeft1 = new CANTalon(Constants.DRIVE_LEFT_1_ID);
     driveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_ID);
+    
+    testMotor = new CANTalon(Constants.TEST_MOTOR_ID);
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID);
 
     driveRight1.setInverted(true);
     driveRight2.setInverted(true);
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
+
+    dartMotor.setInverted(true);
     
     driveRight1.enableBrakeMode(true);
     driveRight2.enableBrakeMode(true);
@@ -43,7 +51,7 @@ public class RobotOutput {
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
-
+  
   /**
    * Don't use this method. Use SensorInput instead.
    * @return Left drive encoder position
@@ -112,5 +120,19 @@ public class RobotOutput {
    */
   public void tankDrive(double leftValue, double rightValue) {
     drive.tankDrive(-leftValue, -rightValue);
+  }
+  
+  /**
+   * Sets the speed of the test motor.
+   * @param speed
+   *          Speed of test motor.
+   */
+  
+  public void setTestMotor(double speed) {
+	  testMotor.set(speed);
+  }
+  
+  public void setDartMotor(double speed) {
+    dartMotor.set(speed);
   }
 }

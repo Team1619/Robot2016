@@ -71,7 +71,7 @@ public class SmashBoard {
   private SendableChooser autoModeChooser;
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmashBoard");
+    smashBoard = NetworkTable.getTable("SmartDashboard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();
@@ -127,6 +127,12 @@ public class SmashBoard {
     smashBoard.putNumber("Left Drive Encoder Velocity", sensorInput.getDriveLeftEncoderVelocity());
     
     // NavX
+    smashBoard.putNumber("Heading", sensorInput.getNavXHeading());
+    
+    //Dart
+    smashBoard.putNumber("Upper Hall Effect", sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
+    smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
+    
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
   }
 
