@@ -59,6 +59,10 @@ public class RobotOutput {
   public int getDriveLeftEncPos() {
     return -driveLeft1.getEncPosition();
   }
+  
+  public int getDartPosition() {
+    return dartMotor.getEncPosition();
+  }
 
   /**
    * Don't use this method. Use SensorInput instead.
