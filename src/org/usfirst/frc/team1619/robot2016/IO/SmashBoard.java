@@ -130,6 +130,6 @@ public class SmashBoard {
     
     //Dart
     smashBoard.putNumber("Upper Hall Effect", sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
+    smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
   }
-  
 }
