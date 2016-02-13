@@ -11,19 +11,18 @@ public class UtilityArm implements Subsystem {
     instance = new UtilityArm();
   }
   
-  private SensorInput sensorInput;
-  
   public static UtilityArm getInstance() {
     return instance;
   }
   
   private RobotOutput robotOutput;
   private DriverInput driverInput;
+  private SensorInput sensorInput;
   
   public UtilityArm() {
     robotOutput = RobotOutput.getInstance();
     driverInput = DriverInput.getInstance();
-    sensorInput = SensorInput.getInstance();
+    sensorInput = SensorInput.getInstance(); 
   }
 
   @Override
