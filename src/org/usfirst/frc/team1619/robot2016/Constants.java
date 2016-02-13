@@ -28,4 +28,5 @@ public class Constants {
   public static final boolean COMPETITION_MODE = false;
   public static final LoggingLevel LOGGING_LEVEL = LoggingLevel.WARNING;
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
+  public static final int UPPER_HALLEFFECT_ID = 1;
 }

@@ -127,6 +127,9 @@ public class SmashBoard {
     
     // NavX
     smashBoard.putNumber("Heading", sensorInput.getNavXHeading());
+    
+    //Dart
+    smashBoard.putNumber("Upper Hall Effect", sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
   }
   
 }
