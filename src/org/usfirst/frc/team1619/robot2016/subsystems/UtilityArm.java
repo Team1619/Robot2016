@@ -5,22 +5,22 @@ import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
-public class Dart implements Subsystem {
-  private static Dart instance;
+public class UtilityArm implements Subsystem {
+  private static UtilityArm instance;
   static {
-    instance = new Dart();
+    instance = new UtilityArm();
   }
   
   private SensorInput sensorInput;
   
-  public static Dart getInstance() {
+  public static UtilityArm getInstance() {
     return instance;
   }
   
   private RobotOutput robotOutput;
   private DriverInput driverInput;
   
-  public Dart() {
+  public UtilityArm() {
     robotOutput = RobotOutput.getInstance();
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();

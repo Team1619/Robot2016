@@ -9,7 +9,7 @@ public class Constants {
   public static final int DRIVE_LEFT_2_ID = 2;
   public static final int DRIVE_RIGHT_1_ID = 3;
   public static final int DRIVE_RIGHT_2_ID = 4;
-  public static final int TEST_MOTOR_ID = 10;
+  public static final int TEST_MOTOR_ID = -1;
   public static final int DART_MOTOR_ID = 5;
 
   //Joysticks
@@ -21,8 +21,8 @@ public class Constants {
   public static final int BUTTON_DRIVE_PID_RESET = 2;
   
   //Buttons
-  public static final int TEST_FORWARD_BUTTON = 1;
-  public static final int TEST_BACKWARD_BUTTON = 2;
+  public static final int TEST_FORWARD_BUTTON = -1;
+  public static final int TEST_BACKWARD_BUTTON = -1;
 
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
