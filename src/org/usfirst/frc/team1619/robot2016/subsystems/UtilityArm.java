@@ -48,7 +48,7 @@ public class UtilityArm implements Subsystem {
   public void disable() {
   }
   
-  public static double getArmAngle(double dartExtention) {
+  public double getArmAngle(double dartExtention) {
 		double dartPivotLengthSquared = ((Constants.DART_WIDTH*Constants.DART_WIDTH) + ((Constants.DART_HEIGHT+dartExtention)*(Constants.DART_HEIGHT+dartExtention)));
 		double numerator = ((Constants.ARM_LENGTH*Constants.ARM_LENGTH) + (Constants.ARM_TO_DART_LENGTH*Constants.ARM_TO_DART_LENGTH) - dartPivotLengthSquared);
 		double denominator = 2.0*Constants.ARM_LENGTH*Constants.ARM_TO_DART_LENGTH;
