@@ -26,7 +26,7 @@ public class Constants {
 
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
-  public static final int DART_ENC_TICKS_PER_INCH = 5;
+  public static final double DART_ENC_TICKS_PER_INCH = 1000.0;
   
   // Properties/configurations
   public static final boolean TEST_MODE = false;

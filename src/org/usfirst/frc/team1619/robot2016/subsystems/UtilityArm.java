@@ -41,6 +41,9 @@ public class UtilityArm implements Subsystem {
     }
 
     robotOutput.setDartMotor(velocity);
+    double angle = getArmAngle(sensorInput.getDartPosition());
+    System.out.println("calculated angle " + angle);
+    System.out.println("current assumed offset" + getDartExtension(0.0));
   }
 
   @Override
