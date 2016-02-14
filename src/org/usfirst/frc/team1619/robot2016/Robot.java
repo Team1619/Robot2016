@@ -1,9 +1,8 @@
 package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
 import org.usfirst.frc.team1619.robot2016.subsystems.DriveTrain;
-import org.usfirst.frc.team1619.robot2016.subsystems.TestMotor;
+import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 

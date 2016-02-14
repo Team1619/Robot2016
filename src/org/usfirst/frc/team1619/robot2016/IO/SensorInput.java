@@ -69,6 +69,11 @@ public class SensorInput {
     robotOut.setDriveRightPos(position);
   }
   
+  /**
+   * Gets the dart position.
+   * @return
+   *        Travel in inches.
+   */
   public double getDartPosition() {
     return robotOut.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
   }
@@ -105,11 +110,21 @@ public class SensorInput {
     navX.reset();
   }
   
+  /**
+   * Checks upper limit switch.
+   * @return
+   *        True if tripped.
+   */
   public boolean getUpperHallEffect() {
     //Sensor is low true
     return !upperHallEffect.get();
   }
   
+  /**
+   * Checks lower limit switch.
+   * @return
+   *        True if tripped.
+   */
   public boolean getLowerHallEffect() {
     //Sensor is low true
     return !lowerHallEffect.get();
