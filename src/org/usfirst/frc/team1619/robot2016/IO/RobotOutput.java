@@ -54,26 +54,10 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
-   * @param Left drive encoder new position
-   */
-  public void setDriveLeftPos(int position) {
-    driveLeft1.setEncPosition(-position);
-  }
-
-  /**
-   * Don't use this method. Use SensorInput instead.
    * @return Right drive encoder position
    */
   public int getDriveRightEncPos() {
     return driveRight1.getEncPosition();
-  }
-
-  /**
-   * Don't use this method. Use SensorInput instead.
-   * @param Right drive encoder new position
-   */
-  public void setDriveRightPos(int position) {
-    driveRight1.setEncPosition(position);
   }
 
   /**
@@ -89,7 +73,7 @@ public class RobotOutput {
    * @return Right drive encoder velocity
    */
   public int getDriveRightEncVel() {
-    return -driveRight1.getEncVelocity();
+    return driveRight1.getEncVelocity();
   }
 
   /**

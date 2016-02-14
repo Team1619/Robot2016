@@ -31,10 +31,17 @@ public class Constants {
   public static final double DRIVE_PID_ROTATION_P = 0.04;
   public static final double DRIVE_PID_ROTATION_I = 0.001;
   public static final double DRIVE_PID_ROTATION_D = 0.15;
+  public static final double DRIVE_PID_ROTATION_IRANGE = 25;
 
   public static final double DRIVE_PID_TRANSLATION_P = 0.001;
-  public static final double DRIVE_PID_TRANSLATION_I = 0;
-  public static final double DRIVE_PID_TRANSLATION_D = 0;
+  public static final double DRIVE_PID_TRANSLATION_I = 0.0001;
+  public static final double DRIVE_PID_TRANSLATION_D = 0.0;
+  public static final double DRIVE_PID_TRANSLATION_IRANGE = 100;
 
   public static final double DRIVER_ROTATION_DEADZONE = 0.05;
+
+  //Autonomous
+  //  Test
+  public static final double AUTO_TEST_ROTATION_TOLERANCE = 2.0;
+  public static final double AUTO_TEST_TRANSLATION_TOLERANCE = 200;
 }

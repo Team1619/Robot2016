@@ -49,6 +49,10 @@ public class GenericPID {
     return outputValue;
   }
 
+  public double getSetPoint() {
+    return setPoint;
+  }
+
   public void resetError() {
     integral = 0;
   }

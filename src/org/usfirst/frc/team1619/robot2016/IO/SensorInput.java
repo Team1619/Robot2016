@@ -40,7 +40,7 @@ public class SensorInput {
    * @return Left drive encoder position
    */
   public int getDriveLeftEncoderPosition() {
-    return (robotOut.getDriveRightEncPos() - driveRightEncPos) / Constants.DRIVE_ENC_TICKS_PER_INCH;
+    return (robotOut.getDriveLeftEncPos() - driveLeftEncPos) / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**
@@ -90,6 +90,10 @@ public class SensorInput {
    */
   public double getNavXHeading() {
     return ((navX.getFusedHeading() + 180) % 360) - 180;
+  }
+
+  public double getNavXHeadingRaw() {
+    return navX.getFusedHeading();
   }
 
   public double getNavXRotationSpeed() {

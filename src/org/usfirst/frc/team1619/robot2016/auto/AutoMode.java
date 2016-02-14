@@ -18,6 +18,8 @@ public class AutoMode {
 
   public void init() {
     currentIndex = 0;
+    finished = false;
+
     if(autoCommands.size() <= 0) {
       finished = true;
     }
