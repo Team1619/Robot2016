@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
-import java.lang.Math.*;
 
 public class Constants {
 
