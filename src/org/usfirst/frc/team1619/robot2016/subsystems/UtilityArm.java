@@ -42,8 +42,8 @@ public class UtilityArm implements Subsystem {
 
     robotOutput.setDartMotor(velocity);
     double angle = getArmAngle(sensorInput.getDartPosition());
-    System.out.println("calculated angle " + angle);
-    System.out.println("current assumed offset" + getDartExtension(0.0));
+    //System.out.println("calculated angle " + angle);
+    //System.out.println("current assumed offset " + getDartExtension(0.0));
   }
 
   @Override
@@ -54,6 +54,7 @@ public class UtilityArm implements Subsystem {
     double dartPivotLengthSquared = ((Constants.DART_WIDTH*Constants.DART_WIDTH) + ((Constants.DART_HEIGHT+dartExtention)*(Constants.DART_HEIGHT+dartExtention)));
 	double numerator = ((Constants.ARM_LENGTH*Constants.ARM_LENGTH) + (Constants.ARM_TO_DART_LENGTH*Constants.ARM_TO_DART_LENGTH) - dartPivotLengthSquared);
 	double denominator = 2.0*Constants.ARM_LENGTH*Constants.ARM_TO_DART_LENGTH;
+	System.out.println("cos angle " + numerator/denominator);
 	double triangleAngle = Math.toDegrees(Math.acos(numerator/denominator));
 	return ((triangleAngle - Constants.ARM_TO_DART_DECLINATION_ANGLE) + Constants.ARM_PIVOTS_TO_TOP_SURFACE_ANGLE);
   }

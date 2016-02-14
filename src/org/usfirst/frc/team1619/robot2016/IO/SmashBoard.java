@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.subsystems.DriveTrain;
+import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
 
@@ -65,10 +66,12 @@ public class SmashBoard {
   private SensorInput sensorInput;
   private DriverInput driverInput;
   private Logger logger;
+  private UtilityArm utilityArm;
   
   // Choosers
   private SendableChooser loggingLevelChooser;
   private SendableChooser autoModeChooser;
+  
   
   private SmashBoard() {
     smashBoard = NetworkTable.getTable("SmartDashboard");
@@ -77,6 +80,7 @@ public class SmashBoard {
     sensorInput = SensorInput.getInstance();
     driverInput = DriverInput.getInstance();
     // logger = Logger.getInstance();
+    utilityArm = UtilityArm.getInstance();
     
     loggingLevelChooser = new SendableChooser();
     autoModeChooser = new SendableChooser();
@@ -135,6 +139,7 @@ public class SmashBoard {
     smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
     
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
+    smashBoard.putNumber("arm angle", utilityArm.getArmAngle(sensorInput.getDartPosition()));
   }
 
   public double getP() {
