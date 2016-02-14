@@ -4,7 +4,6 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
-//import java.lang.Math.*;
 
 public class UtilityArm implements Subsystem {
   private static UtilityArm instance;
@@ -49,10 +48,21 @@ public class UtilityArm implements Subsystem {
   }
   
   public double getArmAngle(double dartExtention) {
-		double dartPivotLengthSquared = ((Constants.DART_WIDTH*Constants.DART_WIDTH) + ((Constants.DART_HEIGHT+dartExtention)*(Constants.DART_HEIGHT+dartExtention)));
-		double numerator = ((Constants.ARM_LENGTH*Constants.ARM_LENGTH) + (Constants.ARM_TO_DART_LENGTH*Constants.ARM_TO_DART_LENGTH) - dartPivotLengthSquared);
-		double denominator = 2.0*Constants.ARM_LENGTH*Constants.ARM_TO_DART_LENGTH;
-		double triangleAngle = Math.toDegrees(Math.acos(numerator/denominator));
-		return ((triangleAngle - Constants.ARM_TO_DART_DECLINATION_ANGLE) - Constants.ARM_PIVOTS_TO_TOP_SURFACE_ANGLE);
-	}
+    double dartPivotLengthSquared = ((Constants.DART_WIDTH*Constants.DART_WIDTH) + ((Constants.DART_HEIGHT+dartExtention)*(Constants.DART_HEIGHT+dartExtention)));
+	double numerator = ((Constants.ARM_LENGTH*Constants.ARM_LENGTH) + (Constants.ARM_TO_DART_LENGTH*Constants.ARM_TO_DART_LENGTH) - dartPivotLengthSquared);
+	double denominator = 2.0*Constants.ARM_LENGTH*Constants.ARM_TO_DART_LENGTH;
+	double triangleAngle = Math.toDegrees(Math.acos(numerator/denominator));
+	return ((triangleAngle - Constants.ARM_TO_DART_DECLINATION_ANGLE) + Constants.ARM_PIVOTS_TO_TOP_SURFACE_ANGLE);
+  }
+  
+  public double getDartExtension(double Angle) {
+	double triangleAngle = Angle + Constants.ARM_TO_DART_DECLINATION_ANGLE + Constants.ARM_PIVOTS_TO_TOP_SURFACE_ANGLE;
+	double ratio = Math.cos(triangleAngle);
+	double denominator = 2.0*Constants.ARM_LENGTH*Constants.ARM_TO_DART_LENGTH;
+	double ab2cosC = ratio * denominator;
+	double aSquaredPlus_bSquared = (Constants.ARM_LENGTH*Constants.ARM_LENGTH) + (Constants.ARM_TO_DART_LENGTH*Constants.ARM_TO_DART_LENGTH);
+	double dartPivotLengthSquared = aSquaredPlus_bSquared - ab2cosC;
+	double dartParallelLength = Math.sqrt(dartPivotLengthSquared - (Constants.DART_WIDTH*Constants.DART_WIDTH));
+	return dartParallelLength - Constants.DART_HEIGHT;
+  }
 }
