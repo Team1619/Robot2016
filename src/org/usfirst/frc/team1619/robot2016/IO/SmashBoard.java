@@ -71,7 +71,7 @@ public class SmashBoard {
   private SendableChooser autoModeChooser;
   
   private SmashBoard() {
-    smashBoard = NetworkTable.getTable("SmartDashboard");
+    smashBoard = NetworkTable.getTable("SmashBoard");
     smashBoard.addTableListener(tableListener);
     
     sensorInput = SensorInput.getInstance();
@@ -135,6 +135,8 @@ public class SmashBoard {
     smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
     
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
+
+    smashBoard.putNumber("speed", sensorInput.getShootMotorSpeed());
   }
 
   public double getP() {

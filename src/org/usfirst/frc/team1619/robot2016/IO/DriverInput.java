@@ -25,8 +25,11 @@ public class DriverInput {
   private Joystick rightStick;
   private Joystick leftStick;
   
-  private JoystickButton testForwardButton;
-  private JoystickButton testBackwardButton;
+//  private JoystickButton testForwardButton;
+//  private JoystickButton testBackwardButton;
+  
+  private JoystickButton intakeButton;
+  private JoystickButton shootButton;
 
   //Declare buttons
   private JoystickButton turnPID;
@@ -37,12 +40,15 @@ public class DriverInput {
     rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
     
-    testForwardButton = new JoystickButton(rightStick, Constants.TEST_FORWARD_BUTTON );
-    testBackwardButton = new JoystickButton(rightStick, Constants.TEST_BACKWARD_BUTTON);
+//    testForwardButton = new JoystickButton(rightStick, Constants.TEST_FORWARD_BUTTON );
+//    testBackwardButton = new JoystickButton(rightStick, Constants.TEST_BACKWARD_BUTTON);
 
     //Init buttons
     turnPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_TURN);
     resetPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_RESET);
+    
+    intakeButton = new JoystickButton(leftStick, Constants.BUTTON_INTAKE);
+    shootButton = new JoystickButton(leftStick, Constants.BUTTON_SHOOT);
   }
 
   //Buttons
@@ -55,12 +61,20 @@ public class DriverInput {
   }
 
   // Driver
-  public boolean getTestForwardButton() {
-	  return this.testForwardButton.get();
+//  public boolean getTestForwardButton() {
+//	  return this.testForwardButton.get();
+//  }
+//  
+//  public boolean getTestBackwardButton() {
+//	  return this.testBackwardButton.get();
+//  }
+  
+  public boolean getIntakeButton() {
+    return this.intakeButton.get();
   }
   
-  public boolean getTestBackwardButton() {
-	  return this.testBackwardButton.get();
+  public boolean getShootButton() {
+    return this.shootButton.get();
   }
   
   public GenericHID getDriverStick() {

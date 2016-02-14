@@ -29,15 +29,15 @@ public class TestMotor implements Subsystem {
 
   @Override
   public void update() {
-    if (driverInput.getTestForwardButton()) {
-      robotOutput.setTestMotor(-(driverInput.getDriverThrottle() / 2) + 0.5);
-    }
-    else if (driverInput.getTestBackwardButton()) {
-      robotOutput.setTestMotor((driverInput.getDriverThrottle() / 2) - 0.5);
-    }
-    else {
-      robotOutput.setTestMotor(0);
-    }
+//    if (driverInput.getTestForwardButton()) {
+//      robotOutput.setTestMotor(-(driverInput.getDriverThrottle() / 2) + 0.5);
+//    }
+//    else if (driverInput.getTestBackwardButton()) {
+//      robotOutput.setTestMotor((driverInput.getDriverThrottle() / 2) - 0.5);
+//    }
+//    else {
+//      robotOutput.setTestMotor(0);
+//    }
   }
 
   @Override

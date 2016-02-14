@@ -11,6 +11,8 @@ public class Constants {
   public static final int DRIVE_RIGHT_2_ID = 4;
   public static final int TEST_MOTOR_ID = -1;
   public static final int DART_MOTOR_ID = 5;
+  public static final int INTAKE_MOTOR_ID = 6;
+  public static final int SHOOT_MOTOR_ID = 7;
 
   //Joysticks
   public static final int JOYSTICK_RIGHT_ID = 0;
@@ -19,6 +21,8 @@ public class Constants {
   //Joystick Buttons
   public static final int BUTTON_DRIVE_PID_TURN = 1;
   public static final int BUTTON_DRIVE_PID_RESET = 2;
+  public static final int BUTTON_INTAKE = 2;
+  public static final int BUTTON_SHOOT = 1;
   
   //Buttons
   public static final int TEST_FORWARD_BUTTON = -1;
@@ -26,7 +30,7 @@ public class Constants {
 
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
-  public static final int DART_ENC_TICKS_PER_INCH = 5;
+  public static final double DART_ENC_TICKS_PER_INCH = 1002.016129;
   
   // Properties/configurations
   public static final boolean TEST_MODE = false;
@@ -36,6 +40,9 @@ public class Constants {
   public static final int UPPER_HALLEFFECT_ID = 0;
   public static final int LOWER_HALLEFFECT_ID = 1;
   public static final double DART_SPEED_FACTOR = 1.0;
+  public static final double INTAKE_INTAKE_SPEED = -1;
+  public static final double SHOOT_INTAKE_SPEED = 1;
+  public static final double INTAKE_SHOOT_SPEED = 1;
   
 //Drive Train
   public static final double DRIVE_PID_ROTATION_P = 0.025;

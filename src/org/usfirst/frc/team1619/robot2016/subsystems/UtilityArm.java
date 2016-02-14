@@ -41,6 +41,19 @@ public class UtilityArm implements Subsystem {
     }
 
     robotOutput.setDartMotor(velocity);
+    
+    if (driverInput.getIntakeButton()) {
+      robotOutput.setIntakeMotor(Constants.INTAKE_INTAKE_SPEED);
+      robotOutput.setShootMotor(Constants.SHOOT_INTAKE_SPEED);
+    }
+    else if (driverInput.getShootButton()) {
+      robotOutput.setIntakeMotor(Constants.INTAKE_SHOOT_SPEED);
+      robotOutput.setShootMotor(-(driverInput.getOperatorThrottle() + 1) / 2);
+    }
+    else {
+      robotOutput.setIntakeMotor(0.0);
+      robotOutput.setShootMotor(-(driverInput.getOperatorThrottle() + 1) / 2);
+    }
   }
 
   @Override
