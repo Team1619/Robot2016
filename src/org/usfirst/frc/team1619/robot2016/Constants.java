@@ -26,7 +26,7 @@ public class Constants {
 
   // Encoders
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
-  public static final double DART_ENC_TICKS_PER_INCH = 1000.0;
+  public static final double DART_ENC_TICKS_PER_INCH = 1024.0;
   
   // Properties/configurations
   public static final boolean TEST_MODE = false;
@@ -51,7 +51,7 @@ public class Constants {
   public static final double ARM_TO_DART_BASE_VERTICAL = 9.3073849;
   public static final double ARM_TO_DART_BASE_HORIZONTAL = 13.47087978;
   public static final double DART_WIDTH = 3.0;
-  public static final double DART_HEIGHT = 12.0375-1.1381526273850824;
+  public static final double DART_HEIGHT = 12.0375-0.4423281995303814;
   public static final double ARM_TO_DART_LENGTH = Math.hypot(ARM_TO_DART_BASE_HORIZONTAL, ARM_TO_DART_BASE_VERTICAL);
   public static final double ARM_TO_DART_DECLINATION_ANGLE = Math.toDegrees(Math.atan(ARM_TO_DART_BASE_VERTICAL/ARM_TO_DART_BASE_HORIZONTAL));
   public static final double ARM_PIVOTS_TO_TOP_SURFACE_ANGLE = 9.27;
