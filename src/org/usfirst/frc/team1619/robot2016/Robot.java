@@ -31,7 +31,6 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     DriveTrain.getInstance().update();
     SmashBoard.getInstance().update();
-    TestMotor.getInstance().update();
     UtilityArm.getInstance().update();
   }
 

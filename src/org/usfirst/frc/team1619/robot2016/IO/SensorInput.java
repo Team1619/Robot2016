@@ -69,7 +69,7 @@ public class SensorInput {
     robotOut.setDriveRightPos(position);
   }
   
-  public int getDartPosition() {
+  public double getDartPosition() {
     return robotOut.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
   }
 

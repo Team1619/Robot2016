@@ -4,6 +4,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
-	<classpathentry kind="var" path="navx-mxp"/>
+	<classpathentry exported="true" kind="var" path="navx-mxp"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
