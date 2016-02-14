@@ -27,6 +27,7 @@ public class Constants {
   public static final int UPPER_HALLEFFECT_ID = 0;
   public static final int LOWER_HALLEFFECT_ID = 1;
   
+
   // Properties/configurations
   public static final boolean TEST_MODE = false;
   public static final boolean COMPETITION_MODE = false;
