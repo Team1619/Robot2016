@@ -11,11 +11,11 @@ public class Constants {
   public static final int DRIVE_RIGHT_2_ID = 4;
   public static final int DART_MOTOR_ID = 5;
 
-  //Joysticks
+  // Joysticks
   public static final int JOYSTICK_RIGHT_ID = 0;
   public static final int JOYSTICK_LEFT_ID = 1;
   
-  //Joystick Buttons
+  // Joystick Buttons
   public static final int BUTTON_DRIVE_PID_TURN = 1;
   public static final int BUTTON_DRIVE_PID_RESET = 2;
 
@@ -23,18 +23,22 @@ public class Constants {
   public static final int DRIVE_ENC_TICKS_PER_INCH = 1;
   public static final double DART_ENC_TICKS_PER_INCH = 1024.0;
   
-  //Limit Switches
+  // Limit Switches
   public static final int UPPER_HALLEFFECT_ID = 0;
   public static final int LOWER_HALLEFFECT_ID = 1;
   
+
   // Properties/configurations
   public static final boolean TEST_MODE = false;
   public static final boolean COMPETITION_MODE = false;
+  
+  // Logger
+  public static final int MAX_LOGS = 20;
+  public static final int QUEUE_SIZE = 32;
   public static final LoggingLevel LOGGING_LEVEL = LoggingLevel.WARNING;
   public static final String LOG_FOLDER_PATH = "/home/lvuser/log/";
-  public static final double DART_SPEED_FACTOR = 1.0;
   
-//Drive Train
+  // Drive Train
   public static final double DRIVE_PID_ROTATION_P = 0.025;
   public static final double DRIVE_PID_ROTATION_I = 0.0;
   public static final double DRIVE_PID_ROTATION_D = 0;
@@ -43,7 +47,10 @@ public class Constants {
   public static final double DRIVE_PID_TRANSLATION_I = 0;
   public static final double DRIVE_PID_TRANSLATION_D = 0;
   
-  //Utility Arm Angle Constants
+  // Utility Arm
+  public static final double DART_SPEED_FACTOR = 1.0;
+  
+  // Utility Arm Angle Constants
   public static final double ARM_LENGTH = 5.08725;
   public static final double ARM_TO_DART_BASE_VERTICAL = 9.3073849;
   public static final double ARM_TO_DART_BASE_HORIZONTAL = 13.47087978;

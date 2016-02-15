@@ -45,7 +45,9 @@ public class DataCollector extends GenericLogger {
    * header.
    */
   public void log(String... values) {
-    fLoggingQueue.add(values);
+    if (sSafeToLog) {
+      fLoggingQueue.add(values);
+    }
   }
 
 }

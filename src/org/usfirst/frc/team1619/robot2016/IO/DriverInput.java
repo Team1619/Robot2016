@@ -14,7 +14,13 @@ public class DriverInput {
   //Singleton stuff
   private static DriverInput instance;
   static {
-    instance = new DriverInput();
+    try {
+      instance = new DriverInput();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
 
   public static DriverInput getInstance() {

@@ -4,7 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 
 /**
  * Created by DanielHathcock on 10/6/15. Project: Logger Package:
- * org.usfirst.frc.team1619.logger
+ * org.usfirst.frc.team1619.robot2016.util.logger
  *
  * This is the subclass of UGenericLogger which is meant to be used to log
  * generic information.
@@ -17,7 +17,13 @@ public class Logger extends GenericLogger {
 
   private static Logger instance;
   static {
-    instance = new Logger();
+    try {
+      instance = new Logger();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
   
   public static Logger getInstance() {
@@ -45,11 +51,25 @@ public class Logger extends GenericLogger {
   
   private Logger() {
     super("UACRRobot" + Constants.LOGGING_LEVEL + "Log", ".txt");
+    loggingLevel = Constants.LOGGING_LEVEL;
     nextLog();
   }
 
+  /**
+   * Sets the logging level and changes the fileName to correspond. 
+   * Should only be called in the various robot init functions
+   * @param newLevel
+   */
   public void setLoggingLevel(LoggingLevel newLevel) {
     loggingLevel = newLevel;
+    fLogName = makeLogName();
+  }
+  
+  /**
+   * @return file name of this log
+   */
+  private String makeLogName() {
+    return "UACRRobot" + loggingLevel.toString() + "Log";
   }
   
   /**
@@ -111,6 +131,8 @@ public class Logger extends GenericLogger {
    */
   protected void log(String level, String[] message) {
     message[0] = String.format("[%s] - %s", level, message[0]);
-    fLoggingQueue.add(message);
+    if (sSafeToLog) {
+      fLoggingQueue.add(message);
+    }
   }
 }

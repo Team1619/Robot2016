@@ -7,34 +7,41 @@ import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
-  
-  public void robotInit() {
-  }
 
+  private SmashBoard smashBoard;
+  private DriveTrain driveTrain;
+  private UtilityArm utilityArm;
+
+  public void robotInit() {
+    smashBoard = SmashBoard.getInstance();
+    driveTrain = DriveTrain.getInstance();
+    utilityArm = UtilityArm.getInstance();
+  }
+  
   public void disabledInit() {
   }
-  
+
   public void disabledPeriodic() {
-    SmashBoard.getInstance().update();
+    smashBoard.update();
   }
+
   public void autonomousInit() {
   }
 
   public void autonomousPeriodic() {
+    smashBoard.update();
   }
-  
+
   public void teleopInit() {
-    DriveTrain.getInstance().initialize();
-  }
+    driveTrain.initialize();
+}
   
   public void teleopPeriodic() {
-    DriveTrain.getInstance().update();
-    SmashBoard.getInstance().update();
-    UtilityArm.getInstance().update();
+    driveTrain.update();
+    smashBoard.update();
+    utilityArm.update();
   }
 
   public void testPeriodic() {
   }
-
 }
-
