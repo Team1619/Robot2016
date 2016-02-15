@@ -26,10 +26,16 @@ public class SmashBoard {
   
   private static SmashBoard instance;
   static {
-    instance = new SmashBoard();
+    try {
+      instance = new SmashBoard();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
   
-  public static SmashBoard getInstance() {    
+  public static SmashBoard getInstance() {  
     return instance;
   }
   
@@ -92,7 +98,6 @@ public class SmashBoard {
     loggingLevelChooser.addObject("Info", LoggingLevel.INFO);
     loggingLevelChooser.addObject("Debug", LoggingLevel.DEBUG);
     loggingLevelChooser.addDefault(Constants.LOGGING_LEVEL.toString(), Constants.LOGGING_LEVEL);
-    loggingLevelChooser.initTable(smashBoard);
     
     // Place choosers (directly into SmartDashboard wpilib class)
     SmartDashboard.putData("Logging level", loggingLevelChooser);
@@ -132,7 +137,7 @@ public class SmashBoard {
     smashBoard.putNumber("Lower Hall Effect", sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
     
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
-    smashBoard.putNumber("arm angle", utilityArm.getArmAngle(sensorInput.getDartPosition()));
+    // smashBoard.putNumber("arm angle", utilityArm.getArmAngle(sensorInput.getDartPosition()));
   }
 
   public double getP() {

@@ -4,7 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 
 /**
  * Created by DanielHathcock on 10/6/15. Project: Logger Package:
- * org.usfirst.frc.team1619.logger
+ * org.usfirst.frc.team1619.robot2016.util.logger
  *
  * This is the subclass of UGenericLogger which is meant to be used to log
  * generic information.
@@ -17,7 +17,13 @@ public class Logger extends GenericLogger {
 
   private static Logger instance;
   static {
-    instance = new Logger();
+    try {
+      instance = new Logger();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
   
   public static Logger getInstance() {

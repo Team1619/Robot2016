@@ -15,9 +15,19 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class SensorInput {
   private static SensorInput instance;
   static {
-    instance = new SensorInput();
-  }
+    try {
+      instance = new SensorInput();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
+  } 
 
+  public static SensorInput getInstance() {
+    return instance;
+  }
+  
   private RobotOutput robotOut;
   private AHRS navX;
   private DigitalInput upperHallEffect;
@@ -28,10 +38,6 @@ public class SensorInput {
     navX = new AHRS(SPI.Port.kMXP);
     upperHallEffect = new DigitalInput(Constants.UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.LOWER_HALLEFFECT_ID);
-  }
-
-  public static SensorInput getInstance() {
-    return instance;
   }
 
   //Encoders

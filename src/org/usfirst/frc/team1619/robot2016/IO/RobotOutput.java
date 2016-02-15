@@ -9,7 +9,13 @@ public class RobotOutput {
   //Singleton
   private static RobotOutput instance;
   static {
-    instance = new RobotOutput();
+    try {
+      instance = new RobotOutput();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
 
   public static RobotOutput getInstance() {
@@ -37,7 +43,9 @@ public class RobotOutput {
     driveRight2.setInverted(true);
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
-
+    
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID);
+    
     dartMotor.setInverted(true);
     
     driveRight1.enableBrakeMode(true);

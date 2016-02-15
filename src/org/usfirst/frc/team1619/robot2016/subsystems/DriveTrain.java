@@ -13,7 +13,13 @@ public class DriveTrain implements Subsystem {
   //static is called when the class is loaded
   private static DriveTrain instance;
   static {
-    instance = new DriveTrain();
+    try {
+      instance = new DriveTrain();
+    }
+    catch (Throwable e) {
+      e.printStackTrace();
+      throw e;
+    }
   }
   
   public static DriveTrain getInstance() {

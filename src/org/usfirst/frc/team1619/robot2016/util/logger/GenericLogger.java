@@ -29,9 +29,9 @@ public abstract class GenericLogger {
   private static final String LOG_FOLDER_PATH = Constants.LOG_FOLDER_PATH;
   private static final String STOP = "STOP";
   private static final SimpleDateFormat sDateFormat =
-    new SimpleDateFormat("yyyy-MM-dd_HH:mm:ssZ");
+    new SimpleDateFormat("MM-dd-YYYY_HH:mm:ss");
   
-  private static String sLogFolder = getDateString() + "/";
+  private static String sLogFolder = "Log-" + getDateString() + "/";
   private static ArrayList<GenericLogger> sLoggers =
     new ArrayList<GenericLogger>();
   protected static boolean sSafeToLog = false;
@@ -164,7 +164,7 @@ public abstract class GenericLogger {
    */
   public static void changeLogs() {
     stopLogs();
-    sLogFolder = getDateString() + "/";
+    sLogFolder = "Log-" + getDateString() + "/";
     
     if (makeLogFolder()) {
       cleanUp();
@@ -226,8 +226,7 @@ public abstract class GenericLogger {
     }
     // If folder not successfully created:
 
-    System.err
-      .println("Cannot create log folder " + LOG_FOLDER_PATH + sLogFolder);
+    System.err.println("Cannot create log folder " + LOG_FOLDER_PATH + sLogFolder);
 
     stopLogs();
     sSafeToLog = false;
