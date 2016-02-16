@@ -1,24 +1,38 @@
 package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.subsystems.DriveTrain;
-import org.usfirst.frc.team1619.robot2016.subsystems.UtilityArm;
+import org.usfirst.frc.team1619.robot2016.states.ArmToAngle;
+import org.usfirst.frc.team1619.robot2016.states.ManualArm;
+import org.usfirst.frc.team1619.robot2016.states.ManualDrive;
+import org.usfirst.frc.team1619.robot2016.states.ManualShooterIntake;
+import org.usfirst.frc.team1619.robot2016.states.State;
+import org.usfirst.frc.team1619.robot2016.subsystems.Subsystem;
+import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
 
+  private RobotState robotState;
+
+  private Subsystem driveTrain;
+  private Subsystem utilityArm;
+  private Subsystem shooterIntake;
+
   private SmashBoard smashBoard;
-  private DriveTrain driveTrain;
-  private UtilityArm utilityArm;
 
   public void robotInit() {
+    robotState = RobotState.getInstance();
+
+    driveTrain = new Subsystem(SubsystemID.DRIVE_TRAIN);
+    utilityArm = new Subsystem(SubsystemID.UTILITY_ARM);
+    shooterIntake = new Subsystem(SubsystemID.SHOOTER_INTAKE);
+
     smashBoard = SmashBoard.getInstance();
-    driveTrain = DriveTrain.getInstance();
-    utilityArm = UtilityArm.getInstance();
   }
-  
+
   public void disabledInit() {
+    Subsystem.resetAll();
   }
 
   public void disabledPeriodic() {
@@ -26,6 +40,7 @@ public class Robot extends IterativeRobot {
   }
 
   public void autonomousInit() {
+    Subsystem.resetAll();
   }
 
   public void autonomousPeriodic() {
@@ -33,15 +48,22 @@ public class Robot extends IterativeRobot {
   }
 
   public void teleopInit() {
-    driveTrain.initialize();
-}
-  
+    Subsystem.resetAll();
+
+    driveTrain.addState(new ManualDrive());
+    utilityArm.addState(new ArmToAngle());
+    utilityArm.addState(new ManualArm());
+    shooterIntake.addState(new ManualShooterIntake());
+  }
+
   public void teleopPeriodic() {
-    driveTrain.update();
+    robotState.update();
+    Subsystem.updateAll();
+    State.updateAll();
     smashBoard.update();
-    utilityArm.update();
   }
 
   public void testPeriodic() {
   }
+
 }

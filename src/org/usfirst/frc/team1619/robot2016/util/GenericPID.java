@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.util;
 
+import org.usfirst.frc.team1619.robot2016.PIDValues;
+
 public class GenericPID {
   private double kP;
   private double kI;
@@ -11,13 +13,13 @@ public class GenericPID {
   private double integral;
 
   public GenericPID() {
-    this(0.0, 0.0, 0.0);
+    this(new PIDValues(0.0, 0.0, 0.0));
   }
 
-  public GenericPID(double pValue, double iValue, double dValue) {
-    this.kP = pValue;
-    this.kI = iValue;
-    this.kD = dValue;
+  public GenericPID(PIDValues values) {
+    this.kP = values.p;
+    this.kI = values.i;
+    this.kD = values.d;
 
     outputValue = 0;
     setPoint = 0;
@@ -25,10 +27,10 @@ public class GenericPID {
     integral = 0;
   }
 
-  public void setValues(double pValue, double iValue, double dValue) {
-    this.kP = pValue;
-    this.kI = iValue;
-    this.kD = dValue;
+  public void setValues(PIDValues values) {
+    this.kP = values.p;
+    this.kI = values.i;
+    this.kD = values.d;
   }
 
   public void setTarget(double target) {
