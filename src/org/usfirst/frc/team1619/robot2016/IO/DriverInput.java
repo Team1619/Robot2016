@@ -2,24 +2,23 @@ package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Joysticks and JoystickButtons from the driver station
- * @author Tim
  */
 public class DriverInput {
-  //Singleton stuff
+
   private static DriverInput instance;
+
   static {
     try {
       instance = new DriverInput();
     }
-    catch (Throwable e) {
-      e.printStackTrace();
-      throw e;
+    catch (Throwable exception) {
+      exception.printStackTrace();
+      throw exception;
     }
   }
 
@@ -27,72 +26,68 @@ public class DriverInput {
     return instance;
   }
 
-  //Declare joysticks
-  private Joystick rightStick;
-  private Joystick leftStick;
+  // Declare joysticks
+  private Joystick driverStick;
+  private Joystick operatorStick;
 
-  //Declare buttons
-  private JoystickButton turnPID;
-  private JoystickButton resetPID;
+  private JoystickButton[] driverStickButtons;
+  private JoystickButton[] operatorStickButtons;
 
   private DriverInput() {
-    //Init joysticks
-    rightStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
-    leftStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
+    // Initialize joysticks
+    driverStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
+    operatorStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
 
-    //Init buttons
-    turnPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_TURN);
-    resetPID = new JoystickButton(rightStick, Constants.BUTTON_DRIVE_PID_RESET);
+    driverStickButtons = new JoystickButton[15];
+    operatorStickButtons = new JoystickButton[15];
+
+    for (int i = 0; i < 15; i++) {
+      driverStickButtons[i] = new JoystickButton(driverStick, i + 1);
+      operatorStickButtons[i] = new JoystickButton(operatorStick, i + 1);
+    }
   }
 
-  //Buttons
-  public boolean getTurnPID() {
-    return turnPID.get();
+  // Buttons
+  public boolean getDriverButton(int buttonID) {
+    return driverStickButtons[buttonID - 1].get();
   }
 
-  public boolean getResetPID() {
-    return resetPID.get();
+  public boolean getOperatorButton(int buttonID) {
+    return operatorStickButtons[buttonID - 1].get();
   }
 
   // Driver
-  public GenericHID getDriverStick() {
-    return rightStick;
-  }
-
   public double getDriverX() {
-    return rightStick.getX();
+    return driverStick.getX();
   }
 
   public double getDriverY() {
-    return rightStick.getY();
+    return driverStick.getY();
   }
 
   public double getDriverTwist() {
-    return rightStick.getTwist();
+    return driverStick.getTwist();
   }
 
   public double getDriverThrottle() {
-    return rightStick.getThrottle();
+    return driverStick.getThrottle();
   }
 
   // Operator
-  public GenericHID getOperatorStick() {
-    return leftStick;
-  }
-
   public double getOperatorX() {
-    return leftStick.getX();
+    return operatorStick.getX();
   }
 
   public double getOperatorY() {
-    return leftStick.getY() * -1.0;
+    return operatorStick.getY();
   }
 
   public double getOperatorTwist() {
-    return leftStick.getTwist();
+    return operatorStick.getTwist();
   }
 
   public double getOperatorThrottle() {
-    return leftStick.getThrottle();
+    return operatorStick.getThrottle();
   }
+
 }

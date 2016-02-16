@@ -6,15 +6,17 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class RobotOutput {
-  //Singleton
+
+  // Singleton
   private static RobotOutput instance;
+
   static {
     try {
       instance = new RobotOutput();
     }
-    catch (Throwable e) {
-      e.printStackTrace();
-      throw e;
+    catch (Throwable exception) {
+      exception.printStackTrace();
+      throw exception;
     }
   }
 
@@ -22,32 +24,40 @@ public class RobotOutput {
     return instance;
   }
 
-  //Declare
+  // Declare
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
   private CANTalon driveRight2;
-  
+
   private CANTalon dartMotor;
-  
+
+  private CANTalon intakeMotor;
+  private CANTalon shooterMotor;
+
   private RobotDrive drive;
 
   private RobotOutput() {
-    //Init
+    // Initialize
     driveRight1 = new CANTalon(Constants.DRIVE_RIGHT_1_ID);
     driveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_ID);
     driveLeft1 = new CANTalon(Constants.DRIVE_LEFT_1_ID);
     driveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_ID);
 
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID); // Positive - dart
+                                                       // extend; Negative -
+                                                       // dart retract
+
+    intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
+    shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
+
     driveRight1.setInverted(true);
     driveRight2.setInverted(true);
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
-    
-    dartMotor = new CANTalon(Constants.DART_MOTOR_ID);
-    
-    dartMotor.setInverted(true);
-    
+
+    shooterMotor.setInverted(true);
+
     driveRight1.enableBrakeMode(true);
     driveRight2.enableBrakeMode(true);
     driveLeft1.enableBrakeMode(true);
@@ -55,27 +65,42 @@ public class RobotOutput {
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
-  
+
   /**
    * Don't use this method. Use SensorInput instead.
+   * 
    * @return Left drive encoder position
    */
   public int getDriveLeftEncPos() {
     return -driveLeft1.getEncPosition();
   }
-  
+
   /**
    * Gets the position of the dart.
-   * @return
-   *        Dart encoder position.
+   * 
+   * @return Dart encoder position.
    */
   public int getDartPosition() {
     return dartMotor.getEncPosition();
   }
 
+  public void setIntakeMotor(double speed) {
+    intakeMotor.set(speed);
+  }
+
+  public void setShooterMotor(double speed) {
+    shooterMotor.set(speed);
+  }
+
+  public int getShooterVelocity() {
+    return shooterMotor.getEncVelocity();
+  }
+
   /**
    * Don't use this method. Use SensorInput instead.
-   * @param Left drive encoder new position
+   * 
+   * @param Left
+   *          drive encoder new position
    */
   public void setDriveLeftPos(int position) {
     driveLeft1.setEncPosition(-position);
@@ -83,6 +108,7 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
+   * 
    * @return Right drive encoder position
    */
   public int getDriveRightEncPos() {
@@ -91,7 +117,9 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
-   * @param Right drive encoder new position
+   * 
+   * @param Right
+   *          drive encoder new position
    */
   public void setDriveRightPos(int position) {
     driveRight1.setEncPosition(-position);
@@ -99,6 +127,7 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
+   * 
    * @return Left drive encoder velocity
    */
   public int getDriveLeftEncVel() {
@@ -107,6 +136,7 @@ public class RobotOutput {
 
   /**
    * Don't use this method. Use SensorInput instead.
+   * 
    * @return Right drive encoder velocity
    */
   public int getDriveRightEncVel() {
@@ -115,6 +145,7 @@ public class RobotOutput {
 
   /**
    * Drive the robot using arcadeDrive
+   * 
    * @param translation
    *          Forward/back values
    * @param rotation
@@ -126,6 +157,7 @@ public class RobotOutput {
 
   /**
    * Drive the robot using tankDrive
+   * 
    * @param leftValue
    *          Left motor values
    * @param rightValue
@@ -137,10 +169,12 @@ public class RobotOutput {
 
   /**
    * Sets the dart motor speed.
+   * 
    * @param speed
-   *            Speed of dart.
+   *          Speed of dart.
    */
   public void setDartMotor(double speed) {
     dartMotor.set(speed);
   }
+
 }
