@@ -105,14 +105,16 @@ public class SmashBoard {
     smashBoard.putNumber("speed", sensorInput.getShooterEncoderVelocity());
 
     // NavX
-    smashBoard.putNumber("Heading", sensorInput.getNavXHeading());
+    smashBoard.putNumber("angle", sensorInput.getNavXHeading());
 
     // Dart
-    smashBoard.putNumber("Upper Hall Effect",
+    smashBoard.putNumber("upperHallEffect",
       sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
-    smashBoard.putNumber("Lower Hall Effect",
+    smashBoard.putNumber("lowerHallEffect",
       sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
+  }
 
-    smashBoard.putNumber("angle", sensorInput.getNavXHeading());
+  public double getRotationOffsetToAligned() {
+    return smashBoard.getNumber("rotationOffsetToAligned", 0.0);
   }
 }

@@ -9,6 +9,7 @@ import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public abstract class State {
@@ -24,6 +25,7 @@ public abstract class State {
   protected DriverInput driverInput;
   protected RobotOutput robotOutput;
   protected SensorInput sensorInput;
+  protected SmashBoard smashBoard;
 
   static {
     states = new HashSet<>();
@@ -47,6 +49,7 @@ public abstract class State {
     driverInput = DriverInput.getInstance();
     robotOutput = RobotOutput.getInstance();
     sensorInput = SensorInput.getInstance();
+    smashBoard = SmashBoard.getInstance();
   }
 
   public void initialize(SubsystemID subsystemID) {

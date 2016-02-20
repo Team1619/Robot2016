@@ -1,13 +1,20 @@
 package org.usfirst.frc.team1619.robot2016;
 
+import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
+import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+
 public class RobotState {
 
   private static RobotState instance;
 
+  private DriverInput driverInput;
+  private SensorInput sensorInput;
+  
   private AutoState autoState;
   private TeleopState teleopState;
-
+  
   private double armTarget;
+  private double rotateTarget;
 
   static {
     instance = new RobotState();
@@ -18,6 +25,9 @@ public class RobotState {
   }
 
   private RobotState() {
+    driverInput = DriverInput.getInstance();
+    sensorInput = SensorInput.getInstance();
+    
     autoState = new AutoState();
     teleopState = new TeleopState();
 
@@ -25,7 +35,9 @@ public class RobotState {
   }
 
   public void update() {
-
+    if (driverInput.getDriverButton(Constants.DRIVER_BUTTON_DRIVE_PID_RESET)) {
+      rotateTarget = sensorInput.getNavXHeading();
+    }
   }
 
   public void setArmTarget(double newArmTarget) {
@@ -36,4 +48,8 @@ public class RobotState {
     return armTarget;
   }
 
+  public double getRotateTarget() {
+    return rotateTarget;
+  }
+  
 }
