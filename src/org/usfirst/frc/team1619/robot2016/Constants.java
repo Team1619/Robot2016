@@ -50,14 +50,13 @@ public class Constants {
   public static final PIDValues DRIVE_PID_TRANSLATION =
     new PIDValues(0.0, 0.0, 0.0);
 
-  // Arm
-  public static final PIDValues ARM_PID_DOWN = new PIDValues(0.625, 0.00075, 1.2);
-  public static final PIDValues ARM_PID_UP = new PIDValues(1.0, 0.0005, 1.25);
-
   // Utility Arm
+  public static final PIDValues ARM_PID_DOWN = 
+      new PIDValues(0.625, 0.00075, 1.2);
+  public static final PIDValues ARM_PID_UP = 
+      new PIDValues(1.0, 0.0005, 1.25);
   public static final double DART_SPEED_FACTOR = 1.0;
 
-  // Utility Arm Angle Constants
   public static final double ARM_LENGTH = 5.08725;
   public static final double ARM_TO_DART_BASE_VERTICAL = 9.3073849;
   public static final double ARM_TO_DART_BASE_HORIZONTAL = 13.47087978;

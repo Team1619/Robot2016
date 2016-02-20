@@ -1,21 +1,13 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.IO.ArmPID;
-import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
-import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
-import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public class ArmToAngle extends State {
 
   private static SubsystemID[] subsystems;
 
-  private DriverInput driverInput;
-  private RobotOutput robotOutput;
-  private SensorInput sensorInput;
-  private RobotState robotState;
-  private ArmPID armPID;
+  protected ArmPID armPID;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.UTILITY_ARM};
@@ -23,12 +15,6 @@ public class ArmToAngle extends State {
 
   public ArmToAngle() {
     super(subsystems);
-
-    driverInput = DriverInput.getInstance();
-    robotOutput = RobotOutput.getInstance();
-    sensorInput = SensorInput.getInstance();
-    robotState = RobotState.getInstance();
-    armPID = ArmPID.getInstance();
   }
 
   @Override

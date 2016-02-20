@@ -1,15 +1,10 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
-import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public class ManualDrive extends State {
 
   private static SubsystemID[] subsystems;
-
-  private DriverInput driverInput;
-  private RobotOutput robotOutput;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
@@ -17,9 +12,6 @@ public class ManualDrive extends State {
 
   public ManualDrive() {
     super(subsystems);
-
-    driverInput = DriverInput.getInstance();
-    robotOutput = RobotOutput.getInstance();
   }
 
   @Override

@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.usfirst.frc.team1619.robot2016.RobotState;
+import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
+import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
+import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public abstract class State {
@@ -15,6 +19,11 @@ public abstract class State {
   private Set<SubsystemID> activeSubsystems;
 
   private boolean finished;
+
+  protected RobotState robotState;
+  protected DriverInput driverInput;
+  protected RobotOutput robotOutput;
+  protected SensorInput sensorInput;
 
   static {
     states = new HashSet<>();
@@ -33,6 +42,11 @@ public abstract class State {
     activeSubsystems = new HashSet<>();
 
     finished = false;
+
+    robotState = RobotState.getInstance();
+    driverInput = DriverInput.getInstance();
+    robotOutput = RobotOutput.getInstance();
+    sensorInput = SensorInput.getInstance();
   }
 
   public void initialize(SubsystemID subsystemID) {

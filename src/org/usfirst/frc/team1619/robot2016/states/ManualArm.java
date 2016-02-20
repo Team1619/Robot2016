@@ -1,17 +1,10 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
-import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
-import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public class ManualArm extends State {
 
   private static SubsystemID[] subsystems;
-
-  private DriverInput driverInput;
-  private RobotOutput robotOutput;
-  private SensorInput sensorInput;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.UTILITY_ARM};
@@ -19,10 +12,6 @@ public class ManualArm extends State {
 
   public ManualArm() {
     super(subsystems);
-
-    driverInput = DriverInput.getInstance();
-    robotOutput = RobotOutput.getInstance();
-    sensorInput = SensorInput.getInstance();
   }
 
   @Override
