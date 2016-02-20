@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.states.ArmToAngle;
+import org.usfirst.frc.team1619.robot2016.states.AutoDriveAndShoot;
 import org.usfirst.frc.team1619.robot2016.states.ManualArm;
 import org.usfirst.frc.team1619.robot2016.states.ManualDrive;
 import org.usfirst.frc.team1619.robot2016.states.ManualShooterIntake;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 
   public void disabledInit() {
     Subsystem.resetAll();
+    State.resetAll();
   }
 
   public void disabledPeriodic() {
@@ -41,14 +43,25 @@ public class Robot extends IterativeRobot {
 
   public void autonomousInit() {
     Subsystem.resetAll();
+    State.resetAll();
+
+    AutoDriveAndShoot autoDriveAndShoot = new AutoDriveAndShoot();
+
+    driveTrain.addState(autoDriveAndShoot);
+    shooterIntake.addState(autoDriveAndShoot);
+    utilityArm.addState(autoDriveAndShoot);
   }
 
   public void autonomousPeriodic() {
+    robotState.update();
+    Subsystem.updateAll();
+    State.updateAll();
     smashBoard.update();
   }
 
   public void teleopInit() {
     Subsystem.resetAll();
+    State.resetAll();
 
     driveTrain.addState(new ManualDrive());
     utilityArm.addState(new ArmToAngle());

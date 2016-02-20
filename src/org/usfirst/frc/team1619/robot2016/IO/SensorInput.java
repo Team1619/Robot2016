@@ -122,6 +122,14 @@ public class SensorInput {
     return navX.getFusedHeading();
   }
 
+  public float getNavXPitch() {
+    return navX.getPitch();
+  }
+
+  public float getNavXRoll() {
+    return navX.getRoll();
+  }
+
   /**
    * Set the current NavX heading to 0
    */

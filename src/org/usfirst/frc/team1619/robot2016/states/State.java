@@ -37,6 +37,10 @@ public abstract class State {
     }
   }
 
+  public static void resetAll() {
+    states.clear();
+  }
+
   protected State(SubsystemID[] subsystems) {
     states.add(this);
 
@@ -74,8 +78,8 @@ public abstract class State {
     activeSubsystems.remove(subsystemID);
 
     if (activeSubsystems.size() == 0) {
-      destroy();
       finished = false;
+      destroy();
     }
     else {
       pause();
@@ -89,6 +93,10 @@ public abstract class State {
   public abstract boolean isReadyForActive();
 
   public boolean isReadyForDestruct() {
+    return finished;
+  }
+
+  protected boolean getFinished() {
     return finished;
   }
 

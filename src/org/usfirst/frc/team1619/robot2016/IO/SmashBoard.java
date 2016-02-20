@@ -106,6 +106,8 @@ public class SmashBoard {
 
     // NavX
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
+    smashBoard.putNumber("pitch", sensorInput.getNavXPitch());
+    smashBoard.putNumber("roll", sensorInput.getNavXRoll());
 
     // Dart
     smashBoard.putNumber("upperHallEffect",

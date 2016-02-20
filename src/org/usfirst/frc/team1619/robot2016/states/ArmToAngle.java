@@ -15,11 +15,13 @@ public class ArmToAngle extends State {
 
   public ArmToAngle() {
     super(subsystems);
+
+    armPID = ArmPID.getInstance();
   }
 
   @Override
   protected void setup() {
-    armPID.setTarget(-0.3);
+    armPID.setTarget(0.0);
   }
 
   @Override
