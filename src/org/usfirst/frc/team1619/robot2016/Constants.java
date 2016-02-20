@@ -18,8 +18,10 @@ public class Constants {
   public static final int JOYSTICK_LEFT_ID = 1;
 
   // Driver buttons
-  public static final int DRIVER_BUTTON_DRIVE_PID_TURN = 1;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 1;
   public static final int DRIVER_BUTTON_DRIVE_PID_RESET = 2;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
+  
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_INTAKE = 2;

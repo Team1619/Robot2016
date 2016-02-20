@@ -1,11 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import java.awt.print.Printable;
-
-import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
 public abstract class RotateToAngle extends State {
 
@@ -53,10 +49,7 @@ public abstract class RotateToAngle extends State {
   }
 
   @Override
-  public boolean isReadyForActive() {
-    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_DRIVE_PID_TURN);
-  }
+  public abstract boolean isReadyForActive();
   
   protected abstract double getRotationTarget();
-
 }
