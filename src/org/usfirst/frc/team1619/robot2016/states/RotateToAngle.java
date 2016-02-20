@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import java.awt.print.Printable;
+
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
@@ -50,6 +52,7 @@ public abstract class RotateToAngle extends State {
   @Override
   protected void destroy() {
     robotOutput.arcadeDrive(0, 0);
+    target = 0.0;
     rotationPID.reset();
   }
 
@@ -61,7 +64,7 @@ public abstract class RotateToAngle extends State {
   protected abstract double getRotationTarget();
   
   private void rotationPIDCalc() {
-    double currentAngle = ((sensorInput.getNavXHeading() + 180 - target) % 360) - 180;
+    double currentAngle = ((sensorInput.getNavXHeading() + 540 - target) % 360) - 180;
     rotationPID.calculate(currentAngle);
   }
 
