@@ -1,5 +1,6 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.framework;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
@@ -10,8 +11,6 @@ public class RobotState {
   private DriverInput driverInput;
   private SensorInput sensorInput;
 
-  private TeleopState teleopState;
-  
   private double armTarget;
   private double rotateTarget;
 
@@ -26,8 +25,6 @@ public class RobotState {
   private RobotState() {
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();
-
-    teleopState = new TeleopState();
 
     armTarget = 0.0;
   }
@@ -49,5 +46,4 @@ public class RobotState {
   public double getRotateTarget() {
     return rotateTarget;
   }
-  
 }

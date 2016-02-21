@@ -1,8 +1,9 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.framework.State;
 
-public class ManualDrive extends State {
+public class DriveManual extends State {
 
   private static SubsystemID[] subsystems;
 
@@ -10,7 +11,7 @@ public class ManualDrive extends State {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
   }
 
-  public ManualDrive() {
+  public DriveManual() {
     super(subsystems);
   }
 

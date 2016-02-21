@@ -1,11 +1,11 @@
-package org.usfirst.frc.team1619.robot2016.subsystems;
+package org.usfirst.frc.team1619.robot2016.framework;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.usfirst.frc.team1619.robot2016.states.State;
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
 
 public class Subsystem {
 

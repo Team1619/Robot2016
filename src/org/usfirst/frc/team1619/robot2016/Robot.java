@@ -3,15 +3,15 @@ package org.usfirst.frc.team1619.robot2016;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.states.ArmToAngle;
+import org.usfirst.frc.team1619.robot2016.framework.RobotState;
+import org.usfirst.frc.team1619.robot2016.framework.State;
+import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
+import org.usfirst.frc.team1619.robot2016.states.ArmManual;
+import org.usfirst.frc.team1619.robot2016.states.ArmMoveToAngle;
 import org.usfirst.frc.team1619.robot2016.states.AutoDriveAndShoot;
-import org.usfirst.frc.team1619.robot2016.states.ManualArm;
-import org.usfirst.frc.team1619.robot2016.states.ManualDrive;
-import org.usfirst.frc.team1619.robot2016.states.ManualShooterIntake;
-import org.usfirst.frc.team1619.robot2016.states.RotateToCameraTarget;
-import org.usfirst.frc.team1619.robot2016.states.State;
-import org.usfirst.frc.team1619.robot2016.subsystems.Subsystem;
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.states.DriveManual;
+import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
+import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
@@ -21,7 +21,8 @@ public class Robot extends IterativeRobot {
 
   private Subsystem driveTrain;
   private Subsystem utilityArm;
-  private Subsystem shooterIntake;
+  private Subsystem shooter;
+  private Subsystem intake;
 
   private SmashBoard smashBoard;
 
@@ -29,12 +30,13 @@ public class Robot extends IterativeRobot {
     // Some IO singletons must be initialized, because some depend on others
     RobotOutput.getInstance().initialize();
     SensorInput.getInstance().initialize();
-    
+
     robotState = RobotState.getInstance();
 
     driveTrain = new Subsystem(SubsystemID.DRIVE_TRAIN);
     utilityArm = new Subsystem(SubsystemID.UTILITY_ARM);
-    shooterIntake = new Subsystem(SubsystemID.SHOOTER_INTAKE);
+    shooter = new Subsystem(SubsystemID.SHOOTER);
+    intake = new Subsystem(SubsystemID.INTAKE);
 
     smashBoard = SmashBoard.getInstance();
   }
@@ -55,7 +57,8 @@ public class Robot extends IterativeRobot {
     AutoDriveAndShoot autoDriveAndShoot = new AutoDriveAndShoot();
 
     driveTrain.addState(autoDriveAndShoot);
-    shooterIntake.addState(autoDriveAndShoot);
+    shooter.addState(autoDriveAndShoot);
+    intake.addState(autoDriveAndShoot);
     utilityArm.addState(autoDriveAndShoot);
   }
 
@@ -70,13 +73,16 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    driveTrain.addState(new RotateToCameraTarget());
-    driveTrain.addState(new ManualDrive());
-    
-    utilityArm.addState(new ArmToAngle());
-    utilityArm.addState(new ManualArm());
-    
-    shooterIntake.addState(new ManualShooterIntake());
+    MultiIntake shooterIntake = new MultiIntake();
+
+    driveTrain.addState(new DriveRotateToCameraTarget());
+    driveTrain.addState(new DriveManual());
+
+    utilityArm.addState(new ArmMoveToAngle());
+    utilityArm.addState(new ArmManual());
+
+    shooter.addState(shooterIntake);
+    intake.addState(shooterIntake);
   }
 
   public void teleopPeriodic() {

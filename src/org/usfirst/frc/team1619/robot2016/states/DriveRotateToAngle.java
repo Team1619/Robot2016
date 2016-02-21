@@ -1,33 +1,30 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import java.awt.print.Printable;
-
-import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
-public abstract class RotateToAngle extends State {
+public abstract class DriveRotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
-  
+
   private DrivePID drivePID;
   private double target;
-  
+
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
   }
 
-  protected RotateToAngle() {
+  protected DriveRotateToAngle() {
     super(subsystems);
 
     drivePID = DrivePID.getInstance();
   }
 
   /**
-   * PID values are set using values in Constants, target is retrieved from 
-   * RobotState, then target of the PID is set to 0 (because the value 
-   * calculated for the current angle is normalized by the target. This allows 
+   * PID values are set using values in Constants, target is retrieved from
+   * RobotState, then target of the PID is set to 0 (because the value
+   * calculated for the current angle is normalized by the target. This allows
    * for one fewer calculation per iteration)
    */
   @Override
@@ -53,10 +50,7 @@ public abstract class RotateToAngle extends State {
   }
 
   @Override
-  public boolean isReadyForActive() {
-    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_DRIVE_PID_TURN);
-  }
-  
-  protected abstract double getRotationTarget();
+  public abstract boolean isReadyForActive();
 
+  protected abstract double getRotationTarget();
 }
