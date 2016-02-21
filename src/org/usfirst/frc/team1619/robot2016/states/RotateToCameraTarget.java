@@ -12,8 +12,8 @@ public class RotateToCameraTarget extends RotateToAngle {
   protected double getRotationTarget() {
     double val = (sensorInput.getNavXHeading()
         - smashBoard.getRotationOffsetToAligned() + 180) % 360 - 180;
-    // System.out.println(smashBoard.getRotationOffsetToAligned());
-    // System.out.println(val);
+//     System.out.println(smashBoard.getRotationOffsetToAligned());
+//     System.out.println(val);
     return val;
   }
 }

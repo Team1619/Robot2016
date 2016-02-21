@@ -6,10 +6,10 @@ import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 public abstract class RotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
-  
+
   private DrivePID drivePID;
   private double target;
-  
+
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
   }
@@ -21,9 +21,9 @@ public abstract class RotateToAngle extends State {
   }
 
   /**
-   * PID values are set using values in Constants, target is retrieved from 
-   * RobotState, then target of the PID is set to 0 (because the value 
-   * calculated for the current angle is normalized by the target. This allows 
+   * PID values are set using values in Constants, target is retrieved from
+   * RobotState, then target of the PID is set to 0 (because the value
+   * calculated for the current angle is normalized by the target. This allows
    * for one fewer calculation per iteration)
    */
   @Override
@@ -50,6 +50,6 @@ public abstract class RotateToAngle extends State {
 
   @Override
   public abstract boolean isReadyForActive();
-  
+
   protected abstract double getRotationTarget();
 }
