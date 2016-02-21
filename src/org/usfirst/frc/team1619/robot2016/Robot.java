@@ -57,7 +57,8 @@ public class Robot extends IterativeRobot {
     AutoDriveAndShoot autoDriveAndShoot = new AutoDriveAndShoot();
 
     driveTrain.addState(autoDriveAndShoot);
-    shooterIntake.addState(autoDriveAndShoot);
+    shooter.addState(autoDriveAndShoot);
+    intake.addState(autoDriveAndShoot);
     utilityArm.addState(autoDriveAndShoot);
   }
 
