@@ -38,7 +38,7 @@ public class SensorInput {
     upperHallEffect = new DigitalInput(Constants.UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.LOWER_HALLEFFECT_ID);
   }
-
+  
   public void initialize() {
     robotOutput = RobotOutput.getInstance();
   }
