@@ -39,7 +39,7 @@ public class RobotOutput {
 
   private RobotDrive drive;
 
-  private RobotOutput() {    
+  private RobotOutput() {
     // Initialize
     driveRight1 = new CANTalon(Constants.DRIVE_RIGHT_1_ID);
     driveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_ID);

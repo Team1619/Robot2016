@@ -70,7 +70,7 @@ public class SmashBoard {
     deleteAllKeys();
 
     smashBoard.addTableListener(tableListener);
-    
+
     sensorInput = SensorInput.getInstance();
 
     distanceFrom = 1000.0;

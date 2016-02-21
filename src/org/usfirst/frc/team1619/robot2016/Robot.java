@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
     // Some IO singletons must be initialized, because some depend on others
     RobotOutput.getInstance().initialize();
     SensorInput.getInstance().initialize();
-    
+
     robotState = RobotState.getInstance();
 
     driveTrain = new Subsystem(SubsystemID.DRIVE_TRAIN);
@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
 
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveManual());
-    
+
     utilityArm.addState(new ArmMoveToAngle());
     utilityArm.addState(new ArmManual());
 
