@@ -22,8 +22,7 @@ public class ManualShooterIntake extends State {
   @Override
   protected void execute() {
     if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_SHOOT)) {
-      robotOutput
-        .setShooterMotor(((-driverInput.getOperatorThrottle() + 1.0) / 2.0));
+      robotOutput.setShooterMotor(1.0);
 
       if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
         || sensorInput.getShooterEncoderVelocity() >= 30000) {

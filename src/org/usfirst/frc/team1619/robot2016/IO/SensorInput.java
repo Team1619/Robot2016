@@ -50,7 +50,7 @@ public class SensorInput {
    * 
    * @return Left drive encoder position
    */
-  public int getDriveLeftEncoderPosition() {
+  public double getDriveLeftEncoderPosition() {
     return robotOut.getDriveLeftEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
@@ -70,7 +70,7 @@ public class SensorInput {
    * 
    * @return Right drive encoder position
    */
-  public int getDriveRightEncoderPosition() {
+  public double getDriveRightEncoderPosition() {
     return robotOut.getDriveRightEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
@@ -128,6 +128,14 @@ public class SensorInput {
 
   public float getNavXRoll() {
     return navX.getRoll();
+  }
+
+  public float getNavXAccelX() {
+    return navX.getRawAccelX();
+  }
+
+  public float getNavXAccelY() {
+    return navX.getRawAccelY();
   }
 
   /**

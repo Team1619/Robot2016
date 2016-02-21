@@ -36,7 +36,6 @@ public class RobotState {
 
   public void update() {
     if (driverInput.getDriverButton(Constants.DRIVER_BUTTON_DRIVE_PID_RESET)) {
-      sensorInput.resetNavXHeading();
       rotateTarget = sensorInput.getNavXHeading();
     }
   }

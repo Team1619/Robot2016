@@ -5,24 +5,32 @@ import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
-public class ReorientToGoalCommand implements Command {
-
-  private GenericPID rotationPID;
+public class RotateByAngle implements Command {
 
   private RobotOutput robotOutput;
   private SensorInput sensorInput;
 
+  private GenericPID rotationPID;
+
+  private double offsetAngle;
+  private double targetAngle;
+
   private int done;
 
-  @Override
-  public void initialize() {
+  public RotateByAngle(double angle) {
+    offsetAngle = angle;
+
     robotOutput = RobotOutput.getInstance();
     sensorInput = SensorInput.getInstance();
 
     rotationPID = new GenericPID();
     rotationPID.setValues(Constants.DRIVE_PID_ROTATION);
     rotationPID.setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
+  }
 
+  @Override
+  public void initialize() {
+    targetAngle = (sensorInput.getNavXHeading() + offsetAngle + 360) % 360;
     rotationPID.setTarget(0.0);
 
     done = 0;
@@ -30,15 +38,19 @@ public class ReorientToGoalCommand implements Command {
 
   @Override
   public void update() {
-    rotationPID.calculate((sensorInput.getNavXHeading() + 180) % 360 - 180);
-    robotOutput.arcadeDrive(0.0, rotationPID.get());
+    double difference =
+      ((sensorInput.getNavXHeading() - targetAngle + 540) % 360) - 180;
 
-    if (Math.abs((sensorInput.getNavXHeading() + 180) % 360 - 180) < 1.0) {
+    if (Math.abs(difference) < 0.25) {
       done++;
     }
-    else {
+    else if (done > 0) {
       done = 0;
     }
+
+    rotationPID.calculate(difference);
+    robotOutput.arcadeDrive(0.0,
+      Math.max(Math.min(rotationPID.get(), 0.625), -0.625));
   }
 
   @Override
@@ -48,7 +60,7 @@ public class ReorientToGoalCommand implements Command {
 
   @Override
   public boolean finished() {
-    return done > 3;
+    return done > 1;
   }
 
 }

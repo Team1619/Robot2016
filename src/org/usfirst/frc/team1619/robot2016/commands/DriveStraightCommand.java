@@ -36,13 +36,16 @@ public class DriveStraightCommand implements Command {
       + Math.abs(sensorInput.getNavXRoll()) > 10.0) {
       reached++;
     }
-    else if (reached > 0 && Math.abs(sensorInput.getNavXPitch())
-      + Math.abs(sensorInput.getNavXRoll()) < 2.75) {
+    else if (reached > 0 && Math.abs(sensorInput.getNavXAccelX())
+      + Math.abs(sensorInput.getNavXAccelY()) < 0.375) {
       reached++;
+    }
+    else if (reached > 0) {
+      reached = 1;
     }
 
     rotationPID.calculate(((sensorInput.getNavXHeading() + 180) % 360) - 180);
-    robotOutput.arcadeDrive(-0.8, rotationPID.get());
+    robotOutput.arcadeDrive(-0.9, rotationPID.get());
   }
 
   @Override
@@ -52,7 +55,7 @@ public class DriveStraightCommand implements Command {
 
   @Override
   public boolean finished() {
-    return reached > 5;
+    return reached > 6;
   }
 
 }

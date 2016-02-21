@@ -1,8 +1,9 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.commands.DriveStraightCommand;
+import org.usfirst.frc.team1619.robot2016.commands.ArmToTopCommand;
+import org.usfirst.frc.team1619.robot2016.commands.DriveStraightForDistance;
 import org.usfirst.frc.team1619.robot2016.commands.Mode;
-import org.usfirst.frc.team1619.robot2016.commands.ReorientToGoalCommand;
+import org.usfirst.frc.team1619.robot2016.commands.RotateByAngle;
 import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
@@ -24,9 +25,11 @@ public class AutoDriveAndShoot extends State {
   @Override
   protected void setup() {
     driveAndShoot = new Mode();
-//    driveAndShoot.add(new DriveStraightCommand());
-    driveAndShoot.add(new ReorientToGoalCommand());
-//    driveAndShoot.add(new ShootCommand());
+    driveAndShoot.add(new DriveStraightForDistance(100.0));
+    driveAndShoot.add(new RotateByAngle(49.0));
+    driveAndShoot.add(new DriveStraightForDistance(20.0));
+    driveAndShoot.add(new ArmToTopCommand());
+    driveAndShoot.add(new ShootCommand());
     driveAndShoot.initialize();
   }
 
