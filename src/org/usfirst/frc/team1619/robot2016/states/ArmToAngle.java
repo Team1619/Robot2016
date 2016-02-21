@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.IO.ArmPID;
+import org.usfirst.frc.team1619.robot2016.subsystems.ArmPID;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
 public class ArmToAngle extends State {
@@ -34,13 +34,13 @@ public class ArmToAngle extends State {
   @Override
   protected void pause() {
     robotOutput.setDartMotor(0.0);
-    armPID.resetError();
+    armPID.reset();
   }
 
   @Override
   protected void destroy() {
     robotOutput.setDartMotor(0.0);
-    armPID.resetError();
+    armPID.resetIntegral();
   }
 
   @Override

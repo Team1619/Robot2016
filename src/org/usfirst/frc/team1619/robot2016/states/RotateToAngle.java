@@ -3,6 +3,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 import java.awt.print.Printable;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
@@ -10,7 +11,7 @@ public abstract class RotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
   
-  private GenericPID rotationPID;
+  private DrivePID drivePID;
   private double target;
   
   static {
@@ -20,7 +21,7 @@ public abstract class RotateToAngle extends State {
   protected RotateToAngle() {
     super(subsystems);
 
-    rotationPID = new GenericPID();
+    drivePID = DrivePID.getInstance();
   }
 
   /**
@@ -31,17 +32,12 @@ public abstract class RotateToAngle extends State {
    */
   @Override
   protected void setup() {
-    rotationPID.setValues(Constants.DRIVE_PID_ROTATION);
-    rotationPID.setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
-    
-    rotationPID.setTarget(0);
-    target = getRotationTarget();
+    drivePID.setRotationTarget(getRotationTarget());
   }
 
   @Override
   protected void execute() {
-    rotationPIDCalc();
-    robotOutput.arcadeDrive(0, 0.5*rotationPID.get());
+    robotOutput.arcadeDrive(0, drivePID.getRotation());
   }
 
   @Override
@@ -53,7 +49,7 @@ public abstract class RotateToAngle extends State {
   protected void destroy() {
     robotOutput.arcadeDrive(0, 0);
     target = 0.0;
-    rotationPID.reset();
+    drivePID.resetRotation();
   }
 
   @Override
@@ -62,10 +58,5 @@ public abstract class RotateToAngle extends State {
   }
   
   protected abstract double getRotationTarget();
-  
-  private void rotationPIDCalc() {
-    double currentAngle = ((sensorInput.getNavXHeading() + 540 - target) % 360) - 180;
-    rotationPID.calculate(currentAngle);
-  }
 
 }

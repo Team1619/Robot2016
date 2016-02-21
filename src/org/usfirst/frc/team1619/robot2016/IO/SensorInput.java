@@ -124,7 +124,7 @@ public class SensorInput {
    * @return Current NavX heading
    */
   public double getNavXHeading() {
-    return navX.getFusedHeading();
+    return ((navX.getFusedHeading() + 180) % 360) - 180;
   }
 
   public float getNavXPitch() {

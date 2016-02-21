@@ -1,6 +1,7 @@
-package org.usfirst.frc.team1619.robot2016.IO;
+package org.usfirst.frc.team1619.robot2016.subsystems;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
 public class ArmPID {
@@ -51,9 +52,14 @@ public class ArmPID {
     }
   }
 
-  public void resetError() {
-    upPID.resetError();
-    downPID.resetError();
+  public void resetIntegral() {
+    upPID.resetIntegral();
+    downPID.resetIntegral();
   }
 
+  public void reset() {
+    upPID.reset();
+    downPID.reset();
+  }
+  
 }

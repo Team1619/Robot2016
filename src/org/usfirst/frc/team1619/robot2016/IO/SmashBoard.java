@@ -134,6 +134,6 @@ public class SmashBoard {
   }
 
   public double getRotationOffsetToAligned() {
-    return smashBoard.getNumber("rotationOffsetToAligned", 0.0);
+    return smashBoard.getNumber("angleOffsetToAligned", 0.0);
   }
 }

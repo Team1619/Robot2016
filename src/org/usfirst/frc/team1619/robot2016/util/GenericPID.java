@@ -72,7 +72,7 @@ public class GenericPID {
     return setPoint;
   }
 
-  public void resetError() {
+  public void resetIntegral() {
     integral = 0;
   }
 

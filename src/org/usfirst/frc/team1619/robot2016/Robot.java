@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1619.robot2016;
 
-import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
@@ -9,7 +8,7 @@ import org.usfirst.frc.team1619.robot2016.states.AutoDriveAndShoot;
 import org.usfirst.frc.team1619.robot2016.states.ManualArm;
 import org.usfirst.frc.team1619.robot2016.states.ManualDrive;
 import org.usfirst.frc.team1619.robot2016.states.ManualShooterIntake;
-import org.usfirst.frc.team1619.robot2016.states.RotateToPresetTarget;
+import org.usfirst.frc.team1619.robot2016.states.RotateToCameraTarget;
 import org.usfirst.frc.team1619.robot2016.states.State;
 import org.usfirst.frc.team1619.robot2016.subsystems.Subsystem;
 import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
@@ -71,7 +70,7 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    driveTrain.addState(new RotateToPresetTarget());
+    driveTrain.addState(new RotateToCameraTarget());
     driveTrain.addState(new ManualDrive());
     
     utilityArm.addState(new ArmToAngle());
