@@ -3,12 +3,14 @@ package org.usfirst.frc.team1619.robot2016.commands;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
 
 public class DriveStraightForDistance implements Command {
 
   private RobotOutput robotOutput;
   private SensorInput sensorInput;
+  private SmashBoard smashBoard;
 
   private GenericPID translationPID;
   private GenericPID rotationPID;
@@ -23,6 +25,7 @@ public class DriveStraightForDistance implements Command {
 
     robotOutput = RobotOutput.getInstance();
     sensorInput = SensorInput.getInstance();
+    smashBoard = SmashBoard.getInstance();
 
     translationPID = new GenericPID();
     translationPID.setValues(Constants.DRIVE_PID_TRANSLATION);
@@ -56,12 +59,15 @@ public class DriveStraightForDistance implements Command {
   @Override
   public void destruct() {
     robotOutput.arcadeDrive(0.0, 0.0);
+    smashBoard.setDistanceFrom(1000.0);
   }
 
   @Override
   public boolean finished() {
-    return Math
-      .abs(targetPosition - sensorInput.getDriveRightEncoderPosition()) < 0.5;
+    double distanceFrom =
+      targetPosition - sensorInput.getDriveRightEncoderPosition();
+    smashBoard.setDistanceFrom(distanceFrom);
+    return Math.abs(distanceFrom) < 0.5;
   }
 
 }

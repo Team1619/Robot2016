@@ -48,6 +48,14 @@ public class Mode {
     commands.add(command);
   }
 
+  public void destruct() {
+    if (currentCommand != null) {
+      currentCommand.destruct();
+    }
+
+    currentCommand = null;
+  }
+
   public boolean getFinished() {
     return finished;
   }

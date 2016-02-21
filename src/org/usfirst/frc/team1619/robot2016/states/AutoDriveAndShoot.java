@@ -48,6 +48,7 @@ public class AutoDriveAndShoot extends State {
 
   @Override
   protected void destroy() {
+    driveAndShoot.destruct();
     setFinished();
   }
 
