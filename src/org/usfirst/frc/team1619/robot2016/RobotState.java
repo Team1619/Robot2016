@@ -9,8 +9,7 @@ public class RobotState {
 
   private DriverInput driverInput;
   private SensorInput sensorInput;
-  
-  private AutoState autoState;
+
   private TeleopState teleopState;
   
   private double armTarget;
@@ -27,8 +26,7 @@ public class RobotState {
   private RobotState() {
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();
-    
-    autoState = new AutoState();
+
     teleopState = new TeleopState();
 
     armTarget = 0.0;
