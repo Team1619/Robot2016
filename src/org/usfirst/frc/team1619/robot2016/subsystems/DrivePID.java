@@ -43,8 +43,19 @@ public class DrivePID {
 
   public double getRotation() {
     double currentAngle = ((sensorInput.getNavXHeading() + 540 - rotationTarget) % 360) - 180;
-    rotationPID.calculate(currentAngle);
-    return rotationPID.get();
+    if (Math.abs(currentAngle) > Constants.DRIVE_PID_ROTATION_BANGBANG_BAND) {
+      rotationPID.calculate(currentAngle);
+      return rotationPID.get();
+    }
+    else {
+      if (currentAngle > Constants.DRIVE_PID_ROTATION_DEADBAND) {
+        return -Constants.DRIVE_PID_ROTATION_BANGBANG_VALUE;
+      }
+      else if (currentAngle < Constants.DRIVE_PID_ROTATION_DEADBAND){
+        return Constants.DRIVE_PID_ROTATION_BANGBANG_VALUE;
+      }
+    }
+    return 0;
   }
 
   public void setTranslationTarget(double newTarget) {
