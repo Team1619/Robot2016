@@ -1,51 +1,44 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.subsystems.ArmPID;
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.framework.State;
 
-public class ArmToAngle extends State {
+public class ArmManual extends State {
 
   private static SubsystemID[] subsystems;
-
-  protected ArmPID armPID;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.UTILITY_ARM};
   }
 
-  public ArmToAngle() {
+  public ArmManual() {
     super(subsystems);
-
-    armPID = ArmPID.getInstance();
   }
 
   @Override
   protected void setup() {
-    armPID.setTarget(0.0);
   }
 
   @Override
   protected void execute() {
-    double voltage = armPID.get();
-
-    robotOutput.setDartMotor(voltage);
+    double armVelocity = driverInput.getOperatorY();
+    
+    robotOutput.setDartMotor(armVelocity);
   }
 
   @Override
   protected void pause() {
     robotOutput.setDartMotor(0.0);
-    armPID.reset();
   }
 
   @Override
   protected void destroy() {
     robotOutput.setDartMotor(0.0);
-    armPID.resetIntegral();
   }
 
   @Override
   public boolean isReadyForActive() {
-    return driverInput.getOperatorButton(4);
+    return true;
   }
 
 }

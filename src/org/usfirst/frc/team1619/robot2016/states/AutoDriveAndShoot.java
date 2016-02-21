@@ -1,11 +1,12 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmToTopCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveStraightForDistance;
 import org.usfirst.frc.team1619.robot2016.commands.Mode;
 import org.usfirst.frc.team1619.robot2016.commands.RotateByAngle;
 import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.framework.State;
 
 public class AutoDriveAndShoot extends State {
 
@@ -15,7 +16,7 @@ public class AutoDriveAndShoot extends State {
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN,
-      SubsystemID.SHOOTER_INTAKE, SubsystemID.UTILITY_ARM};
+      SubsystemID.SHOOTER, SubsystemID.INTAKE, SubsystemID.UTILITY_ARM};
   }
 
   public AutoDriveAndShoot() {

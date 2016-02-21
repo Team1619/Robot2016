@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1619.robot2016.util;
 
-import org.usfirst.frc.team1619.robot2016.PIDValues;
-
 public class GenericPID {
   protected double kP;
   protected double kI;

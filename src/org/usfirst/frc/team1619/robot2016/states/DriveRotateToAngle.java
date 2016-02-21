@@ -1,9 +1,10 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
-import org.usfirst.frc.team1619.robot2016.subsystems.SubsystemID;
 
-public abstract class RotateToAngle extends State {
+public abstract class DriveRotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
 
@@ -14,7 +15,7 @@ public abstract class RotateToAngle extends State {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
   }
 
-  protected RotateToAngle() {
+  protected DriveRotateToAngle() {
     super(subsystems);
 
     drivePID = DrivePID.getInstance();

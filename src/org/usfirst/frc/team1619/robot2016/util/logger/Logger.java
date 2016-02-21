@@ -50,8 +50,8 @@ public class Logger extends GenericLogger {
   private LoggingLevel loggingLevel; 
   
   private Logger() {
-    super("UACRRobot" + Constants.LOGGING_LEVEL + "Log", ".txt");
-    loggingLevel = Constants.LOGGING_LEVEL;
+    super("UACRRobot" + Constants.LOGGER_LOGGING_LEVEL + "Log", ".txt");
+    loggingLevel = Constants.LOGGER_LOGGING_LEVEL;
     nextLog();
   }
 

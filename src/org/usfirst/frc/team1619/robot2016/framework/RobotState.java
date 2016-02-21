@@ -1,5 +1,6 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.framework;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 

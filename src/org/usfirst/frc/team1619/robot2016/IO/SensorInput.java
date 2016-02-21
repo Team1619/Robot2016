@@ -35,8 +35,8 @@ public class SensorInput {
 
   private SensorInput() {
     navX = new AHRS(SPI.Port.kMXP);
-    upperHallEffect = new DigitalInput(Constants.UPPER_HALLEFFECT_ID);
-    lowerHallEffect = new DigitalInput(Constants.LOWER_HALLEFFECT_ID);
+    upperHallEffect = new DigitalInput(Constants.ARM_UPPER_HALLEFFECT_ID);
+    lowerHallEffect = new DigitalInput(Constants.ARM_LOWER_HALLEFFECT_ID);
   }
   
   public void initialize() {
