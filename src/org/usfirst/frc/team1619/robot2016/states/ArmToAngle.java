@@ -28,11 +28,6 @@ public class ArmToAngle extends State {
   protected void execute() {
     double voltage = armPID.get();
 
-    if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
-      || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
-      voltage = 0.0;
-    }
-
     robotOutput.setDartMotor(voltage);
   }
 

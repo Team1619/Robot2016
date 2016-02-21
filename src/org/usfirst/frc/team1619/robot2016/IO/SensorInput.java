@@ -28,21 +28,24 @@ public class SensorInput {
     return instance;
   }
 
-  private RobotOutput robotOut;
+  private RobotOutput robotOutput;
   private AHRS navX;
   private DigitalInput upperHallEffect;
   private DigitalInput lowerHallEffect;
 
   private SensorInput() {
-    robotOut = RobotOutput.getInstance();
     navX = new AHRS(SPI.Port.kMXP);
     upperHallEffect = new DigitalInput(Constants.UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.LOWER_HALLEFFECT_ID);
   }
 
+  public void initialize() {
+    robotOutput = RobotOutput.getInstance();
+  }
+
   // Encoders
   public int getShooterEncoderVelocity() {
-    return robotOut.getShooterVelocity();
+    return robotOutput.getShooterVelocity();
   }
 
   /**
@@ -51,7 +54,8 @@ public class SensorInput {
    * @return Left drive encoder position
    */
   public double getDriveLeftEncoderPosition() {
-    return robotOut.getDriveLeftEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
+    return robotOutput.getDriveLeftEncPos()
+      / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**
@@ -62,7 +66,7 @@ public class SensorInput {
    *          Left encoder new position
    */
   public void setDriveLeftPos(int position) {
-    robotOut.setDriveLeftPos(position);
+    robotOutput.setDriveLeftPos(position);
   }
 
   /**
@@ -71,7 +75,8 @@ public class SensorInput {
    * @return Right drive encoder position
    */
   public double getDriveRightEncoderPosition() {
-    return robotOut.getDriveRightEncPos() / Constants.DRIVE_ENC_TICKS_PER_INCH;
+    return robotOutput.getDriveRightEncPos()
+      / Constants.DRIVE_ENC_TICKS_PER_INCH;
   }
 
   /**
@@ -82,7 +87,7 @@ public class SensorInput {
    *          Right encoder new position
    */
   public void setDriveRightPos(int position) {
-    robotOut.setDriveRightPos(position);
+    robotOutput.setDriveRightPos(position);
   }
 
   /**
@@ -91,7 +96,7 @@ public class SensorInput {
    * @return Travel in inches.
    */
   public double getDartPosition() {
-    return robotOut.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
+    return robotOutput.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
   }
 
   /**
@@ -100,7 +105,7 @@ public class SensorInput {
    * @return Left drive encoder velocity
    */
   public int getDriveLeftEncoderVelocity() {
-    return robotOut.getDriveLeftEncVel();
+    return robotOutput.getDriveLeftEncVel();
   }
 
   /**
@@ -109,7 +114,7 @@ public class SensorInput {
    * @return Left drive encoder velocity
    */
   public int getDriveRightEncoderVelocity() {
-    return robotOut.getDriveRightEncVel();
+    return robotOutput.getDriveRightEncVel();
   }
 
   // NavX

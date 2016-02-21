@@ -21,12 +21,7 @@ public class ManualArm extends State {
   @Override
   protected void execute() {
     double armVelocity = driverInput.getOperatorY();
-
-    if ((armVelocity > 0.0 && sensorInput.getUpperHallEffect())
-      || (armVelocity < 0.0 && sensorInput.getLowerHallEffect())) {
-      armVelocity = 0.0;
-    }
-
+    
     robotOutput.setDartMotor(armVelocity);
   }
 

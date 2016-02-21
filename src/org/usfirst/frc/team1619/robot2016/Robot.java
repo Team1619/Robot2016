@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1619.robot2016;
 
+import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
+import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
+import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.states.ArmToAngle;
 import org.usfirst.frc.team1619.robot2016.states.AutoDriveAndShoot;
@@ -24,6 +27,10 @@ public class Robot extends IterativeRobot {
   private SmashBoard smashBoard;
 
   public void robotInit() {
+    // Some IO singletons must be initialized, because some depend on others
+    RobotOutput.getInstance().initialize();
+    SensorInput.getInstance().initialize();
+    
     robotState = RobotState.getInstance();
 
     driveTrain = new Subsystem(SubsystemID.DRIVE_TRAIN);

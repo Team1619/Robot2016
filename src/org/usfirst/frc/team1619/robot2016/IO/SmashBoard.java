@@ -67,6 +67,8 @@ public class SmashBoard {
 
   private SmashBoard() {
     smashBoard = NetworkTable.getTable("SmashBoard");
+    deleteAllKeys();
+
     smashBoard.addTableListener(tableListener);
 
     sensorInput = SensorInput.getInstance();
@@ -74,6 +76,12 @@ public class SmashBoard {
     distanceFrom = 1000.0;
 
     addDefaults();
+  }
+
+  private void deleteAllKeys() {
+    for (String key : smashBoard.getKeys()) {
+      smashBoard.delete(key);
+    }
   }
 
   /**

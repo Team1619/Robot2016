@@ -25,6 +25,8 @@ public class RobotOutput {
   }
 
   // Declare
+  private SensorInput sensorInput;
+  
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
@@ -37,16 +39,15 @@ public class RobotOutput {
 
   private RobotDrive drive;
 
-  private RobotOutput() {
+  private RobotOutput() {    
     // Initialize
     driveRight1 = new CANTalon(Constants.DRIVE_RIGHT_1_ID);
     driveRight2 = new CANTalon(Constants.DRIVE_RIGHT_2_ID);
     driveLeft1 = new CANTalon(Constants.DRIVE_LEFT_1_ID);
     driveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_ID);
 
-    dartMotor = new CANTalon(Constants.DART_MOTOR_ID); // Positive - dart
-                                                       // extend; Negative -
-                                                       // dart retract
+    // Positive - dart extend; Negative - dart retract
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID); 
 
     intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
     shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
@@ -64,6 +65,10 @@ public class RobotOutput {
     driveLeft2.enableBrakeMode(true);
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
+  }
+  
+  public void initialize() {
+    sensorInput = SensorInput.getInstance();
   }
 
   /**
@@ -173,8 +178,16 @@ public class RobotOutput {
    * @param speed
    *          Speed of dart.
    */
-  public void setDartMotor(double speed) {
-    dartMotor.set(speed);
+  public boolean setDartMotor(double voltage) {
+    boolean returnValue = true;
+    if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
+      || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
+      voltage = 0.0;
+      returnValue = false;
+    }
+
+    dartMotor.set(voltage);
+    return returnValue;
   }
 
 }
