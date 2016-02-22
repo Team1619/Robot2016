@@ -18,7 +18,7 @@ public class GenericTimer {
   }
 
   public void start() {
-    initialTime = System.nanoTime();
+    initialTime = getCurrentTime();
   }
 
   /**
@@ -37,7 +37,7 @@ public class GenericTimer {
    * @return boolean: has timer duration elapsed
    */
   public boolean isFinished() {
-    return initialTime + duration >= System.nanoTime();
+    return initialTime + duration >= getCurrentTime();
   }
 
   /**
@@ -47,6 +47,10 @@ public class GenericTimer {
    * @return int: time elapsed in milliseconds
    */
   public int get() {
-    return (int)(System.nanoTime() - (initialTime + duration));
+    return (int)(getCurrentTime() - (initialTime + duration));
+  }
+
+  private long getCurrentTime() {
+    return System.nanoTime() / 1000000;
   }
 }
