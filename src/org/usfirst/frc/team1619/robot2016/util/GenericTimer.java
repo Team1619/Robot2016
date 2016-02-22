@@ -10,9 +10,14 @@ public class GenericTimer {
   }
 
   /**
-   * Start the timer
+   * Reset the timer to initial conditions
    */
   public void reset() {
+    initialTime = 0;
+    duration = 0;
+  }
+
+  public void start() {
     initialTime = System.nanoTime();
   }
 
@@ -22,7 +27,7 @@ public class GenericTimer {
    * @param duration
    *          Timer length in milliseconds
    */
-  public void set(int duration) {
+  public void setDuration(int duration) {
     this.duration = duration;
   }
 
@@ -36,10 +41,12 @@ public class GenericTimer {
   }
 
   /**
-   * Get the amount of time that has passed since starting the timer
+   * Get the amount of time since the timer duration passed. Negative values are
+   * the amount of time until isFinished will return true.
+   * 
    * @return int: time elapsed in milliseconds
    */
   public int get() {
-    return (int)(initialTime + duration - System.nanoTime());
+    return (int)(System.nanoTime() - (initialTime + duration));
   }
 }
