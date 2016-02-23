@@ -91,10 +91,6 @@ public abstract class State {
 
   public abstract boolean isReadyForActive();
 
-  public boolean isReadyForDestruct() {
-    return finished;
-  }
-
   protected boolean getFinished() {
     return finished;
   }
