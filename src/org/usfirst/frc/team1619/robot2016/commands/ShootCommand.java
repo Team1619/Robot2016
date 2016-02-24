@@ -1,46 +1,73 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
-import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
-import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.framework.Command;
+import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
 
-public class ShootCommand implements Command {
+public class ShootCommand extends Command {
 
-  private RobotOutput robotOutput;
-  private SensorInput sensorInput;
+  private int targetSpeed;
+  private boolean shooting;
 
-  private int extraTime;
+  private GenericTimer shootingTimer;
 
-  @Override
-  public void initialize() {
-    robotOutput = RobotOutput.getInstance();
-    sensorInput = SensorInput.getInstance();
+  public ShootCommand(int targetSpeed, int timeout) {
+    super(timeout);
 
-    extraTime = 0;
+    this.targetSpeed = targetSpeed;
   }
 
   @Override
-  public void update() {
+  protected void initialize() {
+    shooting = false;
+
+    shootingTimer = new GenericTimer();
+    shootingTimer.setDuration(1000);
+  }
+
+  @Override
+  protected void update() {
+    if (!shooting && sensorInput.getShooterEncoderVelocity() > targetSpeed) {
+      shooting = true;
+      shootingTimer.start();
+    }
+    else if (shooting && shootingTimer.isFinished()) {
+      setFinished();
+    }
+
     robotOutput.setShooterMotor(1.0);
-
-    if (sensorInput.getShooterEncoderVelocity() >= 29000) {
+    if (shooting) {
       robotOutput.setIntakeMotor(1.0);
-      extraTime++;
+    }
+    else {
+      robotOutput.setIntakeMotor(0.0);
+    }
+  }
+
+  @Override
+  protected void handleTimeout() {
+    if (!shootingTimer.isStarted()) {
+      shootingTimer.start();
+    }
+    else if (shootingTimer.isFinished()) {
+      setFinished();
     }
 
-    if (extraTime > 0) {
-      extraTime++;
-    }
+    robotOutput.setShooterMotor(1.0);
+    robotOutput.setIntakeMotor(1.0);
+  }
+
+  @Override
+  public void pause() {
+    shooting = false;
+
+    robotOutput.setShooterMotor(0.0);
+    robotOutput.setIntakeMotor(0.0);
   }
 
   @Override
   public void destruct() {
     robotOutput.setShooterMotor(0.0);
     robotOutput.setIntakeMotor(0.0);
-  }
-
-  @Override
-  public boolean finished() {
-    return extraTime > 10;
   }
 
 }

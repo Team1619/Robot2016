@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.commands.Command;
 
 public abstract class SequencerState extends State {
 
@@ -18,27 +17,27 @@ public abstract class SequencerState extends State {
   }
 
   @Override
-  protected void setup() {
+  protected void initialize() {
     addCommands();
-    
+
     if (commands.isEmpty()) {
       setFinished();
       return;
     }
 
     currentCommand = commands.poll();
-    currentCommand.initialize();
+    currentCommand.initializeCommand();
   }
 
   @Override
-  protected void execute() {
+  protected void update() {
     if (getFinished()) {
       return;
     }
 
-    currentCommand.update();
+    currentCommand.updateCommand();
 
-    if (currentCommand.finished()) {
+    if (currentCommand.getFinished()) {
       currentCommand.destruct();
 
       if (commands.isEmpty()) {
@@ -46,17 +45,22 @@ public abstract class SequencerState extends State {
       }
       else {
         currentCommand = commands.poll();
-        currentCommand.initialize();
+        currentCommand.initializeCommand();
       }
     }
   }
-  
+
   @Override
-  protected void destroy() {
+  protected void pause() {
+    currentCommand.pause();
+  }
+
+  @Override
+  protected void destruct() {
     if (currentCommand != null) {
       currentCommand.destruct();
     }
-    
+
     currentCommand = null;
   }
 
@@ -64,7 +68,7 @@ public abstract class SequencerState extends State {
   public boolean isReadyForActive() {
     return !getFinished();
   }
-  
+
   public void add(Command command) {
     commands.add(command);
   }
@@ -73,5 +77,5 @@ public abstract class SequencerState extends State {
    * Call add() for each command in this sequencer
    */
   protected abstract void addCommands();
-  
+
 }

@@ -33,12 +33,21 @@ public class GenericTimer {
   }
 
   /**
+   * Return if the timer has started
+   * 
+   * @return boolean: has timer started
+   */
+  public boolean isStarted() {
+    return initialTime != 0;
+  }
+  
+  /**
    * Return if the set time has elapsed
    * 
    * @return boolean: has timer duration elapsed
    */
   public boolean isFinished() {
-    return initialTime + duration >= getCurrentTime();
+    return get() >= 0;
   }
 
   /**

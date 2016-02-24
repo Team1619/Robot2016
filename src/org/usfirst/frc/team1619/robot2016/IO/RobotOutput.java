@@ -26,7 +26,7 @@ public class RobotOutput {
 
   // Declare
   private SensorInput sensorInput;
-  
+
   private CANTalon driveLeft1;
   private CANTalon driveLeft2;
   private CANTalon driveRight1;
@@ -36,6 +36,8 @@ public class RobotOutput {
 
   private CANTalon intakeMotor;
   private CANTalon shooterMotor;
+
+  private CANTalon lockMotor;
 
   private RobotDrive drive;
 
@@ -47,10 +49,12 @@ public class RobotOutput {
     driveLeft2 = new CANTalon(Constants.DRIVE_LEFT_2_ID);
 
     // Positive - dart extend; Negative - dart retract
-    dartMotor = new CANTalon(Constants.DART_MOTOR_ID); 
+    dartMotor = new CANTalon(Constants.DART_MOTOR_ID);
 
     intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
     shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
+
+    lockMotor = new CANTalon(Constants.LOCK_MOTOR_ID);
 
     driveRight1.setInverted(true);
     driveRight2.setInverted(true);
@@ -66,7 +70,7 @@ public class RobotOutput {
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
-  
+
   public void initialize() {
     sensorInput = SensorInput.getInstance();
   }
@@ -99,6 +103,10 @@ public class RobotOutput {
 
   public int getShooterVelocity() {
     return shooterMotor.getEncVelocity();
+  }
+
+  public void setLockMotor(double speed) {
+    lockMotor.set(speed);
   }
 
   /**

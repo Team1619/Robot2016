@@ -21,12 +21,12 @@ public class ArmMoveToAngle extends State {
   }
 
   @Override
-  protected void setup() {
+  protected void initialize() {
     armPID.setTarget(0.0);
   }
 
   @Override
-  protected void execute() {
+  protected void update() {
     double voltage = armPID.get();
 
     robotOutput.setDartMotor(voltage);
@@ -39,7 +39,7 @@ public class ArmMoveToAngle extends State {
   }
 
   @Override
-  protected void destroy() {
+  protected void destruct() {
     robotOutput.setDartMotor(0.0);
     armPID.resetIntegral();
   }

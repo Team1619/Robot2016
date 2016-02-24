@@ -3,15 +3,15 @@ package org.usfirst.frc.team1619.robot2016.states;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 
-public class DriveManual extends State {
+public class LockManual extends State {
 
   private static SubsystemID[] subsystems;
 
   static {
-    subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
+    subsystems = new SubsystemID[] {SubsystemID.LOCK};
   }
 
-  public DriveManual() {
+  public LockManual() {
     super(subsystems);
   }
 
@@ -21,23 +21,28 @@ public class DriveManual extends State {
 
   @Override
   protected void update() {
-    robotOutput.arcadeDrive(driverInput.getDriverY(),
-      driverInput.getDriverTwist());
+    if (driverInput.getOperatorButton(11)) {
+      robotOutput.setLockMotor(0.1);
+    }
+    else if (driverInput.getOperatorButton(12)) {
+      robotOutput.setLockMotor(-0.1);
+    }
   }
 
   @Override
   protected void pause() {
-    robotOutput.arcadeDrive(0.0, 0.0);
+    robotOutput.setLockMotor(0.0);
   }
 
   @Override
   protected void destruct() {
-    robotOutput.arcadeDrive(0.0, 0.0);
+    robotOutput.setLockMotor(0.0);
   }
 
   @Override
   public boolean isReadyForActive() {
-    return true;
+    return driverInput.getOperatorButton(11)
+      || driverInput.getOperatorButton(12);
   }
 
 }

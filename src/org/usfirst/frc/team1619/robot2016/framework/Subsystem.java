@@ -54,7 +54,7 @@ public class Subsystem {
 
   public void reset() {
     if (activeState != null) {
-      activeState.destruct(subsystemID);
+      activeState.destructSubsystem(subsystemID);
       activeState = null;
     }
 
@@ -63,11 +63,11 @@ public class Subsystem {
 
   private void updateActiveState(State newState) {
     if (activeState != null) {
-      activeState.destruct(subsystemID);
+      activeState.destructSubsystem(subsystemID);
     }
     activeState = newState;
     if (activeState != null) {
-      activeState.initialize(subsystemID);
+      activeState.initializeSubsystem(subsystemID);
     }
   }
 
