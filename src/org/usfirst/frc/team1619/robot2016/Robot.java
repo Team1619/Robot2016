@@ -8,9 +8,10 @@ import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmMoveToAngle;
-import org.usfirst.frc.team1619.robot2016.states.AutoDriveAndShoot;
+import org.usfirst.frc.team1619.robot2016.states.AutoShootSequence;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
+import org.usfirst.frc.team1619.robot2016.states.LockManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
   private Subsystem utilityArm;
   private Subsystem shooter;
   private Subsystem intake;
+  private Subsystem lock;
 
   private SmashBoard smashBoard;
 
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
     utilityArm = new Subsystem(SubsystemID.UTILITY_ARM);
     shooter = new Subsystem(SubsystemID.SHOOTER);
     intake = new Subsystem(SubsystemID.INTAKE);
+    lock = new Subsystem(SubsystemID.LOCK);
 
     smashBoard = SmashBoard.getInstance();
   }
@@ -54,12 +57,10 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    AutoDriveAndShoot autoDriveAndShoot = new AutoDriveAndShoot();
+    AutoShootSequence autoShootSequence = new AutoShootSequence();
 
-    driveTrain.addState(autoDriveAndShoot);
-    shooter.addState(autoDriveAndShoot);
-    intake.addState(autoDriveAndShoot);
-    utilityArm.addState(autoDriveAndShoot);
+    shooter.addState(autoShootSequence);
+    intake.addState(autoShootSequence);
   }
 
   public void autonomousPeriodic() {
@@ -83,6 +84,8 @@ public class Robot extends IterativeRobot {
 
     shooter.addState(shooterIntake);
     intake.addState(shooterIntake);
+
+    lock.addState(new LockManual());
   }
 
   public void teleopPeriodic() {

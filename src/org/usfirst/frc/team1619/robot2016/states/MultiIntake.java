@@ -17,16 +17,16 @@ public class MultiIntake extends State {
   }
 
   @Override
-  protected void setup() {
+  protected void initialize() {
   }
 
   @Override
-  protected void execute() {
+  protected void update() {
     if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_SHOOT)) {
       robotOutput.setShooterMotor(1.0);
 
       if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
-        || sensorInput.getShooterEncoderVelocity() >= 30000) {
+        || sensorInput.getShooterEncoderVelocity() >= 27500) {
         robotOutput.setIntakeMotor(1.0);
       }
     }
@@ -47,7 +47,7 @@ public class MultiIntake extends State {
   }
 
   @Override
-  protected void destroy() {
+  protected void destruct() {
     robotOutput.setIntakeMotor(0.0);
     robotOutput.setShooterMotor(0.0);
   }

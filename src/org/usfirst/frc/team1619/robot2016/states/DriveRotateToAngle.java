@@ -28,12 +28,12 @@ public abstract class DriveRotateToAngle extends State {
    * for one fewer calculation per iteration)
    */
   @Override
-  protected void setup() {
+  protected void initialize() {
     drivePID.setRotationTarget(getRotationTarget());
   }
 
   @Override
-  protected void execute() {
+  protected void update() {
     robotOutput.arcadeDrive(0, drivePID.getRotation());
   }
 
@@ -43,7 +43,7 @@ public abstract class DriveRotateToAngle extends State {
   }
 
   @Override
-  protected void destroy() {
+  protected void destruct() {
     robotOutput.arcadeDrive(0, 0);
     target = 0.0;
     drivePID.resetRotation();

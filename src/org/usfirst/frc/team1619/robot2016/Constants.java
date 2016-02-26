@@ -12,7 +12,6 @@ public class Constants {
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 1;
   public static final int DRIVER_BUTTON_DRIVE_PID_RESET = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
-  
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_INTAKE = 2;
@@ -39,7 +38,7 @@ public class Constants {
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;
   public static final int ARM_LOWER_HALLEFFECT_ID = 1;
 
-  //Utility Arm 
+  // Utility Arm
   public static final double ARM_LENGTH = 5.08725;
   public static final double ARM_TO_DART_BASE_VERTICAL = 9.3073849;
   public static final double ARM_TO_DART_BASE_HORIZONTAL = 13.47087978;
@@ -59,6 +58,7 @@ public class Constants {
   public static final int DART_MOTOR_ID = 5;
   public static final int INTAKE_MOTOR_ID = 6;
   public static final int SHOOTER_MOTOR_ID = 7;
+  public static final int LOCK_MOTOR_ID = 9;
 
   // Properties/configurations
   public static final boolean PROPERTIES_TEST_MODE = false;

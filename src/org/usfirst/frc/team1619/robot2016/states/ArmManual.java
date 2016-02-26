@@ -16,11 +16,11 @@ public class ArmManual extends State {
   }
 
   @Override
-  protected void setup() {
+  protected void initialize() {
   }
 
   @Override
-  protected void execute() {
+  protected void update() {
     double armVelocity = driverInput.getOperatorY();
     
     robotOutput.setDartMotor(armVelocity);
@@ -32,7 +32,7 @@ public class ArmManual extends State {
   }
 
   @Override
-  protected void destroy() {
+  protected void destruct() {
     robotOutput.setDartMotor(0.0);
   }
 

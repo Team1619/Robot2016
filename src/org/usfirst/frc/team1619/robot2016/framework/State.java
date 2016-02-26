@@ -32,7 +32,7 @@ public abstract class State {
 
   public static void updateAll() {
     for (State state : states) {
-      state.update();
+      state.updateState();
     }
   }
 
@@ -55,45 +55,41 @@ public abstract class State {
     smashBoard = SmashBoard.getInstance();
   }
 
-  public void initialize(SubsystemID subsystemID) {
+  public void initializeState(SubsystemID subsystemID) {
     activeSubsystems.add(subsystemID);
 
     if (activeSubsystems.containsAll(subsystems)) {
-      setup();
+      initialize();
     }
   }
 
-  protected abstract void setup();
+  protected abstract void initialize();
 
-  protected void update() {
+  protected void updateState() {
     if (activeSubsystems.containsAll(subsystems)) {
-      execute();
+      update();
     }
   }
 
-  protected abstract void execute();
+  protected abstract void update();
 
-  public void destruct(SubsystemID subsystemID) {
+  public void destructState(SubsystemID subsystemID) {
     activeSubsystems.remove(subsystemID);
 
     if (activeSubsystems.size() == 0) {
       finished = false;
-      destroy();
+      destruct();
     }
     else {
       pause();
     }
   }
 
+  protected abstract void destruct();
+  
   protected abstract void pause();
 
-  protected abstract void destroy();
-
   public abstract boolean isReadyForActive();
-
-  public boolean isReadyForDestruct() {
-    return finished;
-  }
 
   protected boolean getFinished() {
     return finished;
