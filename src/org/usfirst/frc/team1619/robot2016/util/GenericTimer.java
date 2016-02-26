@@ -63,5 +63,4 @@ public class GenericTimer {
   private long getCurrentTime() {
     return System.nanoTime() / 1000000;
   }
-
 }

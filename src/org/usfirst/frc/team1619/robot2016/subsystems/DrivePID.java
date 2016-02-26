@@ -3,6 +3,7 @@ package org.usfirst.frc.team1619.robot2016.subsystems;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.util.GenericPID;
+import org.usfirst.frc.team1619.robot2016.util.PIDKachigBand;
 
 public class DrivePID {
 
@@ -10,7 +11,7 @@ public class DrivePID {
 
   private SensorInput sensorInput;
 
-  private GenericPID rotationPID;
+  private PIDKachigBand rotationPID;
   private GenericPID translationPID;
 
   private double rotationTarget;
@@ -25,16 +26,22 @@ public class DrivePID {
   }
 
   private DrivePID() {
-      sensorInput = SensorInput.getInstance();
+    sensorInput = SensorInput.getInstance();
 
-      rotationPID = new GenericPID();
-      translationPID = new GenericPID();
+    rotationPID = new PIDKachigBand();
+    translationPID = new GenericPID();
 
-      rotationPID.setValues(Constants.DRIVE_PID_ROTATION);
-      rotationPID.setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
-      
-      translationPID.setValues(Constants.DRIVE_PID_TRANSLATION);
-  } 
+    rotationPID.setValues(Constants.DRIVE_PID_ROTATION);
+    rotationPID.setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
+    rotationPID.setKachigBand(Constants.DRIVE_PID_ROTATION_KACHIG_BAND);
+    rotationPID.setKachigConstant(Constants.DRIVE_PID_ROTATION_KACHIG_CONSTANT);
+    rotationPID.setMinumumOutput(Constants.DRIVE_PID_ROTATION_MINIMUM);
+    rotationPID.setKachigTime(Constants.DRIVE_PID_ROTATION_KACHIG_ONTIME,
+      Constants.DRIVE_PID_ROTATION_KACHIG_OFFTIME);
+
+    translationPID.setValues(Constants.DRIVE_PID_TRANSLATION);
+    translationPID.setIRange(Constants.DRIVE_PID_TRANSLATION_IRANGE);
+  }
 
   public void setRotationTarget(double newTarget) {
     rotationTarget = newTarget;
@@ -42,7 +49,9 @@ public class DrivePID {
   }
 
   public double getRotation() {
-    double currentAngle = ((sensorInput.getNavXHeading() + 540 - rotationTarget) % 360) - 180;
+    // While outside of the alternate control band,
+    double currentAngle =
+      ((sensorInput.getNavXHeading() + 540 - rotationTarget) % 360) - 180;
     rotationPID.calculate(currentAngle);
     return rotationPID.get();
   }
@@ -51,13 +60,13 @@ public class DrivePID {
     translationTarget = newTarget;
     translationPID.setTarget(translationTarget);
   }
-  
+
   public double getTranslation() {
     double currentTranslation = sensorInput.getDriveRightEncoderPosition();
     translationPID.calculate(currentTranslation);
     return translationPID.get();
   }
-  
+
   public void resetRotationIntegral() {
     rotationPID.resetIntegral();
   }
@@ -65,13 +74,13 @@ public class DrivePID {
   public void resetRotation() {
     rotationPID.reset();
   }
-  
+
   public void resetTranslationIntegral() {
     translationPID.resetIntegral();
   }
-  
+
   public void resetTranslation() {
     translationPID.reset();
   }
-  
+
 }

@@ -100,7 +100,7 @@ public class GenericPID {
     integralMax = max;
   }
 
-  private double calcPID(double error) {
+  protected double calcPID(double error) {
     double currentError = error;
     double pCalc;
     double iCalc;
