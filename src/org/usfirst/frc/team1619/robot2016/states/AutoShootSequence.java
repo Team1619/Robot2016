@@ -5,6 +5,7 @@ import org.usfirst.frc.team1619.robot2016.commands.DriveForDistanceCommand;
 import org.usfirst.frc.team1619.robot2016.commands.PauseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
+import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoShootSequence extends SequencerState {
@@ -21,9 +22,9 @@ public class AutoShootSequence extends SequencerState {
 
   @Override
   protected void addCommands() {
-    CommandGroup waitAndShoot = new CommandGroup();
+    CommandSequence waitAndShoot = new CommandSequence();
     waitAndShoot.add(new PauseCommand(2500));
-    waitAndShoot.add(new ShootCommand(25000, 3750));
+    waitAndShoot.add(new ShootCommand(90000, 2500));
 
     CommandGroup driveAndShoot = new CommandGroup();
     driveAndShoot.add(new DriveForDistanceCommand(25.0));
