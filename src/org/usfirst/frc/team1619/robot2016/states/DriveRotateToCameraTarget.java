@@ -13,8 +13,6 @@ public class DriveRotateToCameraTarget extends DriveRotateToAngle {
   protected double getRotationTarget() {
     double val = (sensorInput.getNavXHeading()
         - smashBoard.getRotationOffsetToAligned() + 180) % 360 - 180;
-//     System.out.println(smashBoard.getRotationOffsetToAligned());
-//     System.out.println(val);
     return val;
   }
 }

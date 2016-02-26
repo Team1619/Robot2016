@@ -59,8 +59,10 @@ public class Robot extends IterativeRobot {
 
     AutoShootSequence autoShootSequence = new AutoShootSequence();
 
+    driveTrain.addState(autoShootSequence);
     shooter.addState(autoShootSequence);
     intake.addState(autoShootSequence);
+    utilityArm.addState(autoShootSequence);
   }
 
   public void autonomousPeriodic() {
