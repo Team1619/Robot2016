@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.framework;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class CommandGroup extends Command {
@@ -30,16 +31,19 @@ public class CommandGroup extends Command {
 
   @Override
   protected void update() {
-    for (Command command : commands) {
+    Iterator<Command> commandsIterator = commands.iterator();
+
+    while (commandsIterator.hasNext()) {
+      Command command = commandsIterator.next();
       command.updateCommand();
 
       if (command.getFinished()) {
-        commands.remove(command);
-
-        if (commands.isEmpty()) {
-          setFinished();
-        }
+        commandsIterator.remove();
       }
+    }
+
+    if (commands.isEmpty()) {
+      setFinished();
     }
   }
 

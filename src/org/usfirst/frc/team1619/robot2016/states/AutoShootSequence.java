@@ -22,11 +22,11 @@ public class AutoShootSequence extends SequencerState {
   @Override
   protected void addCommands() {
     CommandGroup waitAndShoot = new CommandGroup();
-    waitAndShoot.add(new PauseCommand(1000));
+    waitAndShoot.add(new PauseCommand(2500));
     waitAndShoot.add(new ShootCommand(25000, 3750));
 
     CommandGroup driveAndShoot = new CommandGroup();
-    driveAndShoot.add(new DriveForDistanceCommand(200.0));
+    driveAndShoot.add(new DriveForDistanceCommand(25.0));
     driveAndShoot.add(waitAndShoot);
 
     add(driveAndShoot);

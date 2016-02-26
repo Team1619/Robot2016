@@ -26,7 +26,7 @@ public class MultiIntake extends State {
       robotOutput.setShooterMotor(1.0);
 
       if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
-        || sensorInput.getShooterEncoderVelocity() >= 30000) {
+        || sensorInput.getShooterEncoderVelocity() >= 27500) {
         robotOutput.setIntakeMotor(1.0);
       }
     }

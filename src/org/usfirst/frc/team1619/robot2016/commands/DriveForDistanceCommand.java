@@ -25,7 +25,7 @@ public class DriveForDistanceCommand extends Command {
 
   @Override
   protected void update() {
-    robotOutput.arcadeDrive(drivePID.getTranslation(), drivePID.getRotation());
+    robotOutput.arcadeDrive(-drivePID.getTranslation(), drivePID.getRotation());
   }
 
   @Override
