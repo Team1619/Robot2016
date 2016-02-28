@@ -56,6 +56,12 @@ public abstract class State {
   }
 
   public void initializeState(SubsystemID subsystemID) {
+    if (!subsystems.contains(subsystemID)) {
+      System.out.println("Subsystem " + subsystemID
+        + " not contained in list of required subsystems");
+      return;
+    }
+
     activeSubsystems.add(subsystemID);
 
     if (activeSubsystems.containsAll(subsystems)) {
@@ -86,7 +92,7 @@ public abstract class State {
   }
 
   protected abstract void destruct();
-  
+
   protected abstract void pause();
 
   public abstract boolean isReadyForActive();

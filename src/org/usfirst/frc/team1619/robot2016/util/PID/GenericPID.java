@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1619.robot2016.util;
+package org.usfirst.frc.team1619.robot2016.util.PID;
+
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
 public class GenericPID {
   protected double kP;
@@ -9,6 +11,7 @@ public class GenericPID {
   protected double setPoint;
   protected double prevError;
   protected double integral;
+  protected double deadBand;
 
   protected double integralRange;
   protected double integralMax;
@@ -26,6 +29,7 @@ public class GenericPID {
     setPoint = 0;
     prevError = 0;
     integral = 0;
+    deadBand = 0;
   }
 
   public GenericPID(double pValue, double iValue, double dValue) {
@@ -59,7 +63,13 @@ public class GenericPID {
   }
 
   public void calculate(double currentValue) {
-    outputValue = calcPID(setPoint - currentValue);
+    double error = setPoint - currentValue;
+    if (Math.abs(error) > deadBand) {
+      outputValue = calcPID(setPoint - currentValue);
+    }
+    else {
+      outputValue = 0;
+    }
   }
 
   public double get() {
@@ -100,6 +110,10 @@ public class GenericPID {
     integralMax = max;
   }
 
+  public void setDeadBand(double band) {
+    deadBand = band;
+  }
+
   protected double calcPID(double error) {
     double currentError = error;
     double pCalc;
@@ -125,7 +139,7 @@ public class GenericPID {
     }
     //If there is a integral max, constrain the final result
     if(integralMax != 0) {
-      integral = Math.max(integralMax, Math.min(-integralMax, integral));
+      integral = MathUtility.constrain(integral, integralMax, -integralMax);
     }
     iCalc = integral * kI;
 

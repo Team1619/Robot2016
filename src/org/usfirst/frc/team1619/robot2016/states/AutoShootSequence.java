@@ -2,10 +2,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.DriveForDistanceCommand;
-import org.usfirst.frc.team1619.robot2016.commands.PauseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
-import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
-import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoShootSequence extends SequencerState {
@@ -13,7 +10,8 @@ public class AutoShootSequence extends SequencerState {
   private static SubsystemID[] subsystems;
 
   static {
-    subsystems = new SubsystemID[] {SubsystemID.INTAKE, SubsystemID.SHOOTER};
+    subsystems = new SubsystemID[] {SubsystemID.INTAKE, SubsystemID.SHOOTER,
+      SubsystemID.DRIVE_TRAIN};
   }
 
   public AutoShootSequence() {
@@ -22,15 +20,16 @@ public class AutoShootSequence extends SequencerState {
 
   @Override
   protected void addCommands() {
-    CommandSequence waitAndShoot = new CommandSequence();
-    waitAndShoot.add(new PauseCommand(2500));
-    waitAndShoot.add(new ShootCommand(90000, 2500));
+    // CommandSequence waitAndShoot = new CommandSequence();
+    // waitAndShoot.add(new PauseCommand(2500));
+    // waitAndShoot.add(new ShootCommand(90000, 2500));
+    //
+    // CommandGroup driveAndShoot = new CommandGroup();
+    // driveAndShoot.add(new DriveForDistanceCommand(25.0));
+    // driveAndShoot.add(waitAndShoot);
 
-    CommandGroup driveAndShoot = new CommandGroup();
-    driveAndShoot.add(new DriveForDistanceCommand(25.0));
-    driveAndShoot.add(waitAndShoot);
-
-    add(driveAndShoot);
+    add(new DriveForDistanceCommand(25.0));
+    add(new ShootCommand(30000, 5000));
   }
 
   @Override
