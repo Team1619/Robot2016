@@ -5,10 +5,12 @@ import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
 public class DriveRotationPID extends PIDKachigBand {
   SensorInput sensorInput;
+  double targetAngle;
 
   public DriveRotationPID() {
     super();
     sensorInput = SensorInput.getInstance();
+    targetAngle = 0;
 
     setValues(Constants.DRIVE_PID_ROTATION);
     setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
@@ -19,28 +21,20 @@ public class DriveRotationPID extends PIDKachigBand {
       Constants.DRIVE_PID_ROTATION_KACHIG_OFFTIME);
   }
 
-  private double getRotation() {
-    return ((sensorInput.getNavXHeading() + 540 - setPoint) % 360) - 180;
+  private double getRotationError(double value) {
+    return ((sensorInput.getNavXHeading() + 540 - value) % 360) - 180;
+  }
+
+  public void setTarget(double target) {
+    targetAngle = sensorInput.getNavXHeading() + target;
+    setPoint = 0;
   }
 
   public void calculate() {
-    super.calculate(getRotation());
-  }
-
-  public double get() {
-    return super.get();
+    super.calculate(getRotationError(targetAngle));
   }
 
   public double getError() {
-    return setPoint - getRotation();
-  }
-
-  public void setRotationKachig(boolean isKachiging) {
-    if (isKachiging) {
-      setKachigBand(Constants.DRIVE_PID_ROTATION_KACHIG_BAND);
-    }
-    else {
-      setKachigBand(0);
-    }
+    return -getRotationError(setPoint);
   }
 }

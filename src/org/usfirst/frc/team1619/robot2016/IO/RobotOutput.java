@@ -61,7 +61,7 @@ public class RobotOutput {
     driveLeft1.setInverted(true);
     driveLeft2.setInverted(true);
 
-    intakeMotor.setInverted(true);
+    intakeMotor.setInverted(false);
     shooterMotor.setInverted(true);
 
     driveRight1.enableBrakeMode(true);

@@ -3,13 +3,13 @@ package org.usfirst.frc.team1619.robot2016.commands;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.Command;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 import org.usfirst.frc.team1619.robot2016.util.PID.DriveRotationPID;
 import org.usfirst.frc.team1619.robot2016.util.PID.DriveTranslationPID;
 
 public class DriveForDistanceCommand extends Command {
 
   private double distance;
-  private double targetPosition;
   private GenericTimer endTimer;
   private DriveTranslationPID driveTranslationPID;
   private DriveRotationPID driveRotationPID;
@@ -18,7 +18,6 @@ public class DriveForDistanceCommand extends Command {
     super();
 
     this.distance = distance;
-    targetPosition = 0;
     endTimer = new GenericTimer();
     driveTranslationPID = new DriveTranslationPID();
     driveRotationPID = new DriveRotationPID();
@@ -26,25 +25,29 @@ public class DriveForDistanceCommand extends Command {
 
   @Override
   protected void initialize() {
-    targetPosition = sensorInput.getDriveRightEncoderPosition() + distance;
-    endTimer.setDuration(1000);
+    endTimer.setDuration(Constants.AUTO_DRIVE_TRANSLATION_DEADTIME);
     endTimer.start();
 
     driveRotationPID.reset();
-    driveRotationPID.setTarget(sensorInput.getNavXHeading());
-    driveRotationPID.setRotationKachig(false);
+    driveRotationPID.setTarget(0);
+    driveRotationPID.setKachigBand(0);
 
     driveTranslationPID.reset();
-    driveTranslationPID.setTarget(targetPosition);
+    driveTranslationPID.setTarget(distance);
   }
 
   @Override
   protected void update() {
-    robotOutput.arcadeDrive(driveTranslationPID.get(), driveRotationPID.get());
+    driveTranslationPID.calculate();
+    driveRotationPID.calculate();
 
-    if (Math.abs(driveTranslationPID.getError()) <= 
-        Constants.DRIVE_PID_TRANSLATION_DEADZONE) {
-      if(endTimer.isFinished()) {
+    robotOutput.arcadeDrive(-MathUtility.constrain(driveTranslationPID.get(),
+      Constants.DRIVE_AUTO_MAX_TRANSLATION,
+      -Constants.DRIVE_AUTO_MAX_TRANSLATION), driveRotationPID.get());
+
+    if (Math.abs(driveTranslationPID.getError()) 
+        <= Constants.DRIVE_PID_TRANSLATION_DEADZONE) {
+      if (endTimer.isFinished()) {
         setFinished();
       }
     }

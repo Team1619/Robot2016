@@ -30,6 +30,6 @@ public class DriveTranslationPID extends PIDMinimumOutput {
   }
 
   public void setTarget(double target) {
-    super.setTarget(target - getEncoderPosition());
+    super.setTarget(target + getEncoderPosition());
   }
 }

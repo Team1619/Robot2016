@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.DriveForDistanceCommand;
+import org.usfirst.frc.team1619.robot2016.commands.DriveRotateCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
@@ -28,8 +29,11 @@ public class AutoShootSequence extends SequencerState {
     // driveAndShoot.add(new DriveForDistanceCommand(25.0));
     // driveAndShoot.add(waitAndShoot);
 
-    add(new DriveForDistanceCommand(25.0));
+    add(new DriveForDistanceCommand(50.0));
     add(new ShootCommand(30000, 5000));
+    add(new DriveRotateCommand(90, 2000));
+    add(new DriveRotateCommand(-135, 2000));
+    add(new DriveRotateCommand(-135, 2000));
   }
 
   @Override

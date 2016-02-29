@@ -18,11 +18,17 @@ public class Constants {
   public static final int OPERATOR_BUTTON_SHOOT = 1;
   public static final int OPERATOR_BUTTON_MOVE_ARM_TO_INTAKE = 3;
 
+  // Autonomous
+  public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 500;
+  public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
+  public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 1;
+
   // Encoders
   public static final double DRIVE_ENC_TICKS_PER_INCH = 161.6;
   public static final double DART_ENC_TICKS_PER_INCH = 1024.0;
 
   // Drive Train
+  public static final double DRIVE_AUTO_MAX_TRANSLATION = 0.75;
   public static final PIDValues DRIVE_PID_ROTATION =
     new PIDValues(0.04, 0.001, 0.15);
   public static final double DRIVE_PID_ROTATION_IRANGE = 25;
@@ -34,7 +40,7 @@ public class Constants {
   public static final int DRIVE_PID_ROTATION_KACHIG_OFFTIME = 200;
 
   public static final PIDValues DRIVE_PID_TRANSLATION =
-    new PIDValues(0.05, 0.00, 0.0);
+    new PIDValues(0.035, 0.00, 0.03);
   public static final double DRIVE_PID_TRANSLATION_IRANGE = 5;
   public static final double DRIVE_PID_TRANSLATION_DEADZONE = 1;
   public static final double DRIVE_PID_TRANSLATION_MINIMUMOUTPUT = 0.4;
