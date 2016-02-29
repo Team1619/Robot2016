@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1619.robot2016;
 
-import org.usfirst.frc.team1619.robot2016.util.PIDValues;
+import org.usfirst.frc.team1619.robot2016.util.PID.PIDValues;
 import org.usfirst.frc.team1619.robot2016.util.logger.Logger.LoggingLevel;
 
 public class Constants {
@@ -18,24 +18,32 @@ public class Constants {
   public static final int OPERATOR_BUTTON_SHOOT = 1;
   public static final int OPERATOR_BUTTON_MOVE_ARM_TO_INTAKE = 3;
 
+  // Autonomous
+  public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 500;
+  public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
+  public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 1;
+
   // Encoders
   public static final double DRIVE_ENC_TICKS_PER_INCH = 161.6;
   public static final double DART_ENC_TICKS_PER_INCH = 1024.0;
 
   // Drive Train
+  public static final double DRIVE_AUTO_MAX_TRANSLATION = 0.75;
   public static final PIDValues DRIVE_PID_ROTATION =
     new PIDValues(0.04, 0.001, 0.15);
   public static final double DRIVE_PID_ROTATION_IRANGE = 25;
   public static final double DRIVE_PID_ROTATION_KACHIG_BAND = 10;
   public static final double DRIVE_PID_ROTATION_KACHIG_CONSTANT = 0.60;
-  public static final double DRIVE_PID_ROTATION_DEADBAND = 0.25;
+  public static final double DRIVE_PID_ROTATION_DEADZONE = 0.25;
   public static final double DRIVE_PID_ROTATION_MINIMUM = 0.5;
   public static final int DRIVE_PID_ROTATION_KACHIG_ONTIME = 100;
   public static final int DRIVE_PID_ROTATION_KACHIG_OFFTIME = 200;
 
   public static final PIDValues DRIVE_PID_TRANSLATION =
-    new PIDValues(0.04, 0.001, 0.15);
-  public static final double DRIVE_PID_TRANSLATION_IRANGE = 25;
+    new PIDValues(0.035, 0.00, 0.03);
+  public static final double DRIVE_PID_TRANSLATION_IRANGE = 5;
+  public static final double DRIVE_PID_TRANSLATION_DEADZONE = 1;
+  public static final double DRIVE_PID_TRANSLATION_MINIMUMOUTPUT = 0.4;
 
   // Utility Arm
   public static final PIDValues ARM_PID_DOWN =

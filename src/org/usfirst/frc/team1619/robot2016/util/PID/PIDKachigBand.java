@@ -1,10 +1,12 @@
-package org.usfirst.frc.team1619.robot2016.util;
+package org.usfirst.frc.team1619.robot2016.util.PID;
+
+import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
 public class PIDKachigBand extends GenericPID {
   private double kKachig;
 
   private double kachigBand;
-  private double deadBand;
   private int kachigOnTime;
   private int kachigOffTime;
   private double minimumOutput;
@@ -19,7 +21,6 @@ public class PIDKachigBand extends GenericPID {
     super(values);
     kKachig = 0;
     kachigBand = 0;
-    deadBand = 0;
     kachigOnTime = 0;
     kachigOffTime = 0;
     minimumOutput = 0;
@@ -35,10 +36,6 @@ public class PIDKachigBand extends GenericPID {
 
   public void setKachigBand(double band) {
     kachigBand = band;
-  }
-
-  public void setDeadBand(double band) {
-    deadBand = band;
   }
 
   public void setKachigConstant(double constant) {
@@ -58,12 +55,14 @@ public class PIDKachigBand extends GenericPID {
     double error = setPoint - currentValue;
     // If outside deadband, do nothing
     if (Math.abs(error) > deadBand) {
-      // If inside kachigband, kachigs
+      // If inside kachigband, kachig
       if (Math.abs(error) < kachigBand) {
         // If we should be kachiging, return the kachig value. Else, return 0
         if (kachigTimer.get() % (kachigOnTime + kachigOffTime) < kachigOnTime) {
-          outputValue = Math.min(minimumOutput, 
-            Math.max(-minimumOutput, kKachig * error));
+          // If you use constrain backwards, it ensures the value is always
+          // outside of the range.
+          outputValue = MathUtility.constrain(kKachig * error, -minimumOutput,
+            minimumOutput);
         }
         else {
           outputValue = 0;
@@ -75,6 +74,9 @@ public class PIDKachigBand extends GenericPID {
         kachigTimer.start();
         outputValue = calcPID(error);
       }
+    }
+    else {
+      outputValue = 0;
     }
   }
 }

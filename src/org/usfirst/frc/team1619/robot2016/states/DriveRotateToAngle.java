@@ -2,14 +2,14 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
-import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
+import org.usfirst.frc.team1619.robot2016.util.PID.DriveRotationPID;
+import org.usfirst.frc.team1619.robot2016.util.PID.DriveTranslationPID;
 
 public abstract class DriveRotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
 
-  private DrivePID drivePID;
-  private double target;
+  private DriveRotationPID driveRotationPID;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
@@ -18,7 +18,8 @@ public abstract class DriveRotateToAngle extends State {
   protected DriveRotateToAngle() {
     super(subsystems);
 
-    drivePID = DrivePID.getInstance();
+    new DriveTranslationPID();
+    driveRotationPID = new DriveRotationPID();
   }
 
   /**
@@ -29,12 +30,13 @@ public abstract class DriveRotateToAngle extends State {
    */
   @Override
   protected void initialize() {
-    drivePID.setRotationTarget(getRotationTarget());
+    driveRotationPID.setTarget(getRotationTarget());
   }
 
   @Override
   protected void update() {
-    robotOutput.arcadeDrive(0, drivePID.getRotation());
+    driveRotationPID.calculate();
+    robotOutput.arcadeDrive(0, driveRotationPID.get());
   }
 
   @Override
@@ -45,8 +47,7 @@ public abstract class DriveRotateToAngle extends State {
   @Override
   protected void destruct() {
     robotOutput.arcadeDrive(0, 0);
-    target = 0.0;
-    drivePID.resetRotation();
+    driveRotationPID.reset();
   }
 
   @Override
