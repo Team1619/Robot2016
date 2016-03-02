@@ -27,7 +27,7 @@ public class DriveRotateCommand extends Command {
 
   public DriveRotateCommand(double angle, double kachigBand, double deadBand, 
       int timeout) {
-    this(angle, kachigBand, Constants.DRIVE_PID_ROTATION_DEADZONE, 
+    this(angle, kachigBand, deadBand, 
       Constants.AUTO_DRIVE_ROTATION_TOLERANCE, timeout);
   }
 

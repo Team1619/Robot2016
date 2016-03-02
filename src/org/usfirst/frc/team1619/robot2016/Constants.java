@@ -19,7 +19,7 @@ public class Constants {
   public static final int OPERATOR_BUTTON_MOVE_ARM_TO_INTAKE = 3;
 
   // Autonomous
-  public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 500;
+  public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 1.0;
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 1;

@@ -11,7 +11,7 @@ public class DriveRotateToCameraTarget extends DriveRotateToAngle {
 
   @Override
   protected double getRotationTarget() {
-    double val = smashBoard.getRotationOffsetToAligned();
+    double val = -smashBoard.getRotationOffsetToAligned();
     return val;
   }
 }
