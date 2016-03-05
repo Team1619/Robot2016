@@ -38,10 +38,10 @@ public class DriverInput {
     driverStick = new Joystick(Constants.JOYSTICK_RIGHT_ID);
     operatorStick = new Joystick(Constants.JOYSTICK_LEFT_ID);
 
-    driverStickButtons = new JoystickButton[15];
-    operatorStickButtons = new JoystickButton[15];
+    driverStickButtons = new JoystickButton[16];
+    operatorStickButtons = new JoystickButton[16];
 
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 16; i++) {
       driverStickButtons[i] = new JoystickButton(driverStick, i + 1);
       operatorStickButtons[i] = new JoystickButton(operatorStick, i + 1);
     }
@@ -88,6 +88,10 @@ public class DriverInput {
 
   public double getOperatorThrottle() {
     return operatorStick.getThrottle();
+  }
+
+  public int getOperatorPOV() {
+    return operatorStick.getPOV();
   }
 
 }

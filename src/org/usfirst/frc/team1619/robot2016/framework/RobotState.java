@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1619.robot2016.framework;
 
-import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
@@ -11,8 +10,11 @@ public class RobotState {
   private DriverInput driverInput;
   private SensorInput sensorInput;
 
-  private double armTarget;
-  private double rotateTarget;
+  private int armZero;
+  private boolean armZeroed;
+  
+  private boolean ballPresenceRisingEdge;
+  private boolean ballPresenceLastValue;
 
   static {
     instance = new RobotState();
@@ -26,24 +28,38 @@ public class RobotState {
     driverInput = DriverInput.getInstance();
     sensorInput = SensorInput.getInstance();
 
-    armTarget = 0.0;
+    armZero = 0;
+    armZeroed = false;
+    
+    ballPresenceRisingEdge = false;
+    ballPresenceLastValue = false;
   }
 
   public void update() {
-    if (driverInput.getDriverButton(Constants.DRIVER_BUTTON_DRIVE_PID_RESET)) {
-      sensorInput.resetNavXHeading();
+    boolean ballDetected = sensorInput.getBallPresenceSensor();
+    if (!ballPresenceLastValue && ballDetected) {
+      ballPresenceRisingEdge = true;
     }
+    else {
+      ballPresenceRisingEdge = false;
+    }
+    ballPresenceLastValue = ballDetected;
   }
 
-  public void setArmTarget(double newArmTarget) {
-    armTarget = newArmTarget;
+  public int getArmZero() {
+    return armZero;
   }
 
-  public double getArmTarget() {
-    return armTarget;
+  public void setArmZero(int position) {
+    armZero = position;
+    armZeroed = true;
   }
 
-  public double getRotateTarget() {
-    return rotateTarget;
+  public boolean getArmZeroed() {
+    return armZeroed;
+  }
+  
+  public boolean getBallPresenceRisingEdge() {
+    return ballPresenceRisingEdge;
   }
 }

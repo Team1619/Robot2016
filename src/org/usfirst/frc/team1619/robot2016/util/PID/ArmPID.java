@@ -3,62 +3,43 @@ package org.usfirst.frc.team1619.robot2016.util.PID;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
-public class ArmPID {
-
-  private static ArmPID instance;
+public class ArmPID extends PIDMinimumOutput {
 
   private SensorInput sensorInput;
 
-  private GenericPID upPID;
-  private GenericPID downPID;
+  public ArmPID() {
+    super();
 
-  private double target;
-
-  static {
-    instance = new ArmPID();
-  }
-
-  public static ArmPID getInstance() {
-    return instance;
-  }
-
-  private ArmPID() {
     sensorInput = SensorInput.getInstance();
 
-    upPID = new GenericPID();
-    downPID = new GenericPID();
-
-    upPID.setValues(Constants.ARM_PID_UP);
-    downPID.setValues(Constants.ARM_PID_DOWN);
+    setValues(Constants.ARM_PID);
+    setDeadBand(Constants.ARM_PID_DEADZONE);
+    setMinimumOutput(Constants.ARM_PID_MINIMUM);
   }
 
-  public void setTarget(double newTarget) {
-    target = newTarget;
-    upPID.setTarget(target);
-    downPID.setTarget(target);
+  private double getEncoderPosition() {
+    return sensorInput.getDartPosition();
   }
 
-  public double get() {
-    double position = sensorInput.getDartPosition();
+  public void calculate() {
 
-    if (position < target) {
-      upPID.calculate(position);
-      return upPID.get();
+    super.calculate(getEncoderPosition());
+  }
+
+  public double getError() {
+    return setPoint - getEncoderPosition();
+  }
+
+  @Override
+  public double iCalc(double error) {
+    double iCalc = super.iCalc(error);
+    if (Math.abs(error) < deadBand) {
+      resetIntegral();
+      return 0;
     }
     else {
-      downPID.calculate(position);
-      return downPID.get();
+      return iCalc;
     }
   }
 
-  public void resetIntegral() {
-    upPID.resetIntegral();
-    downPID.resetIntegral();
-  }
-
-  public void reset() {
-    upPID.reset();
-    downPID.reset();
-  }
-  
 }

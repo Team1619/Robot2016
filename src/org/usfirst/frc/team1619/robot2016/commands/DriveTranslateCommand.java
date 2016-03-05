@@ -18,15 +18,21 @@ public class DriveTranslateCommand extends Command {
   private DriveRotationPID driveRotationPID;
 
   public DriveTranslateCommand(double distance) {
-    this(distance, Constants.AUTO_DRIVE_TRANSLATION_MAX_OUTPUT);
+    this(distance, 0);
   }
-  public DriveTranslateCommand(double distance, double maxSpeed) {
-    this(distance, maxSpeed, Constants.DRIVE_PID_TRANSLATION_DEADZONE);
+  public DriveTranslateCommand(double distance, int timeOut) {
+    this(distance, Constants.AUTO_DRIVE_TRANSLATION_MAX_OUTPUT, timeOut);
   }
-  public DriveTranslateCommand(double distance, double maxSpeed, double tolerance) {
-    super();
+  public DriveTranslateCommand(double distance, double maxSpeed, int timeOut) {
+    this(distance, maxSpeed, Constants.DRIVE_PID_TRANSLATION_DEADZONE, timeOut);
+  }
+  public DriveTranslateCommand(double distance, double maxSpeed, double tolerance, int timeOut) {
+    super(timeOut);
 
     this.distance = distance;
+    this.maxSpeed = maxSpeed;
+    this.tolerance = tolerance;
+
     endTimer = new GenericTimer();
     driveTranslationPID = new DriveTranslationPID();
     driveRotationPID = new DriveRotationPID();
@@ -39,7 +45,6 @@ public class DriveTranslateCommand extends Command {
 
     driveRotationPID.reset();
     driveRotationPID.setTarget(0);
-    driveRotationPID.setKachigBand(0);
 
     driveTranslationPID.reset();
     driveTranslationPID.setTarget(distance);

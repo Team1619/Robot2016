@@ -7,13 +7,20 @@ import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
-import org.usfirst.frc.team1619.robot2016.states.ArmMoveToAngle;
-import org.usfirst.frc.team1619.robot2016.states.AutoShootSequence;
+import org.usfirst.frc.team1619.robot2016.states.ArmManualOveride;
+import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
+import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
+import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
+import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToSetAngle;
-import org.usfirst.frc.team1619.robot2016.states.LockManual;
+import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
+import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
+import org.usfirst.frc.team1619.robot2016.states.ShootManual;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
@@ -25,7 +32,7 @@ public class Robot extends IterativeRobot {
   private Subsystem utilityArm;
   private Subsystem shooter;
   private Subsystem intake;
-  private Subsystem lock;
+  private Subsystem scaler;
 
   private SmashBoard smashBoard;
 
@@ -40,7 +47,7 @@ public class Robot extends IterativeRobot {
     utilityArm = new Subsystem(SubsystemID.UTILITY_ARM);
     shooter = new Subsystem(SubsystemID.SHOOTER);
     intake = new Subsystem(SubsystemID.INTAKE);
-    lock = new Subsystem(SubsystemID.LOCK);
+    scaler = new Subsystem(SubsystemID.SCALER);
 
     smashBoard = SmashBoard.getInstance();
   }
@@ -58,7 +65,7 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    AutoShootSequence autoShootSequence = new AutoShootSequence();
+    AutoLowBar autoShootSequence = new AutoLowBar();
 
     driveTrain.addState(autoShootSequence);
     shooter.addState(autoShootSequence);
@@ -77,19 +84,33 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    MultiIntake shooterIntake = new MultiIntake();
+    MultiIntake multiIntake = new MultiIntake();
+    MultiShootAlign multiShootAlign = new MultiShootAlign();
+    MultiShootManual multiShootManual = new MultiShootManual();
 
+    driveTrain.addState(multiShootAlign);
+    driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
     driveTrain.addState(new DriveManual());
-
-    utilityArm.addState(new ArmMoveToAngle());
+ 
+//    utilityArm.addState(new ArmManualOveride());
+    utilityArm.addState(multiShootAlign);
+    utilityArm.addState(new ArmZeroToTop());
+    utilityArm.addState(new ArmPIDMove());
     utilityArm.addState(new ArmManual());
 
-    shooter.addState(shooterIntake);
-    intake.addState(shooterIntake);
+    shooter.addState(new ShootManual());
+    shooter.addState(multiShootManual);
+    shooter.addState(multiShootAlign);
+    shooter.addState(multiIntake);
 
-    lock.addState(new LockManual());
+    intake.addState(new IntakeManual());
+    intake.addState(multiShootManual);
+    intake.addState(multiShootAlign);
+    intake.addState(multiIntake);
+
+    scaler.addState(new ScalerManual());
   }
 
   public void teleopPeriodic() {

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.Command;
+import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
 
 public class ShootCommand extends Command {
@@ -20,8 +22,12 @@ public class ShootCommand extends Command {
   protected void initialize() {
     shooting = false;
 
+    if (targetSpeed == 0) {
+      targetSpeed = Constants.SHOOTER_SHOOT_SPEED_TARGET;
+    }
+
     shootingTimer = new GenericTimer();
-    shootingTimer.setDuration(1000);
+    shootingTimer.setDuration(Constants.SHOOTING_INTAKE_OUT_TIME);
   }
 
   @Override

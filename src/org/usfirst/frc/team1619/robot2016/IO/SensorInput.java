@@ -5,6 +5,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -32,15 +33,23 @@ public class SensorInput {
   private AHRS navX;
   private DigitalInput upperHallEffect;
   private DigitalInput lowerHallEffect;
+  private DigitalInput ballPresenceSensor;
+  private DriverStation driverStation;
 
   private SensorInput() {
     navX = new AHRS(SPI.Port.kMXP);
     upperHallEffect = new DigitalInput(Constants.ARM_UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.ARM_LOWER_HALLEFFECT_ID);
+    ballPresenceSensor = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_ID);
+    driverStation = DriverStation.getInstance();
   }
-  
+
   public void initialize() {
     robotOutput = RobotOutput.getInstance();
+  }
+
+  public double getMatchTimeRemaining() {
+    return driverStation.getMatchTime();
   }
 
   // Encoders
@@ -99,6 +108,10 @@ public class SensorInput {
     return robotOutput.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
   }
 
+  public void zeroDart() {
+    robotOutput.zeroDart();
+  }
+
   /**
    * Left drive motor velocity
    * 
@@ -125,6 +138,10 @@ public class SensorInput {
    */
   public double getNavXHeading() {
     return ((navX.getFusedHeading() + 180) % 360) - 180;
+  }
+
+  public double getNavXRotationSpeed() {
+    return navX.getRate();
   }
 
   public float getNavXPitch() {
@@ -170,4 +187,8 @@ public class SensorInput {
     return !lowerHallEffect.get();
   }
 
+  public boolean getBallPresenceSensor() {
+    return !ballPresenceSensor.get();
+  }
+  
 }

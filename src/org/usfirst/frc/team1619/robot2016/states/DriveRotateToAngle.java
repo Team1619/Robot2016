@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
-import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.DriveRotateCommand;
 import org.usfirst.frc.team1619.robot2016.framework.State;
@@ -18,8 +17,7 @@ public abstract class DriveRotateToAngle extends State {
   protected DriveRotateToAngle() {
     super(subsystems);
 
-    rotateCommand = new DriveRotateCommand(getRotationTarget(),
-      Constants.DRIVE_PID_ROTATION_KACHIG_BAND, 0);
+    rotateCommand = new DriveRotateCommand(getRotationTarget(), 0);
   }
 
   @Override

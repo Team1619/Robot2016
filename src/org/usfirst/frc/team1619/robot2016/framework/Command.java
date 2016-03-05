@@ -4,7 +4,6 @@ import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
-import org.usfirst.frc.team1619.robot2016.util.PID.ArmPID;
 
 public abstract class Command {
 
@@ -17,8 +16,6 @@ public abstract class Command {
   protected RobotOutput robotOutput;
   protected SensorInput sensorInput;
 
-  protected ArmPID armPID;
-
   protected Command() {
     this(0);
   }
@@ -30,8 +27,6 @@ public abstract class Command {
     driverInput = DriverInput.getInstance();
     robotOutput = RobotOutput.getInstance();
     sensorInput = SensorInput.getInstance();
-
-    armPID = ArmPID.getInstance();
   }
 
   public void initializeCommand() {

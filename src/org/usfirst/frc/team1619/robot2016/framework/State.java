@@ -65,6 +65,7 @@ public abstract class State {
     activeSubsystems.add(subsystemID);
 
     if (activeSubsystems.containsAll(subsystems)) {
+      finished = false;
       initialize();
     }
   }
@@ -83,7 +84,6 @@ public abstract class State {
     activeSubsystems.remove(subsystemID);
 
     if (activeSubsystems.size() == 0) {
-      finished = false;
       destruct();
     }
     else {
@@ -105,4 +105,8 @@ public abstract class State {
     finished = true;
   }
 
+  protected boolean isActive() {
+    return activeSubsystems.size() == subsystems.size();
+  }
+  
 }

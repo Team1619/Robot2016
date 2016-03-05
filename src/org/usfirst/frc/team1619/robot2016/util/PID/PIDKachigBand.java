@@ -9,7 +9,7 @@ public class PIDKachigBand extends GenericPID {
   private double kachigBand;
   private int kachigOnTime;
   private int kachigOffTime;
-  private double minimumOutput;
+  private double kachigMinimumOutput;
 
   private GenericTimer kachigTimer;
 
@@ -23,7 +23,7 @@ public class PIDKachigBand extends GenericPID {
     kachigBand = 0;
     kachigOnTime = 0;
     kachigOffTime = 0;
-    minimumOutput = 0;
+    kachigMinimumOutput = 0;
 
     kachigTimer = new GenericTimer();
     kachigTimer.start();
@@ -47,8 +47,8 @@ public class PIDKachigBand extends GenericPID {
     kachigOffTime = offTime;
   }
 
-  public void setMinumumOutput(double minimum) {
-    minimumOutput = minimum;
+  public void setKachigMinumumOutput(double minimum) {
+    kachigMinimumOutput = minimum;
   }
 
   public void calculate(double currentValue) {
@@ -59,13 +59,11 @@ public class PIDKachigBand extends GenericPID {
       if (Math.abs(error) < kachigBand) {
         // If we should be kachiging, return the kachig value. Else, return 0
         if (kachigTimer.get() % (kachigOnTime + kachigOffTime) < kachigOnTime) {
-          // If you use constrain backwards, it ensures the value is always
-          // outside of the range.
-          outputValue = MathUtility.constrain(kKachig * error, -minimumOutput,
-            minimumOutput);
+          outputValue = MathUtility.absMax(kKachig * error, kachigMinimumOutput,
+            -kachigMinimumOutput);
         }
         else {
-          outputValue = 0;
+          outputValue = kachigMinimumOutput;
         }
       }
       else {

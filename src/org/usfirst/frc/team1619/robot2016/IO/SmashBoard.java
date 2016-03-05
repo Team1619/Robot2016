@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.IO;
 
+import org.usfirst.frc.team1619.robot2016.framework.RobotState;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
@@ -20,7 +22,7 @@ public class SmashBoard {
 
   private static SmashBoard instance;
 
-  private double distanceFrom;
+  private double angleError;
 
   static {
     try {
@@ -64,6 +66,7 @@ public class SmashBoard {
 
   // References for getting and putting data
   private SensorInput sensorInput;
+  private RobotState robotState;
 
   private SmashBoard() {
     smashBoard = NetworkTable.getTable("SmashBoard");
@@ -72,8 +75,9 @@ public class SmashBoard {
     smashBoard.addTableListener(tableListener);
 
     sensorInput = SensorInput.getInstance();
+    robotState = RobotState.getInstance();
 
-    distanceFrom = 1000.0;
+    angleError = 1000.0;
 
     addDefaults();
   }
@@ -115,7 +119,7 @@ public class SmashBoard {
       sensorInput.getDriveLeftEncoderPosition());
     smashBoard.putNumber("dartEncoderPosition", sensorInput.getDartPosition());
     smashBoard.putNumber("speed", sensorInput.getShooterEncoderVelocity());
-    smashBoard.putNumber("distanceFrom", distanceFrom);
+    smashBoard.putNumber("angleError", angleError);
 
     // NavX
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
@@ -127,13 +131,23 @@ public class SmashBoard {
       sensorInput.getUpperHallEffect() ? 1.0 : 0.0);
     smashBoard.putNumber("lowerHallEffect",
       sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
+
+    // DIO
+    smashBoard.putNumber("ballPresenceSensor",
+      sensorInput.getBallPresenceSensor() ? 1.0 : 0.0);
+    smashBoard.putNumber("ballPresenceEdge",
+      robotState.getBallPresenceRisingEdge() ? 1.0 : 0.0);
   }
 
-  public void setDistanceFrom(double newDistanceFrom) {
-    distanceFrom = newDistanceFrom;
+  public void setAngleError(double error) {
+    angleError = error;
   }
 
   public double getRotationOffsetToAligned() {
     return smashBoard.getNumber("angleOffsetToAligned", 0.0);
+  }
+
+  public double getDistance() {
+    return smashBoard.getNumber("distance", 100.0);
   }
 }
