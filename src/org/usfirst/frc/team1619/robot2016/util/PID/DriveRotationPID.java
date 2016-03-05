@@ -18,6 +18,8 @@ public class DriveRotationPID extends PIDKachigBand {
     setKachigConstant(Constants.DRIVE_PID_ROTATION_KACHIG_CONSTANT);
     setKachigTime(Constants.DRIVE_PID_ROTATION_KACHIG_ONTIME,
       Constants.DRIVE_PID_ROTATION_KACHIG_OFFTIME);
+    setKachigMinumumOutput(Constants.DRIVE_PID_ROTATION_KACHIG_MINIMUM);
+    setDeadBand(Constants.DRIVE_PID_ROTATION_DEADZONE);
   }
 
   private double getRotationError(double value) {

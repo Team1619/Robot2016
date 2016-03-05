@@ -21,15 +21,7 @@ public class GenericPID {
   }
 
   public GenericPID(PIDValues values) {
-    this.kP = values.p;
-    this.kI = values.i;
-    this.kD = values.d;
-
-    outputValue = 0;
-    setPoint = 0;
-    prevError = 0;
-    integral = 0;
-    deadBand = 0;
+    this(values.p, values.i, values.d);
   }
 
   public GenericPID(double pValue, double iValue, double dValue) {
@@ -92,6 +84,9 @@ public class GenericPID {
     setPoint = 0;
     prevError = 0;
     integral = 0;
+
+    integralRange = 0;
+    integralMax = 0;
   }
 
   /**
