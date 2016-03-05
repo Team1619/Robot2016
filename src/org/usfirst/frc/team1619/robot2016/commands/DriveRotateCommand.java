@@ -12,13 +12,13 @@ public class DriveRotateCommand extends Command {
   private GenericTimer endTimer;
   private DriveRotationPID rotationPID;
 
-  //Five constructors is perfect
+  //Five constructors is the perfect number
   public DriveRotateCommand(double angle) {
     this(angle, 0);
   }
 
   public DriveRotateCommand(double angle, int timeout) {
-    this(angle, 0, timeout);
+    this(angle, Constants.DRIVE_PID_ROTATION_KACHIG_BAND, timeout);
   }
 
   public DriveRotateCommand(double angle, double kachigBand, int timeout) {

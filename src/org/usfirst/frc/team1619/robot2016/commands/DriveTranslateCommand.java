@@ -7,14 +7,23 @@ import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 import org.usfirst.frc.team1619.robot2016.util.PID.DriveRotationPID;
 import org.usfirst.frc.team1619.robot2016.util.PID.DriveTranslationPID;
 
-public class DriveForDistanceCommand extends Command {
+public class DriveTranslateCommand extends Command {
 
   private double distance;
+  private double maxSpeed;
+  private double tolerance;
+
   private GenericTimer endTimer;
   private DriveTranslationPID driveTranslationPID;
   private DriveRotationPID driveRotationPID;
 
-  public DriveForDistanceCommand(double distance) {
+  public DriveTranslateCommand(double distance) {
+    this(distance, Constants.AUTO_DRIVE_TRANSLATION_MAX_OUTPUT);
+  }
+  public DriveTranslateCommand(double distance, double maxSpeed) {
+    this(distance, maxSpeed, Constants.DRIVE_PID_TRANSLATION_DEADZONE);
+  }
+  public DriveTranslateCommand(double distance, double maxSpeed, double tolerance) {
     super();
 
     this.distance = distance;
@@ -42,11 +51,9 @@ public class DriveForDistanceCommand extends Command {
     driveRotationPID.calculate();
 
     robotOutput.arcadeDrive(-MathUtility.constrain(driveTranslationPID.get(),
-      Constants.DRIVE_AUTO_MAX_TRANSLATION,
-      -Constants.DRIVE_AUTO_MAX_TRANSLATION), driveRotationPID.get());
+      maxSpeed, -maxSpeed), driveRotationPID.get());
 
-    if (Math.abs(driveTranslationPID.getError()) 
-        <= Constants.DRIVE_PID_TRANSLATION_DEADZONE) {
+    if (Math.abs(driveTranslationPID.getError()) <= tolerance) {
       if (endTimer.isFinished()) {
         setFinished();
       }
