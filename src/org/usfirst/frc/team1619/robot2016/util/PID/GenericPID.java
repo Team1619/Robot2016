@@ -33,9 +33,20 @@ public class GenericPID {
     setPoint = 0;
     prevError = 0;
     integral = 0;
+    deadBand = 0;
 
     integralRange = 0;
     integralMax = 0;
+  }
+
+  /**
+   * Reset the PID loop to initial conditions
+   */
+  public void reset() {
+    outputValue = 0;
+    setPoint = 0;
+    prevError = 0;
+    integral = 0;
   }
 
   public void setValues(PIDValues values) {
@@ -77,19 +88,6 @@ public class GenericPID {
   }
 
   /**
-   * Reset the PID loop to initial conditions
-   */
-  public void reset() {
-    outputValue = 0;
-    setPoint = 0;
-    prevError = 0;
-    integral = 0;
-
-    integralRange = 0;
-    integralMax = 0;
-  }
-
-  /**
    * Integral term will only be calculated when -range < error < range
    * @param range Range that the I term is calculated within
    */
@@ -117,33 +115,45 @@ public class GenericPID {
     double output;
 
     // P term
-    pCalc = currentError * this.kP;
+    pCalc = pCalc(currentError);
 
     // I term
+    iCalc = iCalc(currentError);
+
+    // D term
+    dCalc = dCalc(currentError);
+
+    // output
+    output = pCalc + iCalc + dCalc;
+    prevError = currentError;
+    return output;
+  }
+
+  protected double pCalc(double error) {
+    return error * this.kP;
+  }
+
+  protected double iCalc(double error) {
     //If there is an integral range, only add the integral term within bounds
     if(integralRange != 0) {
-      if(currentError <= integralRange && currentError >= -integralRange) {
-        integral += currentError;
+      if(error <= integralRange && error >= -integralRange) {
+        integral += error;
       }
       else {
         integral = 0;
       }
     }
     else {
-      integral += currentError;
+      integral += error;
     }
     //If there is a integral max, constrain the final result
     if(integralMax != 0) {
       integral = MathUtility.constrain(integral, integralMax, -integralMax);
     }
-    iCalc = integral * kI;
+    return integral * kI;
+  }
 
-    // D term
-    dCalc = (currentError - prevError) * this.kD;
-
-    // output
-    output = pCalc + iCalc + dCalc;
-    prevError = currentError;
-    return output;
+  protected double dCalc(double error) {
+    return (error - prevError) * this.kD;
   }
 }

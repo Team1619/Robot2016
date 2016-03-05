@@ -2,8 +2,10 @@ package org.usfirst.frc.team1619.robot2016.util.PID;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
-public class DriveRotationPID extends PIDKachigBand {
+public class DriveRotationPID extends GenericPID {
   SensorInput sensorInput;
   double targetAngle;
 
@@ -14,11 +16,7 @@ public class DriveRotationPID extends PIDKachigBand {
 
     setValues(Constants.DRIVE_PID_ROTATION);
     setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
-    setKachigBand(Constants.DRIVE_PID_ROTATION_KACHIG_BAND);
-    setKachigConstant(Constants.DRIVE_PID_ROTATION_KACHIG_CONSTANT);
-    setKachigTime(Constants.DRIVE_PID_ROTATION_KACHIG_ONTIME,
-      Constants.DRIVE_PID_ROTATION_KACHIG_OFFTIME);
-    setKachigMinumumOutput(Constants.DRIVE_PID_ROTATION_KACHIG_MINIMUM);
+    setIMax(Constants.DRIVE_PID_ROTATION_IMAX);
     setDeadBand(Constants.DRIVE_PID_ROTATION_DEADZONE);
   }
 
@@ -26,6 +24,7 @@ public class DriveRotationPID extends PIDKachigBand {
     return ((sensorInput.getNavXHeading() + 540 - value) % 360) - 180;
   }
 
+  @Override
   public void setTarget(double target) {
     targetAngle = sensorInput.getNavXHeading() + target;
     setPoint = 0;
@@ -33,9 +32,29 @@ public class DriveRotationPID extends PIDKachigBand {
 
   public void calculate() {
     super.calculate(getRotationError(targetAngle));
+    SmashBoard.getInstance().setAngleError(getError());
+  }
+
+  @Override
+  public double get() {
+    return MathUtility.constrain(super.get(),
+      Constants.AUTO_DRIVE_ROTATION_MAX_OUTPUT,
+      -Constants.AUTO_DRIVE_ROTATION_MAX_OUTPUT);
   }
 
   public double getError() {
-    return -getRotationError(setPoint);
+    return -getRotationError(targetAngle);
+  }
+
+  @Override
+  public double iCalc(double error) {
+    double iCalc = super.iCalc(error);
+    if (Math.abs(error) < deadBand) {
+      resetIntegral();
+      return 0;
+    }
+    else {
+      return iCalc;
+    }
   }
 }

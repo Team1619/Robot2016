@@ -20,7 +20,7 @@ public class SmashBoard {
 
   private static SmashBoard instance;
 
-  private double distanceFrom;
+  private double angleError;
 
   static {
     try {
@@ -73,7 +73,7 @@ public class SmashBoard {
 
     sensorInput = SensorInput.getInstance();
 
-    distanceFrom = 1000.0;
+    angleError = 1000.0;
 
     addDefaults();
   }
@@ -115,7 +115,7 @@ public class SmashBoard {
       sensorInput.getDriveLeftEncoderPosition());
     smashBoard.putNumber("dartEncoderPosition", sensorInput.getDartPosition());
     smashBoard.putNumber("speed", sensorInput.getShooterEncoderVelocity());
-    smashBoard.putNumber("distanceFrom", distanceFrom);
+    smashBoard.putNumber("angleError", angleError);
 
     // NavX
     smashBoard.putNumber("angle", sensorInput.getNavXHeading());
@@ -129,8 +129,8 @@ public class SmashBoard {
       sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
   }
 
-  public void setDistanceFrom(double newDistanceFrom) {
-    distanceFrom = newDistanceFrom;
+  public void setAngleError(double error) {
+    angleError = error;
   }
 
   public double getRotationOffsetToAligned() {
