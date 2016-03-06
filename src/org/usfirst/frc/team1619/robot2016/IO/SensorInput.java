@@ -127,6 +127,10 @@ public class SensorInput {
     return ((navX.getFusedHeading() + 180) % 360) - 180;
   }
 
+  public double getNavXRotationSpeed() {
+    return navX.getRate();
+  }
+
   public float getNavXPitch() {
     return navX.getPitch();
   }

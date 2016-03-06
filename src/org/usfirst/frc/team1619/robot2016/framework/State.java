@@ -105,4 +105,8 @@ public abstract class State {
     finished = true;
   }
 
+  protected boolean isActive() {
+    return activeSubsystems.size() == subsystems.size();
+  }
+  
 }

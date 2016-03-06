@@ -154,6 +154,11 @@ public class GenericPID {
   }
 
   protected double dCalc(double error) {
-    return (error - prevError) * this.kD;
+    if(prevError != 0) {
+      return (error - prevError) * this.kD;
+    }
+    else {
+      return 0;
+    }
   }
 }

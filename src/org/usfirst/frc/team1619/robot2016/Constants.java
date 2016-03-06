@@ -7,11 +7,13 @@ public class Constants {
   // Joysticks
   public static final int JOYSTICK_RIGHT_ID = 0;
   public static final int JOYSTICK_LEFT_ID = 1;
+  public static final double JOYSTICK_DEADZONE = 0.05;
 
   // Driver buttons
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 1;
+  public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 1;
   public static final int DRIVER_BUTTON_DRIVE_PID_RESET = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 4;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_INTAKE = 2;
@@ -26,6 +28,7 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
 
   // Drive Train
+  public static final double DRIVE_HOLD_HEADING_START_TOLERANCE = 0.5;
   public static final PIDValues DRIVE_PID_ROTATION =
       new PIDValues(0.08, 0.015, 0.25);
   public static final double DRIVE_PID_ROTATION_IRANGE = 5;
