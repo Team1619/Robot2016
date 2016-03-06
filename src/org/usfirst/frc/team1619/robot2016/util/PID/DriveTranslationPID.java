@@ -13,7 +13,7 @@ public class DriveTranslationPID extends PIDMinimumOutput {
     setValues(Constants.DRIVE_PID_TRANSLATION);
     setIRange(Constants.DRIVE_PID_TRANSLATION_IRANGE);
     setDeadBand(Constants.DRIVE_PID_TRANSLATION_DEADZONE);
-    setMinimumOutput(Constants.DRIVE_TRANSLATION_MINIMUM_OUTPUT);
+    setMinimumOutput(Constants.DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT);
   }
 
   private double getEncoderPosition() {

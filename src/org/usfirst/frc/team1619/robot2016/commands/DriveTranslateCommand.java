@@ -39,7 +39,7 @@ public class DriveTranslateCommand extends Command {
 
     driveRotationPID.reset();
     driveRotationPID.setTarget(0);
-    driveRotationPID.setKachigBand(0);
+//    driveRotationPID.setKachigBand(0);
 
     driveTranslationPID.reset();
     driveTranslationPID.setTarget(distance);

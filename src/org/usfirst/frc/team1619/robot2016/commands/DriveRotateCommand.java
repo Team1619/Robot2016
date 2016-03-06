@@ -12,34 +12,27 @@ public class DriveRotateCommand extends Command {
   private GenericTimer endTimer;
   private DriveRotationPID rotationPID;
 
-  //Five constructors is the perfect number
   public DriveRotateCommand(double angle) {
     this(angle, 0);
   }
 
   public DriveRotateCommand(double angle, int timeout) {
-    this(angle, Constants.DRIVE_PID_ROTATION_KACHIG_BAND, timeout);
+    this(angle, Constants.AUTO_DRIVE_ROTATION_TOLERANCE, timeout);
   }
 
-  public DriveRotateCommand(double angle, double kachigBand, int timeout) {
-    this(angle, kachigBand, Constants.DRIVE_PID_ROTATION_DEADZONE, timeout);
+  public DriveRotateCommand(double angle, double tolerance, int timeout) {
+    this(angle, tolerance, Constants.DRIVE_PID_ROTATION_DEADZONE, timeout);
   }
 
-  public DriveRotateCommand(double angle, double kachigBand, double deadBand, 
-      int timeout) {
-    this(angle, kachigBand, Constants.DRIVE_PID_ROTATION_DEADZONE, 
-      Constants.AUTO_DRIVE_ROTATION_TOLERANCE, timeout);
-  }
-
-  public DriveRotateCommand(double angle, double kachigBand, double deadBand, 
-      double tolerance, int timeout) {
+  public DriveRotateCommand(double angle, double tolerance, double deadBand,
+    int timeout) {
     super(timeout);
 
     this.angle = angle;
     this.tolerance = tolerance;
+
     endTimer = new GenericTimer();
     rotationPID = new DriveRotationPID();
-    rotationPID.setKachigBand(kachigBand);
     rotationPID.setDeadBand(deadBand);
   }
 

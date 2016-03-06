@@ -29,9 +29,10 @@ public class AutoShootSequence extends SequencerState {
     // driveAndShoot.add(new DriveForDistanceCommand(25.0));
     // driveAndShoot.add(waitAndShoot);
 
-//    add(new DriveForDistanceCommand(120.0));
-//    add(new ShootCommand(30000, 5000));
-    add(new DriveRotateCommand(90, 2000));
+    add(new DriveRotateCommand(90, 0, 2000));
+//    add(new DriveRotateCommand(20, 5000));
+//    add(new DriveRotateCommand(-3, 5000));
+    
   }
 
   @Override

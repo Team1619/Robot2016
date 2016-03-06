@@ -10,7 +10,9 @@ import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmMoveToAngle;
 import org.usfirst.frc.team1619.robot2016.states.AutoShootSequence;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
+import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
+import org.usfirst.frc.team1619.robot2016.states.DriveRotateToSetAngle;
 import org.usfirst.frc.team1619.robot2016.states.LockManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 
@@ -78,7 +80,9 @@ public class Robot extends IterativeRobot {
 
     MultiIntake shooterIntake = new MultiIntake();
 
+    driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
+    driveTrain.addState(new DriveRotateToSetAngle());
     driveTrain.addState(new DriveManual());
 
     utilityArm.addState(new ArmMoveToAngle());
