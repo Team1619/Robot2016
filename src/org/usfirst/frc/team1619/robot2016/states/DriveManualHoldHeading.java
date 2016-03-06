@@ -56,12 +56,12 @@ public class DriveManualHoldHeading extends State {
     if(isActive()) {
       return driverInput.getDriverButton(
         Constants.DRIVER_BUTTON_DRIVE_HOLD_HEADING)
-        && Math.abs(driverInput.getDriverTwist()) < 0.05;
+        && Math.abs(driverInput.getDriverTwist()) < Constants.JOYSTICK_DEADZONE;
     }
     else {
       return driverInput
         .getDriverButton(Constants.DRIVER_BUTTON_DRIVE_HOLD_HEADING)
-        && Math.abs(driverInput.getDriverTwist()) < 0.05
+        && Math.abs(driverInput.getDriverTwist()) < Constants.JOYSTICK_DEADZONE
         && Math.abs(sensorInput.getNavXRotationSpeed()) 
         < Constants.DRIVE_HOLD_HEADING_START_TOLERANCE;
     }
