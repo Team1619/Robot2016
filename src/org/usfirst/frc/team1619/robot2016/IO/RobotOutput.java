@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.framework.RobotState;
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -25,6 +27,7 @@ public class RobotOutput {
   }
 
   // Declare
+  private RobotState robotState;
   private SensorInput sensorInput;
 
   private CANTalon driveLeft1;
@@ -37,7 +40,7 @@ public class RobotOutput {
   private CANTalon intakeMotor;
   private CANTalon shooterMotor;
 
-  private CANTalon lockMotor;
+  private CANTalon scalerMotor;
 
   private RobotDrive drive;
 
@@ -54,7 +57,7 @@ public class RobotOutput {
     intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
     shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
 
-    lockMotor = new CANTalon(Constants.LOCK_MOTOR_ID);
+    scalerMotor = new CANTalon(Constants.SCALER_MOTOR_ID);
 
     driveRight1.setInverted(true);
     driveRight2.setInverted(true);
@@ -69,10 +72,13 @@ public class RobotOutput {
     driveLeft1.enableBrakeMode(true);
     driveLeft2.enableBrakeMode(true);
 
+    scalerMotor.enableBrakeMode(true);
+
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
 
   public void initialize() {
+    robotState = RobotState.getInstance();
     sensorInput = SensorInput.getInstance();
   }
 
@@ -91,7 +97,11 @@ public class RobotOutput {
    * @return Dart encoder position.
    */
   public int getDartPosition() {
-    return dartMotor.getEncPosition();
+    return dartMotor.getEncPosition() - robotState.getArmZero();
+  }
+
+  public void zeroDart() {
+    robotState.setArmZero(dartMotor.getEncPosition());
   }
 
   public void setIntakeMotor(double speed) {
@@ -106,8 +116,8 @@ public class RobotOutput {
     return shooterMotor.getEncVelocity();
   }
 
-  public void setLockMotor(double speed) {
-    lockMotor.set(speed);
+  public void setScalerMotor(double speed) {
+    scalerMotor.set(speed);
   }
 
   /**
@@ -182,13 +192,45 @@ public class RobotOutput {
   }
 
   /**
-   * Sets the dart motor speed.
+   * Sets the dart motor speed, zero if trying to travel past sensors, and cut
+   * down if near to sensors.
    * 
    * @param speed
    *          Speed of dart.
    */
   public boolean setDartMotor(double voltage) {
+    if (sensorInput.getUpperHallEffect()) {
+      sensorInput.zeroDart();
+    }
+
     boolean returnValue = true;
+
+    if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
+      || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
+      voltage = 0.0;
+      returnValue = false;
+    }
+    else if (voltage > 0.0
+      && sensorInput.getDartPosition() > Constants.ARM_TOP_THROTTLE_POSITION) {
+      voltage = Math.min(voltage, Constants.ARM_THROTTLE_SPEED);
+    }
+    else if (voltage < 0.0 && sensorInput
+      .getDartPosition() < Constants.ARM_BOTTOM_THROTTLE_POSITION) {
+      voltage = Math.max(voltage, -Constants.ARM_THROTTLE_SPEED);
+    }
+
+    dartMotor.set(voltage);
+
+    return returnValue;
+  }
+
+  public boolean setDartMotorNonZeroed(double voltage) {
+    if (sensorInput.getUpperHallEffect()) {
+      sensorInput.zeroDart();
+    }
+
+    boolean returnValue = true;
+
     if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
       || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
       voltage = 0.0;
@@ -196,6 +238,7 @@ public class RobotOutput {
     }
 
     dartMotor.set(voltage);
+
     return returnValue;
   }
 

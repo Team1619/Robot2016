@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 
@@ -22,8 +23,7 @@ public class ArmManual extends State {
   @Override
   protected void update() {
     double armVelocity = driverInput.getOperatorY();
-    
-    robotOutput.setDartMotor(armVelocity);
+    robotOutput.setDartMotorNonZeroed(armVelocity);
   }
 
   @Override

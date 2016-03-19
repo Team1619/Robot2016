@@ -1,15 +1,14 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.commands.DriveRotateCommand;
 import org.usfirst.frc.team1619.robot2016.framework.State;
-import org.usfirst.frc.team1619.robot2016.subsystems.DrivePID;
 
 public abstract class DriveRotateToAngle extends State {
 
   private static SubsystemID[] subsystems;
 
-  private DrivePID drivePID;
-  private double target;
+  private DriveRotateCommand rotateCommand;
 
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
@@ -18,35 +17,28 @@ public abstract class DriveRotateToAngle extends State {
   protected DriveRotateToAngle() {
     super(subsystems);
 
-    drivePID = DrivePID.getInstance();
+    rotateCommand = new DriveRotateCommand(getRotationTarget(), 0);
   }
 
-  /**
-   * PID values are set using values in Constants, target is retrieved from
-   * RobotState, then target of the PID is set to 0 (because the value
-   * calculated for the current angle is normalized by the target. This allows
-   * for one fewer calculation per iteration)
-   */
   @Override
   protected void initialize() {
-    drivePID.setRotationTarget(getRotationTarget());
+    rotateCommand = new DriveRotateCommand(getRotationTarget());
+    rotateCommand.initializeCommand();
   }
 
   @Override
   protected void update() {
-    robotOutput.arcadeDrive(0, drivePID.getRotation());
+    rotateCommand.updateCommand();
   }
 
   @Override
   protected void pause() {
-    robotOutput.arcadeDrive(0, 0);
+    rotateCommand.pause();
   }
 
   @Override
   protected void destruct() {
-    robotOutput.arcadeDrive(0, 0);
-    target = 0.0;
-    drivePID.resetRotation();
+    rotateCommand.destruct();
   }
 
   @Override

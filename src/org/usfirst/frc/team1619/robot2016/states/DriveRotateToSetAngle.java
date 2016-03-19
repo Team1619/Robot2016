@@ -11,7 +11,7 @@ public class DriveRotateToSetAngle extends DriveRotateToAngle {
   
   @Override
   protected double getRotationTarget() {
-    return robotState.getRotateTarget();
+    return -sensorInput.getNavXHeading();
   }
   
 }
