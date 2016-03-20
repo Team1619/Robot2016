@@ -103,7 +103,6 @@ public class Constants {
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.0;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
-  public static final double ARM_POSITION_SHOOT_HIGH = -0.5;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.1855;
 
   // Utility Arm Encoder Stuff

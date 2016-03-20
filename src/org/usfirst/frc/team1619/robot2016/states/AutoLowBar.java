@@ -46,7 +46,7 @@ public class AutoLowBar extends SequencerState {
 //    add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_SHOOT_LOW, 2000));
 //    add(new ShootAlignHighGoalCommand(0));
     add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_INTAKE, 5000));
-    add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_SHOOT_HIGH, 5000));
+    add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_SHOOT_NEAR_BATTER, 5000));
     add(new ArmMoveToPositionCommand(-2.5, 5000));
   }
 

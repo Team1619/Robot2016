@@ -13,7 +13,7 @@ public class ShootAlignHighGoalCommand extends CommandGroup {
 
     firingSequence = new CommandSequence();
 
-    firingSequence.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_SHOOT_HIGH, 1000));
+    firingSequence.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_SHOOT_NEAR_BATTER, 1000));
     firingSequence.add(new ShootCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET, 2000));
 
     add(new DriveRotateToHighGoalCommand());
