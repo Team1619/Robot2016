@@ -4,14 +4,6 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
-import org.usfirst.frc.team1619.robot2016.commands.DriveRotateCommand;
-import org.usfirst.frc.team1619.robot2016.commands.DriveRotateToHighGoalCommand;
-import org.usfirst.frc.team1619.robot2016.commands.DriveTranslateCommand;
-import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
-import org.usfirst.frc.team1619.robot2016.commands.ShootCommand;
-import org.usfirst.frc.team1619.robot2016.commands.ShootManualCommand;
-import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
-import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoLowBar extends SequencerState {
