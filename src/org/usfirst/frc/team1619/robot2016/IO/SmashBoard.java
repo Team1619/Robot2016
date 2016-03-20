@@ -133,10 +133,11 @@ public class SmashBoard {
       sensorInput.getLowerHallEffect() ? 1.0 : 0.0);
 
     // DIO
-    smashBoard.putNumber("ballPresenceSensor",
-      sensorInput.getBallPresenceSensor() ? 1.0 : 0.0);
+    smashBoard.putNumber("ballPresenceSensorRear",
+      sensorInput.getBallPresenceSensorRear() ? 1.0 : 0.0);
     smashBoard.putNumber("ballPresenceEdge",
       robotState.getBallPresenceRisingEdge() ? 1.0 : 0.0);
+    smashBoard.putNumber("ballPresenceSensorFront", sensorInput.getBallPresenceSensorFront() ? 1.0 : 0.0);
   }
 
   public void setAngleError(double error) {
