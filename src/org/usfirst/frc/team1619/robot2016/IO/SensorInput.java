@@ -6,6 +6,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SPI;
 
 /**
@@ -33,14 +34,22 @@ public class SensorInput {
   private AHRS navX;
   private DigitalInput upperHallEffect;
   private DigitalInput lowerHallEffect;
-  private DigitalInput ballPresenceSensor;
+  private DigitalInput ballPresenceSensorRear;
+  private DigitalInput ballPresenceSensorFront;
+  private Relay ballDetectedRear;
+  private Relay ballDetectedFront;
+  
   private DriverStation driverStation;
 
   private SensorInput() {
     navX = new AHRS(SPI.Port.kMXP);
     upperHallEffect = new DigitalInput(Constants.ARM_UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.ARM_LOWER_HALLEFFECT_ID);
-    ballPresenceSensor = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_ID);
+    ballPresenceSensorRear = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_REAR_ID);
+    ballPresenceSensorFront = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_FRONT_ID);
+    ballDetectedRear = new Relay(Constants.BALL_DETECTED_REAR_RELAY_ID);
+    ballDetectedFront = new Relay(Constants.BALL_DETECTED_FRONT_RELAY_ID);
+    
     driverStation = DriverStation.getInstance();
   }
 
@@ -187,8 +196,19 @@ public class SensorInput {
     return !lowerHallEffect.get();
   }
 
-  public boolean getBallPresenceSensor() {
-    return !ballPresenceSensor.get();
+  public boolean getBallPresenceSensorRear() {
+    return !ballPresenceSensorRear.get();
   }
   
+  public boolean getBallPresenceSensorFront() {
+    return !ballPresenceSensorFront.get();
+  }
+  
+  public void setBallDetectedRear(boolean isOn) {
+    ballDetectedRear.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
+  }
+  
+  public void setBallDetectedFront(boolean isOn) {
+    ballDetectedFront.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
+  }
 }

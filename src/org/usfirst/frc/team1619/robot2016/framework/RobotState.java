@@ -13,8 +13,8 @@ public class RobotState {
   private int armZero;
   private boolean armZeroed;
   
-  private boolean ballPresenceRisingEdge;
-  private boolean ballPresenceLastValue;
+  private boolean ballPresenceRearRisingEdge;
+  private boolean ballPresenceRearLastValue;
 
   static {
     instance = new RobotState();
@@ -31,19 +31,23 @@ public class RobotState {
     armZero = 0;
     armZeroed = false;
     
-    ballPresenceRisingEdge = false;
-    ballPresenceLastValue = false;
+    ballPresenceRearRisingEdge = false;
+    ballPresenceRearLastValue = false;
   }
 
   public void update() {
-    boolean ballDetected = sensorInput.getBallPresenceSensor();
-    if (!ballPresenceLastValue && ballDetected) {
-      ballPresenceRisingEdge = true;
+    boolean ballDetectedRear = sensorInput.getBallPresenceSensorRear();
+    if (!ballPresenceRearLastValue && ballDetectedRear) {
+      ballPresenceRearRisingEdge = true;
     }
     else {
-      ballPresenceRisingEdge = false;
+      ballPresenceRearRisingEdge = false;
     }
-    ballPresenceLastValue = ballDetected;
+    ballPresenceRearLastValue = ballDetectedRear;
+    
+    sensorInput.setBallDetectedRear(ballDetectedRear);
+    sensorInput.setBallDetectedFront(sensorInput.getBallPresenceSensorFront());
+
   }
 
   public int getArmZero() {
@@ -60,6 +64,6 @@ public class RobotState {
   }
   
   public boolean getBallPresenceRisingEdge() {
-    return ballPresenceRisingEdge;
+    return ballPresenceRearRisingEdge;
   }
 }
