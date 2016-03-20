@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.util.PID;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 
 public class ArmPID extends PIDMinimumOutput {
 
@@ -13,6 +14,8 @@ public class ArmPID extends PIDMinimumOutput {
     sensorInput = SensorInput.getInstance();
 
     setValues(Constants.ARM_PID);
+    setIRange(Constants.ARM_PID_IRANGE);
+    setIMax(Constants.ARM_PID_IMAX);
     setDeadBand(Constants.ARM_PID_DEADZONE);
     setMinimumOutput(Constants.ARM_PID_MINIMUM);
   }
@@ -22,8 +25,8 @@ public class ArmPID extends PIDMinimumOutput {
   }
 
   public void calculate() {
-
     super.calculate(getEncoderPosition());
+    SmashBoard.getInstance().setAngleError(getError());
   }
 
   public double getError() {

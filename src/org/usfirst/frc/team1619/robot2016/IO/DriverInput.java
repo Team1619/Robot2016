@@ -62,6 +62,9 @@ public class DriverInput {
   }
 
   public double getDriverY() {
+    if(getDriverButton(Constants.DRIVER_BUTTON_DRIVE_INVERT)) {
+      return -driverStick.getY();
+    }
     return driverStick.getY();
   }
 

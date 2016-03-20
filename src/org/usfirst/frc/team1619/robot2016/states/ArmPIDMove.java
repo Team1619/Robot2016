@@ -58,7 +58,7 @@ public class ArmPIDMove extends State {
         armPID.setTarget(Constants.ARM_POSITION_DEFAULT);
         break;
       case SHOOT:
-        armPID.setTarget(Constants.ARM_POSITION_SHOOT_HIGH);
+        armPID.setTarget(Constants.ARM_POSITION_SHOOT_NEAR_BATTER);
         break;
       default:
         break;

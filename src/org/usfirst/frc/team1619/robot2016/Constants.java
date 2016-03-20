@@ -14,6 +14,7 @@ public class Constants {
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 4;
+  public static final int DRIVER_BUTTON_DRIVE_INVERT = 8;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_SHOOT = 1;
@@ -41,24 +42,26 @@ public class Constants {
   public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 0.85;
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
-  public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.8;
+  public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
-  public static final double AUTO_ARM_TOLERANCE = 0.25;
+  public static final double AUTO_ARM_TOLERANCE = 0.05;
 
   // Drive Train
   public static final double DRIVE_HOLD_HEADING_START_TOLERANCE = 0.5;
   public static final PIDValues DRIVE_PID_ROTATION =
-    new PIDValues(0.08, 0.015, 0.25);
+    new PIDValues(0.08, 0.01, 0.20);
   public static final double DRIVE_PID_ROTATION_IRANGE = 5;
   public static final double DRIVE_PID_ROTATION_IMAX =
     0.60 / DRIVE_PID_ROTATION.i;
-  public static final double DRIVE_PID_ROTATION_DEADZONE = 0.5;
-  public static final double DRIVE_PID_ROTATION_MINIMUM = 0.5;
+  public static final double DRIVE_PID_ROTATION_DEADZONE = 0.0;
+  public static final double DRIVE_PID_ROTATION_MINIMUM = 0.75;
 
   public static final PIDValues DRIVE_PID_TRANSLATION =
-    new PIDValues(0.035, 0.00, 0.03);
+    new PIDValues(0.03, 0.005, 0.02);
   public static final double DRIVE_PID_TRANSLATION_IRANGE = 5;
-  public static final double DRIVE_PID_TRANSLATION_DEADZONE = 1;
+  public static final double DRIVE_PID_TRANSLATION_IMAX = 
+    0.35 / DRIVE_PID_TRANSLATION.i;
+  public static final double DRIVE_PID_TRANSLATION_DEADZONE = 0.01;
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
 
   // Intake
@@ -69,7 +72,7 @@ public class Constants {
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 27500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 24000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
 
   //Scaler
@@ -84,22 +87,24 @@ public class Constants {
   public static final double ARM_TOP_THROTTLE_POSITION = -0.5;
   public static final double ARM_THROTTLE_SPEED = 0.5;
 
-  public static final PIDValues ARM_PID = new PIDValues(2, 0.0, 0.1);
-  public static final double ARM_PID_IRANGE = 0.1;
-  public static final double ARM_PID_IMAX = 0.2 / ARM_PID.i;
+  public static final PIDValues ARM_PID = 
+      new PIDValues(0.4, 0.1, 0.0);
+  public static final double ARM_PID_IRANGE = 0.0;
+  public static final double ARM_PID_IMAX = 0.3 / ARM_PID.i;
   public static final double ARM_PID_DEADZONE = 0.05;
   public static final double ARM_PID_MINIMUM = 0.1;
   public static final int ARM_AUTO_DEADTIME = 500;
 
-  public static final double ARM_ZERO_SPEED = 0;
+  public static final double ARM_ZERO_SPEED = 0.75;
 
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;
   public static final int ARM_LOWER_HALLEFFECT_ID = 1;
 
-  public static final double ARM_POSITION_DEFAULT = -4.0;
+  public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.0;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
   public static final double ARM_POSITION_SHOOT_HIGH = -0.5;
+  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.1855;
 
   // Utility Arm Encoder Stuff
   public static final double ARM_LENGTH = 5.08725;

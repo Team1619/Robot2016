@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.util.PID;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
 
 public class DriveTranslationPID extends PIDMinimumOutput {
   SensorInput sensorInput;
@@ -12,6 +13,7 @@ public class DriveTranslationPID extends PIDMinimumOutput {
 
     setValues(Constants.DRIVE_PID_TRANSLATION);
     setIRange(Constants.DRIVE_PID_TRANSLATION_IRANGE);
+    setIMax(Constants.DRIVE_PID_TRANSLATION_IMAX);
     setDeadBand(Constants.DRIVE_PID_TRANSLATION_DEADZONE);
     setMinimumOutput(Constants.DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT);
   }
@@ -23,6 +25,7 @@ public class DriveTranslationPID extends PIDMinimumOutput {
 
   public void calculate() {
     super.calculate(getEncoderPosition());
+//    SmashBoard.getInstance().setAngleError(getError());
   }
 
   public double getError() {
@@ -31,5 +34,17 @@ public class DriveTranslationPID extends PIDMinimumOutput {
 
   public void setTarget(double target) {
     super.setTarget(target + getEncoderPosition());
+  }
+
+  @Override
+  public double iCalc(double error) {
+    double iCalc = super.iCalc(error);
+    if (Math.abs(error) < deadBand || Math.signum(iCalc) != Math.signum(error)) {
+      resetIntegral();
+      return 0;
+    }
+    else {
+      return iCalc;
+    }
   }
 }

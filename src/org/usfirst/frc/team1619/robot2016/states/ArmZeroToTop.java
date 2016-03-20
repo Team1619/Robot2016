@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
 import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 
@@ -15,6 +16,8 @@ public class ArmZeroToTop extends State {
     subsystems = new SubsystemID[] {SubsystemID.UTILITY_ARM};
   }
 
+  ArmZeroCommand zeroCommand;
+
   public ArmZeroToTop() {
     super(subsystems);
 
@@ -23,32 +26,30 @@ public class ArmZeroToTop extends State {
 
   @Override
   protected void initialize() {
+    zeroCommand = new ArmZeroCommand();
+
+    zeroCommand.initializeCommand();
   }
 
   @Override
   protected void update() {
-    robotOutput.setDartMotorNonZeroed(0.75);
-
-    if (sensorInput.getUpperHallEffect()) {
-      setFinished();
-    }
+    zeroCommand.updateCommand();
   }
 
   @Override
   protected void destruct() {
-    robotOutput.setDartMotorNonZeroed(0.0);
+    zeroCommand.destruct();
   }
 
   @Override
   protected void pause() {
-    robotOutput.setDartMotorNonZeroed(0.0);
+    zeroCommand.pause();
   }
 
   @Override
   public boolean isReadyForActive() {
     return (!robotState.getArmZeroed()
-      || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ZERO_DART))
-      || !getFinished();
+      || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ZERO_DART));
   }
 
 }
