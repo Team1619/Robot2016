@@ -23,20 +23,18 @@ public class Constants {
   // Manual intake out while in operator shoot
   public static final int OPERATOR_BUTTON_INTAKE = 2;
   // Spool shooter motor in, intake in
-  public static final int OPERATOR_BUTTON_ARM_POSITION_LOCK = 3;
-  // While pressed, set arm to presets based on joystick pos
   public static final int OPERATOR_BUTTON_ZERO_DART = 4;
   // Zero dart to the top
-  public static final int OPERATOR_BUTTON_ARM_INTAKE = 7;
-  public static final int OPERATOR_BUTTON_ARM_NEUTRAL = 6;
   public static final int OPERATOR_BUTTON_ARM_SHOOT = 5;
+  public static final int OPERATOR_BUTTON_ARM_NEUTRAL = 6;
+  public static final int OPERATOR_BUTTON_ARM_INTAKE = 7;
   public static final int OPERATOR_BUTTON_SCALER_TIMER_OVERIDE = 11;
   public static final int OPERATOR_BUTTON_MANUAL_SHOOTER_OUT = 13;
   public static final int OPERATOR_BUTTON_MANUAL_SHOOTER_IN = 14;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_OUT = 12;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_IN = 15;
-  public static final int OPERATOR_BUTTON_MANUAL_SCALER_EXTEND = 10;
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_RETRACT = 9;
+  public static final int OPERATOR_BUTTON_MANUAL_SCALER_EXTEND = 10;
 
   // Autonomous
   public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 200;
@@ -47,19 +45,17 @@ public class Constants {
   public static final double AUTO_ARM_TOLERANCE = 0.05;
 
   // Drive Train
-  public static final double DRIVE_HOLD_HEADING_START_TOLERANCE = 0.5;
   public static final PIDValues DRIVE_PID_ROTATION =
     new PIDValues(0.08, 0.01, 0.20);
   public static final double DRIVE_PID_ROTATION_IRANGE = 5;
   public static final double DRIVE_PID_ROTATION_IMAX =
     0.60 / DRIVE_PID_ROTATION.i;
   public static final double DRIVE_PID_ROTATION_DEADZONE = 0.0;
-  public static final double DRIVE_PID_ROTATION_MINIMUM = 0.75;
 
   public static final PIDValues DRIVE_PID_TRANSLATION =
     new PIDValues(0.03, 0.005, 0.02);
   public static final double DRIVE_PID_TRANSLATION_IRANGE = 5;
-  public static final double DRIVE_PID_TRANSLATION_IMAX = 
+  public static final double DRIVE_PID_TRANSLATION_IMAX =
     0.35 / DRIVE_PID_TRANSLATION.i;
   public static final double DRIVE_PID_TRANSLATION_DEADZONE = 0.01;
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
@@ -75,20 +71,18 @@ public class Constants {
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 26000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
 
-  //Scaler
+  // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
   public static final double SCALER_RETRACT_SPEED = -1.0;
   public static final double SCALER_MANUAL_TIMER_START = 25;
 
   // Utility Arm
   public static final double ARM_MAX_SPEED = 0.75;
-
   public static final double ARM_BOTTOM_THROTTLE_POSITION = -5.0;
   public static final double ARM_TOP_THROTTLE_POSITION = -0.5;
   public static final double ARM_THROTTLE_SPEED = 0.5;
 
-  public static final PIDValues ARM_PID = 
-      new PIDValues(0.4, 0.1, 0.0);
+  public static final PIDValues ARM_PID = new PIDValues(0.4, 0.1, 0.0);
   public static final double ARM_PID_IRANGE = 0.0;
   public static final double ARM_PID_IMAX = 0.3 / ARM_PID.i;
   public static final double ARM_PID_DEADZONE = 0.05;
@@ -97,13 +91,14 @@ public class Constants {
 
   public static final double ARM_ZERO_SPEED = 0.75;
 
-  public static final int ARM_UPPER_HALLEFFECT_ID = 0;
-  public static final int ARM_LOWER_HALLEFFECT_ID = 1;
-
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.0;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.1855;
+
+  // Arm Hall Effects
+  public static final int ARM_UPPER_HALLEFFECT_ID = 0;
+  public static final int ARM_LOWER_HALLEFFECT_ID = 1;
 
   // Utility Arm Encoder Stuff
   public static final double ARM_LENGTH = 5.08725;
@@ -129,12 +124,12 @@ public class Constants {
 
   // Digital IO
   public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;  
-  
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
+
   // Relays
   public static final int BALL_DETECTED_REAR_RELAY_ID = 1;
   public static final int BALL_DETECTED_FRONT_RELAY_ID = 0;
-  
+
   // Encoders
   public static final double DRIVE_ENC_TICKS_PER_INCH = 161.6;
   public static final double DART_ENC_TICKS_PER_INCH = 1024.0;

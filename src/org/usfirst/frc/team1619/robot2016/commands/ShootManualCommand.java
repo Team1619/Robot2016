@@ -5,6 +5,13 @@ import org.usfirst.frc.team1619.robot2016.framework.Command;
 public class ShootManualCommand extends Command {
   double speed;
 
+  /**
+   * Use this command with 0 timeout in order to get a passive shooter motor
+   * command.
+   * 
+   * @param speed
+   * @param timeOut
+   */
   public ShootManualCommand(double speed, int timeOut) {
     super(timeOut);
     this.speed = speed;
@@ -21,8 +28,6 @@ public class ShootManualCommand extends Command {
 
   @Override
   public void pause() {
-    // TODO Auto-generated method stub
-
   }
 
   @Override

@@ -7,7 +7,6 @@ import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
-import org.usfirst.frc.team1619.robot2016.states.ArmManualOveride;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
 import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
@@ -58,6 +57,7 @@ public class Robot extends IterativeRobot {
   }
 
   public void disabledPeriodic() {
+    robotState.update();
     smashBoard.update();
   }
 
