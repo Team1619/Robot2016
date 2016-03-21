@@ -42,7 +42,7 @@ public class ArmPIDMove extends State {
     }
 
     if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_NEUTRAL)
-      || robotState.getBallPresenceRisingEdge()) {
+      || (robotState.getBallPresenceRisingEdge() && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT)) {
       armPos = ArmPosition.NEUTRAL;
     }
 
@@ -91,7 +91,7 @@ public class ArmPIDMove extends State {
     return driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_INTAKE)
       || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_NEUTRAL)
       || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_SHOOT)
-      || robotState.getBallPresenceRisingEdge();
+      || (robotState.getBallPresenceRisingEdge() && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT);
   }
 
   public static ArmPosition getArmPosition() {

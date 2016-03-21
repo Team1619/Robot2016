@@ -4,7 +4,6 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove.ArmPosition;
-import org.usfirst.frc.team1619.robot2016.util.PID.ArmPID;
 
 public class MultiIntake extends State {
 

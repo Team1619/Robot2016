@@ -2,9 +2,6 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.commands.MultiFinishShot;
-import org.usfirst.frc.team1619.robot2016.commands.MultiPrepareForShot;
 import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 

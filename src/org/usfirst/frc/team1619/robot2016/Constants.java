@@ -72,7 +72,7 @@ public class Constants {
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 24000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 26000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
 
   //Scaler

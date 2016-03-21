@@ -2,7 +2,6 @@ package org.usfirst.frc.team1619.robot2016.IO;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.RobotState;
-import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;

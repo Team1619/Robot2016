@@ -2,7 +2,6 @@ package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.Command;
-import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
 
 public class ShootCommand extends Command {
