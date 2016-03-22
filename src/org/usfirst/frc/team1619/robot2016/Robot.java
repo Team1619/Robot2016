@@ -16,6 +16,7 @@ import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToSetAngle;
 import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
+import org.usfirst.frc.team1619.robot2016.states.MultiScale;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
@@ -87,6 +88,7 @@ public class Robot extends IterativeRobot {
     MultiIntake multiIntake = new MultiIntake();
     MultiShootAlign multiShootAlign = new MultiShootAlign();
     MultiShootManual multiShootManual = new MultiShootManual();
+    MultiScale multiScale = new MultiScale();
 
     driveTrain.addState(multiShootAlign);
     driveTrain.addState(new DriveManualHoldHeading());
@@ -95,6 +97,7 @@ public class Robot extends IterativeRobot {
     driveTrain.addState(new DriveManual());
  
 //    utilityArm.addState(new ArmManualOveride());
+    utilityArm.addState(multiScale);
     utilityArm.addState(multiShootAlign);
     utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(new ArmPIDMove());
@@ -110,6 +113,7 @@ public class Robot extends IterativeRobot {
     intake.addState(multiShootAlign);
     intake.addState(multiIntake);
 
+    scaler.addState(multiScale);
     scaler.addState(new ScalerManual());
   }
 

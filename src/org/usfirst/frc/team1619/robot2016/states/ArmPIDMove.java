@@ -75,11 +75,14 @@ public class ArmPIDMove extends State {
 
   @Override
   protected void pause() {
+    robotOutput.setDartMotor(0);
+    setFinished();
   }
 
   @Override
   protected void destruct() {
     armPos = ArmPosition.NEUTRAL;
+    setFinished();
   }
 
   @Override
