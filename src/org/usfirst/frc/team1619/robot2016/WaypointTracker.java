@@ -20,14 +20,14 @@ public class WaypointTracker {
     return instance;
   }
 
-  protected SensorInput sensorInput;
-  protected SmashBoard smashBoard;
+  private SensorInput sensorInput;
+  private SmashBoard smashBoard;
 
-  protected double positionX;
-  protected double positionY;
-  protected double previousTranslation;
-  protected double previousAngle;
-  protected double centerAngle;
+  private double positionX;
+  private double positionY;
+  private double previousTranslation;
+  private double previousAngle;
+  private double centerAngle;
 
   WaypointTracker() {
     positionX = 0;
@@ -87,18 +87,18 @@ public class WaypointTracker {
     return positionY;
   }
 
-  protected void updatePosition() {
+  private void updatePosition() {
     positionX +=
       Math.cos(Math.toRadians(getAngleChange())) * getTranslationChange();
     positionY +=
       Math.sin(Math.toRadians(getAngleChange())) * getTranslationChange();
   }
 
-  protected double getAngleChange() {
+  private double getAngleChange() {
     return sensorInput.getCenteredNavXHeading(centerAngle) - previousAngle;
   }
 
-  protected double getTranslationChange() {
+  private double getTranslationChange() {
     return sensorInput.getDriveTranslation() - previousTranslation;
   }
 }
