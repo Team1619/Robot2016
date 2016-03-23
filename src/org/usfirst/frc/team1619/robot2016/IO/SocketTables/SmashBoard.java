@@ -16,9 +16,6 @@ public class SmashBoard {
 
   public SmashBoard() {
     socketServer = new SocketServer();
-  }
-
-  public void initialize() {
     socketServer.startServer();
   }
 

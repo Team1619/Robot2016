@@ -70,7 +70,7 @@ public class Constants {
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 26000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 27000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
 
   // Scaler
@@ -154,30 +154,31 @@ public class Constants {
   // Target and Robot Positions after crossing defenses
   public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 100;
   public static final double LEFT_GOAL_TARGET_X =
-    151 - Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+      149.36 - Math.sin(60.0 * (Math.PI / 180.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double LEFT_GOAL_TARGET_Y =
-    10.39 + Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+      179.0 - Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int LEFT_GOAL_OFFSET_ANGLE = 60;
-  public static final double MIDDLE_GOAL_TARGET_X = 169;
+  public static final double MIDDLE_GOAL_TARGET_X = 171.86;
   public static final double MIDDLE_GOAL_TARGET_Y =
-    20.78 + AUTO_SHOT_DISTANCE_FROM_GOAL;
+      166.1 - AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int MIDDLE_GOAL_OFFSET_ANGLE = 0;
   public static final double RIGHT_GOAL_TARGET_X =
-    187 + Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+      194.36 + Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double RIGHT_GOAL_TARGET_Y =
-    10.39 + Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+      179.0 - Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int RIGHT_GOAL_OFFSET_ANGLE = -60;
 
+
   public static final double DEFENSE_1_X = 53.4 * 0 + 25.7;
-  public static final double DEFENSE_1_Y = 16 * 12;
+  public static final double DEFENSE_1_Y = 0;
   public static final double DEFENSE_2_X = 53.4 * 1 + 25.7;
-  public static final double DEFENSE_2_Y = 16 * 12;
+  public static final double DEFENSE_2_Y = 0;
   public static final double DEFENSE_3_X = 53.4 * 2 + 25.7;
-  public static final double DEFENSE_3_Y = 16 * 12;
+  public static final double DEFENSE_3_Y = 0;
   public static final double DEFENSE_4_X = 53.4 * 3 + 25.7;
-  public static final double DEFENSE_4_Y = 16 * 12;
+  public static final double DEFENSE_4_Y = 0;
   public static final double DEFENSE_5_X = 53.4 * 4 + 25.7;
-  public static final double DEFENSE_5_Y = 16 * 12;
+  public static final double DEFENSE_5_Y = 0;
 
   public static final int SMASH_BOARD_PORT = 1619;
 }

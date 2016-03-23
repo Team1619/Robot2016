@@ -66,7 +66,9 @@ public class CommandSequence extends Command {
 
   @Override
   public void pause() {
-    currentCommand.pause();
+    if (currentCommand != null) {
+      currentCommand.pause();
+    }
     
     for (Command passiveCommand : passiveCommands) {
       passiveCommand.pause();
