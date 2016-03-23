@@ -178,4 +178,6 @@ public class Constants {
   public static final double DEFENSE_4_Y = 16 * 12;
   public static final double DEFENSE_5_X = 53.4 * 4 + 25.7;
   public static final double DEFENSE_5_Y = 16 * 12;
+
+  public static final int SMASH_BOARD_PORT = 1619;
 }

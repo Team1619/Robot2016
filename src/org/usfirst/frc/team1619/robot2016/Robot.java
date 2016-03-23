@@ -2,7 +2,7 @@ package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
     scaler = new Subsystem(SubsystemID.SCALER);
 
     smashBoard = SmashBoard.getInstance();
+    smashBoard.initialize();
   }
 
   public void disabledInit() {
