@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 public class Robot extends IterativeRobot {
 
   private RobotState robotState;
+  private WaypointTracker waypointTracker;
 
   private Subsystem driveTrain;
   private Subsystem utilityArm;
@@ -41,6 +42,7 @@ public class Robot extends IterativeRobot {
     SensorInput.getInstance().initialize();
 
     robotState = RobotState.getInstance();
+    waypointTracker = WaypointTracker.getInstance();
 
     driveTrain = new Subsystem(SubsystemID.DRIVE_TRAIN);
     utilityArm = new Subsystem(SubsystemID.UTILITY_ARM);
@@ -83,6 +85,8 @@ public class Robot extends IterativeRobot {
 
   public void teleopInit() {
     robotState.initialze();
+    waypointTracker.initialize();
+
     Subsystem.resetAll();
     State.resetAll();
 
@@ -143,6 +147,8 @@ public class Robot extends IterativeRobot {
 
   public void teleopPeriodic() {
     robotState.update();
+    waypointTracker.update();
+
     Subsystem.updateAll();
     State.updateAll();
     smashBoard.update();
