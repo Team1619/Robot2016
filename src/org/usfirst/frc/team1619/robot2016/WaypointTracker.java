@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016;
 
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 
 public class WaypointTracker {
   private static WaypointTracker instance;
@@ -20,6 +21,7 @@ public class WaypointTracker {
   }
 
   protected SensorInput sensorInput;
+  protected SmashBoard smashBoard;
 
   protected double positionX;
   protected double positionY;
@@ -44,6 +46,8 @@ public class WaypointTracker {
 
   public void update() {
     updatePosition();
+    smashBoard.setWaypointPosition(positionX, positionY);
+    smashBoard.setWaypointOffsets(getAngleToTarget(0, 0), getDistanceToTarget(0, 0));
 
     // More processing expensive, but I'm lazy and it makes sense.
     previousTranslation += getTranslationChange();

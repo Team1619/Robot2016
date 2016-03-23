@@ -47,6 +47,16 @@ public class SmashBoard {
     socketServer.setDouble("angleError", error);
   }
 
+  public void setWaypointPosition(double x, double y) {
+    socketServer.setDouble("waypointX", x);
+    socketServer.setDouble("waypointY", y);
+  }
+
+  public void setWaypointOffsets(double angle, double distance) {
+    socketServer.setDouble("waypointAngle", angle);
+    socketServer.setDouble("waypointDistance", distance);
+  }
+
   public double getRotationOffsetToAligned() {
     return socketServer.getDouble("angleOffsetToAligned", 0.0);
   }
@@ -74,5 +84,4 @@ public class SmashBoard {
 //  public static void main(String[] args) {
 //    SmashBoard smashBoard = new SmashBoard(5000);
 //  }
-  
 }
