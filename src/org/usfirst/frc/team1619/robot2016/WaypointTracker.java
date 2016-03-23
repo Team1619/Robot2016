@@ -46,6 +46,7 @@ public class WaypointTracker {
 
   public void update() {
     updatePosition();
+
     smashBoard.setWaypointPosition(positionX, positionY);
     smashBoard.setWaypointOffsets(getAngleToTarget(0, 0), getDistanceToTarget(0, 0));
 
@@ -86,18 +87,18 @@ public class WaypointTracker {
     return positionY;
   }
 
-  private void updatePosition() {
+  protected void updatePosition() {
     positionX +=
       Math.cos(Math.toRadians(getAngleChange())) * getTranslationChange();
     positionY +=
       Math.sin(Math.toRadians(getAngleChange())) * getTranslationChange();
   }
 
-  private double getAngleChange() {
+  protected double getAngleChange() {
     return sensorInput.getCenteredNavXHeading(centerAngle) - previousAngle;
   }
 
-  private double getTranslationChange() {
+  protected double getTranslationChange() {
     return sensorInput.getDriveTranslation() - previousTranslation;
   }
 }
