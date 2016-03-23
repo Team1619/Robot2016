@@ -32,7 +32,7 @@ public class AutoRoughTerrain extends SequencerState {
     double translateTolerance = 2.0;
 
     
-    add(DriveFromDefenseToHighGoalGenerator.DEFENSE_1.getDriveToTargetGoalSequence(HighGoalTargetPosition.LEFT, 0));
+//    add(DriveFromDefenseToHighGoalGenerator.DEFENSE_1.getDriveToTargetGoalSequence(HighGoalTargetPosition.LEFT, 0));
     
 //    add(new ArmZeroCommand());
 //    add(new ArmMoveToPositionCommand(armLowbarCrossPosition, 2000));

@@ -38,6 +38,7 @@ public class CommandGroup extends Command {
       command.updateCommand();
 
       if (command.getFinished()) {
+        command.destruct();
         commandsIterator.remove();
       }
     }

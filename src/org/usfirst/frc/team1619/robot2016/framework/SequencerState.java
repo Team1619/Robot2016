@@ -52,7 +52,9 @@ public abstract class SequencerState extends State {
 
   @Override
   protected void pause() {
-    currentCommand.pause();
+    if (currentCommand != null) {
+      currentCommand.pause();
+    }
   }
 
   @Override

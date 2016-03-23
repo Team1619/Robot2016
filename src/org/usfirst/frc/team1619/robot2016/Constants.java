@@ -33,7 +33,9 @@ public class Constants {
   public static final int OPERATOR_BUTTON_MANUAL_SHOOTER_IN = 14;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_OUT = 12;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_IN = 15;
-  public static final int OPERATOR_BUTTON_MANUAL_SCALER_RETRACT = 9;
+  // This should not be used right now.
+  public static final int OPERATOR_BUTTON_MANUAL_SCALER_RETRACT = 16;
+  public static final int OPERATOR_BUTTON_SCALER_SCALE = 9;
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_EXTEND = 10;
 
   // Autonomous
@@ -42,7 +44,7 @@ public class Constants {
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
-  public static final double AUTO_ARM_TOLERANCE = 0.05;
+  public static final double AUTO_ARM_TOLERANCE = 0.15;
 
   // Drive Train
   public static final PIDValues DRIVE_PID_ROTATION =
@@ -68,19 +70,24 @@ public class Constants {
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 26000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 27000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
   public static final double SCALER_RETRACT_SPEED = -1.0;
   public static final double SCALER_MANUAL_TIMER_START = 25;
+  public static final double SCALER_SCALE_SPEED = -0.5;
+  public static final int SCALER_SCALE_TIME = 200;
 
   // Utility Arm
   public static final double ARM_MAX_SPEED = 0.75;
   public static final double ARM_BOTTOM_THROTTLE_POSITION = -5.0;
   public static final double ARM_TOP_THROTTLE_POSITION = -0.5;
   public static final double ARM_THROTTLE_SPEED = 0.5;
+
+  public static final double ARM_SCALE_SPEED = -0.5;
+  public static final int ARM_SCALE_TIME = 500;
 
   public static final PIDValues ARM_PID = new PIDValues(0.4, 0.1, 0.0);
   public static final double ARM_PID_IRANGE = 0.0;
@@ -131,7 +138,7 @@ public class Constants {
   public static final int BALL_DETECTED_FRONT_RELAY_ID = 0;
 
   // Encoders
-  public static final double DRIVE_ENC_TICKS_PER_INCH = 161.6 / 2;
+  public static final double DRIVE_ENC_TICKS_PER_INCH = 83.07625;
   public static final double DART_ENC_TICKS_PER_INCH = 1024.0;
 
   // Properties/configurations
@@ -172,4 +179,6 @@ public class Constants {
   public static final double DEFENSE_4_Y = 0;
   public static final double DEFENSE_5_X = 53.4 * 4 + 25.7;
   public static final double DEFENSE_5_Y = 0;
+
+  public static final int SMASH_BOARD_PORT = 1619;
 }

@@ -9,7 +9,7 @@ import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 
 public abstract class State {
 

@@ -33,7 +33,7 @@ public enum DriveFromDefenseToHighGoalGenerator {
   }
 
   public CommandSequence getDriveToTargetGoalSequence(
-    HighGoalTargetPosition targetPosition, int yPositionOffset) {
+    HighGoalTargetPosition targetPosition, int yPositionOffset, double initialAngle) {
     double relativeYPosition =
       targetPosition.getTargetYCoordinate() - (yCoordinate + yPositionOffset);
     double relativeXPosition =
@@ -50,7 +50,7 @@ public enum DriveFromDefenseToHighGoalGenerator {
 
     CommandSequence driveSequence = new CommandSequence();
 
-    driveSequence.add(new DriveRotateCommand(angle, 1.0, 2000));
+    driveSequence.add(new DriveRotateCommand(angle - (sensorInput.getNavXHeading() - initialAngle), 1.0, 2000));
     driveSequence
       .add(new DriveTranslateCommand(straightDistance, 0.75, 5.0, 2000));
     driveSequence.add(new DriveRotateCommand(

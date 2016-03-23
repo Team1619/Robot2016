@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 
 public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
 
