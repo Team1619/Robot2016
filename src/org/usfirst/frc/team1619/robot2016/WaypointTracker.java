@@ -20,14 +20,14 @@ public class WaypointTracker {
     return instance;
   }
 
-  private SensorInput sensorInput;
-  private SmashBoard smashBoard;
+  protected SensorInput sensorInput;
+  protected SmashBoard smashBoard;
 
-  private double positionX;
-  private double positionY;
-  private double previousTranslation;
-  private double previousAngle;
-  private double centerAngle;
+  protected double positionX;
+  protected double positionY;
+  protected double previousTranslation;
+  protected double previousAngle;
+  protected double centerAngle;
 
   WaypointTracker() {
     positionX = 0;
