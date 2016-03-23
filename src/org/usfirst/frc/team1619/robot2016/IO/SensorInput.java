@@ -110,6 +110,10 @@ public class SensorInput {
     robotOutput.setDriveRightPos(position);
   }
 
+  public double getDriveTranslation() {
+    return (getDriveLeftEncoderPosition() + getDriveRightEncoderPosition()) / 2;
+  }
+
   /**
    * Gets the dart position.
    * 
@@ -151,6 +155,18 @@ public class SensorInput {
     return ((navX.getFusedHeading() + 180) % 360) - 180;
   }
 
+  /**
+   * Given a value to center around, return a NavX heading from -180 to 180.
+   * Useful for getting the error from a angle target.
+   * @param value 
+   *    Value to center the angle around
+   * @return
+   *    Angle from -180 to 180
+   */
+  public double getCenteredNavXHeading(double value) {
+    return ((getNavXHeading() + 540 - value) % 360) - 180;
+  }
+
   public double getNavXRotationSpeed() {
     return navX.getRate();
   }
@@ -169,13 +185,6 @@ public class SensorInput {
 
   public float getNavXAccelY() {
     return navX.getRawAccelY();
-  }
-
-  /**
-   * Set the current NavX heading to 0
-   */
-  public void resetNavXHeading() {
-    navX.reset();
   }
 
   /**
