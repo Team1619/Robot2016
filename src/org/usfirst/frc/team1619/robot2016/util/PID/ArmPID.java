@@ -2,7 +2,7 @@ package org.usfirst.frc.team1619.robot2016.util.PID;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
-import org.usfirst.frc.team1619.robot2016.IO.SmashBoard;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 
 public class ArmPID extends PIDMinimumOutput {
 
