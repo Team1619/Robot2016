@@ -72,7 +72,7 @@ public class Constants {
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 27000;
-  public static final double SHOOTER_SPOOL_UP_SPEED = 0.5;
+  public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -104,6 +104,7 @@ public class Constants {
   public static final double ARM_POSITION_LOW_BAR = -5.5;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.4;
+  public static final double ARM_POSITION_VISION = 0.0;
 
   // Arm Hall Effects
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;
@@ -183,5 +184,5 @@ public class Constants {
   public static final double DEFENSE_5_X = 53.4 * 4 + 25.7;
   public static final double DEFENSE_5_Y = 0;
 
-  public static final int SMASH_BOARD_PORT = 1619;
+  public static final int SMASH_BOARD_PORT = 5801;
 }
