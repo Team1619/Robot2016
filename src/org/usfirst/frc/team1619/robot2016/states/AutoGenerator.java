@@ -1,12 +1,16 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.CrossLowBarCommand;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFriseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
 import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
+import org.usfirst.frc.team1619.robot2016.commands.ShootManualCommand;
+import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoGenerator extends SequencerState {
@@ -36,7 +40,7 @@ public class AutoGenerator extends SequencerState {
 
     switch (defense) {
       case 1: // Low bar
-        distanceOffsetFromOuterWorks = 20;
+        distanceOffsetFromOuterWorks = 10;
         add(new CrossLowBarCommand());
         break;
       case 2: // Chevalle de Frise
@@ -48,7 +52,7 @@ public class AutoGenerator extends SequencerState {
         break;
       default:
         add(new CrossLowBarCommand());
-        distanceOffsetFromOuterWorks = 20;
+        distanceOffsetFromOuterWorks = 10;
         break;
     }
 
@@ -92,9 +96,14 @@ public class AutoGenerator extends SequencerState {
         break;
     }
 
+    CommandSequence armToVisionAndSpool = new CommandSequence();
+    armToVisionAndSpool.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 1500));
+    armToVisionAndSpool.addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
+    
     add(driveFromDefenseToHighGoalGenerator.getDriveToTargetGoalSequence(
       highGoalTargetPosition, distanceOffsetFromOuterWorks,
       initialAngle));
+    add(armToVisionAndSpool);
     add(new ShootAlignHighGoalCommand(5000));
   }
 

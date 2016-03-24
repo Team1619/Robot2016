@@ -45,7 +45,7 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
   
-  public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 140.0;
+  public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 125.0;
 
   // Drive Train
   public static final PIDValues DRIVE_PID_ROTATION =
@@ -101,7 +101,7 @@ public class Constants {
 
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.6;
-  public static final double ARM_POSITION_LOW_BAR = -5.5;
+  public static final double ARM_POSITION_LOW_BAR = -5.0;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.4;
   public static final double ARM_POSITION_VISION = 0.0;
@@ -133,12 +133,12 @@ public class Constants {
   public static final int SCALER_MOTOR_ID = 8;
 
   // Digital IO
-  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 2;
 
   // Relays
-  public static final int RELAY_BALL_DETECTED_REAR_ID = 1;
-  public static final int RELAY_BALL_DETECTED_FRONT_ID = 0;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 0;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 1;
   public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders
@@ -156,20 +156,20 @@ public class Constants {
   public static final String LOGGER_LOG_FOLDER_PATH = "/home/lvuser/log/";
 
   // Target and Robot Positions after crossing defenses
-  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 100;
+  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 30;
   public static final double LEFT_GOAL_TARGET_X =
-    149.36 - Math.sin(60.0 * (Math.PI / 180.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    149.36 - Math.sin(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double LEFT_GOAL_TARGET_Y =
-    179.0 - Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    179.0 - Math.cos(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int LEFT_GOAL_OFFSET_ANGLE = 60;
   public static final double MIDDLE_GOAL_TARGET_X = 171.86;
   public static final double MIDDLE_GOAL_TARGET_Y =
     166.1 - AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int MIDDLE_GOAL_OFFSET_ANGLE = 0;
   public static final double RIGHT_GOAL_TARGET_X =
-    194.36 + Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    194.36 + Math.sin(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double RIGHT_GOAL_TARGET_Y =
-    179.0 - Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    179.0 - Math.cos(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int RIGHT_GOAL_OFFSET_ANGLE = -60;
   public static final double AUTO_CAMERA_BIAS_OFFSET = -2.5;
 
