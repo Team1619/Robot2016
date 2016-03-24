@@ -5,6 +5,7 @@ import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFrise;
 import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
+import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoGenerator extends SequencerState {
@@ -91,6 +92,7 @@ public class AutoGenerator extends SequencerState {
     add(driveFromDefenseToHighGoalGenerator.getDriveToTargetGoalSequence(
       highGoalTargetPosition, distanceOffsetFromOuterWorks,
       sensorInput.getNavXHeading()));
+    add(new ShootAlignHighGoalCommand(5000));
   }
 
   @Override

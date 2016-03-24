@@ -51,4 +51,8 @@ public class SmashBoard {
     return (int)socketServer.getLong("autoTargetGoal", 1);
   }
   
+  public static void main(String[] args) {
+    SmashBoard smashBoard = new SmashBoard(5000);
+  }
+  
 }
