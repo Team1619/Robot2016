@@ -9,8 +9,7 @@ import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
-import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
-import org.usfirst.frc.team1619.robot2016.states.AutoRoughTerrain;
+import org.usfirst.frc.team1619.robot2016.states.AutoGenerator;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
@@ -67,9 +66,8 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    //AutoLowBar autoShootSequence = new AutoLowBar();
-    AutoLowBar autoSequence = new AutoLowBar();
-    
+    AutoGenerator autoSequence = new AutoGenerator();
+
     driveTrain.addState(autoSequence);
     shooter.addState(autoSequence);
     intake.addState(autoSequence);
@@ -97,8 +95,8 @@ public class Robot extends IterativeRobot {
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
     driveTrain.addState(new DriveManual());
- 
-//    utilityArm.addState(new ArmManualOveride());
+
+    // utilityArm.addState(new ArmManualOveride());
     utilityArm.addState(multiScale);
     utilityArm.addState(multiShootAlign);
     utilityArm.addState(new ArmZeroToTop());

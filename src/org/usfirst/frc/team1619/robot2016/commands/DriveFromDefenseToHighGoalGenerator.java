@@ -5,11 +5,11 @@ import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public enum DriveFromDefenseToHighGoalGenerator {
-    DEFENSE_1(Constants.DEFENSE_1_X, Constants.DEFENSE_1_Y),
-    DEFENSE_2(Constants.DEFENSE_2_X, Constants.DEFENSE_2_Y),
-    DEFENSE_3(Constants.DEFENSE_3_X, Constants.DEFENSE_3_Y),
-    DEFENSE_4(Constants.DEFENSE_4_X, Constants.DEFENSE_4_Y),
-    DEFENSE_5(Constants.DEFENSE_5_X, Constants.DEFENSE_5_Y);
+  DEFENSE_1(Constants.DEFENSE_1_X, Constants.DEFENSE_1_Y), DEFENSE_2(
+    Constants.DEFENSE_2_X, Constants.DEFENSE_2_Y), DEFENSE_3(
+      Constants.DEFENSE_3_X, Constants.DEFENSE_3_Y), DEFENSE_4(
+        Constants.DEFENSE_4_X, Constants.DEFENSE_4_Y), DEFENSE_5(
+          Constants.DEFENSE_5_X, Constants.DEFENSE_5_Y);
 
   private SensorInput sensorInput;
 
@@ -33,7 +33,8 @@ public enum DriveFromDefenseToHighGoalGenerator {
   }
 
   public CommandSequence getDriveToTargetGoalSequence(
-    HighGoalTargetPosition targetPosition, int yPositionOffset, double initialAngle) {
+    HighGoalTargetPosition targetPosition, int yPositionOffset,
+    double initialAngle) {
     double relativeYPosition =
       targetPosition.getTargetYCoordinate() - (yCoordinate + yPositionOffset);
     double relativeXPosition =
@@ -50,15 +51,14 @@ public enum DriveFromDefenseToHighGoalGenerator {
 
     CommandSequence driveSequence = new CommandSequence();
 
-    driveSequence.add(new DriveRotateCommand(angle - (sensorInput.getNavXHeading() - initialAngle), 1.0, 2000));
+    driveSequence.add(new DriveRotateCommand(
+      angle - (sensorInput.getNavXHeading() - initialAngle), 1.0, 2000));
     driveSequence
       .add(new DriveTranslateCommand(straightDistance, 0.75, 5.0, 2000));
-    driveSequence.add(new DriveRotateCommand(
-      -angle + targetPosition.getOffsetAngle(), 1.0, 1500));
+    driveSequence
+      .add(new DriveRotateCommand(-angle + targetPosition.getOffsetAngle()
+        + Constants.AUTO_CAMERA_BIAS_OFFSET, 1.0, 1500));
 
-    System.out.println(angle);
-    System.out.println(straightDistance);
-    System.out.println(-angle + targetPosition.getOffsetAngle());
     return driveSequence;
   }
 }

@@ -115,9 +115,4 @@ public class SocketServer extends Thread {
     }
   }
 
-  public static void main(String[] args) {
-    SocketServer socketServer = new SocketServer();
-    socketServer.startServer();
-  }
-
 }

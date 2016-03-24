@@ -19,6 +19,11 @@ public class SmashBoard {
     socketServer.startServer();
   }
 
+  public SmashBoard(int port) {
+    socketServer = new SocketServer(port);
+    socketServer.startServer();
+  }
+  
   public void update() {
   }
 
@@ -34,4 +39,16 @@ public class SmashBoard {
     return socketServer.getDouble("distance", 100.0);
   }
 
+  public int getAutoDefense() {
+    return (int)socketServer.getLong("autoDefense", 1);
+  }
+
+  public int getAutoLane() {
+    return (int)socketServer.getLong("autoLane", 1);
+  }
+
+  public int getAutoTargetGoal() {
+    return (int)socketServer.getLong("autoTargetGoal", 1);
+  }
+  
 }
