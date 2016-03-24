@@ -33,7 +33,6 @@ public class Constants {
   public static final int OPERATOR_BUTTON_MANUAL_SHOOTER_IN = 14;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_OUT = 12;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_IN = 15;
-  // This should not be used right now.
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_RETRACT = 16;
   public static final int OPERATOR_BUTTON_SCALER_SCALE = 9;
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_EXTEND = 10;
@@ -45,6 +44,8 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
+  
+  public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 140.0;
 
   // Drive Train
   public static final PIDValues DRIVE_PID_ROTATION =
@@ -71,7 +72,7 @@ public class Constants {
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 27000;
-  public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
+  public static final double SHOOTER_SPOOL_UP_SPEED = 0.5;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -100,6 +101,7 @@ public class Constants {
 
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.6;
+  public static final double ARM_POSITION_LOW_BAR = -5.5;
   public static final double ARM_POSITION_SHOOT_LOW = -1.0;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.4;
 
@@ -134,8 +136,9 @@ public class Constants {
   public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
 
   // Relays
-  public static final int BALL_DETECTED_REAR_RELAY_ID = 1;
-  public static final int BALL_DETECTED_FRONT_RELAY_ID = 0;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 1;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 0;
+  public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders
   public static final double DRIVE_ENC_TICKS_PER_INCH = 83.07625;

@@ -2,10 +2,6 @@ package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
-import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
-import org.usfirst.frc.team1619.robot2016.commands.PauseCommand;
-import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
 public class AutoRoughTerrain extends SequencerState {

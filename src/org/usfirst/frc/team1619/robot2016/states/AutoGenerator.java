@@ -1,8 +1,9 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.CrossLowBarCommand;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
-import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFrise;
+import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFriseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
 import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
@@ -23,6 +24,7 @@ public class AutoGenerator extends SequencerState {
 
   @Override
   protected void addCommands() {
+    double initialAngle = sensorInput.getNavXHeading();
     int defense = smashBoard.getAutoDefense();
     int lane = smashBoard.getAutoLane();
     int targetGoal = smashBoard.getAutoTargetGoal();
@@ -35,16 +37,17 @@ public class AutoGenerator extends SequencerState {
     switch (defense) {
       case 1: // Low bar
         distanceOffsetFromOuterWorks = 20;
+        add(new CrossLowBarCommand());
         break;
       case 2: // Chevalle de Frise
         distanceOffsetFromOuterWorks = 20;
-        add(new CrossChevalleDeFrise());
+        add(new CrossChevalleDeFriseCommand());
         break;
       case 3: // Portcullis
         distanceOffsetFromOuterWorks = 20;
         break;
       default:
-        add(new CrossChevalleDeFrise());
+        add(new CrossLowBarCommand());
         distanceOffsetFromOuterWorks = 20;
         break;
     }
@@ -91,7 +94,7 @@ public class AutoGenerator extends SequencerState {
 
     add(driveFromDefenseToHighGoalGenerator.getDriveToTargetGoalSequence(
       highGoalTargetPosition, distanceOffsetFromOuterWorks,
-      sensorInput.getNavXHeading()));
+      initialAngle));
     add(new ShootAlignHighGoalCommand(5000));
   }
 

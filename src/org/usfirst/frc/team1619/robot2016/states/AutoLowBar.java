@@ -1,10 +1,8 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
-import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.DriveRotateCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveTranslateCommand;
-import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
 import org.usfirst.frc.team1619.robot2016.commands.PauseCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
@@ -25,9 +23,9 @@ public class AutoLowBar extends SequencerState {
   protected void addCommands() {
     double angle = sensorInput.getNavXHeading();
     // double armLowbarCrossPosition = Constants.ARM_POSITION_INTAKE + 0.1;
-    // double translateAcrossLowbar = 140.0 / 2;
+    // double translateAcrossLowbar = 140.0;
     // double rotateToIntermediateMove = 16.38;
-    // double translateToIntermediateMove = 130 / 2;
+    // double translateToIntermediateMove = 130;
     // double rotateToHighGoal = 60 - rotateToIntermediateMove;
     //
     // double translateTolerance = 2.0;

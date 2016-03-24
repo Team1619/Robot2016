@@ -4,9 +4,9 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
-public class CrossChevalleDeFrise extends CommandSequence {
+public class CrossChevalleDeFriseCommand extends CommandSequence {
 
-  public CrossChevalleDeFrise() {
+  public CrossChevalleDeFriseCommand() {
     CommandGroup moveAndArmDown = new CommandGroup();
     moveAndArmDown.add(new DriveTranslateCommand(55.0, 0.8, 2.0, 2500));
     moveAndArmDown.add(

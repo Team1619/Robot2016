@@ -51,7 +51,7 @@ public enum DriveFromDefenseToHighGoalGenerator {
 
     CommandSequence driveSequence = new CommandSequence();
 
-    driveSequence.addPassive(new ShootManualCommand(0.5, 0));
+    driveSequence.addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
     driveSequence.add(new DriveRotateCommand(
       angle - (sensorInput.getNavXHeading() - initialAngle), 1.0, 2000));
     driveSequence

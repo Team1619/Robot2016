@@ -47,7 +47,7 @@ public class RobotState {
     
     sensorInput.setBallDetectedRear(ballDetectedRear);
     sensorInput.setBallDetectedFront(sensorInput.getBallPresenceSensorFront());
-
+    sensorInput.setVisionRingLight(true);
   }
 
   public int getArmZero() {

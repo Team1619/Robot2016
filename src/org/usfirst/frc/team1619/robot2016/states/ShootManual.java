@@ -3,6 +3,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
+import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove.ArmPosition;
 
 public class ShootManual extends State {
 
@@ -23,16 +24,19 @@ public class ShootManual extends State {
   @Override
   protected void update() {
     if (driverInput
-        .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_IN)) {
-        robotOutput.setShooterMotor(Constants.SHOOTER_INTAKE_SPEED);
-      }
-      else if (driverInput
-        .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_OUT)) {
-        robotOutput.setShooterMotor(Constants.SHOOTER_SHOOT_SPEED);
-      }
-      else {
-        robotOutput.setShooterMotor(0);
-      }
+      .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_IN)) {
+      robotOutput.setShooterMotor(Constants.SHOOTER_INTAKE_SPEED);
+    }
+    else if (driverInput
+      .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_OUT)) {
+      robotOutput.setShooterMotor(Constants.SHOOTER_SHOOT_SPEED);
+    }
+    else if (ArmPIDMove.getArmPosition() == ArmPosition.SHOOT) {
+      robotOutput.setShooterMotor(Constants.SHOOTER_SPOOL_UP_SPEED);
+    }
+    else {
+      robotOutput.setShooterMotor(0);
+    }
   }
 
   @Override
@@ -49,7 +53,8 @@ public class ShootManual extends State {
   public boolean isReadyForActive() {
     return driverInput
         .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_IN)
-        || driverInput
-          .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_OUT);
+      || driverInput
+        .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SHOOTER_OUT)
+      || ArmPIDMove.getArmPosition() == ArmPosition.SHOOT;
   }
 }
