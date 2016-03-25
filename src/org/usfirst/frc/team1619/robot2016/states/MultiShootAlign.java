@@ -9,15 +9,21 @@ public class MultiShootAlign extends SequencerState {
 
   private static SubsystemID[] subsystems;
 
+  protected int speedTarget;
+
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN,
       SubsystemID.UTILITY_ARM, SubsystemID.INTAKE, SubsystemID.SHOOTER};
   }
 
-  private ShootAlignHighGoalCommand shootAlignHighGoal;
+  protected ShootAlignHighGoalCommand shootAlignHighGoal;
   
   public MultiShootAlign() {
     super(subsystems);
+  }
+
+  protected int getSpeedTarget() {
+    return Constants.SHOOTER_SHOOT_SPEED_TARGET;
   }
 
   @Override
@@ -27,7 +33,7 @@ public class MultiShootAlign extends SequencerState {
 
   @Override
   protected void addCommands() {
-    shootAlignHighGoal = new ShootAlignHighGoalCommand(0);
+    shootAlignHighGoal = new ShootAlignHighGoalCommand(getSpeedTarget(), 0);
 
     add(shootAlignHighGoal);
   }

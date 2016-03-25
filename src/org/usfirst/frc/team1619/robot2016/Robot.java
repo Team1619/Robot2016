@@ -18,6 +18,9 @@ import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 import org.usfirst.frc.team1619.robot2016.states.MultiScale;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignBatter;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignHigh;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignLow;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootManual;
@@ -86,11 +89,15 @@ public class Robot extends IterativeRobot {
     State.resetAll();
 
     MultiIntake multiIntake = new MultiIntake();
-    MultiShootAlign multiShootAlign = new MultiShootAlign();
+    MultiShootAlignHigh multiShootAlignHigh = new MultiShootAlignHigh();
+    MultiShootAlignLow multiShootAlignLow = new MultiShootAlignLow();
+    MultiShootAlign multiShootAlignBatter = new MultiShootAlignBatter();
     MultiShootManual multiShootManual = new MultiShootManual();
     MultiScale multiScale = new MultiScale();
 
-    driveTrain.addState(multiShootAlign);
+    driveTrain.addState(multiShootAlignHigh);
+    driveTrain.addState(multiShootAlignLow);
+    driveTrain.addState(multiShootAlignBatter);
     driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
@@ -98,19 +105,25 @@ public class Robot extends IterativeRobot {
 
     // utilityArm.addState(new ArmManualOveride());
     utilityArm.addState(multiScale);
-    utilityArm.addState(multiShootAlign);
+    utilityArm.addState(multiShootAlignHigh);
+    utilityArm.addState(multiShootAlignLow);
+    utilityArm.addState(multiShootAlignBatter);
     utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(new ArmPIDMove());
     utilityArm.addState(new ArmManual());
 
     shooter.addState(new ShootManual());
     shooter.addState(multiShootManual);
-    shooter.addState(multiShootAlign);
+    shooter.addState(multiShootAlignHigh);
+    shooter.addState(multiShootAlignLow);
+    shooter.addState(multiShootAlignBatter);
     shooter.addState(multiIntake);
 
     intake.addState(new IntakeManual());
     intake.addState(multiShootManual);
-    intake.addState(multiShootAlign);
+    intake.addState(multiShootAlignHigh);
+    intake.addState(multiShootAlignLow);
+    intake.addState(multiShootAlignBatter);
     intake.addState(multiIntake);
 
     scaler.addState(multiScale);

@@ -1,7 +1,6 @@
-package org.usfirst.frc.team1619.robot2016;
+package org.usfirst.frc.team1619.robot2016.commands;
 
-import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
-import org.usfirst.frc.team1619.robot2016.commands.DriveTranslateCommand;
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class CrossLowBarCommand extends CommandSequence {

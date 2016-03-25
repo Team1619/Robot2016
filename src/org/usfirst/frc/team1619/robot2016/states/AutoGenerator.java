@@ -1,11 +1,11 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
-import org.usfirst.frc.team1619.robot2016.CrossLowBarCommand;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFriseCommand;
+import org.usfirst.frc.team1619.robot2016.commands.CrossLowBarCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
 import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
