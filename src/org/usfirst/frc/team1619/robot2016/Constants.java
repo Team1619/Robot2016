@@ -10,12 +10,13 @@ public class Constants {
   public static final double JOYSTICK_DEADZONE = 0.05;
 
   // Driver buttons
-  public static final int DRIVER_BUTTON_SHOOT = 4;
+  public static final int DRIVER_BUTTON_SHOOT_BATTER = 1;
+  public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
+  public static final int DRIVER_BUTTON_SHOOT_MID = 4;
+  public static final int DRIVER_BUTTON_SHOOT_HIGH = 6;
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 4;
-  public static final int DRIVER_BUTTON_SHOOT_HIGH = 1;
-  public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 7;
   public static final int DRIVER_BUTTON_DRIVE_INVERT = 8;
 
   // Operator buttons

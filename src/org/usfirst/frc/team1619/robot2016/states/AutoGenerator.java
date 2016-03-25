@@ -39,6 +39,9 @@ public class AutoGenerator extends SequencerState {
     add(new ArmZeroCommand());
 
     switch (defense) {
+      case 0: // Do nothing
+        add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
+        return;
       case 1: // Low bar
         distanceOffsetFromOuterWorks = 10;
         add(new CrossLowBarCommand());

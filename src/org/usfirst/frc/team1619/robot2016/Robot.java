@@ -91,13 +91,15 @@ public class Robot extends IterativeRobot {
     MultiIntake multiIntake = new MultiIntake();
     MultiShootAlignHigh multiShootAlignHigh = new MultiShootAlignHigh();
     MultiShootAlignLow multiShootAlignLow = new MultiShootAlignLow();
-    MultiShootAlign multiShootAlignBatter = new MultiShootAlignBatter();
+    MultiShootAlign multiShootAlignMid = new MultiShootAlign();
+    MultiShootAlignBatter multiShootAlignBatter = new MultiShootAlignBatter();
     MultiShootManual multiShootManual = new MultiShootManual();
     MultiScale multiScale = new MultiScale();
 
     driveTrain.addState(multiShootAlignHigh);
     driveTrain.addState(multiShootAlignLow);
     driveTrain.addState(multiShootAlignBatter);
+    driveTrain.addState(multiShootAlignMid);
     driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
@@ -108,6 +110,7 @@ public class Robot extends IterativeRobot {
     utilityArm.addState(multiShootAlignHigh);
     utilityArm.addState(multiShootAlignLow);
     utilityArm.addState(multiShootAlignBatter);
+    utilityArm.addState(multiShootAlignMid);
     utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(new ArmPIDMove());
     utilityArm.addState(new ArmManual());
@@ -117,6 +120,7 @@ public class Robot extends IterativeRobot {
     shooter.addState(multiShootAlignHigh);
     shooter.addState(multiShootAlignLow);
     shooter.addState(multiShootAlignBatter);
+    shooter.addState(multiShootAlignMid);
     shooter.addState(multiIntake);
 
     intake.addState(new IntakeManual());
@@ -124,6 +128,7 @@ public class Robot extends IterativeRobot {
     intake.addState(multiShootAlignHigh);
     intake.addState(multiShootAlignLow);
     intake.addState(multiShootAlignBatter);
+    intake.addState(multiShootAlignMid);
     intake.addState(multiIntake);
 
     scaler.addState(multiScale);

@@ -21,6 +21,6 @@ public class MultiShootAlignBatter extends MultiShootAlign {
 
   @Override
   public boolean isReadyForActive() {
-    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT);
+    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT_BATTER);
   }
 }

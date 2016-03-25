@@ -4,7 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
-public class ShootAlignHighGoalBatterCommand extends CommandGroup{
+public class ShootAlignHighGoalBatterCommand extends CommandGroup {
 
   protected CommandSequence firingSequence;
   protected CommandSequence moveArmAndSpoolUp;

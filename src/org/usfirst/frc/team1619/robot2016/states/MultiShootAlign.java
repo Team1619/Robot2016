@@ -28,7 +28,7 @@ public class MultiShootAlign extends SequencerState {
 
   @Override
   public boolean isReadyForActive() {
-    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT);
+    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT_MID);
   }
 
   @Override
