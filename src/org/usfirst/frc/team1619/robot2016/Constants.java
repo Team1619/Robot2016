@@ -13,10 +13,10 @@ public class Constants {
   public static final int DRIVER_BUTTON_SHOOT_BATTER = 1;
   public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
   public static final int DRIVER_BUTTON_SHOOT_MID = 4;
-  public static final int DRIVER_BUTTON_SHOOT_HIGH = 6;
+  public static final int DRIVER_BUTTON_SHOOT_HIGH = 7;
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 7;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 9;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 6;
   public static final int DRIVER_BUTTON_DRIVE_INVERT = 8;
 
   // Operator buttons
@@ -76,8 +76,9 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 27000;
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 25500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 24000;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 17500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 5000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
 
   // Scaler
@@ -109,7 +110,7 @@ public class Constants {
   public static final double ARM_POSITION_INTAKE = -5.6;
   public static final double ARM_POSITION_LOW_BAR = -5.0;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
-  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.0;
+  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Arm Hall Effects

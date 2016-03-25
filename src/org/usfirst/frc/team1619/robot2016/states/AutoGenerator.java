@@ -107,7 +107,7 @@ public class AutoGenerator extends SequencerState {
       highGoalTargetPosition, distanceOffsetFromOuterWorks,
       initialAngle));
     add(armToVisionAndSpool);
-    add(new ShootAlignHighGoalCommand(5000));
+    add(new ShootAlignHighGoalCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET_AUTO, 5000));
   }
 
   @Override
