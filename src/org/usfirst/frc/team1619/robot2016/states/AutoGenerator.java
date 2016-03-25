@@ -32,6 +32,8 @@ public class AutoGenerator extends SequencerState {
     int defense = smashBoard.getAutoDefense();
     int lane = smashBoard.getAutoLane();
     int targetGoal = smashBoard.getAutoTargetGoal();
+    System.out.println(defense + " " + lane + " " + targetGoal);
+    smashBoard.setString("autoGenerator", defense + " " + lane + " " + targetGoal);
     int distanceOffsetFromOuterWorks;
     HighGoalTargetPosition highGoalTargetPosition;
     DriveFromDefenseToHighGoalGenerator driveFromDefenseToHighGoalGenerator;
@@ -43,11 +45,11 @@ public class AutoGenerator extends SequencerState {
         add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
         return;
       case 1: // Low bar
-        distanceOffsetFromOuterWorks = 10;
+        distanceOffsetFromOuterWorks = -15;
         add(new CrossLowBarCommand());
         break;
       case 2: // Chevalle de Frise
-        distanceOffsetFromOuterWorks = 20;
+        distanceOffsetFromOuterWorks = 50;
         add(new CrossChevalleDeFriseCommand());
         break;
       case 3: // Portcullis
@@ -55,7 +57,7 @@ public class AutoGenerator extends SequencerState {
         break;
       default:
         add(new CrossLowBarCommand());
-        distanceOffsetFromOuterWorks = 10;
+        distanceOffsetFromOuterWorks = -15;
         break;
     }
 
@@ -102,6 +104,8 @@ public class AutoGenerator extends SequencerState {
     CommandSequence armToVisionAndSpool = new CommandSequence();
     armToVisionAndSpool.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 1500));
     armToVisionAndSpool.addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
+    
+//    smashBoard.setString("", text);
     
     add(driveFromDefenseToHighGoalGenerator.getDriveToTargetGoalSequence(
       highGoalTargetPosition, distanceOffsetFromOuterWorks,

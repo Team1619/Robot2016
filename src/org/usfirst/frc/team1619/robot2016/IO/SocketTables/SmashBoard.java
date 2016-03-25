@@ -27,6 +27,10 @@ public class SmashBoard {
   public void update() {
   }
 
+  public void setString(String key, String text) {
+    socketServer.setString(key, text);
+  }
+  
   public void setShootOffset(double offset) {
     socketServer.setDouble("shootOffset", offset);
   }
@@ -53,6 +57,10 @@ public class SmashBoard {
 
   public int getAutoTargetGoal() {
     return (int)socketServer.getLong("autoTargetGoal", 1);
+  }
+  
+  public int getDesiredDistance() {
+    return (int)socketServer.getLong("desiredDistance", 30);
   }
   
 //  public static void main(String[] args) {

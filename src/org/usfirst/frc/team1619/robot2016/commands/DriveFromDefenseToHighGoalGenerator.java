@@ -2,6 +2,7 @@ package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public enum DriveFromDefenseToHighGoalGenerator {
@@ -40,6 +41,8 @@ public enum DriveFromDefenseToHighGoalGenerator {
     double relativeXPosition =
       targetPosition.getTargetXCoordinate() - xCoordinate;
 
+//    SmashBoard.getInstance()
+    
     double straightDistance = Math
       .sqrt(Math.pow(relativeYPosition, 2) + Math.pow(relativeXPosition, 2));
     double angle =
@@ -58,6 +61,8 @@ public enum DriveFromDefenseToHighGoalGenerator {
         + Constants.AUTO_CAMERA_BIAS_OFFSET, 1.0, 1500));
 
     System.out.println("Straight distance :" + straightDistance + "\nAngle: " + angle);
+    SmashBoard.getInstance().setString("pathGenerator", "Straight distance :" + straightDistance + "\nAngle: " + angle);
+    SmashBoard.getInstance().setString("TargetEnum" + targetPosition.name(), targetPosition.getTargetXCoordinate() + " " + targetPosition.getTargetYCoordinate() + " " + targetPosition.getOffsetAngle());
     
     return driveSequence;
   }

@@ -167,7 +167,7 @@ public class Constants {
   public static final String LOGGER_LOG_FOLDER_PATH = "/home/lvuser/log/";
 
   // Target and Robot Positions after crossing defenses
-  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 30;
+  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 65;
   public static final double LEFT_GOAL_TARGET_X =
     149.36 - Math.sin(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double LEFT_GOAL_TARGET_Y =
