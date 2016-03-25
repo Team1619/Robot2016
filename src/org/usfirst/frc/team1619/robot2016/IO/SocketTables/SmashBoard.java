@@ -27,6 +27,10 @@ public class SmashBoard {
   public void update() {
   }
 
+  public void setShootOffset(double offset) {
+    socketServer.setDouble("shootOffset", offset);
+  }
+
   public void setAngleError(double error) {
     socketServer.setDouble("angleError", error);
   }

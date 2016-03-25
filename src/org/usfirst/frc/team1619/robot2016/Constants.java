@@ -13,11 +13,14 @@ public class Constants {
   public static final int DRIVER_BUTTON_SHOOT_BATTER = 1;
   public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
   public static final int DRIVER_BUTTON_SHOOT_MID = 4;
-  public static final int DRIVER_BUTTON_SHOOT_HIGH = 7;
+  public static final int DRIVER_BUTTON_SHOOT_HIGH = 5;
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 9;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 6;
   public static final int DRIVER_BUTTON_DRIVE_INVERT = 8;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_INCREASE = 7;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_DECREASE = 13;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_RESET = 14;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_SHOOT = 1;
@@ -80,6 +83,7 @@ public class Constants {
   public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 5000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
+  public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;

@@ -66,6 +66,7 @@ public class Robot extends IterativeRobot {
   }
 
   public void autonomousInit() {
+    robotState.initialze();
     Subsystem.resetAll();
     State.resetAll();
 
@@ -85,6 +86,7 @@ public class Robot extends IterativeRobot {
   }
 
   public void teleopInit() {
+    robotState.initialze();
     Subsystem.resetAll();
     State.resetAll();
 
