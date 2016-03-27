@@ -14,6 +14,10 @@ public class ShootAlignHighGoalCommand extends CommandGroup {
   }
 
   public ShootAlignHighGoalCommand(int speedTarget, int timeOut) {
+    this(speedTarget, Constants.ARM_POSITION_SHOOT_OUTERWORKS, timeOut);
+  }
+  
+  public ShootAlignHighGoalCommand(int speedTarget, double armPosition, int timeOut) {
     super(timeOut);
 
     moveArmAndSpoolUp = new CommandSequence();

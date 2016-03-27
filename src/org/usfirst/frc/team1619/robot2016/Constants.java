@@ -79,7 +79,7 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 27000;
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 25500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 24000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 5000;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 5000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
@@ -114,6 +114,7 @@ public class Constants {
   public static final double ARM_POSITION_INTAKE = -5.6;
   public static final double ARM_POSITION_LOW_BAR = -5.0;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
+  public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
   public static final double ARM_POSITION_VISION = 0.0;
 

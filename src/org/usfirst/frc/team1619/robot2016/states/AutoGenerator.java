@@ -45,7 +45,7 @@ public class AutoGenerator extends SequencerState {
         add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
         return;
       case 1: // Low bar
-        distanceOffsetFromOuterWorks = -15;
+        distanceOffsetFromOuterWorks = -5;
         add(new CrossLowBarCommand());
         break;
       case 2: // Chevalle de Frise
@@ -111,7 +111,7 @@ public class AutoGenerator extends SequencerState {
       highGoalTargetPosition, distanceOffsetFromOuterWorks,
       initialAngle));
     add(armToVisionAndSpool);
-    add(new ShootAlignHighGoalCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET_AUTO, 5000));
+    add(new ShootAlignHighGoalCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET_AUTO, Constants.ARM_POSITION_SHOOT_AUTO, 5000));
   }
 
   @Override
