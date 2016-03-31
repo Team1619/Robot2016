@@ -1,6 +1,5 @@
-package org.usfirst.frc.team1619.robot2016.framework;
+package org.usfirst.frc.team1619.robot2016;
 
-import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.DriverInput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;

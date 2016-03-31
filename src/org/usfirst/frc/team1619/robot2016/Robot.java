@@ -3,7 +3,6 @@ package org.usfirst.frc.team1619.robot2016;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
@@ -18,9 +17,6 @@ import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 import org.usfirst.frc.team1619.robot2016.states.MultiScale;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
-import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignBatter;
-import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignHigh;
-import org.usfirst.frc.team1619.robot2016.states.MultiShootAlignLow;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootManual;
@@ -91,10 +87,18 @@ public class Robot extends IterativeRobot {
     State.resetAll();
 
     MultiIntake multiIntake = new MultiIntake();
-    MultiShootAlignHigh multiShootAlignHigh = new MultiShootAlignHigh();
-    MultiShootAlignLow multiShootAlignLow = new MultiShootAlignLow();
-    MultiShootAlign multiShootAlignMid = new MultiShootAlign();
-    MultiShootAlignBatter multiShootAlignBatter = new MultiShootAlignBatter();
+    MultiShootAlign multiShootAlignHigh =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_HIGH,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_HIGH);
+    MultiShootAlign multiShootAlignLow =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_LOW,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_LOW);
+    MultiShootAlign multiShootAlignMid = new MultiShootAlign(
+      Constants.DRIVER_BUTTON_SHOOT_MID, Constants.SHOOTER_SHOOT_SPEED_TARGET);
+    MultiShootAlign multiShootAlignBatter =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_BATTER,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_BATTER,
+        Constants.ARM_POSITION_SHOOT_NEAR_BATTER);
     MultiShootManual multiShootManual = new MultiShootManual();
     MultiScale multiScale = new MultiScale();
 
