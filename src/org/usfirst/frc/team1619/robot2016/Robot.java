@@ -9,6 +9,7 @@ import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
 import org.usfirst.frc.team1619.robot2016.states.AutoGenerator;
+import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    AutoGenerator autoSequence = new AutoGenerator();
+    AutoLowBar autoSequence = new AutoLowBar();
 
     driveTrain.addState(autoSequence);
     shooter.addState(autoSequence);

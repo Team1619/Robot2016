@@ -23,7 +23,6 @@ public class MultiIntake extends State {
 
   @Override
   public void update() {
-
     robotOutput.setShooterMotor(Constants.SHOOTER_INTAKE_SPEED);
     robotOutput.setIntakeMotor(Constants.INTAKE_INTAKE_SPEED);
   }
@@ -37,7 +36,7 @@ public class MultiIntake extends State {
   @Override
   public boolean isReadyForActive() {
     return driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
-        || ArmPIDMove.getArmPosition() == ArmPosition.INTAKE;
+      || ArmPIDMove.getArmPosition() == ArmPosition.INTAKE;
   }
 
   @Override

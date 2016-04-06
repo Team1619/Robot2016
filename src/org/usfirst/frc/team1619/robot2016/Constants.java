@@ -50,7 +50,7 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
-  
+
   public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 125.0;
 
   // Drive Train
@@ -112,7 +112,7 @@ public class Constants {
 
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.6;
-  public static final double ARM_POSITION_LOW_BAR = -5.0;
+  public static final double ARM_POSITION_LOW_BAR = -4.0;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
   public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.75;

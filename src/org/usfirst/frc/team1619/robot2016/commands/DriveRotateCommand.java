@@ -10,7 +10,7 @@ public class DriveRotateCommand extends Command {
   protected double angle;
   private double tolerance;
   private GenericTimer endTimer;
-  private DriveRotationPID rotationPID;
+  protected DriveRotationPID rotationPID;
 
   public DriveRotateCommand(double angle) {
     this(angle, 0);
