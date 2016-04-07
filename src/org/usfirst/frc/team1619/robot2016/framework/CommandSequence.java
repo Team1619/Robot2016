@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.framework;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -45,8 +46,16 @@ public class CommandSequence extends Command {
       return;
     }
     
-    for (Command passiveCommand : passiveCommands) {
+    for (Iterator<Command> passives = passiveCommands.iterator(); passives.hasNext();) {
+      Command passiveCommand = passives.next();
       passiveCommand.updateCommand();
+      if (passiveCommand.getFinished()) {
+        passiveCommand.destruct();
+        // So apparently this is just magic
+        // And works
+        // ?!
+        passives.remove();
+      }
     }
     
     currentCommand.updateCommand();
@@ -66,7 +75,9 @@ public class CommandSequence extends Command {
 
   @Override
   public void pause() {
-    currentCommand.pause();
+    if (currentCommand != null) {
+      currentCommand.pause();
+    }
     
     for (Command passiveCommand : passiveCommands) {
       passiveCommand.pause();
@@ -85,6 +96,7 @@ public class CommandSequence extends Command {
     
     currentCommand = null;
     commands.clear();
+    passiveCommands.clear();
   }
   
 }

@@ -38,6 +38,7 @@ public class SensorInput {
   private DigitalInput ballPresenceSensorFront;
   private Relay ballDetectedRear;
   private Relay ballDetectedFront;
+  private Relay visionRingLight;
   
   private DriverStation driverStation;
 
@@ -47,8 +48,9 @@ public class SensorInput {
     lowerHallEffect = new DigitalInput(Constants.ARM_LOWER_HALLEFFECT_ID);
     ballPresenceSensorRear = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_REAR_ID);
     ballPresenceSensorFront = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_FRONT_ID);
-    ballDetectedRear = new Relay(Constants.BALL_DETECTED_REAR_RELAY_ID);
-    ballDetectedFront = new Relay(Constants.BALL_DETECTED_FRONT_RELAY_ID);
+    ballDetectedRear = new Relay(Constants.RELAY_BALL_DETECTED_REAR_ID);
+    ballDetectedFront = new Relay(Constants.RELAY_BALL_DETECTED_FRONT_ID);
+    visionRingLight = new Relay(Constants.RELAY_VISION_RING_LIGHT_ID);
     
     driverStation = DriverStation.getInstance();
   }
@@ -210,5 +212,9 @@ public class SensorInput {
   
   public void setBallDetectedFront(boolean isOn) {
     ballDetectedFront.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
+  }
+  
+  public void setVisionRingLight(boolean isOn) {
+    visionRingLight.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
 }

@@ -27,10 +27,12 @@ public class SocketHandler extends Thread {
   }
 
   private static void addSocket(Socket socket) {
+    System.out.println("Add: " + socket.getLocalSocketAddress());
     sockets.add(socket);
   }
 
   private static void removeSocket(Socket socket) {
+    System.out.println("Remove: " + socket.getLocalSocketAddress());
     sockets.remove(socket);
   }
 

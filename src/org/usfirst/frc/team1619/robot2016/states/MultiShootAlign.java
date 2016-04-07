@@ -15,19 +15,30 @@ public class MultiShootAlign extends SequencerState {
   }
 
   private ShootAlignHighGoalCommand shootAlignHighGoal;
+  private int readyForActiveButton;
+  private int speedTarget;
+  private double armPosition;
   
-  public MultiShootAlign() {
-    super(subsystems);
+  public MultiShootAlign(int driverButton, int speedTarget) {
+    this(driverButton, speedTarget, Constants.ARM_POSITION_SHOOT_OUTERWORKS);
   }
 
+  public MultiShootAlign(int driverButton, int speedTarget, double armPosition) {
+    super(subsystems);
+    
+    readyForActiveButton = driverButton;
+    this.speedTarget = speedTarget;
+    this.armPosition = armPosition;
+  }
+  
   @Override
   public boolean isReadyForActive() {
-    return driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT);
+    return driverInput.getDriverButton(readyForActiveButton);
   }
 
   @Override
   protected void addCommands() {
-    shootAlignHighGoal = new ShootAlignHighGoalCommand(0);
+    shootAlignHighGoal = new ShootAlignHighGoalCommand(speedTarget, armPosition, 0);
 
     add(shootAlignHighGoal);
   }

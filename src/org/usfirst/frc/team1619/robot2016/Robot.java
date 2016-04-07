@@ -3,13 +3,12 @@ package org.usfirst.frc.team1619.robot2016;
 import org.usfirst.frc.team1619.robot2016.IO.RobotOutput;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
-import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
-import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
+import org.usfirst.frc.team1619.robot2016.states.AutoGenerator;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
@@ -50,7 +49,6 @@ public class Robot extends IterativeRobot {
     scaler = new Subsystem(SubsystemID.SCALER);
 
     smashBoard = SmashBoard.getInstance();
-    smashBoard.initialize();
   }
 
   public void disabledInit() {
@@ -64,15 +62,16 @@ public class Robot extends IterativeRobot {
   }
 
   public void autonomousInit() {
+    robotState.initialze();
     Subsystem.resetAll();
     State.resetAll();
 
-    AutoLowBar autoShootSequence = new AutoLowBar();
+    AutoGenerator autoSequence = new AutoGenerator();
 
-    driveTrain.addState(autoShootSequence);
-    shooter.addState(autoShootSequence);
-    intake.addState(autoShootSequence);
-    utilityArm.addState(autoShootSequence);
+    driveTrain.addState(autoSequence);
+    shooter.addState(autoSequence);
+    intake.addState(autoSequence);
+    utilityArm.addState(autoSequence);
   }
 
   public void autonomousPeriodic() {
@@ -83,35 +82,59 @@ public class Robot extends IterativeRobot {
   }
 
   public void teleopInit() {
+    robotState.initialze();
     Subsystem.resetAll();
     State.resetAll();
 
     MultiIntake multiIntake = new MultiIntake();
-    MultiShootAlign multiShootAlign = new MultiShootAlign();
+    MultiShootAlign multiShootAlignHigh =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_HIGH,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_HIGH);
+    MultiShootAlign multiShootAlignLow =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_LOW,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_LOW);
+    MultiShootAlign multiShootAlignMid = new MultiShootAlign(
+      Constants.DRIVER_BUTTON_SHOOT_MID, Constants.SHOOTER_SHOOT_SPEED_TARGET);
+    MultiShootAlign multiShootAlignBatter =
+      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_BATTER,
+        Constants.SHOOTER_SHOOT_SPEED_TARGET_BATTER,
+        Constants.ARM_POSITION_SHOOT_NEAR_BATTER);
     MultiShootManual multiShootManual = new MultiShootManual();
     MultiScale multiScale = new MultiScale();
 
-    driveTrain.addState(multiShootAlign);
+    driveTrain.addState(multiShootAlignHigh);
+    driveTrain.addState(multiShootAlignLow);
+    driveTrain.addState(multiShootAlignBatter);
+    driveTrain.addState(multiShootAlignMid);
     driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
     driveTrain.addState(new DriveManual());
- 
-//    utilityArm.addState(new ArmManualOveride());
+
+    // utilityArm.addState(new ArmManualOveride());
     utilityArm.addState(multiScale);
-    utilityArm.addState(multiShootAlign);
+    utilityArm.addState(multiShootAlignHigh);
+    utilityArm.addState(multiShootAlignLow);
+    utilityArm.addState(multiShootAlignBatter);
+    utilityArm.addState(multiShootAlignMid);
     utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(new ArmPIDMove());
     utilityArm.addState(new ArmManual());
 
     shooter.addState(new ShootManual());
     shooter.addState(multiShootManual);
-    shooter.addState(multiShootAlign);
+    shooter.addState(multiShootAlignHigh);
+    shooter.addState(multiShootAlignLow);
+    shooter.addState(multiShootAlignBatter);
+    shooter.addState(multiShootAlignMid);
     shooter.addState(multiIntake);
 
     intake.addState(new IntakeManual());
     intake.addState(multiShootManual);
-    intake.addState(multiShootAlign);
+    intake.addState(multiShootAlignHigh);
+    intake.addState(multiShootAlignLow);
+    intake.addState(multiShootAlignBatter);
+    intake.addState(multiShootAlignMid);
     intake.addState(multiIntake);
 
     scaler.addState(multiScale);

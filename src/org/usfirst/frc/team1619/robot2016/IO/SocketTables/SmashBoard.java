@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.IO.SocketTables;
 
+import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
+
 public class SmashBoard {
 
   private static SmashBoard instance;
@@ -14,15 +16,30 @@ public class SmashBoard {
     return instance;
   }
 
+  private SensorInput sensorInput;
+  
   public SmashBoard() {
     socketServer = new SocketServer();
-  }
-
-  public void initialize() {
     socketServer.startServer();
+    sensorInput = SensorInput.getInstance();
   }
 
+  public SmashBoard(int port) {
+    socketServer = new SocketServer(port);
+    socketServer.startServer();
+    sensorInput = SensorInput.getInstance();
+  }
+  
   public void update() {
+    socketServer.setDouble("NavX", sensorInput.getNavXHeading());
+  }
+
+  public void setString(String key, String text) {
+    socketServer.setString(key, text);
+  }
+  
+  public void setShootOffset(double offset) {
+    socketServer.setDouble("shootOffset", offset);
   }
 
   public void setAngleError(double error) {
@@ -37,4 +54,24 @@ public class SmashBoard {
     return socketServer.getDouble("distance", 100.0);
   }
 
+  public int getAutoDefense() {
+    return (int)socketServer.getLong("autoDefense", 1);
+  }
+
+  public int getAutoLane() {
+    return (int)socketServer.getLong("autoLane", 1);
+  }
+
+  public int getAutoTargetGoal() {
+    return (int)socketServer.getLong("autoTargetGoal", 1);
+  }
+  
+  public int getDesiredDistance() {
+    return (int)socketServer.getLong("desiredDistance", 30);
+  }
+  
+//  public static void main(String[] args) {
+//    SmashBoard smashBoard = new SmashBoard(5000);
+//  }
+  
 }

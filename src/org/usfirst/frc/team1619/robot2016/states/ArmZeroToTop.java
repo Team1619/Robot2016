@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
-import org.usfirst.frc.team1619.robot2016.framework.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 
 public class ArmZeroToTop extends State {

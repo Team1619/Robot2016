@@ -10,11 +10,17 @@ public class Constants {
   public static final double JOYSTICK_DEADZONE = 0.05;
 
   // Driver buttons
-  public static final int DRIVER_BUTTON_SHOOT = 1;
+  public static final int DRIVER_BUTTON_SHOOT_BATTER = 1;
+  public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
+  public static final int DRIVER_BUTTON_SHOOT_MID = 4;
+  public static final int DRIVER_BUTTON_SHOOT_HIGH = 5;
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 3;
-  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 4;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 9;
+  public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 6;
   public static final int DRIVER_BUTTON_DRIVE_INVERT = 8;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_INCREASE = 7;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_DECREASE = 13;
+  public static final int DRIVER_BUTTON_SHOOT_OFFSET_RESET = 14;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_SHOOT = 1;
@@ -33,7 +39,6 @@ public class Constants {
   public static final int OPERATOR_BUTTON_MANUAL_SHOOTER_IN = 14;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_OUT = 12;
   public static final int OPERATOR_BUTTON_MANUAL_INTAKE_IN = 15;
-  // This should not be used right now.
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_RETRACT = 16;
   public static final int OPERATOR_BUTTON_SCALER_SCALE = 9;
   public static final int OPERATOR_BUTTON_MANUAL_SCALER_EXTEND = 10;
@@ -45,6 +50,8 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
+  
+  public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 125.0;
 
   // Drive Train
   public static final PIDValues DRIVE_PID_ROTATION =
@@ -70,8 +77,13 @@ public class Constants {
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 26000;
-  public static final double SHOOTER_SPOOL_UP_SPEED = 0.8;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 27000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 25500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 5000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 5000;
+  public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
+  public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -99,9 +111,12 @@ public class Constants {
   public static final double ARM_ZERO_SPEED = 0.75;
 
   public static final double ARM_POSITION_DEFAULT = -3.5;
-  public static final double ARM_POSITION_INTAKE = -5.0;
-  public static final double ARM_POSITION_SHOOT_LOW = -1.0;
-  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.1855;
+  public static final double ARM_POSITION_INTAKE = -5.6;
+  public static final double ARM_POSITION_LOW_BAR = -5.0;
+  public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
+  public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
+  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
+  public static final double ARM_POSITION_VISION = 0.0;
 
   // Arm Hall Effects
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;
@@ -130,12 +145,13 @@ public class Constants {
   public static final int SCALER_MOTOR_ID = 8;
 
   // Digital IO
-  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 2;
 
   // Relays
-  public static final int BALL_DETECTED_REAR_RELAY_ID = 1;
-  public static final int BALL_DETECTED_FRONT_RELAY_ID = 0;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 0;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 1;
+  public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders
   public static final double DRIVE_ENC_TICKS_PER_INCH = 83.07625;
@@ -152,32 +168,33 @@ public class Constants {
   public static final String LOGGER_LOG_FOLDER_PATH = "/home/lvuser/log/";
 
   // Target and Robot Positions after crossing defenses
-  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 100;
+  public static final int AUTO_SHOT_DISTANCE_FROM_GOAL = 65;
   public static final double LEFT_GOAL_TARGET_X =
-    151 - Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    149.36 - Math.sin(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double LEFT_GOAL_TARGET_Y =
-    10.39 + Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    179.0 - Math.cos(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int LEFT_GOAL_OFFSET_ANGLE = 60;
-  public static final double MIDDLE_GOAL_TARGET_X = 169;
+  public static final double MIDDLE_GOAL_TARGET_X = 171.86;
   public static final double MIDDLE_GOAL_TARGET_Y =
-    20.78 + AUTO_SHOT_DISTANCE_FROM_GOAL;
+    166.1 - AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int MIDDLE_GOAL_OFFSET_ANGLE = 0;
   public static final double RIGHT_GOAL_TARGET_X =
-    187 + Math.sin(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    194.36 + Math.sin(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final double RIGHT_GOAL_TARGET_Y =
-    10.39 + Math.cos(60.0 * (Math.PI / 180)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
+    179.0 - Math.cos(Math.toRadians(60.0)) * AUTO_SHOT_DISTANCE_FROM_GOAL;
   public static final int RIGHT_GOAL_OFFSET_ANGLE = -60;
+  public static final double AUTO_CAMERA_BIAS_OFFSET = -2.5;
 
   public static final double DEFENSE_1_X = 53.4 * 0 + 25.7;
-  public static final double DEFENSE_1_Y = 16 * 12;
+  public static final double DEFENSE_1_Y = 0;
   public static final double DEFENSE_2_X = 53.4 * 1 + 25.7;
-  public static final double DEFENSE_2_Y = 16 * 12;
+  public static final double DEFENSE_2_Y = 0;
   public static final double DEFENSE_3_X = 53.4 * 2 + 25.7;
-  public static final double DEFENSE_3_Y = 16 * 12;
+  public static final double DEFENSE_3_Y = 0;
   public static final double DEFENSE_4_X = 53.4 * 3 + 25.7;
-  public static final double DEFENSE_4_Y = 16 * 12;
+  public static final double DEFENSE_4_Y = 0;
   public static final double DEFENSE_5_X = 53.4 * 4 + 25.7;
-  public static final double DEFENSE_5_Y = 16 * 12;
+  public static final double DEFENSE_5_Y = 0;
 
-  public static final int SMASH_BOARD_PORT = 1619;
+  public static final int SMASH_BOARD_PORT = 5801;
 }
