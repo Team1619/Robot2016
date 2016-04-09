@@ -115,7 +115,7 @@ public class Constants {
   public static final double ARM_POSITION_LOW_BAR = -5.0;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
   public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
-  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
+  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.75;
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Arm Hall Effects

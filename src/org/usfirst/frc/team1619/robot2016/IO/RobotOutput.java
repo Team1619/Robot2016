@@ -5,6 +5,7 @@ import org.usfirst.frc.team1619.robot2016.RobotState;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Servo;
 
 public class RobotOutput {
 
@@ -42,6 +43,8 @@ public class RobotOutput {
 
   private CANTalon scalerMotor;
 
+  private Servo extensionServo;
+  
   private RobotDrive drive;
 
   private RobotOutput() {
@@ -75,6 +78,8 @@ public class RobotOutput {
     driveLeft2.enableBrakeMode(true);
 
     scalerMotor.enableBrakeMode(true);
+    
+    extensionServo = new Servo(0);
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
@@ -123,6 +128,14 @@ public class RobotOutput {
     scalerMotor.set(speed);
   }
 
+  /**
+   * 
+   * @param value PWM value between 0.0 and 1.0
+   */
+  public void setExtensionServoPWM(double value) {
+    extensionServo.set(value);
+  }
+  
   /**
    * Don't use this method. Use SensorInput instead.
    * 
