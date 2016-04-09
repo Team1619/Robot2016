@@ -65,7 +65,7 @@ public class SensorInput {
 
   // Encoders
   public int getShooterEncoderVelocity() {
-    return robotOutput.getShooterVelocity();
+    return -robotOutput.getShooterVelocity();
   }
 
   /**

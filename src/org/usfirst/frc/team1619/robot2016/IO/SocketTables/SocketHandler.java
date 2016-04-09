@@ -37,11 +37,13 @@ public class SocketHandler extends Thread {
   }
 
   private static void blast(JSONObject message) throws IOException {
-    for (Socket socket : sockets) {
-      if (!socket.isClosed()) {
-        PrintWriter output = new PrintWriter(socket.getOutputStream());
-        output.println(message);
-        output.flush();
+    synchronized(sockets) {
+      for (Socket socket : sockets) {
+        if (!socket.isClosed()) {
+          PrintWriter output = new PrintWriter(socket.getOutputStream());
+          output.println(message);
+          output.flush();
+        }
       }
     }
   }

@@ -38,6 +38,7 @@ public class RobotOutput {
 
   private CANTalon intakeMotor;
   private CANTalon shooterMotor;
+  private CANTalon shooterMotor2;
 
   private CANTalon scalerMotor;
 
@@ -55,7 +56,8 @@ public class RobotOutput {
 
     intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
     shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
-
+    shooterMotor2 = new CANTalon(Constants.SHOOTER_MOTOR_2_ID);
+    
     scalerMotor = new CANTalon(Constants.SCALER_MOTOR_ID);
 
     driveRight1.setInverted(true);
@@ -64,7 +66,8 @@ public class RobotOutput {
     driveLeft2.setInverted(true);
 
     intakeMotor.setInverted(true);
-    shooterMotor.setInverted(true);
+    shooterMotor.setInverted(false);
+    shooterMotor2.setInverted(false);
 
     driveRight1.enableBrakeMode(true);
     driveRight2.enableBrakeMode(true);
@@ -109,6 +112,7 @@ public class RobotOutput {
 
   public void setShooterMotor(double speed) {
     shooterMotor.set(speed);
+    shooterMotor2.set(speed);
   }
 
   public int getShooterVelocity() {

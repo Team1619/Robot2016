@@ -32,6 +32,7 @@ public class SmashBoard {
   
   public void update() {
     socketServer.setDouble("NavX", sensorInput.getNavXHeading());
+    socketServer.setDouble("Shooter Encoder Speed", sensorInput.getShooterEncoderVelocity());
   }
 
   public void setString(String key, String text) {

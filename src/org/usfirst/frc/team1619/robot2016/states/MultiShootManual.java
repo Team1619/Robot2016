@@ -36,7 +36,7 @@ public class MultiShootManual extends State {
     robotOutput.setShooterMotor(Constants.SHOOTER_SHOOT_SPEED);
 
     if(driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_SHOOT_RELEASE)
-        || sensorInput.getShooterEncoderVelocity() > Constants.SHOOTER_SHOOT_SPEED_TARGET) {
+        || sensorInput.getShooterEncoderVelocity() > Constants.SHOOTER_SHOOT_SPEED_TARGET_BATTER) {
       shooting = true;
     }
 

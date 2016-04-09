@@ -81,7 +81,7 @@ public class Constants {
   public static final int SHOOTER_SHOOT_SPEED_TARGET = 25500;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 5000;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 5000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 10000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
 
@@ -142,15 +142,16 @@ public class Constants {
   public static final int DART_MOTOR_ID = 5;
   public static final int INTAKE_MOTOR_ID = 6;
   public static final int SHOOTER_MOTOR_ID = 7;
+  public static final int SHOOTER_MOTOR_2_ID = 9;
   public static final int SCALER_MOTOR_ID = 8;
 
   // Digital IO
-  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 3;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 2;
+  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
 
   // Relays
-  public static final int RELAY_BALL_DETECTED_REAR_ID = 0;
-  public static final int RELAY_BALL_DETECTED_FRONT_ID = 1;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 1;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 0;
   public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders
