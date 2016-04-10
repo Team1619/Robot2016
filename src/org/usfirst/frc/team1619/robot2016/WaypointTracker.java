@@ -26,14 +26,15 @@ public class WaypointTracker {
   private double positionX;
   private double positionY;
   private double previousTranslation;
-  private double previousAngle;
   private double centerAngle;
 
   WaypointTracker() {
+    sensorInput = SensorInput.getInstance();
+    smashBoard = SmashBoard.getInstance();
+
     positionX = 0;
     positionY = 0;
     previousTranslation = 0;
-    previousAngle = 0;
   }
 
   public void initialize() {
@@ -41,18 +42,18 @@ public class WaypointTracker {
     positionY = 0;
     previousTranslation = sensorInput.getDriveTranslation();
     centerAngle = sensorInput.getNavXHeading();
-    previousAngle = sensorInput.getCenteredNavXHeading(centerAngle);
   }
 
   public void update() {
     updatePosition();
 
-    smashBoard.setWaypointPosition(positionX, positionY);
-    smashBoard.setWaypointOffsets(getAngleToTarget(0, 0), getDistanceToTarget(0, 0));
+//    smashBoard.setWaypointPosition(positionX, positionY);
+//    smashBoard.setWaypointOffsets(getAngleToTarget(0, 0), getDistanceToTarget(0, 0));
+    System.out.print("Position: " + Math.rint(positionX) + ", " + Math.rint(positionY));
+    System.out.println("    Angle: " + Math.rint(getAngleToTarget(0, 0)) + "    Distance: " + Math.rint(getDistanceToTarget(0, 0)));
 
     // More processing expensive, but I'm lazy and it makes sense.
     previousTranslation += getTranslationChange();
-    previousAngle += getAngleChange();
   }
 
   /**
@@ -64,7 +65,7 @@ public class WaypointTracker {
    * @return Difference in angle in degrees
    */
   public double getAngleToTarget(double x, double y) {
-    return Math.toDegrees(Math.atan2(positionY - y, positionX - x));
+    return Math.toDegrees((Math.PI / 2) + Math.atan2(positionY - y, positionX - x));
   }
 
   /**
@@ -89,13 +90,14 @@ public class WaypointTracker {
 
   private void updatePosition() {
     positionX +=
-      Math.cos(Math.toRadians(getAngleChange())) * getTranslationChange();
+      Math.sin(Math.toRadians(getAngle())) * getTranslationChange();
     positionY +=
-      Math.sin(Math.toRadians(getAngleChange())) * getTranslationChange();
+      Math.cos(Math.toRadians(getAngle())) * getTranslationChange();
   }
 
-  private double getAngleChange() {
-    return sensorInput.getCenteredNavXHeading(centerAngle) - previousAngle;
+  private double getAngle() {
+    return sensorInput.getCenteredNavXHeading(centerAngle);
+//    return sensorInput.getNavXHeading();
   }
 
   private double getTranslationChange() {
