@@ -16,21 +16,20 @@ public class ShootAlignHighGoalCommand extends CommandGroup {
   public ShootAlignHighGoalCommand(int speedTarget, int timeOut) {
     this(speedTarget, Constants.ARM_POSITION_SHOOT_OUTERWORKS, timeOut);
   }
-  
-  public ShootAlignHighGoalCommand(int speedTarget, double armPosition, int timeOut) {
+
+  public ShootAlignHighGoalCommand(int speedTarget, double armPosition,
+    int timeOut) {
     super(timeOut);
 
     moveArmAndSpoolUp = new CommandSequence();
     firingSequence = new CommandSequence();
 
-    moveArmAndSpoolUp.add(new ArmMoveToPositionCommand(
-      Constants.ARM_POSITION_SHOOT_OUTERWORKS, 1000));
+    moveArmAndSpoolUp.add(new ArmMoveToPositionCommand(armPosition, 1000));
     moveArmAndSpoolUp
       .addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
 
     firingSequence.add(moveArmAndSpoolUp);
-    firingSequence
-      .add(new ShootCommand(speedTarget, 2000));
+    firingSequence.add(new ShootCommand(speedTarget, 2000));
 
     add(new DriveRotateToHighGoalCommand());
     add(firingSequence);

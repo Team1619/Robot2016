@@ -17,7 +17,7 @@ public class SmashBoard {
   }
 
   private SensorInput sensorInput;
-  
+
   public SmashBoard() {
     socketServer = new SocketServer();
     socketServer.startServer();
@@ -29,16 +29,25 @@ public class SmashBoard {
     socketServer.startServer();
     sensorInput = SensorInput.getInstance();
   }
-  
+
   public void update() {
-    socketServer.setDouble("NavX", sensorInput.getNavXHeading());
-    socketServer.setDouble("Shooter Encoder Speed", sensorInput.getShooterEncoderVelocity());
+    socketServer.setDouble("heading", sensorInput.getNavXHeading());
+    socketServer.setDouble("shooterSpeed",
+      sensorInput.getShooterEncoderVelocity());
+    socketServer.setLong("innerBallSensor",
+      sensorInput.getBallPresenceSensorFront() ? 1 : 0);
+    socketServer.setLong("outerBallSensor",
+      sensorInput.getBallPresenceSensorRear() ? 1 : 0);
+    socketServer.setLong("upperHallEffect",
+      sensorInput.getUpperHallEffect() ? 1 : 0);
+    socketServer.setLong("lowerHallEffect",
+      sensorInput.getLowerHallEffect() ? 1 : 0);
   }
 
   public void setString(String key, String text) {
     socketServer.setString(key, text);
   }
-  
+
   public void setShootOffset(double offset) {
     socketServer.setDouble("shootOffset", offset);
   }
@@ -66,13 +75,13 @@ public class SmashBoard {
   public int getAutoTargetGoal() {
     return (int)socketServer.getLong("autoTargetGoal", 1);
   }
-  
+
   public int getDesiredDistance() {
     return (int)socketServer.getLong("desiredDistance", 30);
   }
-  
-//  public static void main(String[] args) {
-//    SmashBoard smashBoard = new SmashBoard(5000);
-//  }
-  
+
+  // public static void main(String[] args) {
+  // SmashBoard smashBoard = new SmashBoard(5000);
+  // }
+
 }

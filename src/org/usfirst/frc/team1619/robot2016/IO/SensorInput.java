@@ -39,19 +39,21 @@ public class SensorInput {
   private Relay ballDetectedRear;
   private Relay ballDetectedFront;
   private Relay visionRingLight;
-  
+
   private DriverStation driverStation;
 
   private SensorInput() {
     navX = new AHRS(SPI.Port.kMXP);
     upperHallEffect = new DigitalInput(Constants.ARM_UPPER_HALLEFFECT_ID);
     lowerHallEffect = new DigitalInput(Constants.ARM_LOWER_HALLEFFECT_ID);
-    ballPresenceSensorRear = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_REAR_ID);
-    ballPresenceSensorFront = new DigitalInput(Constants.BALL_PRESENCE_SENSOR_FRONT_ID);
+    ballPresenceSensorRear =
+      new DigitalInput(Constants.BALL_PRESENCE_SENSOR_REAR_ID);
+    ballPresenceSensorFront =
+      new DigitalInput(Constants.BALL_PRESENCE_SENSOR_FRONT_ID);
     ballDetectedRear = new Relay(Constants.RELAY_BALL_DETECTED_REAR_ID);
     ballDetectedFront = new Relay(Constants.RELAY_BALL_DETECTED_FRONT_ID);
     visionRingLight = new Relay(Constants.RELAY_VISION_RING_LIGHT_ID);
-    
+
     driverStation = DriverStation.getInstance();
   }
 
@@ -65,7 +67,7 @@ public class SensorInput {
 
   // Encoders
   public int getShooterEncoderVelocity() {
-    return -robotOutput.getShooterVelocity();
+    return robotOutput.getShooterVelocity();
   }
 
   /**
@@ -201,19 +203,19 @@ public class SensorInput {
   public boolean getBallPresenceSensorRear() {
     return !ballPresenceSensorRear.get();
   }
-  
+
   public boolean getBallPresenceSensorFront() {
     return !ballPresenceSensorFront.get();
   }
-  
+
   public void setBallDetectedRear(boolean isOn) {
     ballDetectedRear.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
-  
+
   public void setBallDetectedFront(boolean isOn) {
     ballDetectedFront.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
-  
+
   public void setVisionRingLight(boolean isOn) {
     visionRingLight.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }

@@ -9,7 +9,7 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
   private RobotState robotState;
 
   public DriveRotateToHighGoalCommand() {
-    super(0.0, 2500);
+    super(0.0, 1500);
 
     smashBoard = SmashBoard.getInstance();
     robotState = RobotState.getInstance();

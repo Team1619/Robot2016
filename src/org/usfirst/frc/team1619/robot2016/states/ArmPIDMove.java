@@ -42,8 +42,11 @@ public class ArmPIDMove extends State {
     }
 
     if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_NEUTRAL)
-      || (robotState.getBallPresenceRisingEdge() && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT)) {
+      || (robotState.getBallPresenceRisingEdge()
+        && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT)
+      || robotState.getIntakeStalled()) {
       armPos = ArmPosition.NEUTRAL;
+      robotState.setIntakeStalled(false);
     }
 
     if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_SHOOT)) {
@@ -52,21 +55,18 @@ public class ArmPIDMove extends State {
 
     switch (armPos) {
       case INTAKE:
-        armPID.setTarget(Constants.ARM_POSITION_INTAKE);
+        robotOutput.setDartMotor(-1.0);
         break;
       case NEUTRAL:
         armPID.setTarget(Constants.ARM_POSITION_DEFAULT);
+        armPID.calculate();
+        robotOutput.setDartMotor(MathUtility.constrain(armPID.get(),
+          Constants.ARM_MAX_SPEED, -Constants.ARM_MAX_SPEED));
         break;
       case SHOOT:
-        armPID.setTarget(Constants.ARM_POSITION_VISION);
-        break;
-      default:
+        robotOutput.setDartMotor(1.0);
         break;
     }
-
-    armPID.calculate();
-    robotOutput.setDartMotor(MathUtility.constrain(armPID.get(),
-      Constants.ARM_MAX_SPEED, -Constants.ARM_MAX_SPEED));
 
     if (Math.abs(driverInput.getOperatorY()) >= Constants.JOYSTICK_DEADZONE) {
       setFinished();
@@ -94,7 +94,8 @@ public class ArmPIDMove extends State {
     return driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_INTAKE)
       || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_NEUTRAL)
       || driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_ARM_SHOOT)
-      || (robotState.getBallPresenceRisingEdge() && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT);
+      || (robotState.getBallPresenceRisingEdge()
+        && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT);
   }
 
   public static ArmPosition getArmPosition() {

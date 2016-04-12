@@ -73,17 +73,20 @@ public class Constants {
   public static final double INTAKE_INTAKE_SPEED = -1.0;
   public static final double INTAKE_SHOOT_SPEED = 1.0;
   public static final int SHOOTING_INTAKE_OUT_TIME = 750;
+  public static final double INTAKE_STALL_SPEED = 100;
+  public static final int INTAKE_STALL_TIME_BEFORE_STOP = 750;
 
   // Shooter
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 27000;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 25500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 5000;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 24500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 10000;
-  public static final double SHOOTER_SPOOL_UP_SPEED = 0.75;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 10000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET = 7500;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 15000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 5000;
+  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 15000;
+  public static final double SHOOTER_SPOOL_UP_SPEED = 0.5;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
+  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -4.0;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -115,7 +118,7 @@ public class Constants {
   public static final double ARM_POSITION_LOW_BAR = -4.0;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
   public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
-  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.75;
+  public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Arm Hall Effects

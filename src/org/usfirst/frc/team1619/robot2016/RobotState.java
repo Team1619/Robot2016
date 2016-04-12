@@ -13,7 +13,9 @@ public class RobotState {
 
   private int armZero;
   private boolean armZeroed;
-  
+
+  private boolean intakeStalled;
+
   private boolean ballPresenceRearRisingEdge;
   private boolean ballPresenceRearLastValue;
 
@@ -35,17 +37,19 @@ public class RobotState {
 
     armZero = 0;
     armZeroed = false;
-    
+
     ballPresenceRearRisingEdge = false;
     ballPresenceRearLastValue = false;
 
-    shootOffset = 0;
+    shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
   }
 
   public void initialze() {
-    shootOffset = 0;
+    intakeStalled = false;
+
+    shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
   }
@@ -59,20 +63,23 @@ public class RobotState {
       ballPresenceRearRisingEdge = false;
     }
     ballPresenceRearLastValue = ballDetectedRear;
-    
+
     sensorInput.setBallDetectedRear(ballDetectedRear);
     sensorInput.setBallDetectedFront(sensorInput.getBallPresenceSensorFront());
     sensorInput.setVisionRingLight(true);
 
-    boolean offsetIncrease = driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_INCREASE);
-    boolean offsetDecrease = driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_DECREASE);
-    if(!shootOffsetIncreaseLastValue && offsetIncrease) {
+    boolean offsetIncrease = driverInput
+      .getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_INCREASE);
+    boolean offsetDecrease = driverInput
+      .getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_DECREASE);
+    if (!shootOffsetIncreaseLastValue && offsetIncrease) {
       shootOffset += Constants.SHOOTER_OFFSET_INCREMENT;
     }
-    if(!shootOffsetDecreaseLastValue && offsetDecrease) {
+    if (!shootOffsetDecreaseLastValue && offsetDecrease) {
       shootOffset -= Constants.SHOOTER_OFFSET_INCREMENT;
     }
-    if(driverInput.getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_RESET)) {
+    if (driverInput
+      .getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_RESET)) {
       shootOffset = 0;
     }
     shootOffsetIncreaseLastValue = offsetIncrease;
@@ -84,6 +91,7 @@ public class RobotState {
   public double getShootAlignOffset() {
     return shootOffset;
   }
+
   public int getArmZero() {
     return armZero;
   }
@@ -96,8 +104,16 @@ public class RobotState {
   public boolean getArmZeroed() {
     return armZeroed;
   }
-  
+
   public boolean getBallPresenceRisingEdge() {
     return ballPresenceRearRisingEdge;
+  }
+
+  public void setIntakeStalled(boolean stalled) {
+    intakeStalled = stalled;
+  }
+
+  public boolean getIntakeStalled() {
+    return intakeStalled;
   }
 }
