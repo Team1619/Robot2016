@@ -22,8 +22,11 @@ public class ShootPassive extends State {
 
   @Override
   protected void update() {
-    robotOutput.setShooterMotor(sensorInput.getBallPresenceSensorRear()
-      ? Constants.SHOOTER_PASSIVE_SPEED : -Constants.SHOOTER_PASSIVE_SPEED);
+    if ((sensorInput.getBallPresenceSensorRear() && sensorInput.getShooterEncoderVelocity() >= 0)
+      || (!sensorInput.getBallPresenceSensorRear() && sensorInput.getShooterEncoderVelocity() <= 0)) {
+      robotOutput.setShooterMotor(sensorInput.getBallPresenceSensorRear()
+        ? Constants.SHOOTER_PASSIVE_SPEED : -Constants.SHOOTER_PASSIVE_SPEED);
+    }
   }
 
   @Override
@@ -38,7 +41,7 @@ public class ShootPassive extends State {
 
   @Override
   public boolean isReadyForActive() {
-    return true;
+    return !robotState.getHasExtendedScaler();
   }
 
 }

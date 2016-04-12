@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot {
     shooter.addState(multiShootAlignBatter);
     shooter.addState(multiShootAlignMid);
     shooter.addState(multiIntake);
-    shooter.addState(new ShootPassive()s);
+    shooter.addState(new ShootPassive());
 
     intake.addState(new IntakeManual());
     intake.addState(multiShootManual);

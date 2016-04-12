@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.IO.SocketTables;
 
+import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
 public class SmashBoard {
@@ -42,6 +43,9 @@ public class SmashBoard {
       sensorInput.getUpperHallEffect() ? 1 : 0);
     socketServer.setLong("lowerHallEffect",
       sensorInput.getLowerHallEffect() ? 1 : 0);
+    socketServer.setDouble("adjustedAngleOffsetToAligned",
+      getRotationOffsetToAligned()
+        - RobotState.getInstance().getShootAlignOffset());
   }
 
   public void setString(String key, String text) {

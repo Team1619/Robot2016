@@ -22,6 +22,8 @@ public class RobotState {
   private double shootOffset;
   private boolean shootOffsetIncreaseLastValue;
   private boolean shootOffsetDecreaseLastValue;
+  
+  private boolean hasExtendedScaler;
 
   static {
     instance = new RobotState();
@@ -44,6 +46,8 @@ public class RobotState {
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
+    
+    hasExtendedScaler = false;
   }
 
   public void initialze() {
@@ -115,5 +119,13 @@ public class RobotState {
 
   public boolean getIntakeStalled() {
     return intakeStalled;
+  }
+  
+  public void extendedScaler() {
+    hasExtendedScaler = true;
+  }
+  
+  public boolean getHasExtendedScaler() {
+    return hasExtendedScaler;
   }
 }

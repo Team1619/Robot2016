@@ -22,15 +22,19 @@ public class ScalerManual extends State {
 
   @Override
   protected void update() {
-    if (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SCALER_EXTEND)
-        && (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_SCALER_TIMER_OVERIDE)
-          || sensorInput.getMatchTimeRemaining() <= Constants.SCALER_MANUAL_TIMER_START)) {
+    if (driverInput
+      .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SCALER_EXTEND)
+      && (driverInput
+        .getOperatorButton(Constants.OPERATOR_BUTTON_SCALER_TIMER_OVERIDE)
+        || sensorInput
+          .getMatchTimeRemaining() <= Constants.SCALER_MANUAL_TIMER_START)) {
       robotOutput.setScalerMotor(Constants.SCALER_EXTEND_SPEED);
+      robotState.extendedScaler();
     }
-//    else if (driverInput
-//      .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SCALER_RETRACT)) {
-//      robotOutput.setScalerMotor(Constants.SCALER_RETRACT_SPEED);
-//    }
+    // else if (driverInput
+    // .getOperatorButton(Constants.OPERATOR_BUTTON_MANUAL_SCALER_RETRACT)) {
+    // robotOutput.setScalerMotor(Constants.SCALER_RETRACT_SPEED);
+    // }
     else {
       robotOutput.setScalerMotor(0);
     }
@@ -48,6 +52,6 @@ public class ScalerManual extends State {
 
   @Override
   public boolean isReadyForActive() {
-        return true;
-        }
+    return true;
+  }
 }
