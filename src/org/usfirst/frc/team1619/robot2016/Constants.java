@@ -77,6 +77,7 @@ public class Constants {
   public static final int INTAKE_STALL_TIME_BEFORE_STOP = 750;
 
   // Shooter
+  public static final double SHOOTER_PASSIVE_SPEED = 0.25;
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 10000;

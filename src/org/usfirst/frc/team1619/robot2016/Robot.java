@@ -20,6 +20,7 @@ import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootManual;
+import org.usfirst.frc.team1619.robot2016.states.ShootPassive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
@@ -128,6 +129,7 @@ public class Robot extends IterativeRobot {
     shooter.addState(multiShootAlignBatter);
     shooter.addState(multiShootAlignMid);
     shooter.addState(multiIntake);
+    shooter.addState(new ShootPassive()s);
 
     intake.addState(new IntakeManual());
     intake.addState(multiShootManual);
