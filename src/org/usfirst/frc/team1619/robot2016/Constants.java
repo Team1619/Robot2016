@@ -10,10 +10,8 @@ public class Constants {
   public static final double JOYSTICK_DEADZONE = 0.05;
 
   // Driver buttons
-  public static final int DRIVER_BUTTON_SHOOT_BATTER = 1;
-  public static final int DRIVER_BUTTON_SHOOT_LOW = 3;
-  public static final int DRIVER_BUTTON_SHOOT_MID = 4;
-  public static final int DRIVER_BUTTON_SHOOT_HIGH = 5;
+  public static final int DRIVER_BUTTON_SHOOT_FIND_LEFT = 1;
+  public static final int DRIVER_BUTTON_SHOOT_FIND_RIGHT = 4;
   public static final int DRIVER_BUTTON_DRIVE_HOLD_HEADING = 2;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_PRESET = 9;
   public static final int DRIVER_BUTTON_DRIVE_TURN_TO_CAMERA = 6;
@@ -68,10 +66,12 @@ public class Constants {
     0.35 / DRIVE_PID_TRANSLATION.i;
   public static final double DRIVE_PID_TRANSLATION_DEADZONE = 0.01;
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
-  
-  public static final int DRIVE_ROTATE_TO_TARGET_TIMEOUT = 5000;
-  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.1;
 
+  public static final int DRIVE_ROTATE_TO_TARGET_TIMEOUT = 5000;
+  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.375;
+
+  public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.75;
+  
   // Intake
   public static final double INTAKE_INTAKE_SPEED = -1.0;
   public static final double INTAKE_SHOOT_SPEED = 1.0;
@@ -83,11 +83,6 @@ public class Constants {
   public static final double SHOOTER_PASSIVE_SPEED = 0.15;
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_HIGH = 10000;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET = 7500;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_AUTO = 15000;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_LOW = 5000;
-  public static final int SHOOTER_SHOOT_SPEED_TARGET_BATTER = 15000;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.25;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
   public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -3.0;
@@ -124,6 +119,21 @@ public class Constants {
   public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;
   public static final double ARM_POSITION_VISION = 0.0;
+
+  // Shot configurations
+  public static final double SHOT_BATTER_CUT_OFF = 112.5;
+  public static final double SHOT_MID_RANGE_CUT_OFF = 140.0;
+  public static final double SHOT_LONG_RANGE_CUT_OFF = 165.0;
+
+  public static final int SHOT_BATTER_SHOOT_SPEED = 7500;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 17500;
+  public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 27500;
+  public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 30000;
+
+  public static final double SHOT_BATTER_ARM_POSITION = 0.0;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;
+  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.4;
+  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.4;
 
   // Arm Hall Effects
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;

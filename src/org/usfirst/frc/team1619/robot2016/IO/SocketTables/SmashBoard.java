@@ -84,6 +84,18 @@ public class SmashBoard {
     return (int)socketServer.getLong("desiredDistance", 30);
   }
 
+  public boolean getContourFound() {
+    return socketServer.getLong("contourFound", 0) == 1;
+  }
+
+  public int getShotRange() {
+    return (int)socketServer.getLong("shotRange", 0);
+  }
+
+  public void setShotRange(int shotRange) {
+    socketServer.setLong("shotRange", shotRange);
+  }
+
   // public static void main(String[] args) {
   // SmashBoard smashBoard = new SmashBoard(5000);
   // }

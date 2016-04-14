@@ -16,7 +16,7 @@ import org.usfirst.frc.team1619.robot2016.states.DriveRotateToSetAngle;
 import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 import org.usfirst.frc.team1619.robot2016.states.MultiScale;
-import org.usfirst.frc.team1619.robot2016.states.MultiShootAlign;
+import org.usfirst.frc.team1619.robot2016.states.MultiShootFromAnywhere;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootManual;
@@ -88,25 +88,16 @@ public class Robot extends IterativeRobot {
     State.resetAll();
 
     MultiIntake multiIntake = new MultiIntake();
-    MultiShootAlign multiShootAlignHigh =
-      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_HIGH,
-        Constants.SHOOTER_SHOOT_SPEED_TARGET_HIGH);
-    MultiShootAlign multiShootAlignLow =
-      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_LOW,
-        Constants.SHOOTER_SHOOT_SPEED_TARGET_LOW);
-    MultiShootAlign multiShootAlignMid = new MultiShootAlign(
-      Constants.DRIVER_BUTTON_SHOOT_MID, Constants.SHOOTER_SHOOT_SPEED_TARGET);
-    MultiShootAlign multiShootAlignBatter =
-      new MultiShootAlign(Constants.DRIVER_BUTTON_SHOOT_BATTER,
-        Constants.SHOOTER_SHOOT_SPEED_TARGET_BATTER,
-        Constants.ARM_POSITION_SHOOT_NEAR_BATTER);
+    MultiShootFromAnywhere multiShootFromAnywhereFindLeft =
+      new MultiShootFromAnywhere(Constants.DRIVER_BUTTON_SHOOT_FIND_LEFT, true);
+    MultiShootFromAnywhere multiShootFromAnywhereFindRight =
+      new MultiShootFromAnywhere(Constants.DRIVER_BUTTON_SHOOT_FIND_RIGHT,
+        false);
     MultiShootManual multiShootManual = new MultiShootManual();
     MultiScale multiScale = new MultiScale();
 
-    driveTrain.addState(multiShootAlignHigh);
-    driveTrain.addState(multiShootAlignLow);
-    driveTrain.addState(multiShootAlignBatter);
-    driveTrain.addState(multiShootAlignMid);
+    driveTrain.addState(multiShootFromAnywhereFindLeft);
+    driveTrain.addState(multiShootFromAnywhereFindRight);
     driveTrain.addState(new DriveManualHoldHeading());
     driveTrain.addState(new DriveRotateToCameraTarget());
     driveTrain.addState(new DriveRotateToSetAngle());
@@ -114,29 +105,23 @@ public class Robot extends IterativeRobot {
 
     // utilityArm.addState(new ArmManualOveride());
     utilityArm.addState(multiScale);
-    utilityArm.addState(multiShootAlignHigh);
-    utilityArm.addState(multiShootAlignLow);
-    utilityArm.addState(multiShootAlignBatter);
-    utilityArm.addState(multiShootAlignMid);
+    utilityArm.addState(multiShootFromAnywhereFindLeft);
+    utilityArm.addState(multiShootFromAnywhereFindRight);
     utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(new ArmPIDMove());
     utilityArm.addState(new ArmManual());
 
     shooter.addState(new ShootManual());
     shooter.addState(multiShootManual);
-    shooter.addState(multiShootAlignHigh);
-    shooter.addState(multiShootAlignLow);
-    shooter.addState(multiShootAlignBatter);
-    shooter.addState(multiShootAlignMid);
+    shooter.addState(multiShootFromAnywhereFindLeft);
+    shooter.addState(multiShootFromAnywhereFindRight);
     shooter.addState(multiIntake);
     shooter.addState(new ShootPassive());
 
     intake.addState(new IntakeManual());
     intake.addState(multiShootManual);
-    intake.addState(multiShootAlignHigh);
-    intake.addState(multiShootAlignLow);
-    intake.addState(multiShootAlignBatter);
-    intake.addState(multiShootAlignMid);
+    intake.addState(multiShootFromAnywhereFindLeft);
+    intake.addState(multiShootFromAnywhereFindRight);
     intake.addState(multiIntake);
 
     scaler.addState(multiScale);

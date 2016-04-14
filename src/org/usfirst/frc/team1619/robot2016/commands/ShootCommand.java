@@ -22,7 +22,7 @@ public class ShootCommand extends Command {
     shooting = false;
 
     if (targetSpeed == 0) {
-      targetSpeed = Constants.SHOOTER_SHOOT_SPEED_TARGET;
+      targetSpeed = Constants.SHOT_BATTER_SHOOT_SPEED;
     }
 
     shootingTimer = new GenericTimer();

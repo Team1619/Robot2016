@@ -8,7 +8,7 @@ import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFriseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossLowBarCommand;
 import org.usfirst.frc.team1619.robot2016.commands.DriveFromDefenseToHighGoalGenerator;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalTargetPosition;
-import org.usfirst.frc.team1619.robot2016.commands.ShootAlignHighGoalCommand;
+import org.usfirst.frc.team1619.robot2016.commands.ShootFromAnywhereCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootManualCommand;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
@@ -33,7 +33,8 @@ public class AutoGenerator extends SequencerState {
     int lane = smashBoard.getAutoLane();
     int targetGoal = smashBoard.getAutoTargetGoal();
     System.out.println(defense + " " + lane + " " + targetGoal);
-    smashBoard.setString("autoGenerator", defense + " " + lane + " " + targetGoal);
+    smashBoard.setString("autoGenerator",
+      defense + " " + lane + " " + targetGoal);
     int distanceOffsetFromOuterWorks;
     HighGoalTargetPosition highGoalTargetPosition;
     DriveFromDefenseToHighGoalGenerator driveFromDefenseToHighGoalGenerator;
@@ -102,16 +103,17 @@ public class AutoGenerator extends SequencerState {
     }
 
     CommandSequence armToVisionAndSpool = new CommandSequence();
-    armToVisionAndSpool.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 1500));
-    armToVisionAndSpool.addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
-    
-//    smashBoard.setString("", text);
-    
+    armToVisionAndSpool
+      .add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 1500));
+    armToVisionAndSpool
+      .addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
+
+    // smashBoard.setString("", text);
+
     add(driveFromDefenseToHighGoalGenerator.getDriveToTargetGoalSequence(
-      highGoalTargetPosition, distanceOffsetFromOuterWorks,
-      initialAngle));
+      highGoalTargetPosition, distanceOffsetFromOuterWorks, initialAngle));
     add(armToVisionAndSpool);
-    add(new ShootAlignHighGoalCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET_AUTO, Constants.ARM_POSITION_SHOOT_AUTO, 5000));
+    add(new ShootFromAnywhereCommand(true));
   }
 
   @Override

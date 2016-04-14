@@ -10,7 +10,8 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
   private RobotState robotState;
 
   public DriveRotateToHighGoalCommand() {
-    super(0.0, Constants.DRIVE_ROTATE_TO_TARGET_TOLERANCE, Constants.DRIVE_ROTATE_TO_TARGET_TIMEOUT);
+    super(0.0, Constants.DRIVE_ROTATE_TO_TARGET_TOLERANCE,
+      Constants.DRIVE_ROTATE_TO_TARGET_TIMEOUT);
 
     smashBoard = SmashBoard.getInstance();
     robotState = RobotState.getInstance();
@@ -18,9 +19,19 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
 
   @Override
   protected void initialize() {
-    angle = -smashBoard.getRotationOffsetToAligned() + robotState.getShootAlignOffset();
+    angle = -smashBoard.getRotationOffsetToAligned()
+      + robotState.getShootAlignOffset();
 
     super.initialize();
   }
 
+  @Override
+  protected void update() {
+    if (smashBoard.getContourFound()) {
+      rotationPID.setTarget(-smashBoard.getRotationOffsetToAligned()
+        + robotState.getShootAlignOffset());
+    }
+
+    super.update();
+  }
 }

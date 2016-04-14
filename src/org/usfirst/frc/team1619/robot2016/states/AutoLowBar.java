@@ -47,7 +47,7 @@ public class AutoLowBar extends SequencerState {
     add(new CrossRockWallCommand(40.0));
     add(new DriveRotateToAbsoluteCommand(angle, 1000));
     add(driveAndSpool);
-    add(new ShootCommand(Constants.SHOOTER_SHOOT_SPEED_TARGET_AUTO, 2000));
+    add(new ShootCommand(Constants.SHOT_BATTER_SHOOT_SPEED, 2000));
     add(new HighGoalToLaneCommand(angle, 4, 5.0));
     add(new CrossRockWallCommand(0.0));
   }
