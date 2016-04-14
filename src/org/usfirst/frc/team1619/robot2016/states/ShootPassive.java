@@ -27,6 +27,9 @@ public class ShootPassive extends State {
       robotOutput.setShooterMotor(sensorInput.getBallPresenceSensorRear()
         ? Constants.SHOOTER_PASSIVE_SPEED : -Constants.SHOOTER_PASSIVE_SPEED);
     }
+    else {
+      robotOutput.setShooterMotor(0);
+    }
   }
 
   @Override

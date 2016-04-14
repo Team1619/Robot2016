@@ -68,10 +68,10 @@ public class Constants {
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
 
   public static final int DRIVE_ROTATE_TO_TARGET_TIMEOUT = 5000;
-  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.375;
+  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.625;
 
-  public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.75;
-  
+  public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.375;
+
   // Intake
   public static final double INTAKE_INTAKE_SPEED = -1.0;
   public static final double INTAKE_SHOOT_SPEED = 1.0;
@@ -83,7 +83,7 @@ public class Constants {
   public static final double SHOOTER_PASSIVE_SPEED = 0.15;
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
-  public static final double SHOOTER_SPOOL_UP_SPEED = 0.25;
+  public static final double SHOOTER_SPOOL_UP_SPEED = 0.375;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
   public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -3.0;
 
@@ -121,12 +121,12 @@ public class Constants {
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Shot configurations
-  public static final double SHOT_BATTER_CUT_OFF = 112.5;
-  public static final double SHOT_MID_RANGE_CUT_OFF = 140.0;
-  public static final double SHOT_LONG_RANGE_CUT_OFF = 165.0;
+  public static final double SHOT_BATTER_CUT_OFF = 110.0;
+  public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
+  public static final double SHOT_LONG_RANGE_CUT_OFF = 160.0;
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 7500;
-  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 17500;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 20000;
   public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 27500;
   public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 30000;
 

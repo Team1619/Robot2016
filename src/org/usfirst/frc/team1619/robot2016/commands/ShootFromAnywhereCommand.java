@@ -50,7 +50,7 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     CommandGroup rotateToHighGoalAndMoveArm = new CommandGroup();
     rotateToHighGoalAndMoveArm.add(new DriveRotateToHighGoalCommand());
     rotateToHighGoalAndMoveArm
-      .add(new ArmMoveToPositionCommand(targetArmPosition));
+      .add(new ArmMoveToPositionCommand(targetArmPosition, 1750));
 
     CommandSequence alignAndSpool = new CommandSequence();
     alignAndSpool.add(rotateToHighGoalAndMoveArm);

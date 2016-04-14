@@ -1,37 +1,46 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class HighGoalToLaneCommand extends CommandSequence {
 
   public HighGoalToLaneCommand(double initialAngle, int lane, double offset) {
+    double distance;
+
     switch (lane) {
       case 1:
-        add(
-          new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-        add(new DriveTranslateCommand(100.0 - offset, 0.9, 7.5, 2500));
+        distance = 100.0;
         break;
       case 2:
-        add(
-          new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-        add(new DriveTranslateCommand(100.0 - offset, 0.9, 7.5, 2500));
+        distance = 80.0;
         break;
       case 3:
-        add(
-          new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-        add(new DriveTranslateCommand(37.5 - offset, 0.9, 7.5, 2500));
+        distance = 30.0;
         break;
       case 4:
-        add(
-          new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-        add(new DriveTranslateCommand(45.0 - offset, 0.9, 7.5, 2500));
+        distance = 30.0;
         break;
       case 5:
-        add(
-          new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-        add(new DriveTranslateCommand(90.0 - offset, 0.9, 7.5, 2500));
+        distance = 75.0;
+        break;
+      default:
+        distance = 0.0;
         break;
     }
+
+    CommandSequence rotateThenDrive = new CommandSequence();
+    rotateThenDrive.add(
+      new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
+    rotateThenDrive.add(new DriveTranslateCommand(distance, 1.0, 7.5, 2500));
+
+    CommandGroup driveAndArmDown = new CommandGroup();
+    driveAndArmDown.add(rotateThenDrive);
+    driveAndArmDown
+      .add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT, 2000));
+
+    add(driveAndArmDown);
   }
 
 }
