@@ -14,11 +14,13 @@ import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToSetAngle;
 import org.usfirst.frc.team1619.robot2016.states.IntakeManual;
+import org.usfirst.frc.team1619.robot2016.states.LEDsPassive;
 import org.usfirst.frc.team1619.robot2016.states.MultiIntake;
 import org.usfirst.frc.team1619.robot2016.states.MultiScale;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootFromAnywhere;
 import org.usfirst.frc.team1619.robot2016.states.MultiShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ScalerManual;
+import org.usfirst.frc.team1619.robot2016.states.ServoManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootManual;
 import org.usfirst.frc.team1619.robot2016.states.ShootPassive;
 
@@ -33,6 +35,8 @@ public class Robot extends IterativeRobot {
   private Subsystem shooter;
   private Subsystem intake;
   private Subsystem scaler;
+  private Subsystem leds;
+  private Subsystem servo;
 
   private SmashBoard smashBoard;
 
@@ -48,6 +52,8 @@ public class Robot extends IterativeRobot {
     shooter = new Subsystem(SubsystemID.SHOOTER);
     intake = new Subsystem(SubsystemID.INTAKE);
     scaler = new Subsystem(SubsystemID.SCALER);
+    leds = new Subsystem(SubsystemID.LEDS);
+    servo = new Subsystem(SubsystemID.SERVO);
 
     smashBoard = SmashBoard.getInstance();
   }
@@ -126,6 +132,10 @@ public class Robot extends IterativeRobot {
 
     scaler.addState(multiScale);
     scaler.addState(new ScalerManual());
+    
+    leds.addState(new LEDsPassive());
+    
+    servo.addState(new ServoManual());
   }
 
   public void teleopPeriodic() {

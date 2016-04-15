@@ -70,8 +70,6 @@ public class RobotState {
     }
     ballPresenceRearLastValue = ballDetectedRear;
 
-    sensorInput.setBallDetectedRear(ballDetectedRear);
-    sensorInput.setBallDetectedFront(sensorInput.getBallPresenceSensorFront());
     sensorInput.setVisionRingLight(true);
 
     boolean offsetIncrease = driverInput
