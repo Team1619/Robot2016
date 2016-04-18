@@ -9,42 +9,50 @@ public class ShootFromAnywhereCommand extends CommandSequence {
 
   private SmashBoard smashBoard;
 
-  private boolean left;
+  private int shot;
 
-  public ShootFromAnywhereCommand(boolean left) {
+  public ShootFromAnywhereCommand(int shot) {
     super();
 
-    this.left = left;
-
-    smashBoard = SmashBoard.getInstance();
+    this.shot = shot;
   }
 
   @Override
   protected void initialize() {
-    double distance = smashBoard.getDistance();
+    smashBoard = SmashBoard.getInstance();
+
+    if (!smashBoard.getGoodContourFound()) {
+      return;
+    }
 
     int targetShooterSpeed;
     double targetArmPosition;
 
-    if (distance < Constants.SHOT_BATTER_CUT_OFF) {
-      targetShooterSpeed = Constants.SHOT_BATTER_SHOOT_SPEED;
-      targetArmPosition = Constants.SHOT_BATTER_ARM_POSITION;
-      smashBoard.setShotRange(1);
+    if (shot == 0) {
+      shot = smashBoard.getShotRange();
     }
-    else if (distance < Constants.SHOT_MID_RANGE_CUT_OFF) {
-      targetShooterSpeed = Constants.SHOT_MID_RANGE_SHOOT_SPEED;
-      targetArmPosition = Constants.SHOT_MID_RANGE_ARM_POSITION;
-      smashBoard.setShotRange(2);
-    }
-    else if (distance < Constants.SHOT_LONG_RANGE_CUT_OFF) {
-      targetShooterSpeed = Constants.SHOT_LONG_RANGE_SHOOT_SPEED;
-      targetArmPosition = Constants.SHOT_LONG_RANGE_ARM_POSITION;
-      smashBoard.setShotRange(3);
-    }
-    else {
-      targetShooterSpeed = Constants.SHOT_LONGEST_RANGE_SHOOT_SPEED;
-      targetArmPosition = Constants.SHOT_LONGEST_RANGE_ARM_POSITION;
-      smashBoard.setShotRange(4);
+
+    switch (shot) {
+      case 1:
+        targetShooterSpeed = Constants.SHOT_BATTER_SHOOT_SPEED;
+        targetArmPosition = Constants.SHOT_BATTER_ARM_POSITION;
+        break;
+      case 2:
+        targetShooterSpeed = Constants.SHOT_MID_RANGE_SHOOT_SPEED;
+        targetArmPosition = Constants.SHOT_MID_RANGE_ARM_POSITION;
+        break;
+      case 3:
+        targetShooterSpeed = Constants.SHOT_LONG_RANGE_SHOOT_SPEED;
+        targetArmPosition = Constants.SHOT_LONG_RANGE_ARM_POSITION;
+        break;
+      case 4:
+        targetShooterSpeed = Constants.SHOT_LONGEST_RANGE_SHOOT_SPEED;
+        targetArmPosition = Constants.SHOT_LONGEST_RANGE_ARM_POSITION;
+        break;
+      default:
+        targetShooterSpeed = Constants.SHOT_MID_RANGE_SHOOT_SPEED;
+        targetArmPosition = Constants.SHOT_MID_RANGE_ARM_POSITION;
+        break;
     }
 
     CommandGroup rotateToHighGoalAndMoveArm = new CommandGroup();
@@ -57,12 +65,13 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     alignAndSpool
       .addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
 
-    if (!smashBoard.getContourFound()) {
-      add(new FindContourCommand(left));
-    }
-
     add(alignAndSpool);
-    add(new ShootCommand(targetShooterSpeed, 5000));
+
+    CommandSequence shoot = new CommandSequence();
+    shoot.add(new ShootCommand(targetShooterSpeed, 5000));
+    shoot.addPassive(new DriveRotateToHighGoalCommand(true));
+
+    add(shoot);
 
     super.initialize();
   }
@@ -70,15 +79,11 @@ public class ShootFromAnywhereCommand extends CommandSequence {
   @Override
   public void pause() {
     super.pause();
-
-    smashBoard.setShotRange(0);
   }
 
   @Override
   public void destruct() {
     super.destruct();
-
-    smashBoard.setShotRange(0);
   }
 
 }

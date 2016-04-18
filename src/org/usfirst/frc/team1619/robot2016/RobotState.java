@@ -8,6 +8,7 @@ public class RobotState {
 
   private static RobotState instance;
 
+  private SmashBoard smashBoard;
   private DriverInput driverInput;
   private SensorInput sensorInput;
 
@@ -22,7 +23,7 @@ public class RobotState {
   private double shootOffset;
   private boolean shootOffsetIncreaseLastValue;
   private boolean shootOffsetDecreaseLastValue;
-  
+
   private boolean hasExtendedScaler;
 
   static {
@@ -34,9 +35,6 @@ public class RobotState {
   }
 
   private RobotState() {
-    driverInput = DriverInput.getInstance();
-    sensorInput = SensorInput.getInstance();
-
     armZero = 0;
     armZeroed = false;
 
@@ -46,11 +44,15 @@ public class RobotState {
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
-    
+
     hasExtendedScaler = false;
+
+    smashBoard = SmashBoard.getInstance();
+    driverInput = DriverInput.getInstance();
+    sensorInput = SensorInput.getInstance();
   }
 
-  public void initialze() {
+  public void initialize() {
     intakeStalled = false;
 
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
@@ -89,7 +91,27 @@ public class RobotState {
     shootOffsetIncreaseLastValue = offsetIncrease;
     shootOffsetDecreaseLastValue = offsetDecrease;
 
-    SmashBoard.getInstance().setShootOffset(shootOffset);
+    smashBoard.setShootOffset(shootOffset);
+
+    if (smashBoard.getGoodContourFound()) {
+      double distance = smashBoard.getDistance();
+
+      if (distance < Constants.SHOT_BATTER_CUT_OFF) {
+        smashBoard.setShotRange(1);
+      }
+      else if (distance < Constants.SHOT_MID_RANGE_CUT_OFF) {
+        smashBoard.setShotRange(2);
+      }
+      else if (distance < Constants.SHOT_LONG_RANGE_CUT_OFF) {
+        smashBoard.setShotRange(3);
+      }
+      else {
+        smashBoard.setShotRange(4);
+      }
+    }
+    else {
+      smashBoard.setShotRange(0);
+    }
   }
 
   public double getShootAlignOffset() {
@@ -120,11 +142,11 @@ public class RobotState {
   public boolean getIntakeStalled() {
     return intakeStalled;
   }
-  
+
   public void extendedScaler() {
     hasExtendedScaler = true;
   }
-  
+
   public boolean getHasExtendedScaler() {
     return hasExtendedScaler;
   }

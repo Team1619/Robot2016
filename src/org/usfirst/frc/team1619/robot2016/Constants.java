@@ -43,13 +43,22 @@ public class Constants {
 
   // Autonomous
   public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 200;
+  public static final double AUTO_DRIVE_TRANSLATION_STOP_SPEED = 20;
   public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 0.85;
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
 
-  public static final double AUTO_LOW_BAR_DRIVE_DISTANCE = 125.0;
+  public static final double AUTO_DISTANCE_LINE_TO_PLATFORM = 50.0;
+  public static final double AUTO_DISTANCE_LOW_BAR = 85.0;
+  public static final double AUTO_DISTANCE_ROCK_WALL = 130.0;
+  public static final double AUTO_DISTANCE_ROUGH_TERRAIN = 90.0;
+  public static final double AUTO_DISTANCE_MOAT = 120.0;
+  public static final double AUTO_DISTANCE_RAMPARTS = 115.0;
+
+  public static final double AUTO_STATIC_DEFENSES_SPEED = 0.9;
+  public static final double AUTO_DEFENSE_TRANSLATE_TOLERANCE = 12.0;
 
   // Drive Train
   public static final PIDValues DRIVE_PID_ROTATION =
@@ -68,9 +77,10 @@ public class Constants {
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
 
   public static final int DRIVE_ROTATE_TO_TARGET_TIMEOUT = 5000;
-  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.625;
+  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 0.375;
 
-  public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.375;
+  public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.8;
+  public static final double DRIVE_FIND_GOOD_CONTOUR_ROTATE_SPEED = 0.7;
 
   // Intake
   public static final double INTAKE_INTAKE_SPEED = -1.0;
@@ -85,7 +95,7 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.375;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
-  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -3.0;
+  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -4.5;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -114,7 +124,7 @@ public class Constants {
 
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_INTAKE = -5.6;
-  public static final double ARM_POSITION_LOW_BAR = -4.0;
+  public static final double ARM_POSITION_LOW_BAR = -5.25;
   public static final double ARM_POSITION_SHOOT_OUTERWORKS = -0.4;
   public static final double ARM_POSITION_SHOOT_AUTO = -0.25;
   public static final double ARM_POSITION_SHOOT_NEAR_BATTER = -0.25;

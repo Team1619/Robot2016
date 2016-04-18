@@ -46,6 +46,9 @@ public class SmashBoard {
     socketServer.setDouble("adjustedAngleOffsetToAligned",
       getRotationOffsetToAligned()
         - RobotState.getInstance().getShootAlignOffset());
+    socketServer.setLong("driveVelocity",
+      (int)(sensorInput.getDriveLeftEncoderVelocity()
+        + sensorInput.getDriveRightEncoderVelocity()) / 2);
   }
 
   public void setString(String key, String text) {
@@ -69,23 +72,19 @@ public class SmashBoard {
   }
 
   public int getAutoDefense() {
-    return (int)socketServer.getLong("autoDefense", 1);
+    return (int)socketServer.getLong("autoDefense", 0);
   }
 
   public int getAutoLane() {
-    return (int)socketServer.getLong("autoLane", 1);
-  }
-
-  public int getAutoTargetGoal() {
-    return (int)socketServer.getLong("autoTargetGoal", 1);
-  }
-
-  public int getDesiredDistance() {
-    return (int)socketServer.getLong("desiredDistance", 30);
+    return (int)socketServer.getLong("autoLane", 0);
   }
 
   public boolean getContourFound() {
     return socketServer.getLong("contourFound", 0) == 1;
+  }
+
+  public boolean getGoodContourFound() {
+    return socketServer.getLong("contourGood", 0) == 1;
   }
 
   public int getShotRange() {

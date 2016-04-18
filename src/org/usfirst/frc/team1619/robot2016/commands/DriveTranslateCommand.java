@@ -20,13 +20,17 @@ public class DriveTranslateCommand extends Command {
   public DriveTranslateCommand(double distance) {
     this(distance, 0);
   }
+
   public DriveTranslateCommand(double distance, int timeOut) {
     this(distance, Constants.AUTO_DRIVE_TRANSLATION_MAX_OUTPUT, timeOut);
   }
+
   public DriveTranslateCommand(double distance, double maxSpeed, int timeOut) {
     this(distance, maxSpeed, Constants.DRIVE_PID_TRANSLATION_DEADZONE, timeOut);
   }
-  public DriveTranslateCommand(double distance, double maxSpeed, double tolerance, int timeOut) {
+
+  public DriveTranslateCommand(double distance, double maxSpeed,
+    double tolerance, int timeOut) {
     super(timeOut);
 
     this.distance = distance;
@@ -55,11 +59,15 @@ public class DriveTranslateCommand extends Command {
     driveTranslationPID.calculate();
     driveRotationPID.calculate();
 
-    robotOutput.arcadeDrive(-MathUtility.constrain(driveTranslationPID.get(),
-      maxSpeed, -maxSpeed), driveRotationPID.get());
+    robotOutput.arcadeDrive(
+      -MathUtility.constrain(driveTranslationPID.get(), maxSpeed, -maxSpeed),
+      driveRotationPID.get());
 
     if (Math.abs(driveTranslationPID.getError()) <= tolerance) {
-      if (endTimer.isFinished()) {
+      if (endTimer.isFinished()
+        || Math.abs((sensorInput.getDriveLeftEncoderVelocity()
+          + sensorInput.getDriveRightEncoderVelocity())
+          / 2) <= Constants.AUTO_DRIVE_TRANSLATION_STOP_SPEED) {
         setFinished();
       }
     }

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.commands.FindContourCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootFromAnywhereCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
@@ -25,7 +26,8 @@ public class MultiShootFromAnywhere extends SequencerState {
 
   @Override
   protected void addCommands() {
-    add(new ShootFromAnywhereCommand(left));
+    add(new FindContourCommand(left));
+    add(new ShootFromAnywhereCommand(0));
   }
 
   @Override
