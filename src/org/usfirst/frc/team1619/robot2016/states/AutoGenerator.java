@@ -1,7 +1,14 @@
 package org.usfirst.frc.team1619.robot2016.states;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
+import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
+import org.usfirst.frc.team1619.robot2016.commands.CrossDefenseCommand;
+import org.usfirst.frc.team1619.robot2016.commands.HighGoalToLaneCommand;
+import org.usfirst.frc.team1619.robot2016.commands.LaneToHighGoalCommand;
+import org.usfirst.frc.team1619.robot2016.commands.ShootFromAnywhereCommand;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
+import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
 public class AutoGenerator extends SequencerState {
 
@@ -20,23 +27,30 @@ public class AutoGenerator extends SequencerState {
   protected void addCommands() {
     int lane = smashBoard.getAutoLane();
     int defense = smashBoard.getAutoDefense();
-
-    if (!(lane > 0 && defense > 0)) {
+    
+    if (MathUtility.constrain(defense, 6, 1) != defense || MathUtility.constrain(lane, 5, 1) != lane) {
+      add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
       return;
     }
+
+    Defenses defenseEnum = Defenses.values()[defense - 1];
+    double initialAngle = sensorInput.getNavXHeading();
     
-    switch (defense) {
-      case 1: // Low bar
+    add(new CrossDefenseCommand(defenseEnum, Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
+    
+    add(new LaneToHighGoalCommand(lane));
+    add(new ShootFromAnywhereCommand());
+    add(new HighGoalToLaneCommand(initialAngle, lane, defenseEnum.getReturnOffset()));
+    
+    switch (defenseEnum) {
+      case LOW_BAR:
+      case ROCK_WALL:
+      case ROUGH_TERRAIN:
+      case MOAT:
+      case RAMPARTS:
+        add(new CrossDefenseCommand(defenseEnum, defenseEnum.getReturnOffset()));
         break;
-      case 2: // Rock wall
-        break;
-      case 3: // Rough terrain
-        break;
-      case 4: // Moat
-        break;
-      case 5: // Ramparts
-        break;
-      case 6: // Chevalle de frise
+      case CHEVALLE_DE_FRISE:
         break;
     }
   }

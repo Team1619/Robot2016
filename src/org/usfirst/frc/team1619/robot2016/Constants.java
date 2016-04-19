@@ -56,6 +56,15 @@ public class Constants {
   public static final double AUTO_DISTANCE_ROUGH_TERRAIN = 90.0;
   public static final double AUTO_DISTANCE_MOAT = 120.0;
   public static final double AUTO_DISTANCE_RAMPARTS = 115.0;
+  public static final double AUTO_DISTANCE_CHEVALLE = 5.0;
+  
+  public static final double AUTO_RETURN_OFFSET_LOW_BAR = 0.0;
+  public static final double AUTO_RETURN_OFFSET_ROCK_WALL = 0.0;
+  public static final double AUTO_RETURN_OFFSET_ROUGH_TERRAIN = 0.0;
+  public static final double AUTO_RETURN_OFFSET_MOAT = 0.0;
+  public static final double AUTO_RETURN_OFFSET_RAMPARTS = 0.0;
+  public static final double AUTO_RETURN_OFFSET_CHEVALLE = 10.0;
+  
 
   public static final double AUTO_STATIC_DEFENSES_SPEED = 0.9;
   public static final double AUTO_DEFENSE_TRANSLATE_TOLERANCE = 12.0;

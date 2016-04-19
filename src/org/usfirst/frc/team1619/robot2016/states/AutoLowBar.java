@@ -31,7 +31,7 @@ public class AutoLowBar extends SequencerState {
     // add(new HighGoalToLaneCommand(angle, 5, 20.0));
     // add(new CrossRockWallCommand(0.0));
 
-    add(new CrossDefenseCommand(4, Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
+    add(new CrossDefenseCommand(Defenses.LOW_BAR, Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
   }
 
   @Override

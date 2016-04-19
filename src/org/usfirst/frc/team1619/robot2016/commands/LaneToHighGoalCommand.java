@@ -1,11 +1,12 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
+import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class LaneToHighGoalCommand extends CommandSequence {
 
-  public LaneToHighGoalCommand(int lane, double offset) {
+  public LaneToHighGoalCommand(int lane) {
     double distance;
     boolean left;
 
@@ -38,8 +39,8 @@ public class LaneToHighGoalCommand extends CommandSequence {
 
     CommandGroup driveAndArmDown = new CommandGroup();
     driveAndArmDown
-      .add(new DriveTranslateCommand(distance - offset, 0.95, 10.0, 2500));
-    driveAndArmDown.add(new ArmMoveToPositionCommand(0.0, 2500));
+      .add(new DriveTranslateCommand(distance, 0.95, 10.0, 2500));
+    driveAndArmDown.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 2500));
 
     add(driveAndArmDown);
     add(new FindContourCommand(left));

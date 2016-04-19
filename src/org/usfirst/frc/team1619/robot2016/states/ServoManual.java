@@ -11,17 +11,25 @@ public class ServoManual extends State {
     subsystems = new SubsystemID[] {SubsystemID.SERVO};
   }
 
+  private boolean throttleEdge;
+  
   public ServoManual() {
     super(subsystems);
   }
 
   @Override
   protected void initialize() {    
+    throttleEdge = false;
   }
 
   @Override
   protected void update() {
-    robotOutput.setExtensionServoPWM((-driverInput.getOperatorThrottle() + 1) / 2);
+    double operatorThrottle = driverInput.getOperatorThrottle();
+    if (Math.abs(operatorThrottle) == 1 && !throttleEdge) {      
+      robotOutput.setExtensionServoPWM((-operatorThrottle + 1) / 2);
+    }
+    
+    throttleEdge = Math.abs(operatorThrottle) == 1;
   }
 
   @Override

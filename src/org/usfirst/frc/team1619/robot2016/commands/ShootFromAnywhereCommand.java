@@ -11,6 +11,10 @@ public class ShootFromAnywhereCommand extends CommandSequence {
 
   private int shot;
 
+  public ShootFromAnywhereCommand() {
+    this(0);
+  }
+  
   public ShootFromAnywhereCommand(int shot) {
     super();
 

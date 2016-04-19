@@ -33,7 +33,7 @@ public class HighGoalToLaneCommand extends CommandSequence {
     CommandSequence rotateThenDrive = new CommandSequence();
     rotateThenDrive.add(
       new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-    rotateThenDrive.add(new DriveTranslateCommand(distance, 1.0, 7.5, 2500));
+    rotateThenDrive.add(new DriveTranslateCommand(distance - offset, 0.95, 7.5, 2500));
 
     CommandGroup driveAndArmDown = new CommandGroup();
     driveAndArmDown.add(rotateThenDrive);
