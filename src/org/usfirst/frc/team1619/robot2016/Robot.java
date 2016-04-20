@@ -8,6 +8,7 @@ import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
 import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
+import org.usfirst.frc.team1619.robot2016.states.AutoGenerator;
 import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
@@ -73,12 +74,15 @@ public class Robot extends IterativeRobot {
     Subsystem.resetAll();
     State.resetAll();
 
-    AutoLowBar autoSequence = new AutoLowBar();
+    AutoGenerator autoSequence = new AutoGenerator();
+    LEDsPassive ledsState = new LEDsPassive();
 
     driveTrain.addState(autoSequence);
     shooter.addState(autoSequence);
     intake.addState(autoSequence);
     utilityArm.addState(autoSequence);
+    
+    leds.addState(ledsState);
   }
 
   public void autonomousPeriodic() {

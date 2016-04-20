@@ -3,6 +3,7 @@ package org.usfirst.frc.team1619.robot2016.states;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
+import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossDefenseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalToLaneCommand;
 import org.usfirst.frc.team1619.robot2016.commands.LaneToHighGoalCommand;
@@ -27,6 +28,8 @@ public class AutoGenerator extends SequencerState {
   protected void addCommands() {
     int lane = smashBoard.getAutoLane();
     int defense = smashBoard.getAutoDefense();
+    
+    add(new ArmZeroCommand());
     
     if (MathUtility.constrain(defense, 6, 1) != defense || MathUtility.constrain(lane, 5, 1) != lane) {
       add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
