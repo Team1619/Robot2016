@@ -49,6 +49,8 @@ public class SmashBoard {
     socketServer.setLong("driveVelocity",
       (int)(sensorInput.getDriveLeftEncoderVelocity()
         + sensorInput.getDriveRightEncoderVelocity()) / 2);
+    socketServer.setDouble("dartEncoderPosition",
+      sensorInput.getDartPosition());
   }
 
   public void setString(String key, String text) {
@@ -81,6 +83,12 @@ public class SmashBoard {
 
   public boolean getContourFound() {
     return socketServer.getLong("contourFound", 0) == 1;
+  }
+
+  public boolean getContourEdge() {
+    return socketServer.getLong("contourLeft", 0) == 1
+      || socketServer.getLong("contourTop", 0) == 1
+      || socketServer.getLong("contourRight", 0) == 1;
   }
 
   public boolean getGoodContourFound() {

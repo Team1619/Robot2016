@@ -25,7 +25,7 @@ public class ShootFromAnywhereCommand extends CommandSequence {
   protected void initialize() {
     smashBoard = SmashBoard.getInstance();
 
-    if (!smashBoard.getGoodContourFound()) {
+    if (!smashBoard.getContourFound()) {
       return;
     }
 
@@ -62,8 +62,8 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     CommandGroup rotateToHighGoalAndMoveArm = new CommandGroup();
     rotateToHighGoalAndMoveArm.add(new DriveRotateToHighGoalCommand());
     rotateToHighGoalAndMoveArm
-      .add(new ArmMoveToPositionCommand(targetArmPosition, 1750));
-
+      .add(new ArmMoveToPositionCommand(targetArmPosition, 1250));
+    
     CommandSequence alignAndSpool = new CommandSequence();
     alignAndSpool.add(rotateToHighGoalAndMoveArm);
     alignAndSpool

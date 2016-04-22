@@ -27,7 +27,7 @@ public class MultiShootFromAnywhere extends SequencerState {
   @Override
   protected void addCommands() {
     add(new FindContourCommand(left));
-    add(new ShootFromAnywhereCommand(0));
+    add(new ShootFromAnywhereCommand());
   }
 
   @Override

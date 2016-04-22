@@ -28,30 +28,34 @@ public class AutoGenerator extends SequencerState {
   protected void addCommands() {
     int lane = smashBoard.getAutoLane();
     int defense = smashBoard.getAutoDefense();
-    
+
     add(new ArmZeroCommand());
-    
-    if (MathUtility.constrain(defense, 6, 1) != defense || MathUtility.constrain(lane, 5, 1) != lane) {
+
+    if (MathUtility.constrain(defense, 6, 1) != defense
+      || MathUtility.constrain(lane, 5, 1) != lane) {
       add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
       return;
     }
 
     Defenses defenseEnum = Defenses.values()[defense - 1];
     double initialAngle = sensorInput.getNavXHeading();
-    
-    add(new CrossDefenseCommand(defenseEnum, Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
-    
-    add(new LaneToHighGoalCommand(lane));
-    add(new ShootFromAnywhereCommand());
-    add(new HighGoalToLaneCommand(initialAngle, lane, defenseEnum.getReturnOffset()));
-    
+
+    add(new CrossDefenseCommand(defenseEnum,
+      Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
+
+    add(new LaneToHighGoalCommand(initialAngle, lane));
+    add(new ShootFromAnywhereCommand(2));
+    add(new HighGoalToLaneCommand(initialAngle, lane,
+      defenseEnum.getReturnOffset()));
+
     switch (defenseEnum) {
       case LOW_BAR:
       case ROCK_WALL:
       case ROUGH_TERRAIN:
       case MOAT:
       case RAMPARTS:
-        add(new CrossDefenseCommand(defenseEnum, defenseEnum.getReturnOffset()));
+        add(
+          new CrossDefenseCommand(defenseEnum, defenseEnum.getReturnOffset()));
         break;
       case CHEVALLE_DE_FRISE:
         break;

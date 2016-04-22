@@ -6,29 +6,29 @@ import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class LaneToHighGoalCommand extends CommandSequence {
 
-  public LaneToHighGoalCommand(int lane) {
+  public LaneToHighGoalCommand(double initialAngle, int lane) {
     double distance;
     boolean left;
 
     switch (lane) {
       case 1:
-        distance = 100.0;
+        distance = Constants.AUTO_LANE_1_DISTANCE;
         left = false;
         break;
       case 2:
-        distance = 80.0;
+        distance = Constants.AUTO_LANE_2_DISTANCE;
         left = false;
         break;
       case 3:
-        distance = 30.0;
+        distance = Constants.AUTO_LANE_3_DISTANCE;
         left = false;
         break;
       case 4:
-        distance = 30.0;
+        distance = Constants.AUTO_LANE_4_DISTANCE;
         left = true;
         break;
       case 5:
-        distance = 75.0;
+        distance = Constants.AUTO_LANE_5_DISTANCE;
         left = true;
         break;
       default:
@@ -38,10 +38,11 @@ public class LaneToHighGoalCommand extends CommandSequence {
     }
 
     CommandGroup driveAndArmDown = new CommandGroup();
+    driveAndArmDown.add(new DriveTranslateCommand(distance, 0.95, 10.0, 2500));
     driveAndArmDown
-      .add(new DriveTranslateCommand(distance, 0.95, 10.0, 2500));
-    driveAndArmDown.add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 2500));
+      .add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 2500));
 
+    add(new DriveRotateToAbsoluteCommand(initialAngle));
     add(driveAndArmDown);
     add(new FindContourCommand(left));
   }

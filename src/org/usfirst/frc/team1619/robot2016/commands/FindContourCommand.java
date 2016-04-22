@@ -24,7 +24,7 @@ public class FindContourCommand extends Command {
 
   @Override
   protected void update() {
-    if (smashBoard.getContourFound()) {
+    if (smashBoard.getContourFound() || smashBoard.getContourEdge()) {
 
       if (smashBoard.getGoodContourFound()) {
         setFinished();

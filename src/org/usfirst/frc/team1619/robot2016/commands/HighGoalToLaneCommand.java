@@ -11,19 +11,19 @@ public class HighGoalToLaneCommand extends CommandSequence {
 
     switch (lane) {
       case 1:
-        distance = 100.0;
+        distance = Constants.AUTO_LANE_1_DISTANCE;
         break;
       case 2:
-        distance = 80.0;
+        distance = Constants.AUTO_LANE_2_DISTANCE;
         break;
       case 3:
-        distance = 30.0;
+        distance = Constants.AUTO_LANE_3_DISTANCE;
         break;
       case 4:
-        distance = 30.0;
+        distance = Constants.AUTO_LANE_4_DISTANCE;
         break;
       case 5:
-        distance = 75.0;
+        distance = Constants.AUTO_LANE_5_DISTANCE;
         break;
       default:
         distance = 0.0;

@@ -50,22 +50,27 @@ public class Constants {
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.15;
 
+  public static final double AUTO_LANE_1_DISTANCE = 90.0;
+  public static final double AUTO_LANE_2_DISTANCE = 75.0;
+  public static final double AUTO_LANE_3_DISTANCE = 35.0;
+  public static final double AUTO_LANE_4_DISTANCE = 35.0;
+  public static final double AUTO_LANE_5_DISTANCE = 75.0;
+  
   public static final double AUTO_DISTANCE_LINE_TO_PLATFORM = 50.0;
   public static final double AUTO_DISTANCE_LOW_BAR = 85.0;
-  public static final double AUTO_DISTANCE_ROCK_WALL = 130.0;
-  public static final double AUTO_DISTANCE_ROUGH_TERRAIN = 90.0;
-  public static final double AUTO_DISTANCE_MOAT = 120.0;
-  public static final double AUTO_DISTANCE_RAMPARTS = 115.0;
+  public static final double AUTO_DISTANCE_ROCK_WALL = 115.0;
+  public static final double AUTO_DISTANCE_ROUGH_TERRAIN = 85.0;
+  public static final double AUTO_DISTANCE_MOAT = 110.0;
+  public static final double AUTO_DISTANCE_RAMPARTS = 105.0;
   public static final double AUTO_DISTANCE_CHEVALLE = 5.0;
   
   public static final double AUTO_RETURN_OFFSET_LOW_BAR = 0.0;
-  public static final double AUTO_RETURN_OFFSET_ROCK_WALL = 0.0;
-  public static final double AUTO_RETURN_OFFSET_ROUGH_TERRAIN = 0.0;
-  public static final double AUTO_RETURN_OFFSET_MOAT = 0.0;
-  public static final double AUTO_RETURN_OFFSET_RAMPARTS = 0.0;
-  public static final double AUTO_RETURN_OFFSET_CHEVALLE = 10.0;
+  public static final double AUTO_RETURN_OFFSET_ROCK_WALL = 15.0;
+  public static final double AUTO_RETURN_OFFSET_ROUGH_TERRAIN = 5.0;
+  public static final double AUTO_RETURN_OFFSET_MOAT = 15.0;
+  public static final double AUTO_RETURN_OFFSET_RAMPARTS = 15.0;
+  public static final double AUTO_RETURN_OFFSET_CHEVALLE = 15.0;
   
-
   public static final double AUTO_STATIC_DEFENSES_SPEED = 0.9;
   public static final double AUTO_DEFENSE_TRANSLATE_TOLERANCE = 12.0;
 
@@ -122,7 +127,7 @@ public class Constants {
   public static final double ARM_SCALE_SPEED = -0.5;
   public static final int ARM_SCALE_TIME = 500;
 
-  public static final PIDValues ARM_PID = new PIDValues(0.4, 0.1, 0.0);
+  public static final PIDValues ARM_PID = new PIDValues(1.4, 0.0, 0.0);
   public static final double ARM_PID_IRANGE = 0.0;
   public static final double ARM_PID_IMAX = 0.3 / ARM_PID.i;
   public static final double ARM_PID_DEADZONE = 0.05;
@@ -146,8 +151,8 @@ public class Constants {
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 7500;
   public static final int SHOT_MID_RANGE_SHOOT_SPEED = 20000;
-  public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 27500;
-  public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 30000;
+  public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 30000;
+  public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 32000;
 
   public static final double SHOT_BATTER_ARM_POSITION = 0.0;
   public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;

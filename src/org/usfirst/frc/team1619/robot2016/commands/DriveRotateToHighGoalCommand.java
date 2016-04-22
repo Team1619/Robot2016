@@ -33,7 +33,7 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
 
   @Override
   protected void update() {
-    if (smashBoard.getGoodContourFound()) {
+    if (smashBoard.getContourFound()) {
       rotationPID.setTarget(-smashBoard.getRotationOffsetToAligned()
         + robotState.getShootAlignOffset());
     }
