@@ -11,21 +11,19 @@ public class ArmZeroCommand extends Command {
 
   @Override
   protected void update() {
-    robotOutput.setDartMotorNonZeroed(Constants.ARM_ZERO_SPEED);
-
-    if (sensorInput.getUpperHallEffect()) {
+    if (!robotOutput.setDartMotorNonZeroed(Constants.ARM_ZERO_SPEED)) {
       setFinished();
     }
   }
 
   @Override
   public void pause() {
-    robotOutput.setDartMotorNonZeroed(0.0);
+    robotOutput.setDartMotor(0.0);
   }
 
   @Override
   public void destruct() {
-    robotOutput.setDartMotorNonZeroed(0.0);
+    robotOutput.setDartMotor(0.0);
   }
 
 }

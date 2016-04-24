@@ -22,7 +22,7 @@ public class ArmManual extends State {
   @Override
   protected void update() {
     double armVelocity = driverInput.getOperatorY();
-    robotOutput.setDartMotorNonZeroed(armVelocity);
+    robotOutput.setDartMotor(armVelocity);
   }
 
   @Override

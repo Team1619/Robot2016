@@ -28,11 +28,11 @@ public class ScalerManualCommand extends Command {
 
   @Override
   public void pause() {
-    robotOutput.setScalerMotor(0);
+    robotOutput.setScalerMotor(0.0);
   }
 
   @Override
   public void destruct() {
-    robotOutput.setScalerMotor(0);
+    robotOutput.setScalerMotor(0.0);
   }
 }

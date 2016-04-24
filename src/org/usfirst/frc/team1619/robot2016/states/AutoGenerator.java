@@ -49,14 +49,14 @@ public class AutoGenerator extends SequencerState {
       defenseEnum.getReturnOffset()));
 
     switch (defenseEnum) {
-      case LOW_BAR:
       case ROCK_WALL:
       case ROUGH_TERRAIN:
       case MOAT:
       case RAMPARTS:
-        add(
-          new CrossDefenseCommand(defenseEnum, defenseEnum.getReturnOffset()));
+        add(new CrossDefenseCommand(defenseEnum,
+          defenseEnum.getReturnOffset() + 10.0));
         break;
+      case LOW_BAR:
       case CHEVALLE_DE_FRISE:
         break;
     }

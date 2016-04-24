@@ -112,6 +112,10 @@ public class SensorInput {
     robotOutput.setDriveRightPos(position);
   }
 
+  public double getRotationVelocity() {
+    return navX.getRate();
+  }
+
   /**
    * Gets the dart position.
    * 
@@ -119,6 +123,10 @@ public class SensorInput {
    */
   public double getDartPosition() {
     return robotOutput.getDartPosition() / Constants.DART_ENC_TICKS_PER_INCH;
+  }
+
+  public double getDartVelocity() {
+    return robotOutput.getDartVelocity() / Constants.DART_ENC_TICKS_PER_INCH;
   }
 
   public void zeroDart() {

@@ -3,7 +3,6 @@ package org.usfirst.frc.team1619.robot2016.states;
 import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.framework.State;
-import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove.ArmPosition;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
 
 public class MultiIntake extends State {
@@ -24,47 +23,60 @@ public class MultiIntake extends State {
 
   @Override
   public void initialize() {
-    stallTimer.reset();
+    stallTimer.setDuration(Constants.INTAKE_STALL_TIME_BEFORE_STOP);
   }
 
   @Override
   public void update() {
-    robotOutput.setShooterMotor(Constants.SHOOTER_INTAKE_SPEED);
-    robotOutput.setIntakeMotor(Constants.INTAKE_INTAKE_SPEED);
+    robotOutput.setDartMotor(-1.0);
+
+    if (sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT
+      || driverInput
+        .getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE_MANUAL)) {
+      robotOutput.setShooterMotor(Constants.SHOOTER_INTAKE_SPEED);
+      robotOutput.setIntakeMotor(Constants.INTAKE_INTAKE_SPEED);
+    }
 
     if (Math.abs(
-      sensorInput.getShooterEncoderVelocity()) < Constants.INTAKE_STALL_SPEED) {
+      sensorInput.getShooterEncoderVelocity()) < Constants.INTAKE_STALL_SPEED
+      && sensorInput.getDartPosition() < Constants.ARM_POSITION_DEFAULT) {
       if (stallTimer.isStarted()) {
         if (stallTimer.isFinished()) {
-          robotState.setIntakeStalled(true);
-          setFinished();
+          robotState.setArmToDefault(true);
         }
       }
       else {
-        stallTimer.setDuration(Constants.INTAKE_STALL_TIME_BEFORE_STOP);
         stallTimer.start();
       }
+    }
+
+    if (robotState.getBallPresenceRisingEdge()) {
+      setFinished();
     }
   }
 
   @Override
   public void pause() {
-    robotOutput.setShooterMotor(0);
-    robotOutput.setIntakeMotor(0);
-    stallTimer.reset();
+    robotOutput.setShooterMotor(0.0);
+    robotOutput.setIntakeMotor(0.0);
+    setFinished();
   }
 
   @Override
   public boolean isReadyForActive() {
-    return driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
-      || ArmPIDMove.getArmPosition() == ArmPosition.INTAKE;
+    return (driverInput.getOperatorButton(Constants.OPERATOR_BUTTON_INTAKE)
+      || isActive())
+      && !(driverInput.getOperatorY() > Constants.JOYSTICK_DEADZONE)
+      && !getFinished();
   }
 
   @Override
   protected void destruct() {
-    robotOutput.setShooterMotor(0);
-    robotOutput.setIntakeMotor(0);
+    robotOutput.setShooterMotor(0.0);
+    robotOutput.setIntakeMotor(0.0);
     stallTimer.reset();
+
+    setFinished(false);
   }
 
 }

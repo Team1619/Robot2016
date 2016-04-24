@@ -60,7 +60,7 @@ public abstract class SequencerState extends State {
   @Override
   protected void destruct() {
     commands.clear();
-    
+
     if (currentCommand != null) {
       currentCommand.destruct();
     }

@@ -4,9 +4,9 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
-import org.usfirst.frc.team1619.robot2016.framework.State;
+import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 
-public class ArmZeroToTop extends State {
+public class ArmZeroToTop extends SequencerState {
 
   private RobotState robotState;
 
@@ -25,25 +25,12 @@ public class ArmZeroToTop extends State {
   }
 
   @Override
-  protected void initialize() {
-    zeroCommand = new ArmZeroCommand();
+  protected void addCommands() {
+    add(new ArmZeroCommand());
 
-    zeroCommand.initializeCommand();
-  }
-
-  @Override
-  protected void update() {
-    zeroCommand.updateCommand();
-  }
-
-  @Override
-  protected void destruct() {
-    zeroCommand.destruct();
-  }
-
-  @Override
-  protected void pause() {
-    zeroCommand.pause();
+    if (!robotState.getArmZeroed()) {
+      robotState.setArmToDefault(true);
+    }
   }
 
   @Override

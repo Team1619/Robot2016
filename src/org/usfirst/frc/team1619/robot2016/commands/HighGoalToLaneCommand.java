@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
-import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class HighGoalToLaneCommand extends CommandSequence {
@@ -33,12 +32,13 @@ public class HighGoalToLaneCommand extends CommandSequence {
     CommandSequence rotateThenDrive = new CommandSequence();
     rotateThenDrive.add(
       new DriveRotateToAbsoluteCommand((initialAngle + 180.0) % 360, 2000));
-    rotateThenDrive.add(new DriveTranslateCommand(distance - offset, 0.95, 7.5, 2500));
+    rotateThenDrive
+      .add(new DriveTranslateCommand(distance - offset, 0.95, 7.5, 2500));
 
-    CommandGroup driveAndArmDown = new CommandGroup();
+    CommandSequence driveAndArmDown = new CommandSequence();
     driveAndArmDown.add(rotateThenDrive);
     driveAndArmDown
-      .add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT, 2000));
+      .addPassive(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
 
     add(driveAndArmDown);
   }

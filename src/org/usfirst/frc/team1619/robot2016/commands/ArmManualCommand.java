@@ -23,16 +23,16 @@ public class ArmManualCommand extends Command {
 
   @Override
   protected void update() {
-    robotOutput.setDartMotorNonZeroed(speed);
+    robotOutput.setDartMotor(speed);
   }
 
   @Override
   public void pause() {
-    robotOutput.setDartMotorNonZeroed(0);
+    robotOutput.setDartMotor(0);
   }
 
   @Override
   public void destruct() {
-    robotOutput.setDartMotorNonZeroed(0);
+    robotOutput.setDartMotor(0);
   }
 }

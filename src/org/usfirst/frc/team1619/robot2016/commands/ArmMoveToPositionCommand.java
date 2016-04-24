@@ -39,7 +39,8 @@ public class ArmMoveToPositionCommand extends Command {
     robotOutput.setDartMotor(armPID.get());
 
     if (Math.abs(armPID.getError()) <= Constants.AUTO_ARM_TOLERANCE) {
-      if (endTimer.isFinished()) {
+      if (endTimer.isFinished() || Math
+        .abs(sensorInput.getDartPosition()) < Constants.AUTO_ARM_STOP_SPEED) {
         setFinished();
       }
     }

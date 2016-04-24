@@ -14,7 +14,7 @@ public class ShootFromAnywhereCommand extends CommandSequence {
   public ShootFromAnywhereCommand() {
     this(0);
   }
-  
+
   public ShootFromAnywhereCommand(int shot) {
     super();
 
@@ -62,12 +62,18 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     CommandGroup rotateToHighGoalAndMoveArm = new CommandGroup();
     rotateToHighGoalAndMoveArm.add(new DriveRotateToHighGoalCommand());
     rotateToHighGoalAndMoveArm
-      .add(new ArmMoveToPositionCommand(targetArmPosition, 1250));
-    
+      .add(new ArmMoveToPositionCommand(targetArmPosition, 2000));
+
     CommandSequence alignAndSpool = new CommandSequence();
     alignAndSpool.add(rotateToHighGoalAndMoveArm);
-    alignAndSpool
-      .addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
+    if (shot > 1) {
+      alignAndSpool.addPassive(
+        new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
+    }
+    else {
+      alignAndSpool.addPassive(
+        new ShootManualCommand(Constants.SHOOTER_BATTER_SPOOL_UP_SPEED, 0));
+    }
 
     add(alignAndSpool);
 
@@ -78,16 +84,6 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     add(shoot);
 
     super.initialize();
-  }
-
-  @Override
-  public void pause() {
-    super.pause();
-  }
-
-  @Override
-  public void destruct() {
-    super.destruct();
   }
 
 }

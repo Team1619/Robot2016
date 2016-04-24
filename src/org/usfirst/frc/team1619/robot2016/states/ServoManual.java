@@ -26,7 +26,7 @@ public class ServoManual extends State {
   protected void update() {
     double operatorThrottle = driverInput.getOperatorThrottle();
     if (Math.abs(operatorThrottle) == 1 && !throttleEdge) {      
-      robotOutput.setExtensionServoPWM((-operatorThrottle + 1) / 2);
+      robotOutput.setExtensionServoPWM(0.725 * (-operatorThrottle + 1) / 2 + 0.1);
     }
     
     throttleEdge = Math.abs(operatorThrottle) == 1;

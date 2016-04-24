@@ -6,10 +6,9 @@ import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.framework.State;
 import org.usfirst.frc.team1619.robot2016.framework.Subsystem;
 import org.usfirst.frc.team1619.robot2016.states.ArmManual;
-import org.usfirst.frc.team1619.robot2016.states.ArmPIDMove;
+import org.usfirst.frc.team1619.robot2016.states.ArmMoveToDefault;
 import org.usfirst.frc.team1619.robot2016.states.ArmZeroToTop;
 import org.usfirst.frc.team1619.robot2016.states.AutoGenerator;
-import org.usfirst.frc.team1619.robot2016.states.AutoLowBar;
 import org.usfirst.frc.team1619.robot2016.states.DriveManual;
 import org.usfirst.frc.team1619.robot2016.states.DriveManualHoldHeading;
 import org.usfirst.frc.team1619.robot2016.states.DriveRotateToCameraTarget;
@@ -81,7 +80,7 @@ public class Robot extends IterativeRobot {
     shooter.addState(autoSequence);
     intake.addState(autoSequence);
     utilityArm.addState(autoSequence);
-    
+
     leds.addState(ledsState);
   }
 
@@ -114,11 +113,12 @@ public class Robot extends IterativeRobot {
     driveTrain.addState(new DriveManual());
 
     // utilityArm.addState(new ArmManualOveride());
+    utilityArm.addState(new ArmZeroToTop());
     utilityArm.addState(multiScale);
     utilityArm.addState(multiShootFromAnywhereFindLeft);
     utilityArm.addState(multiShootFromAnywhereFindRight);
-    utilityArm.addState(new ArmZeroToTop());
-    utilityArm.addState(new ArmPIDMove());
+    utilityArm.addState(new ArmMoveToDefault());
+    utilityArm.addState(multiIntake);
     utilityArm.addState(new ArmManual());
 
     shooter.addState(new ShootManual());
@@ -136,9 +136,9 @@ public class Robot extends IterativeRobot {
 
     scaler.addState(multiScale);
     scaler.addState(new ScalerManual());
-    
+
     leds.addState(new LEDsPassive());
-    
+
     servo.addState(new ServoManual());
   }
 

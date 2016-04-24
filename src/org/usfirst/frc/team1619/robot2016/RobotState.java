@@ -15,7 +15,7 @@ public class RobotState {
   private int armZero;
   private boolean armZeroed;
 
-  private boolean intakeStalled;
+  private boolean armToDefault;
 
   private boolean ballPresenceRearRisingEdge;
   private boolean ballPresenceRearLastValue;
@@ -38,6 +38,8 @@ public class RobotState {
     armZero = 0;
     armZeroed = false;
 
+    armToDefault = false;
+
     ballPresenceRearRisingEdge = false;
     ballPresenceRearLastValue = false;
 
@@ -53,8 +55,6 @@ public class RobotState {
   }
 
   public void initialize() {
-    intakeStalled = false;
-
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
@@ -70,7 +70,8 @@ public class RobotState {
     }
     ballPresenceRearLastValue = ballDetectedRear;
 
-    sensorInput.setVisionRingLight(true);
+    sensorInput.setVisionRingLight(
+      sensorInput.getDartPosition() > Constants.ARM_POSITION_VISION - 1.5);
 
     boolean offsetIncrease = driverInput
       .getDriverButton(Constants.DRIVER_BUTTON_SHOOT_OFFSET_INCREASE);
@@ -129,16 +130,16 @@ public class RobotState {
     return armZeroed;
   }
 
+  public boolean getArmToDefault() {
+    return armToDefault;
+  }
+
+  public void setArmToDefault(boolean armToDefault) {
+    this.armToDefault = armToDefault;
+  }
+
   public boolean getBallPresenceRisingEdge() {
     return ballPresenceRearRisingEdge;
-  }
-
-  public void setIntakeStalled(boolean stalled) {
-    intakeStalled = stalled;
-  }
-
-  public boolean getIntakeStalled() {
-    return intakeStalled;
   }
 
   public void extendedScaler() {

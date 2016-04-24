@@ -37,7 +37,7 @@ public class SocketHandler extends Thread {
   }
 
   private static void blast(JSONObject message) throws IOException {
-    synchronized(sockets) {
+    synchronized (sockets) {
       for (Socket socket : sockets) {
         if (!socket.isClosed()) {
           PrintWriter output = new PrintWriter(socket.getOutputStream());

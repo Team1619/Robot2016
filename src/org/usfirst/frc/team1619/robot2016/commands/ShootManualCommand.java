@@ -28,11 +28,12 @@ public class ShootManualCommand extends Command {
 
   @Override
   public void pause() {
+    robotOutput.setShooterMotor(0.0);
   }
 
   @Override
   public void destruct() {
-    robotOutput.setShooterMotor(0);
+    robotOutput.setShooterMotor(0.0);
   }
 
 }

@@ -106,8 +106,12 @@ public abstract class State {
     finished = true;
   }
 
+  protected void setFinished(boolean finished) {
+    this.finished = finished;
+  }
+
   protected boolean isActive() {
     return activeSubsystems.size() == subsystems.size();
   }
-  
+
 }

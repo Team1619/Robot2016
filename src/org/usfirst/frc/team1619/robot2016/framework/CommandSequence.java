@@ -11,31 +11,31 @@ public class CommandSequence extends Command {
   private Queue<Command> commands;
   private List<Command> passiveCommands;
   private Command currentCommand;
-  
+
   public CommandSequence() {
     commands = new LinkedList<>();
     passiveCommands = new ArrayList<>();
   }
-  
+
   public void add(Command command) {
     commands.add(command);
   }
-  
+
   public void addPassive(Command command) {
     passiveCommands.add(command);
   }
-  
+
   @Override
   protected void initialize() {
     if (commands.isEmpty()) {
       setFinished();
       return;
     }
-    
+
     for (Command passiveCommand : passiveCommands) {
       passiveCommand.initializeCommand();
     }
-    
+
     currentCommand = commands.poll();
     currentCommand.initializeCommand();
   }
@@ -45,24 +45,22 @@ public class CommandSequence extends Command {
     if (getFinished()) {
       return;
     }
-    
-    for (Iterator<Command> passives = passiveCommands.iterator(); passives.hasNext();) {
+
+    for (Iterator<Command> passives = passiveCommands.iterator(); passives
+      .hasNext();) {
       Command passiveCommand = passives.next();
       passiveCommand.updateCommand();
       if (passiveCommand.getFinished()) {
         passiveCommand.destruct();
-        // So apparently this is just magic
-        // And works
-        // ?!
         passives.remove();
       }
     }
-    
+
     currentCommand.updateCommand();
-    
+
     if (currentCommand.getFinished()) {
       currentCommand.destruct();
-      
+
       if (commands.isEmpty()) {
         setFinished();
       }
@@ -78,7 +76,7 @@ public class CommandSequence extends Command {
     if (currentCommand != null) {
       currentCommand.pause();
     }
-    
+
     for (Command passiveCommand : passiveCommands) {
       passiveCommand.pause();
     }
@@ -89,14 +87,14 @@ public class CommandSequence extends Command {
     if (currentCommand != null) {
       currentCommand.destruct();
     }
-    
+
     for (Command passiveCommand : passiveCommands) {
       passiveCommand.destruct();
     }
-    
+
     currentCommand = null;
     commands.clear();
     passiveCommands.clear();
   }
-  
+
 }

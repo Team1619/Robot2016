@@ -49,8 +49,10 @@ public class SmashBoard {
     socketServer.setLong("driveVelocity",
       (int)(sensorInput.getDriveLeftEncoderVelocity()
         + sensorInput.getDriveRightEncoderVelocity()) / 2);
-    socketServer.setDouble("dartEncoderPosition",
-      sensorInput.getDartPosition());
+    socketServer.setDouble("dartPosition", sensorInput.getDartPosition());
+    socketServer.setDouble("dartVelocity", sensorInput.getDartVelocity());
+    socketServer.setDouble("rotationVelocity",
+      sensorInput.getRotationVelocity());
   }
 
   public void setString(String key, String text) {
@@ -102,9 +104,5 @@ public class SmashBoard {
   public void setShotRange(int shotRange) {
     socketServer.setLong("shotRange", shotRange);
   }
-
-  // public static void main(String[] args) {
-  // SmashBoard smashBoard = new SmashBoard(5000);
-  // }
 
 }

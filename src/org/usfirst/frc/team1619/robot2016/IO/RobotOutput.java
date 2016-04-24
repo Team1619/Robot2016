@@ -44,7 +44,7 @@ public class RobotOutput {
   private CANTalon scalerMotor;
 
   private Servo extensionServo;
-  
+
   private RobotDrive drive;
 
   private RobotOutput() {
@@ -60,7 +60,7 @@ public class RobotOutput {
     intakeMotor = new CANTalon(Constants.INTAKE_MOTOR_ID);
     shooterMotor = new CANTalon(Constants.SHOOTER_MOTOR_ID);
     shooterMotor2 = new CANTalon(Constants.SHOOTER_MOTOR_2_ID);
-    
+
     scalerMotor = new CANTalon(Constants.SCALER_MOTOR_ID);
 
     driveRight1.setInverted(true);
@@ -78,7 +78,7 @@ public class RobotOutput {
     driveLeft2.enableBrakeMode(true);
 
     scalerMotor.enableBrakeMode(true);
-    
+
     extensionServo = new Servo(0);
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
@@ -107,6 +107,10 @@ public class RobotOutput {
     return dartMotor.getEncPosition() - robotState.getArmZero();
   }
 
+  public int getDartVelocity() {
+    return dartMotor.getEncVelocity();
+  }
+
   public void zeroDart() {
     robotState.setArmZero(dartMotor.getEncPosition());
   }
@@ -130,12 +134,13 @@ public class RobotOutput {
 
   /**
    * 
-   * @param value PWM value between 0.0 and 1.0
+   * @param value
+   *          PWM value between 0.0 and 1.0
    */
   public void setExtensionServoPWM(double value) {
     extensionServo.set(value);
   }
-  
+
   /**
    * Don't use this method. Use SensorInput instead.
    * 
@@ -215,10 +220,6 @@ public class RobotOutput {
    *          Speed of dart.
    */
   public boolean setDartMotor(double voltage) {
-    if (sensorInput.getUpperHallEffect()) {
-      sensorInput.zeroDart();
-    }
-
     boolean returnValue = true;
 
     if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
