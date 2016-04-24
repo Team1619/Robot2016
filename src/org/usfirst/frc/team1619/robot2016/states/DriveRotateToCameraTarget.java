@@ -8,7 +8,7 @@ import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
 public class DriveRotateToCameraTarget extends SequencerState {
 
   private static SubsystemID[] subsystems;
-  
+
   static {
     subsystems = new SubsystemID[] {SubsystemID.DRIVE_TRAIN};
   }
@@ -17,7 +17,6 @@ public class DriveRotateToCameraTarget extends SequencerState {
     super(subsystems);
   }
 
-  
   @Override
   public boolean isReadyForActive() {
     return driverInput
@@ -26,7 +25,7 @@ public class DriveRotateToCameraTarget extends SequencerState {
 
   @Override
   protected void addCommands() {
-    add(new DriveRotateToHighGoalCommand());
+    add(new DriveRotateToHighGoalCommand(true));
   }
 
 }

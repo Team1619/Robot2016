@@ -216,11 +216,11 @@ public class SensorInput {
     return !ballPresenceSensorFront.get();
   }
 
-  public void setBallDetectedRear(boolean isOn) {
+  public void setRearLEDs(boolean isOn) {
     ballDetectedRear.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
 
-  public void setBallDetectedFront(boolean isOn) {
+  public void setFrontLEDs(boolean isOn) {
     ballDetectedFront.set(isOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
 

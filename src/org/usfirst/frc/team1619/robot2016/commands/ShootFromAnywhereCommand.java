@@ -60,20 +60,15 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     }
 
     CommandGroup rotateToHighGoalAndMoveArm = new CommandGroup();
-    rotateToHighGoalAndMoveArm.add(new DriveRotateToHighGoalCommand());
     rotateToHighGoalAndMoveArm
-      .add(new ArmMoveToPositionCommand(targetArmPosition, 2000));
+      .add(new DriveRotateToHighGoalCommand(Constants.SHOT_ANGLE_TOLERANCE));
+    rotateToHighGoalAndMoveArm
+      .add(new ArmMoveToPositionCommand(targetArmPosition));
 
     CommandSequence alignAndSpool = new CommandSequence();
     alignAndSpool.add(rotateToHighGoalAndMoveArm);
-    if (shot > 1) {
-      alignAndSpool.addPassive(
-        new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
-    }
-    else {
-      alignAndSpool.addPassive(
-        new ShootManualCommand(Constants.SHOOTER_BATTER_SPOOL_UP_SPEED, 0));
-    }
+    alignAndSpool
+      .addPassive(new ShootManualCommand(Constants.SHOOTER_SPOOL_UP_SPEED, 0));
 
     add(alignAndSpool);
 

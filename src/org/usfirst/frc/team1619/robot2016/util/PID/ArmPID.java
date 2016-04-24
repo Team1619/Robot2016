@@ -14,8 +14,6 @@ public class ArmPID extends PIDMinimumOutput {
     sensorInput = SensorInput.getInstance();
 
     setValues(Constants.ARM_PID);
-    setIRange(Constants.ARM_PID_IRANGE);
-    setIMax(Constants.ARM_PID_IMAX);
     setDeadBand(Constants.ARM_PID_DEADZONE);
     setMinimumOutput(Constants.ARM_PID_MINIMUM);
   }

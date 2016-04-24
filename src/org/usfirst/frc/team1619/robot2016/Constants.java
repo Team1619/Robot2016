@@ -47,7 +47,7 @@ public class Constants {
   public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 0.85;
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
-  public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.7;
+  public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
   public static final double AUTO_ARM_TOLERANCE = 0.1;
   public static final double AUTO_ARM_STOP_SPEED = 0.2;
 
@@ -92,8 +92,8 @@ public class Constants {
   public static final double DRIVE_PID_TRANSLATION_MINIMUM_OUTPUT = 0.3;
 
   public static final int DRIVE_ROTATE_TO_TARGET_TIMEOUT = 5000;
-  public static final double DRIVE_ROTATE_TO_TARGET_TOLERANCE = 1.0;
   public static final double DRIVE_ROTATE_UPDATE_VISION_ANGLE_SPEED = 0.75;
+  public static final double DRIVE_ROTATE_UPDATE_STOP_ANGLE = 1.5;
 
   public static final double DRIVE_FIND_CONTOUR_ROTATE_SPEED = 0.8;
   public static final double DRIVE_FIND_GOOD_CONTOUR_ROTATE_SPEED = 0.7;
@@ -110,7 +110,6 @@ public class Constants {
   public static final double SHOOTER_INTAKE_SPEED = -1.0;
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.15;
-  public static final double SHOOTER_BATTER_SPOOL_UP_SPEED = 0.15;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
   public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -4.5;
 
@@ -130,11 +129,9 @@ public class Constants {
   public static final double ARM_SCALE_SPEED = -0.5;
   public static final int ARM_SCALE_TIME = 500;
 
-  public static final PIDValues ARM_PID = new PIDValues(1.2, 0.0, 0.0);
-  public static final double ARM_PID_IRANGE = 0.0;
-  public static final double ARM_PID_IMAX = 0.3 / ARM_PID.i;
+  public static final PIDValues ARM_PID = new PIDValues(0.6, 0.0, 0.0);
   public static final double ARM_PID_DEADZONE = 0.05;
-  public static final double ARM_PID_MINIMUM = 0.1;
+  public static final double ARM_PID_MINIMUM = 0.375;
   public static final int ARM_AUTO_DEADTIME = 500;
 
   public static final double ARM_ZERO_SPEED = 0.75;
@@ -142,6 +139,10 @@ public class Constants {
   public static final double ARM_POSITION_DEFAULT = -3.5;
   public static final double ARM_POSITION_VISION = 0.0;
 
+  // Servo
+  public static final double SERVO_IN_POSITION = 0.825;
+  public static final double SERVO_OUT_POSITION = 0.1;
+  
   // Shot configurations
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
   public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
@@ -153,9 +154,12 @@ public class Constants {
   public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 32000;
 
   public static final double SHOT_BATTER_ARM_POSITION = 0.0;
-  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.4;
-  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.4;
-  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.4;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;
+  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.275;
+  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.275;
+
+  // arcsin(3.5/max distance of shot)
+  public static final double SHOT_ANGLE_TOLERANCE = 1.0;
 
   // Arm Hall Effects
   public static final int ARM_UPPER_HALLEFFECT_ID = 0;

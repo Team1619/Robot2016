@@ -43,7 +43,8 @@ public class RobotOutput {
 
   private CANTalon scalerMotor;
 
-  private Servo extensionServo;
+  private Servo extensionServo1;
+  private Servo extensionServo2;
 
   private RobotDrive drive;
 
@@ -79,7 +80,8 @@ public class RobotOutput {
 
     scalerMotor.enableBrakeMode(true);
 
-    extensionServo = new Servo(0);
+    extensionServo1 = new Servo(0);
+    extensionServo2 = new Servo(1);
 
     drive = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
   }
@@ -138,7 +140,8 @@ public class RobotOutput {
    *          PWM value between 0.0 and 1.0
    */
   public void setExtensionServoPWM(double value) {
-    extensionServo.set(value);
+    extensionServo1.set(value);
+    extensionServo2.set(1.0 - value);
   }
 
   /**

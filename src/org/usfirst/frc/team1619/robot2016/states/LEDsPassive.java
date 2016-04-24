@@ -16,30 +16,30 @@ public class LEDsPassive extends State {
   }
 
   @Override
-  protected void initialize() {    
+  protected void initialize() {
   }
 
   @Override
-  protected void update() {    
-    sensorInput.setBallDetectedRear(sensorInput.getBallPresenceSensorRear());
-    sensorInput.setBallDetectedFront(sensorInput.getBallPresenceSensorFront());
+  protected void update() {
+    sensorInput.setRearLEDs(sensorInput.getBallPresenceSensorRear());
+    sensorInput.setFrontLEDs(sensorInput.getBallPresenceSensorFront());
   }
 
   @Override
-  protected void destruct() {    
-    sensorInput.setBallDetectedFront(false);
-    sensorInput.setBallDetectedRear(false);
+  protected void destruct() {
+    sensorInput.setFrontLEDs(false);
+    sensorInput.setRearLEDs(false);
   }
 
   @Override
   protected void pause() {
-    sensorInput.setBallDetectedFront(false);
-    sensorInput.setBallDetectedRear(false);    
+    sensorInput.setFrontLEDs(false);
+    sensorInput.setRearLEDs(false);
   }
 
   @Override
   public boolean isReadyForActive() {
     return true;
   }
- 
+
 }

@@ -137,8 +137,13 @@ public class Robot extends IterativeRobot {
     scaler.addState(multiScale);
     scaler.addState(new ScalerManual());
 
+    leds.addState(multiShootFromAnywhereFindLeft);
+    leds.addState(multiShootFromAnywhereFindRight);
+    leds.addState(multiIntake);
     leds.addState(new LEDsPassive());
 
+    servo.addState(multiShootFromAnywhereFindLeft);
+    servo.addState(multiShootFromAnywhereFindRight);
     servo.addState(new ServoManual());
   }
 

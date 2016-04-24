@@ -9,10 +9,13 @@ public class MultiIntake extends State {
 
   private GenericTimer stallTimer;
 
+  private int ledFrames;
+
   private static SubsystemID[] subsystems;
 
   static {
-    subsystems = new SubsystemID[] {SubsystemID.INTAKE, SubsystemID.SHOOTER};
+    subsystems = new SubsystemID[] {SubsystemID.INTAKE, SubsystemID.SHOOTER,
+      SubsystemID.LEDS};
   }
 
   public MultiIntake() {
@@ -24,6 +27,7 @@ public class MultiIntake extends State {
   @Override
   public void initialize() {
     stallTimer.setDuration(Constants.INTAKE_STALL_TIME_BEFORE_STOP);
+    ledFrames = 0;
   }
 
   @Override
@@ -52,6 +56,20 @@ public class MultiIntake extends State {
 
     if (robotState.getBallPresenceRisingEdge()) {
       setFinished();
+    }
+
+    if (sensorInput.getBallPresenceSensorFront()) {
+      sensorInput.setFrontLEDs(true);
+    }
+    else {
+      if (ledFrames < 5) {
+        sensorInput.setFrontLEDs(true);
+      }
+      else {
+        sensorInput.setFrontLEDs(false);
+      }
+
+      ledFrames = (ledFrames + 1) % 10;
     }
   }
 

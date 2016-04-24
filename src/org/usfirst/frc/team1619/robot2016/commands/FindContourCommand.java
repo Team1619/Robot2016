@@ -24,20 +24,23 @@ public class FindContourCommand extends Command {
 
   @Override
   protected void update() {
-    if (smashBoard.getContourFound() || smashBoard.getContourEdge()
-      || sensorInput.getDartPosition() < -1.0) {
-
-      if (smashBoard.getGoodContourFound()) {
-        setFinished();
+    if (sensorInput.getDartPosition() > -1.0) {
+      if (smashBoard.getContourFound() || smashBoard.getContourEdge()) {
+        if (smashBoard.getGoodContourFound()) {
+          setFinished();
+        }
+        else {
+          robotOutput.arcadeDrive(0.0,
+            (left ? -1 : 1) * Constants.DRIVE_FIND_GOOD_CONTOUR_ROTATE_SPEED);
+        }
       }
       else {
         robotOutput.arcadeDrive(0.0,
-          (left ? -1 : 1) * Constants.DRIVE_FIND_GOOD_CONTOUR_ROTATE_SPEED);
+          (left ? -1 : 1) * Constants.DRIVE_FIND_CONTOUR_ROTATE_SPEED);
       }
     }
     else {
-      robotOutput.arcadeDrive(0.0,
-        (left ? -1 : 1) * Constants.DRIVE_FIND_CONTOUR_ROTATE_SPEED);
+      robotOutput.arcadeDrive(0.0, 0.0);
     }
 
     robotOutput.setDartMotor(1.0);

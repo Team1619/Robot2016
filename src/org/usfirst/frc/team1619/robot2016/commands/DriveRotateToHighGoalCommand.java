@@ -9,16 +9,26 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
   private SmashBoard smashBoard;
   private RobotState robotState;
 
-  public DriveRotateToHighGoalCommand() {
-    this(false);
+  private double tolerance;
+  private boolean updating;
+
+  public DriveRotateToHighGoalCommand(double tolerance) {
+    this(tolerance, false);
   }
 
   public DriveRotateToHighGoalCommand(boolean infinite) {
-    super(0.0, infinite ? 0.0 : Constants.DRIVE_ROTATE_TO_TARGET_TOLERANCE,
+    this(0.0, infinite);
+  }
+
+  public DriveRotateToHighGoalCommand(double tolerance, boolean infinite) {
+    super(0.0, infinite ? 0.0 : tolerance,
       infinite ? 0 : Constants.DRIVE_ROTATE_TO_TARGET_TIMEOUT);
 
     smashBoard = SmashBoard.getInstance();
     robotState = RobotState.getInstance();
+
+    this.tolerance = tolerance;
+    updating = true;
   }
 
   @Override
@@ -33,9 +43,15 @@ public class DriveRotateToHighGoalCommand extends DriveRotateCommand {
 
   @Override
   protected void update() {
-    if (smashBoard.getContourFound()) {
-      rotationPID.setTarget(-smashBoard.getRotationOffsetToAligned()
-        + robotState.getShootAlignOffset());
+    if (smashBoard.getContourFound() && updating) {
+      double offset = -smashBoard.getRotationOffsetToAligned()
+        + robotState.getShootAlignOffset();
+
+      if (Math.abs(offset) < tolerance * 1.5) {
+        updating = false;
+      }
+
+      rotationPID.setTarget(offset);
     }
 
     super.update();
