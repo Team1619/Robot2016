@@ -32,7 +32,7 @@ public class AutoGenerator extends SequencerState {
 
     add(new ArmZeroCommand());
 
-    if (MathUtility.constrain(defense, 6, 1) != defense
+    if (MathUtility.constrain(defense, 7, 1) != defense
       || MathUtility.constrain(lane, 5, 1) != lane) {
       add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
       return;
@@ -61,10 +61,13 @@ public class AutoGenerator extends SequencerState {
       case ROUGH_TERRAIN:
       case MOAT:
       case RAMPARTS:
+      case PORTCULLIS:
         add(new CrossDefenseCommand(defenseEnum,
           defenseEnum.getReturnOffset() + 10.0));
         break;
       case LOW_BAR:
+        add(
+          new CrossDefenseCommand(defenseEnum, defenseEnum.getReturnOffset()));
         break;
       case CHEVALLE_DE_FRISE:
         add(new CrossChevalleDeFriseCommand(true));

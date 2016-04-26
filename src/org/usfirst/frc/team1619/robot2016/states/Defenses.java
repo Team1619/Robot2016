@@ -8,7 +8,8 @@ public enum Defenses {
       Constants.AUTO_RETURN_OFFSET_ROUGH_TERRAIN), MOAT(0.0,
         Constants.AUTO_RETURN_OFFSET_MOAT), RAMPARTS(0.0,
           Constants.AUTO_RETURN_OFFSET_RAMPARTS), CHEVALLE_DE_FRISE(-7.5,
-            Constants.AUTO_RETURN_OFFSET_CHEVALLE);
+            Constants.AUTO_RETURN_OFFSET_CHEVALLE), PORTCULLIS(0.0,
+              Constants.AUTO_RETURN_OFFSET_PORTCULLIS);
 
   private double horizontalOffset;
   private double returnOffset;

@@ -9,7 +9,7 @@ public class CrossChevalleDeFriseCommand extends CommandSequence {
   public CrossChevalleDeFriseCommand() {
     this(false);
   }
-  
+
   public CrossChevalleDeFriseCommand(boolean initialDrive) {
     CommandSequence startCrossing = new CommandSequence();
     startCrossing.add(new ArmManualCommand(-0.9, 750));
@@ -30,7 +30,7 @@ public class CrossChevalleDeFriseCommand extends CommandSequence {
     fullCrossing.add(raiseArmCrossing);
 
     if (initialDrive) {
-      add(new DriveTranslateCommand(20.0, 0.7, 3.75, 1500));
+      add(new DriveTranslateCommand(22.5, 0.7, 3.75, 1500));
     }
     add(fullCrossing);
   }
