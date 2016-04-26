@@ -4,6 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.SubsystemID;
 import org.usfirst.frc.team1619.robot2016.commands.ArmMoveToPositionCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ArmZeroCommand;
+import org.usfirst.frc.team1619.robot2016.commands.CrossChevalleDeFriseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.CrossDefenseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.HighGoalToLaneCommand;
 import org.usfirst.frc.team1619.robot2016.commands.LaneToHighGoalCommand;
@@ -43,10 +44,17 @@ public class AutoGenerator extends SequencerState {
     add(new CrossDefenseCommand(defenseEnum,
       Constants.AUTO_DISTANCE_LINE_TO_PLATFORM));
 
-    add(new LaneToHighGoalCommand(initialAngle, lane));
-    add(new ShootFromAnywhereCommand(2));
-    add(new HighGoalToLaneCommand(initialAngle, lane,
-      defenseEnum.getReturnOffset()));
+    add(new LaneToHighGoalCommand(initialAngle, lane,
+      defenseEnum.getHorizontalOffset()));
+    add(new ShootFromAnywhereCommand());
+    if (defenseEnum == Defenses.CHEVALLE_DE_FRISE) {
+      add(new HighGoalToLaneCommand(initialAngle, lane,
+        defenseEnum.getReturnOffset(), Constants.ARM_POSITION_DEFAULT + 1.0));
+    }
+    else {
+      add(new HighGoalToLaneCommand(initialAngle, lane,
+        defenseEnum.getReturnOffset()));
+    }
 
     switch (defenseEnum) {
       case ROCK_WALL:
@@ -57,7 +65,9 @@ public class AutoGenerator extends SequencerState {
           defenseEnum.getReturnOffset() + 10.0));
         break;
       case LOW_BAR:
+        break;
       case CHEVALLE_DE_FRISE:
+        add(new CrossChevalleDeFriseCommand(true));
         break;
     }
   }

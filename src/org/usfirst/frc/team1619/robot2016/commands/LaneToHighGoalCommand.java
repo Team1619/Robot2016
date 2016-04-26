@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 
 public class LaneToHighGoalCommand extends CommandSequence {
 
-  public LaneToHighGoalCommand(double initialAngle, int lane) {
+  public LaneToHighGoalCommand(double initialAngle, int lane, double offset) {
     double distance;
     boolean left;
 
@@ -42,7 +43,22 @@ public class LaneToHighGoalCommand extends CommandSequence {
     driveAndArmDown
       .add(new ArmMoveToPositionCommand(Constants.ARM_POSITION_VISION, 2500));
 
-    add(new DriveRotateToAbsoluteCommand(initialAngle));
+    double angle = initialAngle;
+
+    if (offset != 0.0) {
+      double offsetAngle =
+        Math.atan(Math.abs(offset) / distance) * 180 / Math.PI;
+      SmashBoard.getInstance().setString("test",
+        "" + offsetAngle + ", " + offset);
+      if (offset > 0) {
+        angle += offsetAngle;
+      }
+      else {
+        angle -= offsetAngle;
+      }
+    }
+
+    add(new DriveRotateToAbsoluteCommand(angle, 2000));
     add(driveAndArmDown);
     add(new FindContourCommand(left));
   }

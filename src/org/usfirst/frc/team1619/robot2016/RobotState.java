@@ -20,6 +20,7 @@ public class RobotState {
   private boolean ballPresenceRearRisingEdge;
   private boolean ballPresenceRearLastValue;
 
+  private double shootSpeedPercent;
   private double shootOffset;
   private boolean shootOffsetIncreaseLastValue;
   private boolean shootOffsetDecreaseLastValue;
@@ -43,6 +44,7 @@ public class RobotState {
     ballPresenceRearRisingEdge = false;
     ballPresenceRearLastValue = false;
 
+    shootSpeedPercent = Constants.SHOT_INITIAL_SPEED_PERCENT;
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
@@ -55,6 +57,7 @@ public class RobotState {
   }
 
   public void initialize() {
+    shootSpeedPercent = Constants.SHOT_INITIAL_SPEED_PERCENT;
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
@@ -90,6 +93,13 @@ public class RobotState {
     shootOffsetIncreaseLastValue = offsetIncrease;
     shootOffsetDecreaseLastValue = offsetDecrease;
 
+    if (driverInput
+      .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_SHOOT_SPEED)) {
+      shootSpeedPercent =
+        (Math.round((1.0 - driverInput.getDriverThrottle()) * 5.0) * 5 + 50)
+          / 100.0;
+    }
+
     smashBoard.setShootOffset(shootOffset);
 
     if (smashBoard.getGoodContourFound()) {
@@ -111,6 +121,10 @@ public class RobotState {
     else {
       smashBoard.setShotRange(0);
     }
+  }
+
+  public double getShootSpeedPercent() {
+    return shootSpeedPercent;
   }
 
   public double getShootAlignOffset() {

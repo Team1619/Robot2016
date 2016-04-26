@@ -18,17 +18,16 @@ public class SmashBoard {
   }
 
   private SensorInput sensorInput;
+  private RobotState robotState;
 
   public SmashBoard() {
     socketServer = new SocketServer();
     socketServer.startServer();
-    sensorInput = SensorInput.getInstance();
   }
 
-  public SmashBoard(int port) {
-    socketServer = new SocketServer(port);
-    socketServer.startServer();
+  public void initialize() {
     sensorInput = SensorInput.getInstance();
+    robotState = RobotState.getInstance();
   }
 
   public void update() {
@@ -53,6 +52,8 @@ public class SmashBoard {
     socketServer.setDouble("dartVelocity", sensorInput.getDartVelocity());
     socketServer.setDouble("rotationVelocity",
       sensorInput.getRotationVelocity());
+    socketServer.setDouble("shootSpeedPercent",
+      robotState.getShootSpeedPercent() * 100.0);
   }
 
   public void setString(String key, String text) {

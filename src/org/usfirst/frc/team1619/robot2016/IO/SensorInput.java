@@ -129,8 +129,8 @@ public class SensorInput {
     return robotOutput.getDartVelocity() / Constants.DART_ENC_TICKS_PER_INCH;
   }
 
-  public void zeroDart() {
-    robotOutput.zeroDart();
+  public void zeroDart(boolean bottom) {
+    robotOutput.zeroDart(bottom ? Constants.ARM_DOWN_OFFSET_FROM_ZERO : 0);
   }
 
   /**

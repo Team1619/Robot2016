@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.IO.SocketTables.SmashBoard;
 import org.usfirst.frc.team1619.robot2016.framework.CommandGroup;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
@@ -8,6 +9,7 @@ import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 public class ShootFromAnywhereCommand extends CommandSequence {
 
   private SmashBoard smashBoard;
+  private RobotState robotState;
 
   private int shot;
 
@@ -24,6 +26,7 @@ public class ShootFromAnywhereCommand extends CommandSequence {
   @Override
   protected void initialize() {
     smashBoard = SmashBoard.getInstance();
+    robotState = robotState.getInstance();
 
     if (!smashBoard.getContourFound()) {
       return;
@@ -73,7 +76,8 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     add(alignAndSpool);
 
     CommandSequence shoot = new CommandSequence();
-    shoot.add(new ShootCommand(targetShooterSpeed, 5000));
+    shoot.add(new ShootCommand(
+      (int)(targetShooterSpeed * robotState.getShootSpeedPercent()), 5000));
     shoot.addPassive(new DriveRotateToHighGoalCommand(true));
 
     add(shoot);

@@ -113,8 +113,8 @@ public class RobotOutput {
     return dartMotor.getEncVelocity();
   }
 
-  public void zeroDart() {
-    robotState.setArmZero(dartMotor.getEncPosition());
+  public void zeroDart(int offset) {
+    robotState.setArmZero(dartMotor.getEncPosition() + offset);
   }
 
   public void setIntakeMotor(double speed) {
@@ -225,6 +225,10 @@ public class RobotOutput {
   public boolean setDartMotor(double voltage) {
     boolean returnValue = true;
 
+    if (sensorInput.getLowerHallEffect()) {
+      sensorInput.zeroDart(true);
+    }
+
     if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
       || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
       voltage = 0.0;
@@ -244,22 +248,8 @@ public class RobotOutput {
     return returnValue;
   }
 
-  public boolean setDartMotorNonZeroed(double voltage) {
-    if (sensorInput.getUpperHallEffect()) {
-      sensorInput.zeroDart();
-    }
-
-    boolean returnValue = true;
-
-    if ((voltage > 0.0 && sensorInput.getUpperHallEffect())
-      || (voltage < 0.0 && sensorInput.getLowerHallEffect())) {
-      voltage = 0.0;
-      returnValue = false;
-    }
-
+  public void setDartMotorIgnoreSensors(double voltage) {
     dartMotor.set(voltage);
-
-    return returnValue;
   }
 
 }

@@ -4,7 +4,7 @@ import org.usfirst.frc.team1619.robot2016.Constants;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 import org.usfirst.frc.team1619.robot2016.util.MathUtility;
 
-public class DriveRotationPID extends GenericPID {
+public class DriveRotationPID extends PIDMinimumOutput {
   SensorInput sensorInput;
   double targetAngle;
 
@@ -16,6 +16,7 @@ public class DriveRotationPID extends GenericPID {
     setValues(Constants.DRIVE_PID_ROTATION);
     setIRange(Constants.DRIVE_PID_ROTATION_IRANGE);
     setIMax(Constants.DRIVE_PID_ROTATION_IMAX);
+    setMinimumOutput(Constants.DRIVE_PID_ROTATION_MINIMUM_OUTPUT);
     setDeadBand(Constants.DRIVE_PID_ROTATION_DEADZONE);
   }
 
@@ -31,7 +32,7 @@ public class DriveRotationPID extends GenericPID {
 
   public void calculate() {
     super.calculate(getRotationError(targetAngle));
-//    SmashBoard.getInstance().setAngleError(getError());
+    // SmashBoard.getInstance().setAngleError(getError());
   }
 
   @Override
@@ -48,7 +49,8 @@ public class DriveRotationPID extends GenericPID {
   @Override
   public double iCalc(double error) {
     double iCalc = super.iCalc(error);
-    if (Math.abs(error) < deadBand || Math.signum(iCalc) != Math.signum(error)) {
+    if (Math.abs(error) < deadBand
+      || Math.signum(iCalc) != Math.signum(error)) {
       resetIntegral();
       return 0;
     }

@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
     // Some IO singletons must be initialized, because some depend on others
     RobotOutput.getInstance().initialize();
     SensorInput.getInstance().initialize();
+    SmashBoard.getInstance().initialize();
 
     robotState = RobotState.getInstance();
 

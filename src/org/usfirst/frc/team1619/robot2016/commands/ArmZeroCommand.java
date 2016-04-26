@@ -11,7 +11,8 @@ public class ArmZeroCommand extends Command {
 
   @Override
   protected void update() {
-    if (!robotOutput.setDartMotorNonZeroed(Constants.ARM_ZERO_SPEED)) {
+    if (!robotOutput.setDartMotor(Constants.ARM_ZERO_SPEED)) {
+      sensorInput.zeroDart(false);
       setFinished();
     }
   }

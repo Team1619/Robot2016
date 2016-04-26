@@ -43,8 +43,12 @@ public class CrossDefenseCommand extends CommandSequence {
     CommandSequence cross = new CommandSequence();
 
     if (defense == Defenses.LOW_BAR) {
-      cross.add(new PauseCommand(500));
+      cross.add(new PauseCommand(375));
       cross.addPassive(new ArmManualCommand(-1.0, 0));
+    }
+    else if (defense == Defenses.CHEVALLE_DE_FRISE) {
+      cross.addPassive(
+        new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT + 1.0));
     }
     else {
       cross.addPassive(
@@ -54,11 +58,11 @@ public class CrossDefenseCommand extends CommandSequence {
       new DriveTranslateCommand(distance, Constants.AUTO_STATIC_DEFENSES_SPEED,
         Constants.AUTO_DEFENSE_TRANSLATE_TOLERANCE, 0));
 
-    if (defense == Defenses.CHEVALLE_DE_FRISE) {
-      cross.add(new CrossChevalleDeFriseCommand());
-    }
-
     add(cross);
+
+    if (defense == Defenses.CHEVALLE_DE_FRISE) {
+      add(new CrossChevalleDeFriseCommand());
+    }
   }
 
 }

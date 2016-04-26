@@ -6,6 +6,11 @@ import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 public class HighGoalToLaneCommand extends CommandSequence {
 
   public HighGoalToLaneCommand(double initialAngle, int lane, double offset) {
+    this(initialAngle, lane, offset, Constants.ARM_POSITION_DEFAULT);
+  }
+
+  public HighGoalToLaneCommand(double initialAngle, int lane, double offset,
+    double armAngle) {
     double distance;
 
     switch (lane) {
@@ -37,8 +42,7 @@ public class HighGoalToLaneCommand extends CommandSequence {
 
     CommandSequence driveAndArmDown = new CommandSequence();
     driveAndArmDown.add(rotateThenDrive);
-    driveAndArmDown
-      .addPassive(new ArmMoveToPositionCommand(Constants.ARM_POSITION_DEFAULT));
+    driveAndArmDown.addPassive(new ArmMoveToPositionCommand(armAngle));
 
     add(driveAndArmDown);
   }
