@@ -151,7 +151,9 @@ public class Constants {
   public static final double SERVO_OUT_POSITION = 0.1;
 
   // Shot configurations
-  public static final double SHOT_INITIAL_SPEED_PERCENT = 1.0;
+  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.65;
+  public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.45;
+  public static final double SHOT_SPEED_PERCENT_RANGE = 0.8 - .45;
 
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
   public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
@@ -186,12 +188,12 @@ public class Constants {
   public static final int SCALER_MOTOR_ID = 8;
 
   // Digital IO
-  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 2;
 
   // Relays
-  public static final int RELAY_BALL_DETECTED_REAR_ID = 1;
-  public static final int RELAY_BALL_DETECTED_FRONT_ID = 0;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 0;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 1;
   public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders

@@ -95,9 +95,9 @@ public class RobotState {
 
     if (driverInput
       .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_SHOOT_SPEED)) {
-      shootSpeedPercent =
-        (Math.round((1.0 - driverInput.getDriverThrottle()) * 5.0) * 5 + 50)
-          / 100.0;
+      shootSpeedPercent = (((1.0 - driverInput.getDriverThrottle()) / 2)
+        * Constants.SHOT_SPEED_PERCENT_RANGE)
+        + Constants.SHOT_SPEED_PERCENT_LOWER_VALUE;
     }
 
     smashBoard.setShootOffset(shootOffset);
