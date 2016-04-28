@@ -186,12 +186,12 @@ public class Constants {
   public static final int SCALER_MOTOR_ID = 8;
 
   // Digital IO
-  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 2;
-  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_REAR_ID = 3;
+  public static final int BALL_PRESENCE_SENSOR_FRONT_ID = 2;
 
   // Relays
-  public static final int RELAY_BALL_DETECTED_REAR_ID = 1;
-  public static final int RELAY_BALL_DETECTED_FRONT_ID = 0;
+  public static final int RELAY_BALL_DETECTED_REAR_ID = 0;
+  public static final int RELAY_BALL_DETECTED_FRONT_ID = 1;
   public static final int RELAY_VISION_RING_LIGHT_ID = 2;
 
   // Encoders

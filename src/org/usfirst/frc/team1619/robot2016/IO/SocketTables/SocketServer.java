@@ -48,6 +48,8 @@ public class SocketServer extends Thread {
     while (open) {
       try {
         Socket socket = serverSocket.accept();
+        socket.setTcpNoDelay(true);
+        socket.setKeepAlive(false);
 
         SocketHandler messageHandler = new SocketHandler(socket);
         messageHandler.start();

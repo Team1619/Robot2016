@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,24 +29,29 @@ public class SocketHandler extends Thread {
 
   private static void addSocket(Socket socket) {
     System.out.println("Add: " + socket.getLocalSocketAddress());
-    sockets.add(socket);
+    synchronized (sockets) {
+      sockets.add(socket);
+    }
   }
 
   private static void removeSocket(Socket socket) {
     System.out.println("Remove: " + socket.getLocalSocketAddress());
-    sockets.remove(socket);
+    synchronized (sockets) {
+      sockets.remove(socket);
+    }
   }
 
   private static void blast(JSONObject message) throws IOException {
-    synchronized (sockets) {
-      for (Socket socket : sockets) {
-        if (!socket.isClosed()) {
+    Set<Socket> copy = new HashSet<>( sockets );
+    //synchronized (sockets) {
+      for (Socket socket : copy) {
+        if (!socket.isClosed() && socket.getInetAddress().isReachable(1000)) {
           PrintWriter output = new PrintWriter(socket.getOutputStream());
           output.println(message);
           output.flush();
         }
       }
-    }
+    // }
   }
 
   public SocketHandler(Socket socket) {
