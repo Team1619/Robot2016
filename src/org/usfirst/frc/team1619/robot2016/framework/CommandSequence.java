@@ -18,11 +18,15 @@ public class CommandSequence extends Command {
   }
 
   public void add(Command command) {
-    commands.add(command);
+    if (command != null) {
+      commands.add(command);
+    }
   }
 
   public void addPassive(Command command) {
-    passiveCommands.add(command);
+    if (command != null) {
+      passiveCommands.add(command);
+    }
   }
 
   @Override
@@ -56,17 +60,22 @@ public class CommandSequence extends Command {
       }
     }
 
-    currentCommand.updateCommand();
+    if (currentCommand == null) {
+      setFinished();
+    }
+    else {
+      currentCommand.updateCommand();
 
-    if (currentCommand.getFinished()) {
-      currentCommand.destruct();
+      if (currentCommand.getFinished()) {
+        currentCommand.destruct();
 
-      if (commands.isEmpty()) {
-        setFinished();
-      }
-      else {
-        currentCommand = commands.poll();
-        currentCommand.initializeCommand();
+        if (commands.isEmpty()) {
+          setFinished();
+        }
+        else {
+          currentCommand = commands.poll();
+          currentCommand.initializeCommand();
+        }
       }
     }
   }

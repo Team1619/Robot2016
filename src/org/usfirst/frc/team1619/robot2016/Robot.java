@@ -149,10 +149,15 @@ public class Robot extends IterativeRobot {
   }
 
   public void teleopPeriodic() {
-    robotState.update();
-    Subsystem.updateAll();
-    State.updateAll();
-    smashBoard.update();
+    try {
+      robotState.update();
+      Subsystem.updateAll();
+      State.updateAll();
+      smashBoard.update();
+    }
+    catch (Exception exception) {
+      exception.printStackTrace();
+    }
   }
 
   public void testPeriodic() {
