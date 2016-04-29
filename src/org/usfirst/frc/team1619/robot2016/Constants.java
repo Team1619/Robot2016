@@ -57,13 +57,13 @@ public class Constants {
   public static final double AUTO_LANE_2_DISTANCE = 75.0;
   public static final double AUTO_LANE_3_DISTANCE = 35.0;
   public static final double AUTO_LANE_4_DISTANCE = 35.0;
-  public static final double AUTO_LANE_5_DISTANCE = 75.0;
+  public static final double AUTO_LANE_5_DISTANCE = 90.0;
 
   public static final double AUTO_DISTANCE_LINE_TO_PLATFORM = 50.0;
   public static final double AUTO_DISTANCE_LOW_BAR = 85.0;
   public static final double AUTO_DISTANCE_ROCK_WALL = 115.0;
   public static final double AUTO_DISTANCE_ROUGH_TERRAIN = 85.0;
-  public static final double AUTO_DISTANCE_MOAT = 110.0;
+  public static final double AUTO_DISTANCE_MOAT = 130.0;
   public static final double AUTO_DISTANCE_RAMPARTS = 105.0;
   public static final double AUTO_DISTANCE_CHEVALLE = -5.0;
   public static final double AUTO_DISTANCE_PORTCULLIS = 0.0;
@@ -143,7 +143,7 @@ public class Constants {
 
   public static final double ARM_ZERO_SPEED = 1.0;
 
-  public static final double ARM_POSITION_DEFAULT = -3.0;
+  public static final double ARM_POSITION_DEFAULT = -3.4;
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Servo
@@ -151,23 +151,23 @@ public class Constants {
   public static final double SERVO_OUT_POSITION = 0.1;
 
   // Shot configurations
-  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.65;
-  public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.45;
-  public static final double SHOT_SPEED_PERCENT_RANGE = 0.8 - .45;
+  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.75;
+  public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.5;
+  public static final double SHOT_SPEED_PERCENT_RANGE = 0.9 - SHOT_SPEED_PERCENT_LOWER_VALUE;
 
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
   public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
   public static final double SHOT_LONG_RANGE_CUT_OFF = 160.0;
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 5000;
-  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 15000;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 12500;
   public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 30000;
   public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 32000;
 
   public static final double SHOT_BATTER_ARM_POSITION = 0.0;
-  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;
-  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.275;
-  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.275;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.25;
+  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.2;
+  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.2;
 
   // arcsin(3.5/max distance of shot)
   public static final double SHOT_ANGLE_TOLERANCE = 0.8;

@@ -7,6 +7,7 @@ import org.usfirst.frc.team1619.robot2016.commands.ControlFrontLEDs;
 import org.usfirst.frc.team1619.robot2016.commands.ControlRearLEDs;
 import org.usfirst.frc.team1619.robot2016.commands.FindContourCommand;
 import org.usfirst.frc.team1619.robot2016.commands.FlashFrontLEDs;
+import org.usfirst.frc.team1619.robot2016.commands.PauseCommand;
 import org.usfirst.frc.team1619.robot2016.commands.ShootFromAnywhereCommand;
 import org.usfirst.frc.team1619.robot2016.framework.CommandSequence;
 import org.usfirst.frc.team1619.robot2016.framework.SequencerState;
@@ -35,6 +36,7 @@ public class MultiShootFromAnywhere extends SequencerState {
   protected void addCommands() {
     CommandSequence align = new CommandSequence();
     align.add(new FindContourCommand(left));
+    align.add(new PauseCommand(100));
     align.addPassive(new FlashFrontLEDs(5));
 
     CommandSequence shoot = new CommandSequence();

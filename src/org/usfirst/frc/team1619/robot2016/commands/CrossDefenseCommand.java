@@ -46,7 +46,7 @@ public class CrossDefenseCommand extends CommandSequence {
     CommandSequence cross = new CommandSequence();
 
     if (defense == Defenses.LOW_BAR) {
-      cross.add(new PauseCommand(375));
+      cross.add(new PauseCommand(625));
       cross.addPassive(new ArmManualCommand(-1.0, 0));
     }
     else if (defense == Defenses.CHEVALLE_DE_FRISE) {
