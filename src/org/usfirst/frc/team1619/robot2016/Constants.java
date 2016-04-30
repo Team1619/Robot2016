@@ -19,7 +19,8 @@ public class Constants {
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_INCREASE = 7;
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_DECREASE = 13;
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_RESET = 14;
-  public static final int DRIVER_BUTTON_UPDATE_SHOOT_SPEED = 16;
+  public static final int DRIVER_BUTTON_RESET_ARM_ANGLE_MODIFIER = 15;
+  public static final int DRIVER_BUTTON_UPDATE_ARM_ANGLE_MODIFIER = 16;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_SHOOT = 1;
@@ -117,7 +118,7 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.15;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
-  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -4.5;
+  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -6.5;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -143,7 +144,7 @@ public class Constants {
 
   public static final double ARM_ZERO_SPEED = 1.0;
 
-  public static final double ARM_POSITION_DEFAULT = -3.4;
+  public static final double ARM_POSITION_DEFAULT = -3.55;
   public static final double ARM_POSITION_VISION = 0.0;
 
   // Servo
@@ -154,20 +155,22 @@ public class Constants {
   public static final double SHOT_INITIAL_SPEED_PERCENT = 0.75;
   public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.5;
   public static final double SHOT_SPEED_PERCENT_RANGE = 0.9 - SHOT_SPEED_PERCENT_LOWER_VALUE;
+  
+  public static final double ARM_ANGLE_MODIFIER_MAGNITUDE = 0.3;
 
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
   public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
   public static final double SHOT_LONG_RANGE_CUT_OFF = 160.0;
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 5000;
-  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 12500;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 10000;
   public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 30000;
   public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 32000;
 
   public static final double SHOT_BATTER_ARM_POSITION = 0.0;
-  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.25;
-  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.2;
-  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.2;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.45;
+  public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.4;
+  public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.4;
 
   // arcsin(3.5/max distance of shot)
   public static final double SHOT_ANGLE_TOLERANCE = 0.8;

@@ -54,6 +54,7 @@ public class SmashBoard {
       sensorInput.getRotationVelocity());
     socketServer.setDouble("shootSpeedPercent",
       robotState.getShootSpeedPercent() * 100.0);
+    socketServer.setDouble("armAngleModifier", robotState.getArmAngleModifier());
     socketServer.setDouble("navXPitch", sensorInput.getNavXPitch());
     socketServer.setDouble("navXRoll", sensorInput.getNavXRoll());
   }
