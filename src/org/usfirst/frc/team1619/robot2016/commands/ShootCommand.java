@@ -31,7 +31,7 @@ public class ShootCommand extends Command {
 
   @Override
   protected void update() {
-    if (!shooting && sensorInput.getShooterEncoderVelocity() > targetSpeed) {
+    if (!shooting && Math.abs(sensorInput.getShooterEncoderVelocity()) > targetSpeed) {
       shooting = true;
       shootingTimer.start();
     }

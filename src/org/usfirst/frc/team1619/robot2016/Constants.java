@@ -58,7 +58,7 @@ public class Constants {
   public static final double AUTO_LANE_2_DISTANCE = 75.0;
   public static final double AUTO_LANE_3_DISTANCE = 35.0;
   public static final double AUTO_LANE_4_DISTANCE = 35.0;
-  public static final double AUTO_LANE_5_DISTANCE = 90.0;
+  public static final double AUTO_LANE_5_DISTANCE = 60.0;
 
   public static final double AUTO_DISTANCE_LINE_TO_PLATFORM = 50.0;
   public static final double AUTO_DISTANCE_LOW_BAR = 85.0;
@@ -118,7 +118,7 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.15;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
-  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -6.5;
+  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -8;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -152,10 +152,11 @@ public class Constants {
   public static final double SERVO_OUT_POSITION = 0.1;
 
   // Shot configurations
-  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.75;
+  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.85;
   public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.5;
-  public static final double SHOT_SPEED_PERCENT_RANGE = 0.9 - SHOT_SPEED_PERCENT_LOWER_VALUE;
-  
+  public static final double SHOT_SPEED_PERCENT_RANGE =
+    0.9 - SHOT_SPEED_PERCENT_LOWER_VALUE;
+
   public static final double ARM_ANGLE_MODIFIER_MAGNITUDE = 0.3;
 
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
@@ -163,12 +164,12 @@ public class Constants {
   public static final double SHOT_LONG_RANGE_CUT_OFF = 160.0;
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 5000;
-  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 10000;
-  public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 30000;
-  public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 32000;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 7500;
+  public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 10000;
+  public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 11000;
 
-  public static final double SHOT_BATTER_ARM_POSITION = 0.0;
-  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.45;
+  public static final double SHOT_BATTER_ARM_POSITION = -0.1;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;
   public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.4;
   public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.4;
 
