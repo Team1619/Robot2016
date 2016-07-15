@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1619.robot2016.IO.SocketTables;
 
+import java.net.InetSocketAddress;
+
 import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.IO.SensorInput;
 
@@ -7,7 +9,7 @@ public class SmashBoard {
 
   private static SmashBoard instance;
 
-  private SocketServer socketServer;
+  private NewSocketServer socketServer;
 
   static {
     instance = new SmashBoard();
@@ -21,8 +23,8 @@ public class SmashBoard {
   private RobotState robotState;
 
   public SmashBoard() {
-    socketServer = new SocketServer();
-    socketServer.startServer();
+    socketServer = new NewSocketServer(new InetSocketAddress("0.0.0.0", 5802));
+    socketServer.start();
   }
 
   public void initialize() {
@@ -31,44 +33,42 @@ public class SmashBoard {
   }
 
   public void update() {
-    socketServer.setDouble("heading", sensorInput.getNavXHeading());
-    socketServer.setDouble("shooterSpeed",
-      sensorInput.getShooterEncoderVelocity());
-    socketServer.setLong("innerBallSensor",
+    socketServer.set("heading", sensorInput.getNavXHeading());
+    socketServer.set("shooterSpeed", sensorInput.getShooterEncoderVelocity());
+    socketServer.set("innerBallSensor",
       sensorInput.getBallPresenceSensorFront() ? 1 : 0);
-    socketServer.setLong("outerBallSensor",
+    socketServer.set("outerBallSensor",
       sensorInput.getBallPresenceSensorRear() ? 1 : 0);
-    socketServer.setLong("upperHallEffect",
+    socketServer.set("upperHallEffect",
       sensorInput.getUpperHallEffect() ? 1 : 0);
-    socketServer.setLong("lowerHallEffect",
+    socketServer.set("lowerHallEffect",
       sensorInput.getLowerHallEffect() ? 1 : 0);
-    socketServer.setDouble("adjustedAngleOffsetToAligned",
+    socketServer.set("adjustedAngleOffsetToAligned",
       getRotationOffsetToAligned()
         - RobotState.getInstance().getShootAlignOffset());
-    socketServer.setLong("driveVelocity",
+    socketServer.set("driveVelocity",
       (int)(sensorInput.getDriveLeftEncoderVelocity()
         + sensorInput.getDriveRightEncoderVelocity()) / 2);
-    socketServer.setDouble("dartPosition", sensorInput.getDartPosition());
-    socketServer.setDouble("dartVelocity", sensorInput.getDartVelocity());
-    socketServer.setDouble("rotationVelocity",
-      sensorInput.getRotationVelocity());
-    socketServer.setDouble("shootSpeedPercent",
+    socketServer.set("dartPosition", sensorInput.getDartPosition());
+    socketServer.set("dartVelocity", sensorInput.getDartVelocity());
+    socketServer.set("rotationVelocity", sensorInput.getRotationVelocity());
+    socketServer.set("shootSpeedPercent",
       robotState.getShootSpeedPercent() * 100.0);
-    socketServer.setDouble("armAngleModifier", robotState.getArmAngleModifier());
-    socketServer.setDouble("navXPitch", sensorInput.getNavXPitch());
-    socketServer.setDouble("navXRoll", sensorInput.getNavXRoll());
+    socketServer.set("navXPitch", sensorInput.getNavXPitch());
+    socketServer.set("navXRoll", sensorInput.getNavXRoll());
+    socketServer.flush();
   }
 
   public void setString(String key, String text) {
-    socketServer.setString(key, text);
+    socketServer.set(key, text);
   }
 
   public void setShootOffset(double offset) {
-    socketServer.setDouble("shootOffset", offset);
+    socketServer.set("shootOffset", offset);
   }
 
   public void setAngleError(double error) {
-    socketServer.setDouble("angleError", error);
+    socketServer.set("angleError", error);
   }
 
   public double getRotationOffsetToAligned() {
@@ -80,33 +80,33 @@ public class SmashBoard {
   }
 
   public int getAutoDefense() {
-    return (int)socketServer.getLong("autoDefense", 0);
+    return socketServer.getInt("autoDefense", 0);
   }
 
   public int getAutoLane() {
-    return (int)socketServer.getLong("autoLane", 0);
+    return socketServer.getInt("autoLane", 0);
   }
 
   public boolean getContourFound() {
-    return socketServer.getLong("contourFound", 0) == 1;
+    return socketServer.getInt("contourFound", 0) == 1;
   }
 
   public boolean getContourEdge() {
-    return socketServer.getLong("contourLeft", 0) == 1
-      || socketServer.getLong("contourTop", 0) == 1
-      || socketServer.getLong("contourRight", 0) == 1;
+    return socketServer.getInt("contourLeft", 0) == 1
+      || socketServer.getInt("contourTop", 0) == 1
+      || socketServer.getInt("contourRight", 0) == 1;
   }
 
   public boolean getGoodContourFound() {
-    return socketServer.getLong("contourGood", 0) == 1;
+    return socketServer.getInt("contourGood", 0) == 1;
   }
 
   public int getShotRange() {
-    return (int)socketServer.getLong("shotRange", 0);
+    return socketServer.getInt("shotRange", 0);
   }
 
   public void setShotRange(int shotRange) {
-    socketServer.setLong("shotRange", shotRange);
+    socketServer.set("shotRange", shotRange);
   }
 
 }

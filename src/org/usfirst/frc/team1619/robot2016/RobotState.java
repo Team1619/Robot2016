@@ -21,7 +21,7 @@ public class RobotState {
   private boolean ballPresenceRearLastValue;
 
   private double shootSpeedPercent;
-  private double armAngleModifier;
+  // private double armAngleModifier;
 
   private double shootOffset;
   private boolean shootOffsetIncreaseLastValue;
@@ -47,7 +47,7 @@ public class RobotState {
     ballPresenceRearLastValue = false;
 
     shootSpeedPercent = Constants.SHOT_INITIAL_SPEED_PERCENT;
-    armAngleModifier = 0;
+    // armAngleModifier = 0;
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
@@ -61,7 +61,7 @@ public class RobotState {
 
   public void initialize() {
     shootSpeedPercent = Constants.SHOT_INITIAL_SPEED_PERCENT;
-    armAngleModifier = 0;
+    // armAngleModifier = 0;
     shootOffset = Constants.SHOOTER_INITIAL_OFFSET_ANGLE;
     shootOffsetIncreaseLastValue = false;
     shootOffsetDecreaseLastValue = false;
@@ -97,21 +97,27 @@ public class RobotState {
     shootOffsetIncreaseLastValue = offsetIncrease;
     shootOffsetDecreaseLastValue = offsetDecrease;
 
-//    if (driverInput
-//      .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_SHOOT_SPEED)) {
-//      shootSpeedPercent = (((1.0 - driverInput.getDriverThrottle()) / 2)
-//        * Constants.SHOT_SPEED_PERCENT_RANGE)
-//        + Constants.SHOT_SPEED_PERCENT_LOWER_VALUE;
-//    }
-
     if (driverInput
-      .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_ARM_ANGLE_MODIFIER)) {
-      armAngleModifier = (-driverInput.getDriverThrottle())
-        * Constants.ARM_ANGLE_MODIFIER_MAGNITUDE;
+      .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_SHOOT_SPEED)) {
+      shootSpeedPercent = (((1.0 - driverInput.getDriverThrottle()) / 2)
+        * Constants.SHOT_SPEED_PERCENT_RANGE)
+        + Constants.SHOT_SPEED_PERCENT_LOWER_VALUE;
     }
-    if (driverInput.getDriverButton(Constants.DRIVER_BUTTON_RESET_ARM_ANGLE_MODIFIER)) {
-      armAngleModifier = 0;
+    if (driverInput
+      .getDriverButton(Constants.DRIVER_BUTTON_RESET_SHOOT_SPEED)) {
+      shootSpeedPercent = Constants.SHOT_INITIAL_SPEED_PERCENT;
     }
+
+    // if (driverInput
+    // .getDriverButton(Constants.DRIVER_BUTTON_UPDATE_ARM_ANGLE_MODIFIER)) {
+    // armAngleModifier = (-driverInput.getDriverThrottle())
+    // * Constants.ARM_ANGLE_MODIFIER_MAGNITUDE;
+    // }
+    // if
+    // (driverInput.getDriverButton(Constants.DRIVER_BUTTON_RESET_ARM_ANGLE_MODIFIER))
+    // {
+    // armAngleModifier = 0;
+    // }
 
     smashBoard.setShootOffset(shootOffset);
 
@@ -135,10 +141,10 @@ public class RobotState {
       smashBoard.setShotRange(0);
     }
   }
-
-  public double getArmAngleModifier() {
-    return armAngleModifier;
-  }
+  //
+  // public double getArmAngleModifier() {
+  // return armAngleModifier;
+  // }
 
   public double getShootSpeedPercent() {
     return shootSpeedPercent;

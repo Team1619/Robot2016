@@ -66,7 +66,7 @@ public class ShootFromAnywhereCommand extends CommandSequence {
     rotateToHighGoalAndMoveArm
       .add(new DriveRotateToHighGoalCommand(Constants.SHOT_ANGLE_TOLERANCE));
     rotateToHighGoalAndMoveArm
-      .add(new ArmMoveToPositionCommand(targetArmPosition + robotState.getArmAngleModifier()));
+      .add(new ArmMoveToPositionCommand(targetArmPosition));
 
     CommandSequence alignAndSpool = new CommandSequence();
     alignAndSpool.add(rotateToHighGoalAndMoveArm);
@@ -75,9 +75,10 @@ public class ShootFromAnywhereCommand extends CommandSequence {
 
     add(alignAndSpool);
 
+    targetShooterSpeed *= robotState.getShootSpeedPercent();
+
     CommandSequence shoot = new CommandSequence();
-    shoot.add(new ShootCommand(
-      (int)(targetShooterSpeed * robotState.getShootSpeedPercent()), 5000));
+    shoot.add(new ShootCommand(targetShooterSpeed, 5000));
     shoot.addPassive(new DriveRotateToHighGoalCommand(true));
 
     add(shoot);

@@ -9,6 +9,7 @@ public class Constants {
   public static final int JOYSTICK_LEFT_ID = 1;
   public static final double JOYSTICK_DEADZONE = 0.05;
 
+  // Shoot left Right Hold Align A+ A- AR SSR SS+-
   // Driver buttons
   public static final int DRIVER_BUTTON_SHOOT_FIND_LEFT = 1;
   public static final int DRIVER_BUTTON_SHOOT_FIND_RIGHT = 4;
@@ -19,8 +20,8 @@ public class Constants {
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_INCREASE = 7;
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_DECREASE = 13;
   public static final int DRIVER_BUTTON_SHOOT_OFFSET_RESET = 14;
-  public static final int DRIVER_BUTTON_RESET_ARM_ANGLE_MODIFIER = 15;
-  public static final int DRIVER_BUTTON_UPDATE_ARM_ANGLE_MODIFIER = 16;
+  public static final int DRIVER_BUTTON_RESET_SHOOT_SPEED = 15;
+  public static final int DRIVER_BUTTON_UPDATE_SHOOT_SPEED = 16;
 
   // Operator buttons
   public static final int OPERATOR_BUTTON_SHOOT = 1;
@@ -47,7 +48,7 @@ public class Constants {
   // Autonomous
   public static final int AUTO_DRIVE_TRANSLATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_TRANSLATION_STOP_SPEED = 20;
-  public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 0.85;
+  public static final double AUTO_DRIVE_TRANSLATION_MAX_OUTPUT = 0.6;
   public static final int AUTO_DRIVE_ROTATION_DEADTIME = 200;
   public static final double AUTO_DRIVE_ROTATION_MAX_OUTPUT = 0.85;
   public static final double AUTO_DRIVE_ROTATION_TOLERANCE = 0.5;
@@ -56,9 +57,9 @@ public class Constants {
 
   public static final double AUTO_LANE_1_DISTANCE = 90.0;
   public static final double AUTO_LANE_2_DISTANCE = 75.0;
-  public static final double AUTO_LANE_3_DISTANCE = 35.0;
-  public static final double AUTO_LANE_4_DISTANCE = 35.0;
-  public static final double AUTO_LANE_5_DISTANCE = 60.0;
+  public static final double AUTO_LANE_3_DISTANCE = 25.0;
+  public static final double AUTO_LANE_4_DISTANCE = 25.0;
+  public static final double AUTO_LANE_5_DISTANCE = 70.0;
 
   public static final double AUTO_DISTANCE_LINE_TO_PLATFORM = 50.0;
   public static final double AUTO_DISTANCE_LOW_BAR = 85.0;
@@ -75,7 +76,7 @@ public class Constants {
   public static final double AUTO_RETURN_OFFSET_ROUGH_TERRAIN = 5.0;
   public static final double AUTO_RETURN_OFFSET_MOAT = 15.0;
   public static final double AUTO_RETURN_OFFSET_RAMPARTS = 15.0;
-  public static final double AUTO_RETURN_OFFSET_CHEVALLE = -5.0;
+  public static final double AUTO_RETURN_OFFSET_CHEVALLE = -20.0;
   public static final double AUTO_RETURN_OFFSET_PORTCULLIS = 0.0;
 
   public static final double AUTO_STATIC_DEFENSES_SPEED = 0.9;
@@ -118,7 +119,7 @@ public class Constants {
   public static final double SHOOTER_SHOOT_SPEED = 1.0;
   public static final double SHOOTER_SPOOL_UP_SPEED = 0.15;
   public static final double SHOOTER_OFFSET_INCREMENT = 1.0;
-  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -8;
+  public static final double SHOOTER_INITIAL_OFFSET_ANGLE = -5;
 
   // Scaler
   public static final double SCALER_EXTEND_SPEED = 1.0;
@@ -152,24 +153,24 @@ public class Constants {
   public static final double SERVO_OUT_POSITION = 0.1;
 
   // Shot configurations
-  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.85;
-  public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.5;
+  public static final double SHOT_INITIAL_SPEED_PERCENT = 0.25;
+  public static final double SHOT_SPEED_PERCENT_LOWER_VALUE = 0.2;
   public static final double SHOT_SPEED_PERCENT_RANGE =
-    0.9 - SHOT_SPEED_PERCENT_LOWER_VALUE;
+    0.5 - SHOT_SPEED_PERCENT_LOWER_VALUE;
 
   public static final double ARM_ANGLE_MODIFIER_MAGNITUDE = 0.3;
 
   public static final double SHOT_BATTER_CUT_OFF = 110.0;
-  public static final double SHOT_MID_RANGE_CUT_OFF = 137.5;
+  public static final double SHOT_MID_RANGE_CUT_OFF = 145.0;
   public static final double SHOT_LONG_RANGE_CUT_OFF = 160.0;
 
   public static final int SHOT_BATTER_SHOOT_SPEED = 5000;
-  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 7500;
+  public static final int SHOT_MID_RANGE_SHOOT_SPEED = 5000;
   public static final int SHOT_LONG_RANGE_SHOOT_SPEED = 10000;
   public static final int SHOT_LONGEST_RANGE_SHOOT_SPEED = 11000;
 
-  public static final double SHOT_BATTER_ARM_POSITION = -0.1;
-  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.3;
+  public static final double SHOT_BATTER_ARM_POSITION = -0.05;
+  public static final double SHOT_MID_RANGE_ARM_POSITION = -0.4;
   public static final double SHOT_LONG_RANGE_ARM_POSITION = -0.4;
   public static final double SHOT_LONGEST_RANGE_ARM_POSITION = -0.4;
 

@@ -38,9 +38,6 @@ public class CrossDefenseCommand extends CommandSequence {
       case CHEVALLE_DE_FRISE:
         distance = Constants.AUTO_DISTANCE_CHEVALLE + offset;
         break;
-      case PORTCULLIS:
-        distance = Constants.AUTO_DISTANCE_PORTCULLIS + offset;
-        break;
     }
 
     CommandSequence cross = new CommandSequence();
@@ -65,14 +62,6 @@ public class CrossDefenseCommand extends CommandSequence {
 
     if (defense == Defenses.CHEVALLE_DE_FRISE) {
       add(new CrossChevalleDeFriseCommand());
-    }
-    else if (defense == Defenses.PORTCULLIS) {
-      CommandSequence crossPortcullis = new CommandSequence();
-      crossPortcullis
-        .add(new DriveTranslateCommand(Constants.AUTO_DISTANCE_CROSS_PORTCULLIS,
-          0.7, Constants.AUTO_DEFENSE_TRANSLATE_TOLERANCE, 0));
-      crossPortcullis.addPassive(new ArmManualCommand(-1.0, 0));
-      add(crossPortcullis);
     }
   }
 

@@ -1,11 +1,14 @@
 package org.usfirst.frc.team1619.robot2016.commands;
 
 import org.usfirst.frc.team1619.robot2016.Constants;
+import org.usfirst.frc.team1619.robot2016.RobotState;
 import org.usfirst.frc.team1619.robot2016.framework.Command;
 import org.usfirst.frc.team1619.robot2016.util.GenericTimer;
 
 public class ShootCommand extends Command {
 
+  private RobotState robotState;
+  
   private int targetSpeed;
   private boolean shooting;
 
@@ -19,11 +22,12 @@ public class ShootCommand extends Command {
 
   @Override
   protected void initialize() {
+    robotState = RobotState.getInstance();
     shooting = false;
-
-    if (targetSpeed == 0) {
-      targetSpeed = Constants.SHOT_BATTER_SHOOT_SPEED;
-    }
+//
+//    if (targetSpeed == 0) {
+//      targetSpeed = (int)Math.floor(Constants.SHOT_BATTER_SHOOT_SPEED * robotState.getShootSpeedPercent());
+//    }
 
     shootingTimer = new GenericTimer();
     shootingTimer.setDuration(Constants.SHOOTING_INTAKE_OUT_TIME);

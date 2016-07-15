@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
   public void disabledInit() {
     Subsystem.resetAll();
     State.resetAll();
+    smashBoard.setString("mode", "disabled");
   }
 
   public void disabledPeriodic() {
@@ -83,6 +84,7 @@ public class Robot extends IterativeRobot {
     utilityArm.addState(autoSequence);
 
     leds.addState(ledsState);
+    smashBoard.setString("mode", "auto");
   }
 
   public void autonomousPeriodic() {
@@ -146,6 +148,7 @@ public class Robot extends IterativeRobot {
     servo.addState(multiShootFromAnywhereFindLeft);
     servo.addState(multiShootFromAnywhereFindRight);
     servo.addState(new ServoManual());
+    smashBoard.setString("mode", "teleop");
   }
 
   public void teleopPeriodic() {

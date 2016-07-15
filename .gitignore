@@ -58,3 +58,4 @@ local.properties
 # National Instruments #
 ########################
 sysProps.xml
+/target/
